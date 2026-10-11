@@ -11,6 +11,8 @@ import sys
 import signal
 import subprocess
 import tempfile
+import math
+from collections import Counter
 from collections import deque
 from pathlib import Path
 from typing import Any
@@ -42,7 +44,7 @@ def env_float(name: str, default: float, minimum: float | None = None) -> float:
     return value
 
 
-VERSION = "2.0.0"
+VERSION = "2.1.0"
 MODEL_NAME = "gpt-6-luna"
 REASONING_EFFORT = "low"
 CODEX_BIN = os.environ.get("ROUTER_CODEX_BIN", "codex")
@@ -54,6 +56,7 @@ STREAM_THRESHOLD_BYTES = env_int("ROUTER_STREAM_THRESHOLD_BYTES", 5_000_000, min
 CODE_CONTEXT_LINES = env_int("ROUTER_CODE_CONTEXT_LINES", 8, minimum=0)
 AGENT_CONTEXT_LINES = env_int("ROUTER_AGENT_CONTEXT_LINES", 6, minimum=0)
 MAX_OUTPUT_LINES = env_int("ROUTER_MAX_OUTPUT_LINES", 160, minimum=1)
+OUTPUT_CONTEXT_LINES = env_int("ROUTER_OUTPUT_CONTEXT_LINES", 2, minimum=0)
 FALLBACK_PREVIEW_CHARS = 2000
 VALID_MODES = {"agent_context", "error_log", "heavy_code"}
 LOG_KEYWORD_PATTERN = re.compile(
@@ -102,6 +105,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         default="",
         help="Optional user question, error text, or search phrase used to bias routing.",
     )
+    parser.add_argument("--deterministic", action="store_true",
+                        help="Select ranked raw slices locally without a model call.")
     return parser.parse_args(argv[1:])
 
 
@@ -130,16 +135,142 @@ def numbered_content(raw_text: str, max_chars: int) -> tuple[str, bool]:
     return "".join(chunks), truncated
 
 
+QUERY_STOPWORDS = set("""a an the and or to of in on at for from with without by as is are was were be been being do does did have has had which what when where why how who whose this that these those it its only give answer answers question questions requested inspect trace identify return use using supplied exact original source line lines code identifier identifiers literal fully qualified expression arguments method function type value number called calls after before into all any each both true false if then else no not can could would should must please explain show find tell
+무엇 어떤 어느 어디 언제 어떻게 왜 누가 그 이 저 및 또는 그리고 에서 으로 대해 대한 답변 질문 정답 원문 줄 코드 함수 메서드 식별자 알려주세요 설명해주세요 찾아주세요 확인해주세요 사용 해당 각각 모두 있는 없는 경우 무엇인가 무엇인가요 주세요 합니다 입니다
+""".split())
+
+
 def normalize_query_terms(query: str) -> list[str]:
-    terms = [term.lower() for term in re.findall(r"[\w./:-]+", query)]
-    return [term for term in terms if len(term) >= 2]
+    terms = [term.casefold().strip("./:-") for term in re.findall(r"[\w./:-]+", query)]
+    return list(dict.fromkeys(term for term in terms
+                             if len(term) >= 2 and term not in QUERY_STOPWORDS))
+
+
+def term_pattern(term: str) -> re.Pattern[str]:
+    # Underscore-separated symbol components match, arbitrary substrings do not.
+    return re.compile(r"(?<![^\W_])" + re.escape(term) + r"(?![^\W_])", re.IGNORECASE)
 
 
 def query_matches(line: str, query_terms: list[str]) -> bool:
-    if not query_terms:
-        return False
-    normalized = line.lower()
-    return any(term in normalized for term in query_terms)
+    return any(term_pattern(term).search(line) for term in query_terms)
+
+
+SEVERE_LOG_PATTERN = re.compile(
+    r"runtime error:|fatal|panic|traceback|segmentation fault|addresssanitizer|"
+    r"undefinedbehaviorsanitizer|\bFAILED\b|\bERROR\b|AssertionError|"
+    r"Exception:|error:|\b[1-9]\d* failed\b", re.IGNORECASE)
+
+
+def ranked_candidates(line_factory, mode: str, query_terms: list[str], max_chars: int,
+                      max_lines: int | None = None):
+    """Two passes; retain line metadata, never an unbounded copy of streaming text.
+
+    Allocate a small tail reserve and one anchor per file region, then rank rare
+    query hits and diagnostics. Whole original lines are admitted by cost, so a
+    giant early line cannot consume the budget or hide later failures.
+    """
+    patterns = [term_pattern(term) for term in query_terms]
+    counts = Counter()
+    metadata = []
+    signatures = []
+    repeats = Counter()
+    traceback_headers = []
+    keyword = {"error_log": LOG_KEYWORD_PATTERN, "heavy_code": CODE_KEYWORD_PATTERN,
+               "agent_context": AGENT_CONTEXT_KEYWORD_PATTERN}[mode]
+    for n, line in enumerate(line_factory(), 1):
+        if mode == "error_log" and re.search(r"_{3,}\s+\S.*\s+_{3,}", line):
+            traceback_headers.append(n-1)
+        hits = tuple(i for i, pattern in enumerate(patterns) if pattern.search(line))
+        counts.update(hits)
+        score = 3.0 if keyword.search(line) else 0.0
+        if mode == "error_log" and SEVERE_LOG_PATTERN.search(line):
+            score += 8.0
+        if mode == "heavy_code" and CODE_STRUCTURE_PATTERN.search(line):
+            score += 0.5
+        if mode == "agent_context" and AGENT_CONTEXT_STRUCTURE_PATTERN.search(line):
+            score += 1.0
+        signature = re.sub(r"\d+", "#", line.casefold().strip())[:256]
+        signatures.append(signature)
+        repeats[signature] += 1
+        metadata.append((len(f"{n}: {line}") + 34, hits, score))
+    total = len(metadata)
+    if not total:
+        return "", False, 0, 0, []
+    scores = [(base + sum(12 / math.sqrt(counts[i]) for i in hits))
+              / math.sqrt(repeats[signature])
+              for (cost, hits, base), signature in zip(metadata, signatures)]
+    context = {"error_log": LOG_CONTEXT_LINES, "heavy_code": CODE_CONTEXT_LINES,
+               "agent_context": AGENT_CONTEXT_LINES}[mode]
+    anchors = [i for i, score in enumerate(scores) if score > 0]
+    tail_count = min(total, LOG_TAIL_LINES if mode == "error_log" else 30)
+    eligible = set(range(total - tail_count, total))
+    for i in anchors:
+        eligible.update(range(max(0, i-context), min(total, i+context+1)))
+    if not eligible:
+        eligible.update(range(total))
+    selected = set()
+    used = 0
+    limit = max_lines if max_lines is not None else total
+
+    def add(i, budget=max_chars):
+        nonlocal used
+        if i in selected or len(selected) >= limit:
+            return
+        cost = metadata[i][0]
+        if used + cost <= budget:
+            selected.add(i)
+            used += cost
+
+    # At most 10% for end-of-file evidence, including success/failure summaries.
+    for i in range(total-1, total-tail_count-1, -1):
+        if len(selected) >= max(1, limit // 10):
+            break
+        add(i, max_chars // 10)
+    # Prevent a cluster of early hits from monopolizing all available evidence.
+    for region in range(8):
+        group = [i for i in anchors if i * 8 // total == region]
+        if group:
+            add(max(group, key=lambda i: (scores[i], i)))
+    # Named failure blocks can place the failing expression far from the test
+    # header. Retain the first matching pytest block (bounded to 64 lines), not
+    # just repeated summary lines at the end. This also respects "first" queries.
+    blocks = {}
+    for term_index in sorted(range(len(patterns)), key=lambda i: counts[i]):
+        if not any(c in query_terms[term_index] for c in "_./"):
+            continue
+        matching = [i for i in traceback_headers if term_index in metadata[i][1]]
+        if not matching:
+            continue
+        start = matching[0]
+        end = next((i for i in traceback_headers if i > start), total)
+        blocks[start] = list(range(start, min(end, start+64)))
+    block_budget = min(max_chars, used + max_chars // 4)
+    block_line_limit = min(limit, len(selected) + max(1, limit // 3))
+    for offset in range(64):
+        for block in blocks.values():
+            if offset >= len(block):
+                continue
+            i = block[offset]
+            eligible.add(i)
+            if len(selected) < block_line_limit:
+                add(i, block_budget)
+    ranked = sorted(anchors, key=lambda i: (-scores[i], -i))
+    # Keep useful neighborhoods, not just isolated matching tokens. Nearby hits
+    # share a neighborhood instead of repeatedly consuming the same allocation.
+    covered_anchors = set()
+    for i in ranked:
+        if i in covered_anchors:
+            continue
+        for radius in range(context+1):
+            for j in ((i,) if radius == 0 else (i-radius, i+radius)):
+                if j in eligible:
+                    add(j)
+        covered_anchors.update(range(max(0, i-context), min(total, i+context+1)))
+    for i in sorted(eligible, reverse=True):
+        add(i)
+    pairs = [(n, line) for n, line in enumerate(line_factory(), 1) if n-1 in selected]
+    rendered, _ = render_numbered_pairs(pairs, max_chars)
+    return rendered, len(selected) < len(eligible), len(eligible), total, sorted(i+1 for i in selected)
 
 
 def render_selected_lines(
@@ -182,147 +313,33 @@ def render_numbered_pairs(
     return "".join(chunks), truncated
 
 
-def keyword_candidate_content(
-    raw_text: str,
-    pattern: re.Pattern[str],
-    context_lines: int,
-    max_chars: int,
-    query_terms: list[str] | None = None,
-    fallback_to_full: bool = True,
-) -> tuple[str, bool, int]:
-    lines = raw_text.splitlines(keepends=True)
-    selected: set[int] = set()
-    query_terms = query_terms or []
-
-    for idx, line in enumerate(lines):
-        if pattern.search(line) or query_matches(line, query_terms):
-            start = max(0, idx - context_lines)
-            end = min(len(lines), idx + context_lines + 1)
-            selected.update(range(start, end))
-
-    if not selected and fallback_to_full:
-        rendered, truncated = numbered_content(raw_text, max_chars)
-        return rendered, truncated, len(lines)
-    if not selected:
-        return "", False, 0
-
-    rendered, truncated = render_selected_lines(lines, selected, max_chars)
-    return rendered, truncated, len(selected)
+def keyword_candidate_content(raw_text: str, pattern: re.Pattern[str], context_lines: int,
+                              max_chars: int, query_terms: list[str] | None = None,
+                              fallback_to_full: bool = True) -> tuple[str, bool, int]:
+    # Kept for callers of the original public helper; logs use the shared policy.
+    mode = "error_log" if pattern is LOG_KEYWORD_PATTERN else "heavy_code"
+    result = ranked_candidates(lambda: iter(raw_text.splitlines(keepends=True)), mode,
+                               query_terms or [], max_chars)
+    return result[:3]
 
 
-def code_candidate_content(
-    raw_text: str,
-    max_chars: int,
-    query_terms: list[str],
-) -> tuple[str, bool, int, str]:
-    if query_terms:
-        rendered, truncated, candidate_count = keyword_candidate_content(
-            raw_text,
-            re.compile(r"a^"),
-            CODE_CONTEXT_LINES,
-            max_chars,
-            query_terms=query_terms,
-            fallback_to_full=False,
-        )
-        if candidate_count:
-            return rendered, truncated, candidate_count, "query"
-
-    rendered, truncated, candidate_count = keyword_candidate_content(
-        raw_text,
-        CODE_KEYWORD_PATTERN,
-        CODE_CONTEXT_LINES,
-        max_chars,
-        fallback_to_full=False,
-    )
-    if candidate_count:
-        return rendered, truncated, candidate_count, "code keyword"
-
-    lines = raw_text.splitlines(keepends=True)
-    selected: set[int] = set()
-    selected.update(range(min(40, len(lines))))
-    selected.update(range(max(0, len(lines) - 40), len(lines)))
-
-    for idx, line in enumerate(lines):
-        if CODE_STRUCTURE_PATTERN.search(line):
-            start = max(0, idx - 2)
-            end = min(len(lines), idx + 3)
-            selected.update(range(start, end))
-
-    rendered, truncated = render_selected_lines(lines, selected, max_chars)
-    return rendered, truncated, len(selected), "code structure/head-tail"
+def code_candidate_content(raw_text: str, max_chars: int, query_terms: list[str]):
+    result = ranked_candidates(lambda: iter(raw_text.splitlines(keepends=True)),
+                               "heavy_code", query_terms, max_chars)
+    return (*result[:3], "ranked query/structure/distributed")
 
 
-def agent_context_candidate_content(
-    raw_text: str,
-    max_chars: int,
-    query_terms: list[str],
-) -> tuple[str, bool, int, str]:
-    lines = raw_text.splitlines(keepends=True)
-    selected: set[int] = set()
-
-    selected.update(range(min(30, len(lines))))
-    selected.update(range(max(0, len(lines) - 30), len(lines)))
-
-    in_frontmatter = False
-    frontmatter_started = False
-    for idx, line in enumerate(lines):
-        stripped = line.strip()
-        if idx == 0 and stripped == "---":
-            in_frontmatter = True
-            frontmatter_started = True
-        elif in_frontmatter and stripped == "---":
-            selected.add(idx)
-            in_frontmatter = False
-        if in_frontmatter or (frontmatter_started and idx <= 40 and stripped == "---"):
-            selected.add(idx)
-
-        is_query_hit = query_matches(line, query_terms)
-        is_instruction_hit = AGENT_CONTEXT_KEYWORD_PATTERN.search(line)
-        is_structure_hit = AGENT_CONTEXT_STRUCTURE_PATTERN.search(line)
-        if is_query_hit or is_instruction_hit:
-            start = max(0, idx - AGENT_CONTEXT_LINES)
-            end = min(len(lines), idx + AGENT_CONTEXT_LINES + 1)
-            selected.update(range(start, end))
-        elif is_structure_hit:
-            selected.add(idx)
-
-    if not selected:
-        rendered, truncated = numbered_content(raw_text, max_chars)
-        return rendered, truncated, len(lines), "agent context full fallback"
-
-    rendered, truncated = render_selected_lines(lines, selected, max_chars)
-    return rendered, truncated, len(selected), "agent context query/rule/head-tail"
+def agent_context_candidate_content(raw_text: str, max_chars: int, query_terms: list[str]):
+    result = ranked_candidates(lambda: iter(raw_text.splitlines(keepends=True)),
+                               "agent_context", query_terms, max_chars)
+    return (*result[:3], "ranked query/rule/distributed")
 
 
-def streaming_log_candidate_content(
-    file_path: Path,
-    max_chars: int,
-    query_terms: list[str],
-) -> tuple[str, bool, int, int]:
-    selected: dict[int, str] = {}
-    before: deque[tuple[int, str]] = deque(maxlen=LOG_CONTEXT_LINES)
-    tail: deque[tuple[int, str]] = deque(maxlen=LOG_TAIL_LINES)
-    include_until = 0
-    total_lines = 0
-
-    with file_path.open("r", encoding="utf-8", errors="replace") as handle:
-        for line_no, line in enumerate(handle, start=1):
-            total_lines = line_no
-            tail.append((line_no, line))
-            hit = LOG_KEYWORD_PATTERN.search(line) or query_matches(line, query_terms)
-            if hit:
-                for prev_no, prev_line in before:
-                    selected.setdefault(prev_no, prev_line)
-                include_until = max(include_until, line_no + LOG_CONTEXT_LINES)
-            if hit or line_no <= include_until:
-                selected.setdefault(line_no, line)
-            before.append((line_no, line))
-
-    for line_no, line in tail:
-        selected.setdefault(line_no, line)
-
-    rendered, truncated = render_numbered_pairs(list(selected.items()), max_chars)
-    return rendered, truncated, len(selected), total_lines
+def streaming_log_candidate_content(file_path: Path, max_chars: int, query_terms: list[str]):
+    def lines():
+        with file_path.open("r", encoding="utf-8", errors="replace") as handle:
+            yield from handle
+    return ranked_candidates(lines, "error_log", query_terms, max_chars)[:4]
 
 
 def build_prompt(
@@ -551,6 +568,26 @@ def call_codex(prompt: str) -> dict[str, Any]:
         return json.loads(output_path.read_text(encoding="utf-8"))
 
 
+def add_output_context(targets: list[dict[str, Any]], total_lines: int):
+    """Keep chosen core evidence first; spend only spare budget on neighbors."""
+    selected = {n for t in targets for n in range(t["start_line"], t["end_line"]+1)}
+    for radius in range(1, OUTPUT_CONTEXT_LINES+1):
+        for target in targets:
+            for n in (target["start_line"]-radius, target["end_line"]+radius):
+                if 1 <= n <= total_lines and len(selected) < MAX_OUTPUT_LINES:
+                    selected.add(n)
+    result = []
+    for n in sorted(selected):
+        if result and n == result[-1]["end_line"]+1:
+            result[-1]["end_line"] = n
+        else:
+            result.append({"start_line": n, "end_line": n, "reason": ""})
+    for item in result:
+        item["reason"] = "; ".join(dict.fromkeys(t["reason"] for t in targets
+            if t["start_line"] <= item["end_line"] and t["end_line"] >= item["start_line"]))
+    return result
+
+
 def normalize_targets(
     mapping: dict[str, Any],
     total_lines: int,
@@ -596,51 +633,50 @@ def normalize_targets(
         else:
             merged.append(target)
 
-    if mode == "error_log":
-        return cap_targets_latest_first(merged)
-    return cap_targets_earliest_first(merged)
+    return cap_targets_fair(merged, latest=(mode == "error_log"))
 
 
-def cap_targets_earliest_first(targets: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    capped: list[dict[str, Any]] = []
-    used_lines = 0
-    for target in targets:
-        line_count = target["end_line"] - target["start_line"] + 1
-        remaining = MAX_OUTPUT_LINES - used_lines
-        if remaining <= 0:
+def cap_targets_fair(targets: list[dict[str, Any]], latest: bool = False):
+    requested = sum(t["end_line"]-t["start_line"]+1 for t in targets)
+    if requested <= MAX_OUTPUT_LINES:
+        return targets
+    allocations = [0] * len(targets)
+    remaining = MAX_OUTPUT_LINES
+    while remaining:
+        changed = False
+        for i, target in enumerate(targets):
+            if allocations[i] < target["end_line"]-target["start_line"]+1:
+                allocations[i] += 1
+                remaining -= 1
+                changed = True
+                if not remaining:
+                    break
+        if not changed:
             break
-        if line_count > remaining:
-            target = {
-                **target,
-                "end_line": target["start_line"] + remaining - 1,
-                "reason": f"{target['reason']} [truncated by ROUTER_MAX_OUTPUT_LINES]",
-            }
-            line_count = remaining
-        capped.append(target)
-        used_lines += line_count
+    result = []
+    for target, count in zip(targets, allocations):
+        if not count:
+            continue
+        item = dict(target)
+        if count < target["end_line"]-target["start_line"]+1:
+            if latest:
+                item["start_line"] = item["end_line"]-count+1
+            else:
+                item["end_line"] = item["start_line"]+count-1
+            item["reason"] += " [truncated by ROUTER_MAX_OUTPUT_LINES; fair per-range budget]"
+        result.append(item)
+    print("[token-router output-cap] " + json.dumps({"requested_lines": requested,
+          "returned_lines": sum(allocations), "omitted_ranges": allocations.count(0),
+          "policy": "fair-per-range"}), file=sys.stderr)
+    return result
 
-    return capped
+
+def cap_targets_earliest_first(targets):
+    return cap_targets_fair(targets)
 
 
-def cap_targets_latest_first(targets: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    kept_reversed: list[dict[str, Any]] = []
-    used_lines = 0
-    for target in reversed(targets):
-        line_count = target["end_line"] - target["start_line"] + 1
-        remaining = MAX_OUTPUT_LINES - used_lines
-        if remaining <= 0:
-            break
-        if line_count > remaining:
-            target = {
-                **target,
-                "start_line": target["end_line"] - remaining + 1,
-                "reason": f"{target['reason']} [older lines truncated by ROUTER_MAX_OUTPUT_LINES]",
-            }
-            line_count = remaining
-        kept_reversed.append(target)
-        used_lines += line_count
-
-    return list(reversed(kept_reversed))
+def cap_targets_latest_first(targets):
+    return cap_targets_fair(targets, latest=True)
 
 
 def targets_from_numbered_content(
@@ -797,64 +833,56 @@ def main(argv: list[str]) -> int:
         print(fallback("File is empty.", mode=mode))
         return 1
 
-    fallback_text = ""
     try:
-        if mode == "error_log" and file_size >= STREAM_THRESHOLD_BYTES:
-            query_terms = normalize_query_terms(query)
-            candidate_content, truncated, candidate_count, total_lines = streaming_log_candidate_content(
-                target_file, MAX_PROMPT_CHARS, query_terms
-            )
-            fallback_text = candidate_content
+        def lines():
+            with target_file.open("r", encoding="utf-8", errors="replace") as handle:
+                yield from handle
+        terms = normalize_query_terms(query)
+        candidate, truncated, eligible, total, visible = ranked_candidates(
+            lines, mode, terms, MAX_PROMPT_CHARS)
+        print("[token-router coverage] " + json.dumps({
+            "total_lines": total, "candidate_lines": eligible, "visible_lines": len(visible),
+            "candidate_chars": len(candidate), "source_chars": sum(len(line) for line in lines()),
+            "truncated": truncated,
+            "policy": "ranked-distributed-tail", "complete_source": len(visible) == total,
+        }), file=sys.stderr)
+        status = "deterministic" if args.deterministic else "model"
+        failure = None
+        output_capped = False
+        if not args.deterministic:
             try:
-                mapping = call_codex(
-                    build_prompt(
-                        "",
-                        mode,
-                        query=query,
-                        prebuilt_content=candidate_content,
-                        prebuilt_candidate_count=candidate_count,
-                        prebuilt_candidate_kind="streaming log keyword/tail",
-                        prebuilt_truncated=truncated,
-                    )
-                )
-                targets = normalize_targets(mapping, total_lines, mode=mode)
-            except (json.JSONDecodeError, ValueError, RuntimeError, TypeError) as exc:
-                targets = targets_from_numbered_content(
-                    candidate_content,
-                    total_lines,
-                    f"deterministic streaming fallback after Codex failure: {exc}",
-                    mode=mode,
-                )
-                if not targets:
-                    raise
-            print(render_slices_from_file(target_file, targets), end="")
-            return 0
-
-        raw_text = read_text(target_file)
-        fallback_text = raw_text
-        if not raw_text:
-            print(fallback("File is empty.", mode=mode))
-            return 1
-
-        mapping = call_codex(build_prompt(raw_text, mode, query=query))
-        targets = normalize_targets(mapping, len(raw_text.splitlines()), mode=mode)
-    except (
-        OSError,
-        TypeError,
-        json.JSONDecodeError,
-        ValueError,
-        RuntimeError,
-    ) as exc:
-        if not fallback_text:
-            try:
-                fallback_text = read_preview(target_file)
-            except OSError:
-                fallback_text = ""
-        print(fallback(str(exc), fallback_text, mode=mode))
+                mapping = call_codex(build_prompt("", mode, query=query,
+                    prebuilt_content=candidate, prebuilt_candidate_count=len(visible),
+                    prebuilt_candidate_kind="ranked/distributed/tail",
+                    prebuilt_truncated=truncated))
+                targets = normalize_targets(mapping, total, mode=mode)
+                targets = add_output_context(targets, total)
+                output_capped = any("truncated by ROUTER_MAX_OUTPUT_LINES" in t["reason"]
+                                    for t in targets) or len(mapping["targets"]) > MAX_OUTPUT_LINES
+            except (OSError, TypeError, ValueError, RuntimeError) as exc:
+                failure = str(exc)
+                status = "fallback"
+        if args.deterministic or failure is not None:
+            selected, selection_truncated, _, _, _ = ranked_candidates(
+                lines, mode, terms, MAX_PROMPT_CHARS, max_lines=MAX_OUTPUT_LINES)
+            output_capped = selection_truncated
+            targets = targets_from_numbered_content(selected, total,
+                "ranked local selection (" + status + ")", mode=mode)
+            if not targets:
+                raise ValueError("No complete source line fits the configured budget")
+        print("[token-router status] " + json.dumps({"status": status,
+              "model_failed": failure is not None, "reason": failure,
+              "output_lines": sum(t["end_line"]-t["start_line"]+1 for t in targets),
+              "output_capped": output_capped,
+              "coverage_guaranteed": False}), file=sys.stderr)
+        print(render_slices_from_file(target_file, targets), end="")
+        # Usable raw fallback is a successful extraction; stderr identifies failure.
+        return 0
+    except (OSError, TypeError, ValueError, RuntimeError) as exc:
+        print("[token-router status] " + json.dumps({"status": "error", "reason": str(exc)}),
+              file=sys.stderr)
+        print(fallback(str(exc), mode=mode))
         return 1
-
-    print(render_slices(raw_text, targets), end="")
-    return 0
 
 
 if __name__ == "__main__":

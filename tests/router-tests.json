@@ -62,7 +62,7 @@
       14
     ],
     "expected_output_contains": [
-      "first; second [truncated by ROUTER_MAX_OUTPUT_LINES]"
+      "first; second [truncated by ROUTER_MAX_OUTPUT_LINES; fair per-range budget]"
     ],
     "mock_only": true
   },
@@ -124,7 +124,7 @@
     "mock_only": true
   },
   {
-    "name": "error_log cap keeps latest ranges",
+    "name": "error_log cap keeps a share of each distinct range",
     "fixture": "fixtures/overlap_lines.txt",
     "mode": "error_log",
     "env": {
@@ -145,13 +145,13 @@
       ]
     },
     "expected_contains_lines": [
-      25,
-      26,
+      4,
+      5,
       27,
       28
     ],
     "expected_output_contains": [
-      "latest error [older lines truncated by ROUTER_MAX_OUTPUT_LINES]"
+      "fair per-range budget"
     ],
     "mock_only": true
   },
@@ -272,22 +272,23 @@
       12
     ],
     "expected_output_contains": [
-      "mandatory and nearby workflow rules [truncated by ROUTER_MAX_OUTPUT_LINES]"
+      "mandatory and nearby workflow rules [truncated by ROUTER_MAX_OUTPUT_LINES; fair per-range budget]"
     ],
     "mock_only": true
   },
   {
-    "name": "agent_context fallback preview uses instruction keywords",
+    "name": "agent_context fallback returns raw evidence with explicit failure status",
     "fixture": "fixtures/agent_context_rules.md",
     "mode": "agent_context",
     "mock_response": {
       "not_targets": []
     },
-    "expected_exit": 1,
+    "expected_exit": 0,
     "forbid_fallback": false,
     "expected_output_contains": [
-      "#### Router Fallback",
-      "--- [KEYWORD MATCH PREVIEW] ---",
+      "RAW CONTENT FROM LINE",
+      "\"status\": \"fallback\"",
+      "\"model_failed\": true",
       "Always preserve user-owned worktree changes before editing files.",
       "Never expose secrets, credentials, tokens, or private keys in responses."
     ],

@@ -114,7 +114,7 @@ def run_case(
         if text and text not in output:
             errors.append(f"output missing fixture line {text!r}")
 
-    if case.get("forbid_fallback", True) and ("#### Router Fallback" in output or "deterministic streaming fallback" in output):
+    if case.get("forbid_fallback", True) and ("#### Router Fallback" in output or "deterministic streaming fallback" in output or '"status": "fallback"' in output):
         errors.append("unexpected fallback output")
 
     return errors

@@ -7,32 +7,33 @@
 
 **Select relevant raw lines from oversized files before sending them to your main reasoning model.**
 
-Version **2.0.0** uses **GPT-6 Luna Light** through Codex CLI: model `gpt-6-luna`, reasoning effort `low`, fixed by the router. It reuses your existing Codex ChatGPT login and subscription. No API key, local model, or local model server is required.
+Version **2.1.0** uses **GPT-6 Luna Light** through Codex CLI: model `gpt-6-luna`, reasoning effort `low`, fixed by the router. It reuses your existing Codex ChatGPT login and subscription. No API key, local model, or local model server is required.
 
 ## How it works
 
-1. Python scans a file and narrows it to line-numbered candidate windows.
-2. Codex CLI sends those candidates and your query to GPT-6 Luna Light, which returns JSON line ranges.
+1. Python ranks query/diagnostic windows, reserves distributed and recent evidence, and applies a character budget before rendering in original line order.
+2. Codex CLI sends those candidates and your query to GPT-6 Luna Light, which returns JSON line ranges. With `--deterministic`, Python selects bounded raw ranges without a model call.
 3. Python validates and merges the ranges, then extracts raw text from the original file.
 4. Your main agent reasons over the selected evidence and retrieves wider ranges when necessary.
 
 The model selects coordinates; it does not summarize or rewrite evidence. “Lossless” describes the extracted text, **not completeness of selection**. Relevant dependencies can be omitted by either prefiltering or model selection.
 
-**Cloud and usage boundary:** candidate content and the query leave your machine through Codex. Each real routing call consumes Codex subscription usage. Smaller input for your main model does not establish lower total token use or lower total cost; the router also processes input. Speed, quality, and savings depend on the workload and have not been established by a comparative Luna benchmark.
+**Cloud and usage boundary:** candidate content and the query leave your machine through Codex. Each real routing call consumes Codex subscription usage. Smaller input for your main model does not establish lower total token use or lower total cost; the router also processes input. Speed, quality, and savings depend on the workload. The [real-file benchmark and improvements](docs/benchmark-improvements.md) distinguish main-context reduction from total usage and report evidence lost by v2.0.
 
 ## Quick start
 
 Requirements:
 
 - Python 3.10 or later.
-- A recent Codex CLI on `PATH`, with `exec --ephemeral`, `--ignore-user-config`, and `--output-schema` support.
-- A Codex account with access to `gpt-6-luna`, signed in through ChatGPT. Check the [official Codex CLI documentation](https://developers.openai.com/codex/cli/) for installation.
+- For cloud selection: a recent Codex CLI on `PATH`, with `exec --ephemeral`, `--ignore-user-config`, and `--output-schema` support.
+- For cloud selection: a Codex account with access to `gpt-6-luna`, signed in through ChatGPT. Check the [official Codex CLI documentation](https://developers.openai.com/codex/cli/) for installation.
 
 ```bash
 codex login
 codex login status
 python3 scripts/router.py error_log path/to/deploy.log --query "database migration timeout"
 python3 scripts/router.py heavy_code path/to/service.py --query "token expiration"
+python3 scripts/router.py heavy_code path/to/service.py --query "session_token" --deterministic
 python3 scripts/router.py agent_context path/to/agent-context/frontend.md --query "frontend testing workflow"
 ```
 
@@ -44,7 +45,7 @@ The router fixes model and effort rather than inheriting your main agent's setti
 
 | Mode | Intended input | Candidate selection |
 |---|---|---|
-| `error_log` | Logs, stack traces, CI failures | Query and error keyword windows; recent tail for large logs |
+| `error_log` | Logs, stack traces, CI failures | Ranked query/error windows, distributed anchors and recent tail at every size |
 | `heavy_code` | Long source files with a focused question | Query hits, code markers, structural/head/tail previews |
 | `agent_context` | Long optional instruction references | Query hits, headings, mandatory-rule keywords and previews |
 
@@ -80,13 +81,18 @@ The provider, model `gpt-6-luna`, and effort `low` are fixed. There is no model/
 | `ROUTER_TIMEOUT` | `120` | Codex subprocess timeout in seconds |
 | `ROUTER_MAX_CHARS` | `120000` | Maximum line-numbered candidate content sent to the router model |
 | `ROUTER_MAX_OUTPUT_LINES` | `160` | Maximum extracted raw lines returned to the main agent |
-| `ROUTER_STREAM_THRESHOLD_BYTES` | `5000000` | Threshold for streaming log prefiltering |
+| `ROUTER_OUTPUT_CONTEXT_LINES` | `2` | Neighbor lines added around model targets using only spare output budget |
+| `ROUTER_STREAM_THRESHOLD_BYTES` | legacy | Deprecated; all sizes now use the same two-pass scan policy |
 | `ROUTER_LOG_CONTEXT_LINES` | `6` | Context around log keyword/query hits |
-| `ROUTER_LOG_TAIL_LINES` | `200` | Recent tail retained for large logs |
+| `ROUTER_LOG_TAIL_LINES` | `200` | Recent tail eligible for a reserved share of the candidate budget |
 | `ROUTER_CODE_CONTEXT_LINES` | `8` | Context around source query/keyword hits |
 | `ROUTER_AGENT_CONTEXT_LINES` | `6` | Context around instruction-reference hits |
 
-Output ranges are merged and capped; `error_log` keeps newer ranges first when capped. Candidate and output limits can omit relevant material. Inspect nearby raw lines whenever the answer depends on missing context.
+Output ranges are merged and share the line budget across distinct ranges. Model-selected core ranges are preserved first; up to two neighboring lines per side are added when the output budget allows, retaining nearby guards and traceback locations. Any cut is reported; portions of each range can still be lost. `error_log` keeps the newer end within each capped range. Inspect nearby raw lines whenever the answer depends on missing context.
+
+Stderr reports `[token-router coverage]` with source/candidate/visible counts and truncation, `[token-router usage]` for cloud usage, and `[token-router status]` with `model`, `deterministic`, `fallback`, or `error`. Exit 0 means raw extraction succeeded, **not** that model selection succeeded or evidence is complete. On model failure, inspect `status=fallback` / `model_failed=true`; a missing/unreadable source or no fitting raw line exits 1.
+
+Use exact task identifiers instead of a long generic checklist. For known symbols, start with ordinary search or `--deterministic`; read directly when the candidate set is almost the whole source. Cloud routing remains available when semantic selection is useful. No automatic cloud retry is performed. The scan retains metadata proportional to the number of source lines; it does not promise constant memory. The character budget limits model candidates, while model-selected raw output is limited by lines and can include neighboring or previously omitted source lines.
 
 ## Upgrade from v1
 
@@ -106,6 +112,6 @@ To intentionally call the real Codex model and consume subscription usage:
 python3 scripts/run_router_tests.py tests/router-tests.json --real
 ```
 
-[The benchmark report](docs/benchmark-report.md) records four passing v2 live smoke checks and retains historical v1 measurements for provenance. The smoke checks used tiny fixtures and revealed substantial CLI input overhead; avoid routing short inputs. The historical v1 measurements are **not GPT-6 Luna results**, billing measurements, or evidence of v2 speed or accuracy. A useful future comparison should hold the prefilter constant, include a prefilter-only baseline, measure evidence recall and downstream task success, and count the routing call's time and usage.
+[The benchmark report](docs/benchmark-report.md) records four passing v2 live smoke checks and retains historical v1 measurements for provenance. The smoke checks used tiny fixtures and revealed substantial CLI input overhead; avoid routing short inputs. The historical v1 measurements are **not GPT-6 Luna results**, billing measurements, or evidence of v2 speed or accuracy. The [real-file follow-up](docs/benchmark-improvements.md) measures downstream factual extraction with routing time and usage included. Deterministic extraction remains lossy and should be followed by targeted source retrieval when evidence is absent.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [SUPPORT.md](SUPPORT.md). Use sanitized fixtures in public reports. Licensed under [MIT](LICENSE).

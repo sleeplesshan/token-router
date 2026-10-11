@@ -1,0 +1,1093 @@
+{
+  "date": "2026-10-12",
+  "cli_version": "codex-cli 0.162.1",
+  "main_model": "gpt-6.1-sol",
+  "main_effort": "medium",
+  "router_model": "gpt-6-luna",
+  "router_effort": "low",
+  "router_sha256": "4a45f54ab44b7ae77a0a860e7d1fb30f5480e0fc19cd066ca397f8a9fe4d8e7f",
+  "tasks": [
+    {
+      "task_id": "cpython_subprocess_timeout",
+      "source_lines": 2223,
+      "conditions": {
+        "full": {
+          "tokens_median": 29634,
+          "seconds_median": 8.112851459067315,
+          "correct": 18,
+          "total": 18,
+          "fallbacks": 0
+        },
+        "v2.0": {
+          "tokens_median": 35553,
+          "seconds_median": 13.408022166928276,
+          "correct": 18,
+          "total": 18,
+          "fallbacks": 0
+        },
+        "v2.1": {
+          "tokens_median": 27836,
+          "seconds_median": 12.730862999800593,
+          "correct": 18,
+          "total": 18,
+          "fallbacks": 0
+        }
+      }
+    },
+    {
+      "task_id": "cpython_asyncio_connections",
+      "source_lines": 2052,
+      "conditions": {
+        "full": {
+          "tokens_median": 26543,
+          "seconds_median": 8.463916375068948,
+          "correct": 18,
+          "total": 18,
+          "fallbacks": 0
+        },
+        "v2.0": {
+          "tokens_median": 32901,
+          "seconds_median": 13.658112708013505,
+          "correct": 18,
+          "total": 18,
+          "fallbacks": 0
+        },
+        "v2.1": {
+          "tokens_median": 28370,
+          "seconds_median": 16.079065582947806,
+          "correct": 18,
+          "total": 18,
+          "fallbacks": 0
+        }
+      }
+    },
+    {
+      "task_id": "cpython_ubsan_failure",
+      "source_lines": 3768,
+      "conditions": {
+        "full": {
+          "tokens_median": 224199,
+          "seconds_median": 10.538429499836639,
+          "correct": 18,
+          "total": 18,
+          "fallbacks": 0
+        },
+        "v2.0": {
+          "tokens_median": 124385,
+          "seconds_median": 13.924566332949325,
+          "correct": 0,
+          "total": 18,
+          "fallbacks": 3
+        },
+        "v2.1": {
+          "tokens_median": 50021,
+          "seconds_median": 14.153011291055009,
+          "correct": 18,
+          "total": 18,
+          "fallbacks": 0
+        }
+      }
+    },
+    {
+      "task_id": "scipy_distributed_failures",
+      "source_lines": 6315,
+      "conditions": {
+        "full": {
+          "tokens_median": 277788,
+          "seconds_median": 10.835644541075453,
+          "correct": 18,
+          "total": 18,
+          "fallbacks": 0
+        },
+        "v2.0": {
+          "tokens_median": 67922,
+          "seconds_median": 12.597211041953415,
+          "correct": 0,
+          "total": 18,
+          "fallbacks": 3
+        },
+        "v2.1": {
+          "tokens_median": 52567,
+          "seconds_median": 17.46359145687893,
+          "correct": 18,
+          "total": 18,
+          "fallbacks": 0
+        }
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "cpython_subprocess_timeout",
+      "source_file": "subprocess.py",
+      "difficulty": "localized",
+      "query": "Inspect subprocess.run timeout handling, Windows versus POSIX child cleanup, and return-code checks. Answer all six numbered questions with exact code identifiers and original source line evidence.",
+      "facts": [
+        {
+          "id": "kill",
+          "question": "Which process method is called immediately after run catches TimeoutExpired? Give its fully qualified expression without arguments. Answer only the requested code identifier or literal.",
+          "expected_answer": "process.kill",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 557,
+              "end_line": 558
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              557,
+              558
+            ]
+          ]
+        },
+        {
+          "id": "windows",
+          "question": "On Windows after killing the child, which method supplies exc.stdout and exc.stderr? Give its fully qualified expression without arguments. Answer only the requested code identifier or literal.",
+          "expected_answer": "process.communicate",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 559,
+              "end_line": 565
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              559,
+              565
+            ]
+          ]
+        },
+        {
+          "id": "posix",
+          "question": "In the POSIX timeout branch, which method explicitly reaps the killed child? Give its fully qualified expression without arguments. Answer only the requested code identifier or literal.",
+          "expected_answer": "process.wait",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 566,
+              "end_line": 569
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              566,
+              569
+            ]
+          ]
+        },
+        {
+          "id": "timeout_raise",
+          "question": "Which existing exception type is re-raised after timeout cleanup? Answer only the requested code identifier or literal.",
+          "expected_answer": "TimeoutExpired",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 557,
+              "end_line": 570
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              557,
+              570
+            ]
+          ]
+        },
+        {
+          "id": "other_exception",
+          "question": "For a non-timeout exception, which context-manager method does the comment say waits for the child? Answer only the requested code identifier or literal.",
+          "expected_answer": "__exit__",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 571,
+              "end_line": 574
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              571,
+              574
+            ]
+          ],
+          "accepted_answers": [
+            "__exit__",
+            "process.__exit__"
+          ]
+        },
+        {
+          "id": "check",
+          "question": "When check is true and the polled return code is nonzero, which exception type is raised? Answer only the requested code identifier or literal.",
+          "expected_answer": "CalledProcessError",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 575,
+              "end_line": 578
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              575,
+              578
+            ]
+          ]
+        }
+      ],
+      "mode": "heavy_code"
+    },
+    {
+      "id": "cpython_asyncio_connections",
+      "source_file": "asyncio_base_events.py",
+      "difficulty": "distributed",
+      "query": "Trace asyncio create_connection Happy Eyeballs setup, SSL hostname validation, address-family interleaving helper, socket cleanup and aggregate failure behavior. Answer all six numbered questions with exact code identifiers or literals and original source line evidence.",
+      "facts": [
+        {
+          "id": "interleave_default",
+          "question": "When happy_eyeballs_delay is supplied and interleave is None, what integer does interleave become? Answer only the requested code identifier or literal.",
+          "expected_answer": "1",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 1104,
+              "end_line": 1106
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              1104,
+              1106
+            ]
+          ]
+        },
+        {
+          "id": "race",
+          "question": "Which qualified coroutine does the Happy Eyeballs branch await to race connection attempts? Answer only the requested code identifier or literal.",
+          "expected_answer": "staggered.staggered_race",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 1142,
+              "end_line": 1147
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              1142,
+              1147
+            ]
+          ]
+        },
+        {
+          "id": "ssl_host",
+          "question": "With ssl enabled, server_hostname None and a falsy host, which exception type is raised? Answer only the requested code identifier or literal.",
+          "expected_answer": "ValueError",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 1077,
+              "end_line": 1090
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              1077,
+              1090
+            ]
+          ]
+        },
+        {
+          "id": "family_groups",
+          "question": "Inside _interleave_addrinfos, which qualified constructor stores address groups in first-seen family order? Answer only the requested code identifier or literal.",
+          "expected_answer": "collections.OrderedDict",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 160,
+              "end_line": 168
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              160,
+              168
+            ]
+          ]
+        },
+        {
+          "id": "socket_cleanup",
+          "question": "Inside _connect_sock, after OSError with an allocated socket, which fully qualified method is called before re-raising? Answer only the requested code identifier or literal.",
+          "expected_answer": "sock.close",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 1042,
+              "end_line": 1046
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              1042,
+              1046
+            ]
+          ]
+        },
+        {
+          "id": "all_errors",
+          "question": "If all connection attempts fail and all_errors is true, which exception type is raised? Answer only the requested code identifier or literal.",
+          "expected_answer": "ExceptionGroup",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 1149,
+              "end_line": 1153
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              1149,
+              1153
+            ]
+          ]
+        }
+      ],
+      "mode": "heavy_code"
+    },
+    {
+      "id": "cpython_ubsan_failure",
+      "source_file": "cpython-ubsan.log",
+      "mode": "error_log",
+      "difficulty": "localized traceback plus separate tail diagnostics",
+      "query": "Inspect the failed multiprocessing test, traceback, test-file summary, and separate UBSan reports. Answer all six questions using exact literals and original log line evidence; do not infer causation.",
+      "facts": [
+        {
+          "id": "test",
+          "question": "Give the fully qualified test identifier inside parentheses on the ERROR line. Answer only the requested identifier, string, or number.",
+          "expected_answer": "test.test_multiprocessing_spawn.test_processes.WithProcessesTestProcess.test_interrupt",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 3179,
+              "end_line": 3179
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              3179,
+              3179
+            ]
+          ]
+        },
+        {
+          "id": "exception",
+          "question": "Which exception class terminates that test traceback? Answer only the requested identifier, string, or number.",
+          "expected_answer": "RuntimeError",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 3204,
+              "end_line": 3204
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              3204,
+              3204
+            ]
+          ]
+        },
+        {
+          "id": "raise_line",
+          "question": "At what numeric line in Lib/test/_test_multiprocessing.py does handler raise that exception? Answer only the requested identifier, string, or number.",
+          "expected_answer": "628",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 3202,
+              "end_line": 3203
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              3202,
+              3203
+            ]
+          ]
+        },
+        {
+          "id": "test_files",
+          "question": "What exact run ratio appears in the final Total test files line? Give only the value after run=. Answer only the requested identifier, string, or number.",
+          "expected_answer": "548/559",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 3657,
+              "end_line": 3657
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              3657,
+              3657
+            ]
+          ]
+        },
+        {
+          "id": "alignment",
+          "question": "What exact file:line:column prefixes the misaligned int load runtime error? Answer only the requested identifier, string, or number.",
+          "expected_answer": "conftest.c:179:9",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 3673,
+              "end_line": 3673
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              3673,
+              3673
+            ]
+          ]
+        },
+        {
+          "id": "segv_top",
+          "question": "What function name is in frame #0 of the separate SEGV sanitizer report? Answer only the requested identifier, string, or number.",
+          "expected_answer": "pthread_kill",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 3680,
+              "end_line": 3682
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              3680,
+              3682
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scipy_distributed_failures",
+      "source_file": "scipy-fast.log",
+      "mode": "error_log",
+      "difficulty": "distributed errors and runtime metadata",
+      "query": "Inspect actual pytest runtime metadata, final failure totals, first fitpack_F traceback, and the distinct legacy STFT tuple failure. Answer all six questions using exact literals and original log line evidence; do not rely on the CI job label.",
+      "facts": [
+        {
+          "id": "python",
+          "question": "What Python version does the pytest platform line report? Answer only the requested identifier, string, or number.",
+          "expected_answer": "3.14.2",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 2421,
+              "end_line": 2421
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              2421,
+              2421
+            ]
+          ]
+        },
+        {
+          "id": "failed",
+          "question": "How many tests failed in the final summary? Give only the integer. Answer only the requested identifier, string, or number.",
+          "expected_answer": "48",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              6256,
+              6256
+            ]
+          ]
+        },
+        {
+          "id": "passed",
+          "question": "How many tests passed in the final summary? Give only the integer without commas. Answer only the requested identifier, string, or number.",
+          "expected_answer": "85328",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              6256,
+              6256
+            ]
+          ]
+        },
+        {
+          "id": "helper",
+          "question": "What assertion helper is called at the failing line in the first TestMakeSplrep.test_fitpack_F case? Give its name without arguments. Answer only the requested identifier, string, or number.",
+          "expected_answer": "xp_assert_close_no_0d",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 3854,
+              "end_line": 3855
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              3854,
+              3855
+            ]
+          ]
+        },
+        {
+          "id": "source_line",
+          "question": "At what numeric line of test_bsplines.py is that first fitpack_F AttributeError reported? Answer only the requested identifier, string, or number.",
+          "expected_answer": "5134",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 3870,
+              "end_line": 3870
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              3870,
+              3870
+            ]
+          ]
+        },
+        {
+          "id": "tuple_test",
+          "question": "Which legacy STFT test has the tuple object has no attribute shape error in the final summary? Give only the function name. Answer only the requested identifier, string, or number.",
+          "expected_answer": "test_tutorial_stft_legacy_stft",
+          "answer_rule": "strip whitespace and surrounding backticks; exact case-sensitive equality",
+          "evidence_ranges": [
+            {
+              "start_line": 6237,
+              "end_line": 6237
+            }
+          ],
+          "evidence_rule": "at least one cited range overlaps the gold range; factual answer must also match",
+          "evidence": [
+            [
+              6237,
+              6237
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "trials": [
+    {
+      "trial_id": "cpython_subprocess_timeout-1-full",
+      "task_id": "cpython_subprocess_timeout",
+      "repeat": 1,
+      "condition": "full",
+      "total_tokens": 29636,
+      "total_cached_tokens": 0,
+      "total_seconds": 8.619658875046298,
+      "visible_lines": 2223,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_subprocess_timeout-1-routed",
+      "task_id": "cpython_subprocess_timeout",
+      "repeat": 1,
+      "condition": "routed",
+      "total_tokens": 35496,
+      "total_cached_tokens": 0,
+      "total_seconds": 13.408022166928276,
+      "visible_lines": 22,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-1-full",
+      "task_id": "cpython_asyncio_connections",
+      "repeat": 1,
+      "condition": "full",
+      "total_tokens": 26573,
+      "total_cached_tokens": 0,
+      "total_seconds": 9.22504537482746,
+      "visible_lines": 2052,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-1-routed",
+      "task_id": "cpython_asyncio_connections",
+      "repeat": 1,
+      "condition": "routed",
+      "total_tokens": 32681,
+      "total_cached_tokens": 3840,
+      "total_seconds": 15.638326042797416,
+      "visible_lines": 30,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_subprocess_timeout-2-routed",
+      "task_id": "cpython_subprocess_timeout",
+      "repeat": 2,
+      "condition": "routed",
+      "total_tokens": 65597,
+      "total_cached_tokens": 29440,
+      "total_seconds": 15.46887033386156,
+      "visible_lines": 38,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_subprocess_timeout-2-full",
+      "task_id": "cpython_subprocess_timeout",
+      "repeat": 2,
+      "condition": "full",
+      "total_tokens": 29634,
+      "total_cached_tokens": 0,
+      "total_seconds": 7.258423208026215,
+      "visible_lines": 2223,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-2-routed",
+      "task_id": "cpython_asyncio_connections",
+      "repeat": 2,
+      "condition": "routed",
+      "total_tokens": 32925,
+      "total_cached_tokens": 3840,
+      "total_seconds": 13.658112708013505,
+      "visible_lines": 45,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-2-full",
+      "task_id": "cpython_asyncio_connections",
+      "repeat": 2,
+      "condition": "full",
+      "total_tokens": 26541,
+      "total_cached_tokens": 0,
+      "total_seconds": 8.216222750023007,
+      "visible_lines": 2052,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_subprocess_timeout-3-full",
+      "task_id": "cpython_subprocess_timeout",
+      "repeat": 3,
+      "condition": "full",
+      "total_tokens": 29630,
+      "total_cached_tokens": 0,
+      "total_seconds": 8.112851459067315,
+      "visible_lines": 2223,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_subprocess_timeout-3-routed",
+      "task_id": "cpython_subprocess_timeout",
+      "repeat": 3,
+      "condition": "routed",
+      "total_tokens": 35553,
+      "total_cached_tokens": 0,
+      "total_seconds": 12.744047583080828,
+      "visible_lines": 21,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-3-full",
+      "task_id": "cpython_asyncio_connections",
+      "repeat": 3,
+      "condition": "full",
+      "total_tokens": 26543,
+      "total_cached_tokens": 0,
+      "total_seconds": 8.463916375068948,
+      "visible_lines": 2052,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-3-routed",
+      "task_id": "cpython_asyncio_connections",
+      "repeat": 3,
+      "condition": "routed",
+      "total_tokens": 32901,
+      "total_cached_tokens": 3840,
+      "total_seconds": 12.514770291978493,
+      "visible_lines": 44,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-1-full",
+      "task_id": "cpython_ubsan_failure",
+      "repeat": 1,
+      "condition": "full",
+      "total_tokens": 224199,
+      "total_cached_tokens": 3968,
+      "total_seconds": 10.699531957972795,
+      "visible_lines": 3768,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-1-routed",
+      "task_id": "cpython_ubsan_failure",
+      "repeat": 1,
+      "condition": "routed",
+      "total_tokens": 68203,
+      "total_cached_tokens": 3840,
+      "total_seconds": 11.042990667046979,
+      "visible_lines": 43,
+      "grounded_correct": 0,
+      "facts_total": 6,
+      "routing_failed": true,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "scipy_distributed_failures-1-full",
+      "task_id": "scipy_distributed_failures",
+      "repeat": 1,
+      "condition": "full",
+      "total_tokens": 277786,
+      "total_cached_tokens": 0,
+      "total_seconds": 11.938632583012804,
+      "visible_lines": 6315,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "scipy_distributed_failures-1-routed",
+      "task_id": "scipy_distributed_failures",
+      "repeat": 1,
+      "condition": "routed",
+      "total_tokens": 67916,
+      "total_cached_tokens": 3840,
+      "total_seconds": 12.597211041953415,
+      "visible_lines": 42,
+      "grounded_correct": 0,
+      "facts_total": 6,
+      "routing_failed": true,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-2-routed",
+      "task_id": "cpython_ubsan_failure",
+      "repeat": 2,
+      "condition": "routed",
+      "total_tokens": 124385,
+      "total_cached_tokens": 59008,
+      "total_seconds": 13.924566332949325,
+      "visible_lines": 43,
+      "grounded_correct": 0,
+      "facts_total": 6,
+      "routing_failed": true,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-2-full",
+      "task_id": "cpython_ubsan_failure",
+      "repeat": 2,
+      "condition": "full",
+      "total_tokens": 224199,
+      "total_cached_tokens": 0,
+      "total_seconds": 10.441125583136454,
+      "visible_lines": 3768,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "scipy_distributed_failures-2-routed",
+      "task_id": "scipy_distributed_failures",
+      "repeat": 2,
+      "condition": "routed",
+      "total_tokens": 136758,
+      "total_cached_tokens": 60160,
+      "total_seconds": 13.813519499031827,
+      "visible_lines": 42,
+      "grounded_correct": 0,
+      "facts_total": 6,
+      "routing_failed": true,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "scipy_distributed_failures-2-full",
+      "task_id": "scipy_distributed_failures",
+      "repeat": 2,
+      "condition": "full",
+      "total_tokens": 277788,
+      "total_cached_tokens": 0,
+      "total_seconds": 10.835644541075453,
+      "visible_lines": 6315,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-3-full",
+      "task_id": "cpython_ubsan_failure",
+      "repeat": 3,
+      "condition": "full",
+      "total_tokens": 224201,
+      "total_cached_tokens": 0,
+      "total_seconds": 10.538429499836639,
+      "visible_lines": 3768,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-3-routed",
+      "task_id": "cpython_ubsan_failure",
+      "repeat": 3,
+      "condition": "routed",
+      "total_tokens": 132485,
+      "total_cached_tokens": 55040,
+      "total_seconds": 14.171327874995768,
+      "visible_lines": 43,
+      "grounded_correct": 0,
+      "facts_total": 6,
+      "routing_failed": true,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "scipy_distributed_failures-3-full",
+      "task_id": "scipy_distributed_failures",
+      "repeat": 3,
+      "condition": "full",
+      "total_tokens": 277788,
+      "total_cached_tokens": 3968,
+      "total_seconds": 10.472613250138238,
+      "visible_lines": 6315,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "scipy_distributed_failures-3-routed",
+      "task_id": "scipy_distributed_failures",
+      "repeat": 3,
+      "condition": "routed",
+      "total_tokens": 67922,
+      "total_cached_tokens": 3968,
+      "total_seconds": 10.645899208029732,
+      "visible_lines": 42,
+      "grounded_correct": 0,
+      "facts_total": 6,
+      "routing_failed": true,
+      "version": "v2.0"
+    },
+    {
+      "trial_id": "cpython_subprocess_timeout-1-routed",
+      "task_id": "cpython_subprocess_timeout",
+      "repeat": 1,
+      "condition": "routed",
+      "total_tokens": 27769,
+      "total_cached_tokens": 3840,
+      "total_seconds": 12.70266575110145,
+      "visible_lines": 26,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.1"
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-1-routed",
+      "task_id": "cpython_asyncio_connections",
+      "repeat": 1,
+      "condition": "routed",
+      "total_tokens": 28274,
+      "total_cached_tokens": 3840,
+      "total_seconds": 16.994789458811283,
+      "visible_lines": 95,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.1"
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-1-routed",
+      "task_id": "cpython_ubsan_failure",
+      "repeat": 1,
+      "condition": "routed",
+      "total_tokens": 50051,
+      "total_cached_tokens": 7808,
+      "total_seconds": 14.120165166910738,
+      "visible_lines": 29,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.1"
+    },
+    {
+      "trial_id": "scipy_distributed_failures-1-routed",
+      "task_id": "scipy_distributed_failures",
+      "repeat": 1,
+      "condition": "routed",
+      "total_tokens": 54077,
+      "total_cached_tokens": 7808,
+      "total_seconds": 18.49303883407265,
+      "visible_lines": 73,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.1"
+    },
+    {
+      "trial_id": "cpython_subprocess_timeout-2-routed",
+      "task_id": "cpython_subprocess_timeout",
+      "repeat": 2,
+      "condition": "routed",
+      "total_tokens": 27939,
+      "total_cached_tokens": 0,
+      "total_seconds": 14.653749209130183,
+      "visible_lines": 36,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.1"
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-2-routed",
+      "task_id": "cpython_asyncio_connections",
+      "repeat": 2,
+      "condition": "routed",
+      "total_tokens": 28370,
+      "total_cached_tokens": 7808,
+      "total_seconds": 14.618727582972497,
+      "visible_lines": 105,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.1"
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-2-routed",
+      "task_id": "cpython_ubsan_failure",
+      "repeat": 2,
+      "condition": "routed",
+      "total_tokens": 50021,
+      "total_cached_tokens": 3840,
+      "total_seconds": 21.823704957962036,
+      "visible_lines": 27,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.1"
+    },
+    {
+      "trial_id": "scipy_distributed_failures-2-routed",
+      "task_id": "scipy_distributed_failures",
+      "repeat": 2,
+      "condition": "routed",
+      "total_tokens": 52561,
+      "total_cached_tokens": 3840,
+      "total_seconds": 17.46359145687893,
+      "visible_lines": 33,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.1"
+    },
+    {
+      "trial_id": "cpython_subprocess_timeout-3-routed",
+      "task_id": "cpython_subprocess_timeout",
+      "repeat": 3,
+      "condition": "routed",
+      "total_tokens": 27836,
+      "total_cached_tokens": 7808,
+      "total_seconds": 12.730862999800593,
+      "visible_lines": 26,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.1"
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-3-routed",
+      "task_id": "cpython_asyncio_connections",
+      "repeat": 3,
+      "condition": "routed",
+      "total_tokens": 49704,
+      "total_cached_tokens": 21248,
+      "total_seconds": 16.079065582947806,
+      "visible_lines": 64,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.1"
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-3-routed",
+      "task_id": "cpython_ubsan_failure",
+      "repeat": 3,
+      "condition": "routed",
+      "total_tokens": 49959,
+      "total_cached_tokens": 7808,
+      "total_seconds": 14.153011291055009,
+      "visible_lines": 26,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.1"
+    },
+    {
+      "trial_id": "scipy_distributed_failures-3-routed",
+      "task_id": "scipy_distributed_failures",
+      "repeat": 3,
+      "condition": "routed",
+      "total_tokens": 52567,
+      "total_cached_tokens": 3840,
+      "total_seconds": 15.845216208137572,
+      "visible_lines": 33,
+      "grounded_correct": 6,
+      "facts_total": 6,
+      "version": "v2.1"
+    }
+  ]
+}

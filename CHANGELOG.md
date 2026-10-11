@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.1.0 — 2026-10-12
+
+- Rank candidates before applying the character cap; preserve distributed anchors and a tail share at every file size.
+- Remove generic question words, match Unicode/symbol boundaries, and downweight repeated diagnostics.
+- Preserve bounded context for the first named pytest failure block.
+- Share output budgets across distinct ranges and add nearby lines without displacing selected core evidence.
+- Add `--deterministic` to retrieve raw evidence without any model call.
+- Return ranked raw fallback on model failure at all file sizes, with explicit status and coverage diagnostics. Exit 0 indicates usable extraction, including fallback; inspect `model_failed`.
+- Replace the skill's line-count trigger with search-first and evidence-completeness guidance. Keep GPT-6 Luna Light and ChatGPT subscription authentication fixed.
+- Add regressions for noisy queries, Unicode identifiers, repeated errors, distributed evidence, fallback, and context padding. See [real-file validation](docs/benchmark-improvements.md).
+
 ## 2.0.0 — 2026-10-11
 
 ### Breaking changes
