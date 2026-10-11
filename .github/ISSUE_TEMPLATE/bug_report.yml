@@ -19,11 +19,11 @@ body:
     validations:
       required: true
   - type: input
-    id: model
+    id: codex_version
     attributes:
-      label: Ollama model
-      description: Include the full model and quantization tag.
-      placeholder: "gemma4:e2b-it-q4_K_M, qwen2.5-coder:7b, ..."
+      label: Codex CLI version
+      description: Include codex --version; the router fixes gpt-6-luna with low reasoning.
+      placeholder: "codex-cli version"
     validations:
       required: true
   - type: checkboxes
@@ -31,7 +31,8 @@ body:
     attributes:
       label: Failure kind
       options:
-        - label: Invalid JSON from local model
+        - label: Invalid structured output from Codex
+        - label: Codex login, model access, or timeout issue
         - label: Poor or missing line selection
         - label: Fallback output issue
         - label: Output cap issue
@@ -63,7 +64,7 @@ body:
     id: environment
     attributes:
       label: Environment
-      description: Python version, OS, Ollama version, OLLAMA_NUM_CTX, OLLAMA_KEEP_ALIVE, ROUTER_* overrides.
+      description: Python version, OS, Codex CLI version, ChatGPT login status (no credentials), ROUTER_* overrides.
       render: text
   - type: checkboxes
     id: safety

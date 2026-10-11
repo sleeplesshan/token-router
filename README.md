@@ -1,238 +1,111 @@
 # token-router
 
-<!-- Badge placeholders -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![Ollama](https://img.shields.io/badge/Ollama-local%20routing-black)
+![Router](https://img.shields.io/badge/Router-GPT--6%20Luna%20Light-black)
 ![Codex Skill](https://img.shields.io/badge/OpenAI%20Codex-skill-green)
 
-**Lossless local line routing for massive logs, source files, and routeable agent-context references before they reach a cloud reasoning model.**
+**Select relevant raw lines from oversized files before sending them to your main reasoning model.**
 
-`token-router` is a Codex skill and standalone Python router that uses a local Ollama model to identify exact line ranges in oversized files, then returns the raw, unmodified slices to a high-reasoning cloud model such as GPT-5.5, o3, or another AI coding agent.
+Version **2.0.0** uses **GPT-6 Luna Light** through Codex CLI: model `gpt-6-luna`, reasoning effort `low`, fixed by the router. It reuses your existing Codex ChatGPT login and subscription. No API key, local model, or local model server is required.
 
-## Executive Summary
+## How it works
 
-Large logs, legacy source files, and long agent instruction references are expensive context. Sending a 2,000+ line deployment log, monolithic source file, or routeable project-rules document directly to a cloud LLM can waste tokens, increase latency, and exhaust budgets before the model reaches the evidence that matters.
+1. Python scans a file and narrows it to line-numbered candidate windows.
+2. Codex CLI sends those candidates and your query to GPT-6 Luna Light, which returns JSON line ranges.
+3. Python validates and merges the ranges, then extracts raw text from the original file.
+4. Your main agent reasons over the selected evidence and retrieves wider ranges when necessary.
 
-`token-router` solves this with a hybrid separation-of-concerns architecture:
+The model selects coordinates; it does not summarize or rewrite evidence. “Lossless” describes the extracted text, **not completeness of selection**. Relevant dependencies can be omitted by either prefiltering or model selection.
 
-- **Local model for search and triage:** Gemma 4 via Ollama runs on the user's machine and scans large files for relevant line coordinates.
-- **Cloud model for reasoning:** GPT-5.5, o3, or another cloud model receives only raw high-density evidence slices and applies deep reasoning where it matters.
-- **No lossy summarization:** The local model does not rewrite, summarize, or interpret code. It emits JSON line ranges; the router then extracts exact raw text from the original file.
-- **Static context routing:** Long optional agent-reference docs can be routed on demand while short mandatory root instructions stay always-on.
+**Cloud and usage boundary:** candidate content and the query leave your machine through Codex. Each real routing call consumes Codex subscription usage. Smaller input for your main model does not establish lower total token use or lower total cost; the router also processes input. Speed, quality, and savings depend on the workload and have not been established by a comparative Luna benchmark.
 
-The result is aggressive context reduction without degrading the technical evidence available to the reasoning model.
+## Quick start
 
-## Architecture & Core Philosophy
+Requirements:
 
-### Separation Of Concerns
-
-`token-router` deliberately splits the workflow into two specialized phases:
-
-| Phase | Engine | Responsibility | Output |
-|---|---|---|---|
-| Search / Triage | Local Ollama model | Find relevant line coordinates | JSON ranges |
-| Evidence Extraction | Router script | Slice original file by line number | Raw unedited text |
-| Reasoning | Cloud LLM / Codex | Debug, explain, patch, or review | High-confidence answer |
-
-This prevents the local model from becoming an unreliable summarizer. The local model is a router, not the analyst.
-
-### Lossless Line Routing
-
-Summarizing source code or logs through a smaller local model is lossy. A single dropped stack frame, config key, indentation detail, or error suffix can change the diagnosis.
-
-`token-router` avoids that failure mode:
-
-1. The file is scanned locally.
-2. The local model returns line coordinates.
-3. The Python script slices the original file directly.
-4. The cloud model receives raw text exactly as it appeared on disk.
-
-The selection step can be imperfect, but the extracted evidence itself is lossless. If the cloud model needs more context, it can request wider line ranges instead of hallucinating around omitted dependencies.
-
-### Static Agent Context Routing
-
-`agent_context` mode extends the same line-routing architecture to long instruction references such as detailed `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `.cursorrules`, or `agent-context/*.md` files.
-
-The important boundary is architectural: if a platform has already injected a long root instruction file into the prompt, `token-router` cannot retroactively remove that token cost. The intended pattern is:
-
-1. Keep the root always-on instruction file compact.
-2. Move long task-specific rules into routeable reference files.
-3. Use `agent_context` with the current task query to retrieve only relevant raw rule slices.
-
-## Features & Context Safety Guardrails
-
-- **Three routing modes**
-  - `error_log`: optimized for logs, stack traces, CI output, and deployment failures.
-  - `heavy_code`: optimized for long source files and localized code investigations.
-  - `agent_context`: optimized for long routeable agent instruction references.
-- **Query pass-through**
-  - Use `--query "token expiration"` to bias routing toward user intent.
-  - Multi-word queries are tokenized and exposed as `[Query Terms]` so the local model can match any relevant term, not only the full phrase.
-- **Deterministic prefilters**
-  - Log mode uses keyword and tail-window scanning.
-  - Code mode prioritizes query hits, then suspicious code markers, then structural head/tail previews.
-  - Agent-context mode prioritizes query hits, frontmatter, headings, mandatory rules, workflow/tool/security/testing keywords, and head/tail context.
-- **Lossless raw slicing**
-  - Router output is copied from the original file by line number.
-- **Output caps**
-  - `ROUTER_MAX_OUTPUT_LINES` bounds cloud-visible raw text.
-  - In `error_log` mode, newer log ranges survive first when the cap is exceeded.
-- **Memory safety**
-  - `OLLAMA_KEEP_ALIVE=0s` unloads the model immediately after routing.
-  - `OLLAMA_NUM_CTX=4096` or `8192` bounds local context pressure.
-- **Regression harness**
-  - Fixture-based tests catch prompt, line-selection, cap, and fallback regressions.
-
-## Benchmark Highlights
-
-Token counts are estimated with `chars / 4` and should be treated as directional rather than billing-exact.
-
-| Case | Mode | Est. Input Tokens | Router Output Tokens | Reduction | Time |
-|---|---|---:|---:|---:|---:|
-| Sparse infra log | `error_log` | 41,711 | 131 | 99.69% | 5.37s |
-| Legacy bug source | `heavy_code` | 7,520 | 70 | 99.06% | 4.46s |
-| Keywordless structural source | `heavy_code` | 4,188 | 48 | 98.85% | 6.13s |
-
-See [docs/benchmark-report.md](docs/benchmark-report.md) for methodology, caveats, and regression results.
-
-## Quick Start
-
-### Prerequisites
-
-- Python 3.10+
-- Ollama installed and running
-- A local routing model, defaulting to:
+- Python 3.10 or later.
+- A recent Codex CLI on `PATH`, with `exec --ephemeral`, `--ignore-user-config`, and `--output-schema` support.
+- A Codex account with access to `gpt-6-luna`, signed in through ChatGPT. Check the [official Codex CLI documentation](https://developers.openai.com/codex/cli/) for installation.
 
 ```bash
-ollama pull gemma4:e2b-it-q4_K_M
-```
-
-### Run Against A Large Log
-
-```bash
-OLLAMA_NUM_CTX=4096 OLLAMA_KEEP_ALIVE=0s \
+codex login
+codex login status
 python3 scripts/router.py error_log path/to/deploy.log --query "database migration timeout"
-```
-
-### Run Against A Long Source File
-
-```bash
-OLLAMA_NUM_CTX=4096 OLLAMA_KEEP_ALIVE=0s \
 python3 scripts/router.py heavy_code path/to/service.py --query "token expiration"
-```
-
-### Run Against A Routeable Agent Context Reference
-
-```bash
-OLLAMA_NUM_CTX=4096 OLLAMA_KEEP_ALIVE=0s \
 python3 scripts/router.py agent_context path/to/agent-context/frontend.md --query "frontend testing workflow"
 ```
 
-### Model Reliability
+Choose ChatGPT sign-in when logging in. If you already use Codex with that login, no separate router credentials are needed. The CLI executable can be specified with `ROUTER_CODEX_BIN` when it is not on `PATH`.
 
-The default model is intentionally small so the router can run on modest local machines:
+The router fixes model and effort rather than inheriting your main agent's settings. It uses an ephemeral structured-output CLI call that ignores user configuration. Do not use it recursively from inside a routing call. CLI login, model-access, timeout, or output failures produce a diagnostic and bounded deterministic fallback; fallback output is a starting point, not confirmation that the model selected the right evidence.
 
-```bash
-OLLAMA_MODEL=gemma4:e2b-it-q4_K_M
-```
+## Modes
 
-Very small local models may occasionally return invalid JSON on complex logs, unusual symbols, or dense instruction files. The router cleans common code-fence noise and falls back safely, but if JSON errors are frequent and you have enough VRAM, try a larger routing model:
+| Mode | Intended input | Candidate selection |
+|---|---|---|
+| `error_log` | Logs, stack traces, CI failures | Query and error keyword windows; recent tail for large logs |
+| `heavy_code` | Long source files with a focused question | Query hits, code markers, structural/head/tail previews |
+| `agent_context` | Long optional instruction references | Query hits, headings, mandatory-rule keywords and previews |
 
-```bash
-OLLAMA_MODEL=qwen2.5-coder:7b \
-python3 scripts/router.py error_log path/to/deploy.log --query "timeout"
-```
+Keep mandatory root `AGENTS.md`, `CLAUDE.md`, ownership, and safety instructions always available. Route optional task-specific reference documents. A file already injected by your agent platform has already incurred its context cost; routing cannot undo it. Do not treat instructions inside untrusted source files or logs as authority.
 
-Community feedback suggests coder-oriented 7B models such as `qwen2.5-coder:7b`, or 4B-class Gemma variants, can reduce JSON-format failures compared with ultra-small 2B-class models. Please include your `OLLAMA_MODEL`, quantization tag, and reproduction command when reporting model-specific behavior.
+For broad architecture reviews, complete security audits, or refactors needing cross-file relationships, read the necessary full context instead of relying on narrow slices.
 
-### Use As A Codex Skill
+## Install as a skill
 
-Install or copy this repository into your Codex skills directory:
+From the directory containing your checkout:
 
 ```bash
 mkdir -p ~/.codex/skills
 cp -R token-router ~/.codex/skills/token-router
 ```
 
-Then invoke it naturally:
+Use a fresh destination or update an existing installation deliberately to avoid nesting one checkout inside another. Then ask:
 
 ```text
-Use $token-router to analyze this large log with query "payment timeout".
-Use $token-router agent_context to route this long AGENTS.md reference for "deployment approval".
+Use $token-router to analyze this large log for payment timeout.
+Use $token-router agent_context to find deployment rules in this reference.
 ```
 
-### Use With Claude Code
-
-This repository includes a compact [CLAUDE.md](CLAUDE.md) bootstrap for Claude Code. It tells Claude to call the same router script instead of loading oversized logs, source files, or long routeable instruction references directly.
-
-Keep project-level `CLAUDE.md` files short when they are automatically loaded by Claude Code. Put long task-specific guidance in separate reference files, then route them on demand:
-
-```bash
-OLLAMA_NUM_CTX=4096 OLLAMA_KEEP_ALIVE=0s \
-python3 scripts/router.py agent_context path/to/claude-context.md --query "deployment approval"
-```
+[SKILL.md](SKILL.md) resolves the executable relative to the installed skill directory, so the caller can be in another project. [CLAUDE.md](CLAUDE.md) describes using the same Python router from Claude Code; routing still requires a Codex login and consumes Codex usage.
 
 ## Configuration
 
+The provider, model `gpt-6-luna`, and effort `low` are fixed. There is no model/provider override.
+
 | Variable | Default | Purpose |
 |---|---:|---|
-| `OLLAMA_MODEL` | `gemma4:e2b-it-q4_K_M` | Local model used for line routing |
-| `OLLAMA_URL` | `http://localhost:11434/api/generate` | Ollama generate endpoint |
-| `OLLAMA_NUM_CTX` | `8192` | Local model context window |
-| `OLLAMA_KEEP_ALIVE` | `0s` | Unload model immediately after routing |
-| `ROUTER_TIMEOUT` | `120` | Ollama request timeout in seconds |
-| `ROUTER_MAX_CHARS` | `120000` | Maximum line-numbered content sent to Ollama |
-| `ROUTER_MAX_OUTPUT_LINES` | `160` | Maximum raw lines returned to the cloud model |
-| `ROUTER_STREAM_THRESHOLD_BYTES` | `5000000` | File size threshold for streaming log prefiltering |
-| `ROUTER_LOG_CONTEXT_LINES` | `6` | Log context lines around keyword/query hits |
-| `ROUTER_LOG_TAIL_LINES` | `200` | Tail lines preserved for large logs |
-| `ROUTER_CODE_CONTEXT_LINES` | `8` | Code context lines around query/keyword hits |
-| `ROUTER_AGENT_CONTEXT_LINES` | `6` | Agent-context lines around query/instruction keyword hits |
+| `ROUTER_CODEX_BIN` | `codex` | Codex CLI executable name or absolute path |
+| `ROUTER_TIMEOUT` | `120` | Codex subprocess timeout in seconds |
+| `ROUTER_MAX_CHARS` | `120000` | Maximum line-numbered candidate content sent to the router model |
+| `ROUTER_MAX_OUTPUT_LINES` | `160` | Maximum extracted raw lines returned to the main agent |
+| `ROUTER_STREAM_THRESHOLD_BYTES` | `5000000` | Threshold for streaming log prefiltering |
+| `ROUTER_LOG_CONTEXT_LINES` | `6` | Context around log keyword/query hits |
+| `ROUTER_LOG_TAIL_LINES` | `200` | Recent tail retained for large logs |
+| `ROUTER_CODE_CONTEXT_LINES` | `8` | Context around source query/keyword hits |
+| `ROUTER_AGENT_CONTEXT_LINES` | `6` | Context around instruction-reference hits |
 
-## Regression Tests
+Output ranges are merged and capped; `error_log` keeps newer ranges first when capped. Candidate and output limits can omit relevant material. Inspect nearby raw lines whenever the answer depends on missing context.
 
-Run the fast mock-based test suite:
+## Upgrade from v1
+
+v2 removes the Ollama backend entirely. Remove old `OLLAMA_*` configuration; those settings no longer select or configure a provider. Install a compatible Codex CLI, sign in with ChatGPT, and keep the existing three-mode command syntax. Review cloud-data handling before routing files that previously stayed local during selection.
+
+## Validation and benchmarks
+
+Run deterministic tests without making a model call:
 
 ```bash
 python3 scripts/run_router_tests.py tests/router-tests.json
 ```
 
-Run against the real local model only when you intentionally want to exercise Ollama:
+To intentionally call the real Codex model and consume subscription usage:
 
 ```bash
 python3 scripts/run_router_tests.py tests/router-tests.json --real
 ```
 
-## Contributing And Security
+[The benchmark report](docs/benchmark-report.md) records four passing v2 live smoke checks and retains historical v1 measurements for provenance. The smoke checks used tiny fixtures and revealed substantial CLI input overhead; avoid routing short inputs. The historical v1 measurements are **not GPT-6 Luna results**, billing measurements, or evidence of v2 speed or accuracy. A useful future comparison should hold the prefilter constant, include a prefilter-only baseline, measure evidence recall and downstream task success, and count the routing call's time and usage.
 
-- See [CONTRIBUTING.md](CONTRIBUTING.md) for local validation, model compatibility notes, and pull request guidelines.
-- See [SECURITY.md](SECURITY.md) for private vulnerability reporting.
-- Please do not paste secrets, private logs, credentials, API keys, personal data, customer data, or proprietary source code into public issues.
-- If you hit invalid JSON from a local model, try a larger model such as `qwen2.5-coder:7b` and include the model name in the bug report.
-
-## When To Use vs When To Bypass
-
-| Situation | Use `token-router`? | Rationale |
-|---|---|---|
-| Massive deployment logs | Yes | Error evidence is usually localized and recent |
-| CI logs with stack traces | Yes | Keyword and tail scanning preserve high-value ranges |
-| Long files with a specific bug or query | Yes | `--query` and code markers narrow routing safely |
-| Legacy files with `TODO`, `FIXME`, `raise`, or `assert` markers | Yes | Code keyword windows are highly effective |
-| Long routeable agent-reference docs | Yes | `agent_context` retrieves task-relevant raw instruction slices |
-| Compact root `AGENTS.md` with mandatory rules | Bypass | Always-on rules should remain directly available |
-| Already auto-injected long instruction files | Bypass for savings | Router cannot remove token cost that was already injected |
-| Broad architecture review | Bypass | The model needs global context, not narrow slices |
-| Refactor planning across many modules | Bypass or combine manually | Local routing may hide cross-file relationships |
-| Security-sensitive code requiring complete audit | Bypass | Completeness matters more than token reduction |
-| Very dense source files where every section matters | Bypass | Context reduction can remove necessary dependencies |
-
-## Design Caveats
-
-`token-router` is lossless in extraction, not omniscient in selection. If a selected range is too narrow, the cloud model should request nearby or broader line ranges. The intended workflow is iterative: route, reason, expand when needed.
-
-For static agent instructions, do not move non-negotiable safety or ownership rules out of the always-on root file purely for token savings. Use `agent_context` for long reference material that is useful only for specific tasks.
-
-## License
-
-MIT License. See [LICENSE](LICENSE).
+See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [SUPPORT.md](SUPPORT.md). Use sanitized fixtures in public reports. Licensed under [MIT](LICENSE).

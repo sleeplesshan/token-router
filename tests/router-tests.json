@@ -18,8 +18,15 @@
         }
       ]
     },
-    "expected_contains_lines": [8, 9, 10, 11],
-    "expected_output_contains": ["token expiration logic"]
+    "expected_contains_lines": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "expected_output_contains": [
+      "token expiration logic"
+    ]
   },
   {
     "name": "overlap merge and output cap",
@@ -47,8 +54,17 @@
         }
       ]
     },
-    "expected_contains_lines": [10, 11, 12, 13, 14],
-    "expected_output_contains": ["first; second [truncated by ROUTER_MAX_OUTPUT_LINES]"]
+    "expected_contains_lines": [
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "expected_output_contains": [
+      "first; second [truncated by ROUTER_MAX_OUTPUT_LINES]"
+    ],
+    "mock_only": true
   },
   {
     "name": "streaming log tail finds late error",
@@ -68,8 +84,14 @@
         }
       ]
     },
-    "expected_contains_lines": [120, 121, 122],
-    "expected_output_contains": ["late payment timeout"]
+    "expected_contains_lines": [
+      120,
+      121,
+      122
+    ],
+    "expected_output_contains": [
+      "late payment timeout"
+    ]
   },
   {
     "name": "multi-word query terms are shown in prompt",
@@ -90,8 +112,16 @@
         }
       ]
     },
-    "expected_contains_lines": [8, 9, 10, 11],
-    "expected_output_contains": ["token expiration logic"]
+    "expected_contains_lines": [
+      8,
+      9,
+      10,
+      11
+    ],
+    "expected_output_contains": [
+      "token expiration logic"
+    ],
+    "mock_only": true
   },
   {
     "name": "error_log cap keeps latest ranges",
@@ -114,10 +144,16 @@
         }
       ]
     },
-    "expected_contains_lines": [25, 26, 27, 28],
+    "expected_contains_lines": [
+      25,
+      26,
+      27,
+      28
+    ],
     "expected_output_contains": [
       "latest error [older lines truncated by ROUTER_MAX_OUTPUT_LINES]"
-    ]
+    ],
+    "mock_only": true
   },
   {
     "name": "agent_context query routes deployment approval",
@@ -141,8 +177,16 @@
         }
       ]
     },
-    "expected_contains_lines": [18, 19, 20, 21, 22],
-    "expected_output_contains": ["deployment approval workflow"]
+    "expected_contains_lines": [
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "expected_output_contains": [
+      "deployment approval workflow"
+    ]
   },
   {
     "name": "agent_context query routes frontend testing",
@@ -163,8 +207,16 @@
         }
       ]
     },
-    "expected_contains_lines": [12, 13, 14, 15, 16],
-    "expected_output_contains": ["frontend testing workflow"]
+    "expected_contains_lines": [
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "expected_output_contains": [
+      "frontend testing workflow"
+    ]
   },
   {
     "name": "agent_context no query keeps mandatory rules in prompt",
@@ -186,8 +238,15 @@
         }
       ]
     },
-    "expected_contains_lines": [8, 9, 10],
-    "expected_output_contains": ["mandatory operating rules"]
+    "expected_contains_lines": [
+      8,
+      9,
+      10
+    ],
+    "expected_output_contains": [
+      "mandatory operating rules"
+    ],
+    "mock_only": true
   },
   {
     "name": "agent_context output cap preserves early mandatory rules",
@@ -205,10 +264,17 @@
         }
       ]
     },
-    "expected_contains_lines": [8, 9, 10, 11, 12],
+    "expected_contains_lines": [
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
     "expected_output_contains": [
       "mandatory and nearby workflow rules [truncated by ROUTER_MAX_OUTPUT_LINES]"
-    ]
+    ],
+    "mock_only": true
   },
   {
     "name": "agent_context fallback preview uses instruction keywords",
@@ -224,6 +290,7 @@
       "--- [KEYWORD MATCH PREVIEW] ---",
       "Always preserve user-owned worktree changes before editing files.",
       "Never expose secrets, credentials, tokens, or private keys in responses."
-    ]
+    ],
+    "mock_only": true
   }
 ]

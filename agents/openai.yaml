@@ -1,4 +1,4 @@
 interface:
   display_name: "Token Router"
-  short_description: "Route large files and agent-context refs through local Ollama"
-  default_prompt: "Use $token-router to analyze this large log, source file, or routeable agent-context reference with a local Ollama line router."
+  short_description: "Route large files through Codex GPT-6 Luna Light"
+  default_prompt: "Use $token-router to select relevant raw lines from this large file using GPT-6 Luna Light and my existing Codex login."

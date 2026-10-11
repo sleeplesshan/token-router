@@ -9,6 +9,7 @@ import json
 import os
 import subprocess
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
@@ -32,7 +33,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--real",
         action="store_true",
-        help="Call the real Ollama model instead of ROUTER_MOCK_RESPONSE values.",
+        help="Call GPT-6 Luna Light through Codex CLI for live selection cases.",
     )
     return parser.parse_args()
 
@@ -76,17 +77,17 @@ def run_case(
                 errors.append(f"prompt missing {expected!r}")
 
     env = os.environ.copy()
-    env.setdefault("OLLAMA_KEEP_ALIVE", "0s")
-    env.setdefault("OLLAMA_NUM_CTX", "4096")
     env.setdefault("ROUTER_TIMEOUT", "60")
     env.update(case.get("env", {}))
-    if not real and case.get("mock_response"):
+    env.pop("ROUTER_MOCK_RESPONSE", None)
+    if not real and "mock_response" in case:
         env["ROUTER_MOCK_RESPONSE"] = json.dumps(case["mock_response"])
 
     cmd = [sys.executable, str(ROUTER_PATH), mode, str(fixture)]
     if query:
         cmd.extend(["--query", query])
 
+    started = time.monotonic()
     result = subprocess.run(
         cmd,
         env=env,
@@ -94,11 +95,18 @@ def run_case(
         capture_output=True,
         check=False,
     )
+    elapsed = time.monotonic() - started
+    if real:
+        print(f"  {elapsed:.2f}s")
+        for line in result.stderr.splitlines():
+            if line.startswith("[token-router usage]"):
+                print("  " + line)
     output = result.stdout + result.stderr
     if result.returncode != case.get("expected_exit", 0):
         errors.append(f"exit {result.returncode}, expected {case.get('expected_exit', 0)}")
 
-    for expected in case.get("expected_output_contains", []):
+    expectations = case.get("real_output_contains", []) if real else case.get("expected_output_contains", [])
+    for expected in expectations:
         if expected not in output:
             errors.append(f"output missing {expected!r}")
 
@@ -106,7 +114,7 @@ def run_case(
         if text and text not in output:
             errors.append(f"output missing fixture line {text!r}")
 
-    if case.get("forbid_fallback", True) and "#### Router Fallback" in output:
+    if case.get("forbid_fallback", True) and ("#### Router Fallback" in output or "deterministic streaming fallback" in output):
         errors.append("unexpected fallback output")
 
     return errors
@@ -120,6 +128,8 @@ def main() -> int:
 
     failures: list[str] = []
     for case in cases:
+        if args.real and case.get("mock_only", False):
+            continue
         name = case.get("name", case.get("fixture", "unnamed"))
         errors = run_case(case, manifest_path, router_module, args.real)
         if errors:

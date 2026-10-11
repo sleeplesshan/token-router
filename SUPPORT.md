@@ -1,14 +1,11 @@
 # Support
 
-For general usage questions, open a GitHub Discussion if enabled, or file a regular issue.
+For usage questions, open a GitHub Discussion if enabled, or a regular issue. For bugs, include a minimal sanitized reproduction, Python/Codex CLI versions, and relevant `ROUTER_*` settings. Never share credentials or Codex authentication files.
 
-For bugs, use the bug report issue template and include a minimal sanitized reproduction.
+v2 requires a compatible Codex CLI, ChatGPT login, and access to fixed `gpt-6-luna` with `low` reasoning. It consumes Codex subscription usage. Check `codex login status` and the CLI version when diagnosing setup failures.
 
-For security vulnerabilities, do not open a public issue. Follow `SECURITY.md`.
-
-Useful links:
-
-- README: `README.md`
-- Benchmarks: `docs/benchmark-report.md`
-- Regression tests: `tests/router-tests.json`
-- Claude Code bootstrap: `CLAUDE.md`
+- [Usage and configuration](README.md)
+- [Historical benchmarks and evaluation caveats](docs/benchmark-report.md)
+- [Regression fixtures](tests/router-tests.json)
+- [Claude Code bootstrap](CLAUDE.md)
+- [Private security reporting](SECURITY.md)

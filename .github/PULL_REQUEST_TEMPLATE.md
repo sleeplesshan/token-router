@@ -7,7 +7,7 @@ What changed and why?
 - [ ] `error_log`
 - [ ] `heavy_code`
 - [ ] `agent_context`
-- [ ] Model compatibility
+- [ ] Codex CLI compatibility
 - [ ] Documentation
 - [ ] Tests
 - [ ] Community / repository health
@@ -17,7 +17,7 @@ What changed and why?
 - [ ] `python3 -m py_compile scripts/router.py scripts/run_router_tests.py`
 - [ ] `python3 scripts/run_router_tests.py tests/router-tests.json`
 - [ ] Skill validation, if metadata changed
-- [ ] Manual smoke test, if routing behavior changed
+- [ ] Intentional cloud smoke test with sanitized input, if needed (consumes Codex usage)
 
 ## Safety
 

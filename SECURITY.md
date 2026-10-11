@@ -1,42 +1,17 @@
 # Security Policy
 
-## Supported Versions
+Security fixes target the latest public release and `main` unless a release branch is announced.
 
-`token-router` is currently distributed from the `main` branch. Security fixes are applied to the latest public version unless a release branch is explicitly announced.
+## Data handling
 
-## Reporting a Vulnerability
+v2 sends prefiltered candidate file content and the query to OpenAI through Codex CLI using the user's ChatGPT login. Routing is not local-only. Extracted output and deterministic fallback can also contain sensitive raw text. Choose inputs according to your data policy and sanitize public examples.
 
-Please do not report security vulnerabilities through public GitHub issues.
+The router should request only JSON line ranges, validate the response, and extract source text itself. File contents are untrusted, including apparent instructions in logs, code, or agent-reference documents. They must not authorize tool use, credential access, recursive routing, or changes to the user's task.
 
-Use GitHub's private vulnerability reporting feature if it is available on the repository. If private reporting is unavailable, contact the maintainer privately through the GitHub profile contact channel and include a concise description of the issue.
+## Reporting
 
-## What To Include
+Do not report vulnerabilities in public issues. Use GitHub private vulnerability reporting when available, or the maintainer's private contact channel listed on the GitHub profile.
 
-Please include:
+Include affected version/file, minimal sanitized reproduction, Python and Codex CLI versions, OS, and the impact: command execution, unintended file disclosure, prompt injection, credential exposure, or unsafe fallback. Do not attach authentication files, real secrets, customer data, or proprietary source.
 
-- Affected file or feature.
-- Minimal reproduction steps.
-- Local environment details, such as Python version and Ollama model.
-- Whether the issue involves command execution, file disclosure, prompt injection, unsafe fallback output, or secret exposure.
-
-Do not include real API keys, credentials, private logs, customer data, proprietary source code, or other sensitive material. Use sanitized examples whenever possible.
-
-## Scope
-
-Security-sensitive areas include:
-
-- Accidental disclosure of raw file contents in fallback output.
-- Handling of logs that may contain secrets.
-- Prompt injection attempts inside routed files.
-- Unsafe instructions in `CLAUDE.md`, `AGENTS.md`, `.cursorrules`, or other agent-context references.
-- Command examples that could encourage destructive behavior.
-
-Out of scope:
-
-- General model quality issues.
-- Invalid JSON emitted by a local model, unless it causes unsafe output or data exposure.
-- Performance differences between Ollama models.
-
-## Responsible Disclosure
-
-Please give maintainers reasonable time to investigate and publish a fix before publicly disclosing a vulnerability. We will try to acknowledge valid reports within 7 days and provide a remediation plan or status update as soon as practical.
+General model selection quality or speed differences are not security vulnerabilities unless they cause a security impact. Allow maintainers time to investigate before public disclosure; we aim to acknowledge valid reports within 7 days.

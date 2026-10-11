@@ -1,74 +1,34 @@
 # Contributing to token-router
 
-Thank you for helping improve `token-router`.
+Preserve the v2 design: Python prefilters input, fixed GPT-6 Luna Light (`gpt-6-luna`, reasoning effort `low`) selects line coordinates through Codex CLI, and Python extracts original text. The model must not summarize or rewrite evidence. The cloud call uses an existing ChatGPT login and consumes Codex subscription usage.
 
-This project is a lossless local line router for large logs, source files, and routeable agent-context references. Contributions are most useful when they preserve that design: the local model should route line coordinates, not summarize or rewrite evidence.
+Useful contributions include evidence-recall improvements, deterministic prefilters, bounded fallback behavior, CLI compatibility, and synthetic fixtures for malformed output, non-English content, or omitted dependencies. Keep the provider/model fixed and avoid introducing recursive router calls.
 
-## Good Contribution Areas
-
-- Routing quality improvements for `error_log`, `heavy_code`, or `agent_context`.
-- Better deterministic prefilters and fallback behavior.
-- Model compatibility notes for Ollama models.
-- Regression fixtures for malformed JSON, unusual logs, long `CLAUDE.md` / `AGENTS.md` files, or non-English content.
-- Documentation for Codex, Claude Code, and terminal-agent workflows.
-
-## Model Reliability Notes
-
-The default model is optimized for low local resource usage:
-
-```bash
-OLLAMA_MODEL=gemma4:e2b-it-q4_K_M
-```
-
-Very small local models can occasionally emit invalid JSON, especially with complex logs, unusual symbols, or dense instruction files. If you see JSON parsing failures, please try a larger routing model before filing a routing-quality bug:
-
-```bash
-OLLAMA_MODEL=qwen2.5-coder:7b python3 scripts/router.py error_log path/to/file.log --query "timeout"
-```
-
-Other users have reported lower JSON error rates with larger coder-oriented models such as `qwen2.5-coder:7b` or 4B-class Gemma variants when VRAM is available. Please include the exact `OLLAMA_MODEL`, quantization tag, and command output when reporting model-specific behavior.
-
-## Local Validation
-
-Run these before opening a pull request:
+## Validation
 
 ```bash
 python3 -m py_compile scripts/router.py scripts/run_router_tests.py
 python3 scripts/run_router_tests.py tests/router-tests.json
 ```
 
-If you are changing the Codex skill metadata, also run:
+Mock tests must not require a login or contact a model. Run `--real` only when intentionally exercising the cloud model with sanitized fixtures. Record Codex CLI version, mode, query, elapsed time, fallback status, and whether the needed evidence was retained. Do not infer live model quality from mock success.
+
+If skill metadata changes, run the skill-creator validator available in your environment:
 
 ```bash
-python3 /path/to/quick_validate.py .
+python3 /absolute/path/to/skill-creator/scripts/quick_validate.py .
 ```
 
-If `quick_validate.py` cannot import `yaml`, install or expose `PyYAML` in your local Python environment and rerun it.
+Install or expose PyYAML if that validator requires it.
 
-## Pull Request Guidelines
+## Pull requests
 
-- Keep changes focused.
-- Add or update tests for routing behavior changes.
-- Do not add secrets, private logs, customer data, or proprietary source code to fixtures.
-- Prefer small synthetic fixtures that reproduce the behavior.
-- Document any new environment variables in `README.md` and `SKILL.md`.
-- Preserve backward compatibility for:
+- Keep scope focused and add tests for meaningful behavior changes.
+- Preserve the `error_log`, `heavy_code`, and `agent_context` command forms.
+- Document configuration changes and distinguish historical measurements from current results.
+- Keep fixtures synthetic or sanitized; never publish credentials, private logs, or proprietary source.
+- Evaluate downstream task success and evidence recall alongside output size. Count routing overhead when discussing efficiency.
 
-```bash
-python3 scripts/router.py error_log <file>
-python3 scripts/router.py heavy_code <file>
-python3 scripts/router.py agent_context <file>
-```
+## Bug reports
 
-## Reporting Bugs
-
-Please use the bug report issue template and include:
-
-- Mode: `error_log`, `heavy_code`, or `agent_context`
-- `OLLAMA_MODEL`
-- `OLLAMA_NUM_CTX`
-- `OLLAMA_KEEP_ALIVE`
-- Whether the failure is invalid JSON, poor line selection, fallback behavior, or output-cap behavior
-- A minimal sanitized fixture or reproduction command
-
-Do not paste private production logs or credentials into public issues.
+Include Python and Codex CLI versions, OS, mode, sanitized command and fixture, relevant `ROUTER_*` settings, and whether the failure concerns authentication/model access, structured output, selection, timeout, fallback, or output caps. State whether `codex login status` confirms ChatGPT authentication; never include credential files or tokens. The model/effort are fixed, so model switching is not a troubleshooting step.

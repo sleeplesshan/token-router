@@ -7,7 +7,7 @@ body:
     id: problem
     attributes:
       label: Problem
-      description: What routing, documentation, model compatibility, or workflow problem should this solve?
+      description: What routing, documentation, Codex CLI compatibility, or workflow problem should this solve?
     validations:
       required: true
   - type: textarea
@@ -25,7 +25,7 @@ body:
         - error_log routing
         - heavy_code routing
         - agent_context routing
-        - model compatibility
+        - Codex CLI compatibility
         - docs
         - tests
         - Claude Code support
@@ -37,7 +37,7 @@ body:
     id: alternatives
     attributes:
       label: Alternatives considered
-      description: Any simpler workaround, existing environment variable, or model switch you tried?
+      description: Any simpler workaround, existing environment variable, or CLI setup change you tried?
   - type: checkboxes
     id: safety
     attributes:
