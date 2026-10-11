@@ -7,7 +7,7 @@
 
 **Select relevant raw lines from oversized files before sending them to your main reasoning model.**
 
-Version **2.3.0** defaults to Python-only token-first extraction and optionally uses **GPT-6 Luna Light** through Codex CLI: model `gpt-6-luna`, reasoning effort `low`, fixed by the router. It reuses your existing Codex ChatGPT login and subscription. No API key, local model, or local model server is required.
+Version **2.4.0** defaults to Python-only token-first extraction and optionally uses **GPT-6 Luna Light** through Codex CLI: model `gpt-6-luna`, reasoning effort `low`, fixed by the router. It reuses your existing Codex ChatGPT login and subscription. No API key, local model, or local model server is required.
 
 ## How it works
 
@@ -128,3 +128,10 @@ The [automatic-bypass follow-up](docs/benchmark-auto-routing.md) records v2.2 ca
 ## Token-first default
 
 The 15% margin is a rendered-character heuristic, not a token guarantee. Default routing adds no Luna usage; only explicit cloud options do. Candidate output is bounded by `ROUTER_MAX_CHARS`, preserves all admitted ranges plus neighbors, and can exceed 160 lines. It can still omit relevant evidence. Exit 2 / `needs_targeted_read` means search or narrow the query, not automatic cloud retry. Measure recovery reads and answer output too when comparing total tokens. See [v2.3 real-file measurements](docs/benchmark-token-priority.md), including the accuracy regression caught before release. The compatibility option `--optimize latency` is not a guarantee of lower wall time.
+
+
+## Evidence checks and matching (v2.4)
+
+Default admission now reports query anchors, unmatched terms, packet budget, and reduction independently. No matched term in candidate cores triggers whole reading for moderate sources or a structured search request for larger sources. These are observable checks, not calibrated confidence or semantic sufficiency. Missing-query state is unknown; partial matches are not proof of complete evidence.
+
+Python files up to 1 MB get bounded AST statement/expression completion (12-line nodes, 128 added lines), before final packet admission. Invalid syntax retains the original candidates; remaining crossings are partial. Full control-flow and dependency coverage are not promised. ASCII query components use an index; complex terms and non-ASCII lines retain exact regex semantics. See [paired v2.3/v2.4 measurements](docs/benchmark-evidence-checks.md).

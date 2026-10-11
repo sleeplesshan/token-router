@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.4.0 — Evidence admission and faster matching
+
+- Separate lexical evidence, budget, reduction, and boundary diagnostics; abstain from unrelated candidate packets.
+- Complete bounded Python statements before rechecking packet admission.
+- Index ASCII term components while preserving complex and Unicode regex behavior.
+- Compare v2.3/v2.4 in alternating real-model trials and local processing measurements.
+
+
 ## 2.3.0 — Token-first admission
 
 - Default to zero selector-model calls; pass useful bounded candidates directly to the main model.

@@ -17,6 +17,11 @@ from collections import deque
 from pathlib import Path
 from typing import Any
 
+# Allow both direct CLI execution and file-based test imports.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from query_matcher import compile_matcher
+from evidence_checks import assess_query_evidence, complete_python_statements
+
 
 def env_int(name: str, default: int, minimum: int | None = None) -> int:
     raw_value = os.environ.get(name)
@@ -44,7 +49,7 @@ def env_float(name: str, default: float, minimum: float | None = None) -> float:
     return value
 
 
-VERSION = "2.3.0"
+VERSION = "2.4.0"
 MODEL_NAME = "gpt-6-luna"
 REASONING_EFFORT = "low"
 CODEX_BIN = os.environ.get("ROUTER_CODEX_BIN", "codex")
@@ -170,7 +175,7 @@ SEVERE_LOG_PATTERN = re.compile(
 
 
 def ranked_candidates(line_factory, mode: str, query_terms: list[str], max_chars: int,
-                      max_lines: int | None = None):
+                      max_lines: int | None = None, diagnostics: dict | None = None):
     """Two passes; retain line metadata, never an unbounded copy of streaming text.
 
     Allocate a small tail reserve and one anchor per file region, then rank rare
@@ -178,6 +183,7 @@ def ranked_candidates(line_factory, mode: str, query_terms: list[str], max_chars
     giant early line cannot consume the budget or hide later failures.
     """
     patterns = [term_pattern(term) for term in query_terms]
+    match_terms = compile_matcher(query_terms)
     counts = Counter()
     metadata = []
     signatures = []
@@ -188,7 +194,7 @@ def ranked_candidates(line_factory, mode: str, query_terms: list[str], max_chars
     for n, line in enumerate(line_factory(), 1):
         if mode == "error_log" and re.search(r"_{3,}\s+\S.*\s+_{3,}", line):
             traceback_headers.append(n-1)
-        hits = tuple(i for i, pattern in enumerate(patterns) if pattern.search(line))
+        hits = match_terms(line)
         counts.update(hits)
         score = 3.0 if keyword.search(line) else 0.0
         if mode == "error_log" and SEVERE_LOG_PATTERN.search(line):
@@ -201,6 +207,8 @@ def ranked_candidates(line_factory, mode: str, query_terms: list[str], max_chars
         signatures.append(signature)
         repeats[signature] += 1
         metadata.append((len(f"{n}: {line}") + 34, hits, score))
+    if diagnostics is not None:
+        diagnostics.update(assess_query_evidence(query_terms, counts))
     total = len(metadata)
     if not total:
         return "", False, 0, 0, []
@@ -276,6 +284,10 @@ def ranked_candidates(line_factory, mode: str, query_terms: list[str], max_chars
         covered_anchors.update(range(max(0, i-context), min(total, i+context+1)))
     for i in sorted(eligible, reverse=True):
         add(i)
+    if diagnostics is not None:
+        diagnostics['source_matched_terms'] = diagnostics['matched_terms']
+        selected_hits = {hit for i in selected for hit in metadata[i][1]}
+        diagnostics.update(assess_query_evidence(query_terms, selected_hits))
     pairs = [(n, line) for n, line in enumerate(line_factory(), 1) if n-1 in selected]
     rendered, _ = render_numbered_pairs(pairs, max_chars)
     return rendered, len(selected) < len(eligible), len(eligible), total, sorted(i+1 for i in selected)
@@ -899,8 +911,9 @@ def main(argv: list[str]) -> int:
             with target_file.open("r", encoding="utf-8", errors="replace") as handle:
                 yield from handle
         terms = normalize_query_terms(query)
+        checks = {}
         candidate, truncated, eligible, total, visible = ranked_candidates(
-            lines, mode, terms, MAX_PROMPT_CHARS)
+            lines, mode, terms, MAX_PROMPT_CHARS, diagnostics=checks)
         visible_set = set(visible)
         source_chars = candidate_raw_chars = 0
         for line_no, line in enumerate(lines(), 1):
@@ -924,11 +937,20 @@ def main(argv: list[str]) -> int:
                 token_targets = targets_from_numbered_content(candidate, total,
                     "deterministic candidate evidence", mode=mode, apply_cap=False)
                 token_targets = expand_candidate_context(token_targets, total)
+                checks['boundary'] = {'syntax': 'unknown', 'reason': 'not_python_or_size_limit'}
+                if mode == 'heavy_code' and target_file.suffix == '.py' and file_size <= 1_000_000:
+                    token_targets, checks['boundary'] = complete_python_statements(
+                        read_text(target_file), token_targets)
                 candidate_output = render_slices_from_file(target_file, token_targets) if token_targets else ""
                 whole = [{"start_line": 1, "end_line": total, "reason": "automatic full-source bypass; no model call; raw source preserved"}]
                 full_chars = source_chars + len(render_slices("", whole))
                 status = token_first_strategy(source_chars, full_chars, len(candidate_output), bool(token_targets))
+                if status == 'auto_candidates' and checks['query_anchor'] == 'missing':
+                    status = 'auto_full' if source_chars <= AUTO_FULL_CHARS else 'needs_targeted_read'
+                checks['packet_within_budget'] = len(candidate_output) <= MAX_PROMPT_CHARS
+                checks['reduction_satisfied'] = len(candidate_output) <= full_chars * .85
                 print("[token-router decision] " + json.dumps({
+                    "action": status, "checks": checks,
                     "objective": "tokens", "full_rendered_chars": full_chars,
                     "candidate_rendered_chars": len(candidate_output),
                     "rendered_char_reduction": 1-len(candidate_output)/full_chars if full_chars else 0,
@@ -938,7 +960,10 @@ def main(argv: list[str]) -> int:
                     print("[token-router status] " + json.dumps({"status": status,
                         "model_called": False, "model_failed": False,
                         "reason": "No sufficiently smaller bounded evidence packet; narrow the query or read targeted source ranges.",
-                        "suggested_ranges": [[t["start_line"],t["end_line"]] for t in token_targets[:12]],
+                        "checks": checks,
+                        "next_action": "search_query_terms" if checks['query_anchor'] == 'missing' else "narrow_query",
+                        "search_terms": checks['unmatched_terms'][:12],
+                        "suggested_ranges": [] if checks['query_anchor'] == 'missing' else [[t["start_line"],t["end_line"]] for t in token_targets[:12]],
                     }), file=sys.stderr)
                     return 2
         failure = None
