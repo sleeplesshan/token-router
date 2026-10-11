@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.2.0 — 2026-10-12
+
+- Skip unnecessary Luna calls automatically for small whole sources, dense candidates in moderate sources, and small untruncated query-matching candidates.
+- Preserve the entire source on full bypass instead of silently applying the selection line cap.
+- Add `--force-model` to retain explicit cloud selection; keep `--deterministic` as explicit bounded local extraction.
+- Report `model_called`, distinct bypass statuses, raw candidate character counts and zero routing tokens when no model runs.
+- Add threshold, evidence-preservation and override regressions; record actual-file follow-up in [the report](docs/benchmark-auto-routing.md).
+
 ## 2.1.0 — 2026-10-12
 
 - Rank candidates before applying the character cap; preserve distributed anchors and a tail share at every file size.

@@ -108,7 +108,7 @@ class EvidenceSelectionTests(unittest.TestCase):
             path.write_text('ordinary progress\n'*400+'Traceback: late_specific_failure\n')
             out,err=io.StringIO(),io.StringIO()
             with patch.object(r,'call_codex',return_value={'targets':[]}), contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
-                status=r.main(['router.py','error_log',str(path),'--query','late_specific_failure'])
+                status=r.main(['router.py','error_log',str(path),'--query','late_specific_failure','--force-model'])
         self.assertIn('late_specific_failure',out.getvalue())
         self.assertIn('RAW CONTENT FROM LINE',out.getvalue())
         self.assertIn('fallback',(out.getvalue()+err.getvalue()).lower())

@@ -7,12 +7,12 @@
 
 **Select relevant raw lines from oversized files before sending them to your main reasoning model.**
 
-Version **2.1.0** uses **GPT-6 Luna Light** through Codex CLI: model `gpt-6-luna`, reasoning effort `low`, fixed by the router. It reuses your existing Codex ChatGPT login and subscription. No API key, local model, or local model server is required.
+Version **2.2.0** uses **GPT-6 Luna Light** through Codex CLI: model `gpt-6-luna`, reasoning effort `low`, fixed by the router. It reuses your existing Codex ChatGPT login and subscription. No API key, local model, or local model server is required.
 
 ## How it works
 
 1. Python ranks query/diagnostic windows, reserves distributed and recent evidence, and applies a character budget before rendering in original line order.
-2. Codex CLI sends those candidates and your query to GPT-6 Luna Light, which returns JSON line ranges. With `--deterministic`, Python selects bounded raw ranges without a model call.
+2. An automatic policy skips Luna for small sources, dense candidate sets in moderate sources, or small untruncated candidates. Otherwise Codex CLI sends candidates and your query to GPT-6 Luna Light. `--force-model` disables bypass; `--deterministic` requires bounded Python-only extraction.
 3. Python validates and merges the ranges, then extracts raw text from the original file.
 4. Your main agent reasons over the selected evidence and retrieves wider ranges when necessary.
 
@@ -81,6 +81,9 @@ The provider, model `gpt-6-luna`, and effort `low` are fixed. There is no model/
 | `ROUTER_TIMEOUT` | `120` | Codex subprocess timeout in seconds |
 | `ROUTER_MAX_CHARS` | `120000` | Maximum line-numbered candidate content sent to the router model |
 | `ROUTER_MAX_OUTPUT_LINES` | `160` | Maximum extracted raw lines returned to the main agent |
+| `ROUTER_AUTO_SMALL_CHARS` | `12000` | Whole-source bypass threshold in raw characters |
+| `ROUTER_AUTO_FULL_CHARS` | `100000` | Whole-source bypass ceiling when candidate raw characters cover at least 65% of source |
+| `ROUTER_AUTO_CANDIDATE_CHARS` | `12000` | Candidate bypass ceiling; also requires no truncation, all query terms present, and fit within output line cap |
 | `ROUTER_OUTPUT_CONTEXT_LINES` | `2` | Neighbor lines added around model targets using only spare output budget |
 | `ROUTER_STREAM_THRESHOLD_BYTES` | legacy | Deprecated; all sizes now use the same two-pass scan policy |
 | `ROUTER_LOG_CONTEXT_LINES` | `6` | Context around log keyword/query hits |
@@ -88,9 +91,11 @@ The provider, model `gpt-6-luna`, and effort `low` are fixed. There is no model/
 | `ROUTER_CODE_CONTEXT_LINES` | `8` | Context around source query/keyword hits |
 | `ROUTER_AGENT_CONTEXT_LINES` | `6` | Context around instruction-reference hits |
 
-Output ranges are merged and share the line budget across distinct ranges. Model-selected core ranges are preserved first; up to two neighboring lines per side are added when the output budget allows, retaining nearby guards and traceback locations. Any cut is reported; portions of each range can still be lost. `error_log` keeps the newer end within each capped range. Inspect nearby raw lines whenever the answer depends on missing context.
+Automatic whole-source bypass preserves every line, even beyond `ROUTER_MAX_OUTPUT_LINES`, within its raw-character thresholds. This prevents a speed optimization from becoming silent evidence loss. `coverage_guaranteed=true` means the whole source was returned, not that the answer is correct. Use `--force-model` or `--deterministic` when an explicitly line-capped path is required. These flags are mutually exclusive. Candidate bypass is still a lossy prefilter; no semantic completeness is promised.
 
-Stderr reports `[token-router coverage]` with source/candidate/visible counts and truncation, `[token-router usage]` for cloud usage, and `[token-router status]` with `model`, `deterministic`, `fallback`, or `error`. Exit 0 means raw extraction succeeded, **not** that model selection succeeded or evidence is complete. On model failure, inspect `status=fallback` / `model_failed=true`; a missing/unreadable source or no fitting raw line exits 1.
+Model-selected output ranges are merged and share the line budget across distinct ranges. Model-selected core ranges are preserved first; up to two neighboring lines per side are added when the output budget allows, retaining nearby guards and traceback locations. Any cut is reported; portions of each range can still be lost. `error_log` keeps the newer end within each capped range. Inspect nearby raw lines whenever the answer depends on missing context.
+
+Stderr reports `[token-router coverage]` with source/candidate/visible counts and truncation, `[token-router usage]` for cloud usage, and `[token-router status]` with `auto_full`, `auto_candidates`, `model`, `deterministic`, `fallback`, or `error`, plus `model_called`. Automatic bypass emits zero routing usage. Exit 0 means raw extraction succeeded, **not** that model selection succeeded or evidence is complete. On model failure, inspect `status=fallback` / `model_failed=true`; a missing/unreadable source or no fitting raw line exits 1.
 
 Use exact task identifiers instead of a long generic checklist. For known symbols, start with ordinary search or `--deterministic`; read directly when the candidate set is almost the whole source. Cloud routing remains available when semantic selection is useful. No automatic cloud retry is performed. The scan retains metadata proportional to the number of source lines; it does not promise constant memory. The character budget limits model candidates, while model-selected raw output is limited by lines and can include neighboring or previously omitted source lines.
 
@@ -115,3 +120,5 @@ python3 scripts/run_router_tests.py tests/router-tests.json --real
 [The benchmark report](docs/benchmark-report.md) records four passing v2 live smoke checks and retains historical v1 measurements for provenance. The smoke checks used tiny fixtures and revealed substantial CLI input overhead; avoid routing short inputs. The historical v1 measurements are **not GPT-6 Luna results**, billing measurements, or evidence of v2 speed or accuracy. The [real-file follow-up](docs/benchmark-improvements.md) measures downstream factual extraction with routing time and usage included. Deterministic extraction remains lossy and should be followed by targeted source retrieval when evidence is absent.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [SUPPORT.md](SUPPORT.md). Use sanitized fixtures in public reports. Licensed under [MIT](LICENSE).
+
+The [automatic-bypass follow-up](docs/benchmark-auto-routing.md) records v2.2 call counts, accuracy, token totals and latency. Thresholds are practical initial heuristics, not measured universal break-even points.

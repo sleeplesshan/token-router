@@ -22,9 +22,9 @@ Resolve `scripts/router.py` relative to **this installed SKILL.md**, never the c
 python3 "/absolute/path/to/token-router/scripts/router.py" heavy_code "/absolute/path/to/target.py" --query "token expiration" --deterministic
 ```
 
-Omit `--deterministic` to ask Luna to select ranges. Pick `error_log` for logs/stack traces, `heavy_code` for focused source investigations, or `agent_context` for optional references.
+The default is automatic: small sources and moderately sized sources with dense candidates are passed through whole; small untruncated candidate sets can be returned directly. Other cases use Luna. Add `--force-model` to require Luna, or `--deterministic` to require bounded local extraction; these flags are mutually exclusive. Whole-source bypass deliberately ignores the 160-line selection cap to avoid silently dropping evidence. Pick `error_log` for logs/stack traces, `heavy_code` for focused source investigations, or `agent_context` for optional references.
 
-Use specific symbols, error messages, or task terms in `--query`; avoid pasting a long checklist of generic questions. Keep the full task for the main analyst. Inspect candidate/output truncation and fallback diagnostics as well as the raw slices.
+Use specific symbols, error messages, or task terms in `--query`; avoid pasting a long checklist of generic questions. Keep the full task for the main analyst. Inspect candidate/output truncation, `model_called`, and fallback diagnostics as well as the raw slices. `auto_full` preserves the entire source; `auto_candidates` preserves only the prefiltered candidates and still requires evidence checks.
 
 Before answering, check that each material claim has visible evidence. If evidence is missing, search the omitted symbol/error or retrieve wider raw ranges, including log summaries and traceback origins. Do not repeat an unchanged routing call. If one targeted expansion still leaves broad gaps, read the necessary full context or explicitly state what remains unknown. An empty or truncated selection does not establish that no error exists.
 
@@ -39,6 +39,8 @@ A deterministic fallback is only a lead, not a successful model selection. Inspe
 Measure Luna **plus** the main model when claiming overall token or speed improvements. Input reduction alone does not establish lower total usage or subscription cost. The real-file v2.0 benchmark found preserved code accuracy but increased total tokens/time, and lost log evidence due to prefix truncation. See [benchmark evidence](docs/benchmark-improvements.md) for the fixes, measurements, and limits.
 
 ## Limits and checks
+
+Automatic thresholds are character heuristics, not token limits: whole source up to 12,000 characters; whole source up to 100,000 characters if candidate raw text covers at least 65%; or all untruncated candidates up to 12,000 characters and the output line cap with every normalized query term present. These thresholds avoid calls, not prove answer completeness.
 
 Defaults: `ROUTER_TIMEOUT=120`, `ROUTER_MAX_CHARS=120000`, `ROUTER_MAX_OUTPUT_LINES=160`. Limits can omit necessary evidence. See [configuration](README.md#configuration).
 

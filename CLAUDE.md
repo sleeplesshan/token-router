@@ -17,3 +17,5 @@ python3 "/absolute/path/to/token-router/scripts/router.py" agent_context "/absol
 - Use full context for tasks requiring global understanding or completeness. Main-agent context reduction does not guarantee lower total usage or faster execution.
 
 For known symbols, use search or add `--deterministic` to extract without a model. Do not invoke Luna solely because a file exceeds a line threshold. Inspect stderr coverage/truncation and `status=fallback` even when exit status is 0; expand missing evidence before answering. See [SKILL.md](SKILL.md) for retrieval choices.
+
+Default v2.2 routing can bypass Luna automatically. `auto_full` returns the entire source even beyond the selection line cap; `auto_candidates` returns all admitted candidates but can omit other relevant source text. Use `--force-model` to require cloud selection, and inspect `model_called` when measuring usage.

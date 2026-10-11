@@ -44,7 +44,7 @@ def env_float(name: str, default: float, minimum: float | None = None) -> float:
     return value
 
 
-VERSION = "2.1.0"
+VERSION = "2.2.0"
 MODEL_NAME = "gpt-6-luna"
 REASONING_EFFORT = "low"
 CODEX_BIN = os.environ.get("ROUTER_CODEX_BIN", "codex")
@@ -57,6 +57,9 @@ CODE_CONTEXT_LINES = env_int("ROUTER_CODE_CONTEXT_LINES", 8, minimum=0)
 AGENT_CONTEXT_LINES = env_int("ROUTER_AGENT_CONTEXT_LINES", 6, minimum=0)
 MAX_OUTPUT_LINES = env_int("ROUTER_MAX_OUTPUT_LINES", 160, minimum=1)
 OUTPUT_CONTEXT_LINES = env_int("ROUTER_OUTPUT_CONTEXT_LINES", 2, minimum=0)
+AUTO_SMALL_CHARS = env_int("ROUTER_AUTO_SMALL_CHARS", 12000, minimum=0)
+AUTO_FULL_CHARS = env_int("ROUTER_AUTO_FULL_CHARS", 100000, minimum=0)
+AUTO_CANDIDATE_CHARS = env_int("ROUTER_AUTO_CANDIDATE_CHARS", 12000, minimum=0)
 FALLBACK_PREVIEW_CHARS = 2000
 VALID_MODES = {"agent_context", "error_log", "heavy_code"}
 LOG_KEYWORD_PATTERN = re.compile(
@@ -105,8 +108,11 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         default="",
         help="Optional user question, error text, or search phrase used to bias routing.",
     )
-    parser.add_argument("--deterministic", action="store_true",
+    policy = parser.add_mutually_exclusive_group()
+    policy.add_argument("--deterministic", action="store_true",
                         help="Select ranked raw slices locally without a model call.")
+    policy.add_argument("--force-model", action="store_true",
+                        help="Disable automatic bypass and ask Luna to select ranges.")
     return parser.parse_args(argv[1:])
 
 
@@ -809,6 +815,21 @@ def count_lines(file_path: Path) -> int:
         return sum(1 for _ in handle)
 
 
+def automatic_strategy(source_chars, candidate_raw_chars, candidate, visible, truncated, terms):
+    """Conservative call-elision heuristics, not a claim of semantic coverage."""
+    if source_chars <= AUTO_SMALL_CHARS:
+        return "auto_full"
+    if source_chars <= AUTO_FULL_CHARS and source_chars and candidate_raw_chars / source_chars >= 0.65:
+        return "auto_full"
+    candidate_source = "\n".join(line.partition(": ")[2] for line in candidate.splitlines()
+                                 if re.match(r"^\d+: ", line))
+    if (terms and not truncated and visible and len(visible) <= MAX_OUTPUT_LINES
+            and len(candidate) <= AUTO_CANDIDATE_CHARS
+            and all(query_matches(candidate_source, [term]) for term in terms)):
+        return "auto_candidates"
+    return "model"
+
+
 def main(argv: list[str]) -> int:
     try:
         args = parse_args(argv)
@@ -840,16 +861,34 @@ def main(argv: list[str]) -> int:
         terms = normalize_query_terms(query)
         candidate, truncated, eligible, total, visible = ranked_candidates(
             lines, mode, terms, MAX_PROMPT_CHARS)
+        visible_set = set(visible)
+        source_chars = candidate_raw_chars = 0
+        for line_no, line in enumerate(lines(), 1):
+            source_chars += len(line)
+            if line_no in visible_set:
+                candidate_raw_chars += len(line)
         print("[token-router coverage] " + json.dumps({
             "total_lines": total, "candidate_lines": eligible, "visible_lines": len(visible),
-            "candidate_chars": len(candidate), "source_chars": sum(len(line) for line in lines()),
+            "candidate_chars": len(candidate), "source_chars": source_chars,
+            "candidate_raw_chars": candidate_raw_chars,
             "truncated": truncated,
             "policy": "ranked-distributed-tail", "complete_source": len(visible) == total,
         }), file=sys.stderr)
         status = "deterministic" if args.deterministic else "model"
+        if not args.deterministic and not args.force_model:
+            status = automatic_strategy(source_chars, candidate_raw_chars, candidate, visible, truncated, terms)
         failure = None
         output_capped = False
-        if not args.deterministic:
+        if status == "auto_full":
+            targets = [{"start_line": 1, "end_line": total,
+                        "reason": "automatic full-source bypass; no model call; raw source preserved"}]
+        elif status == "auto_candidates":
+            targets = targets_from_numbered_content(candidate, total,
+                "automatic complete-candidate bypass; source may contain omitted evidence", mode=mode)
+        if status.startswith("auto_"):
+            print('[token-router usage] ' + json.dumps({"input_tokens": 0,
+                  "output_tokens": 0, "cached_input_tokens": 0}), file=sys.stderr)
+        if status == "model":
             try:
                 mapping = call_codex(build_prompt("", mode, query=query,
                     prebuilt_content=candidate, prebuilt_candidate_count=len(visible),
@@ -871,10 +910,11 @@ def main(argv: list[str]) -> int:
             if not targets:
                 raise ValueError("No complete source line fits the configured budget")
         print("[token-router status] " + json.dumps({"status": status,
+              "model_called": not args.deterministic and not status.startswith("auto_"),
               "model_failed": failure is not None, "reason": failure,
               "output_lines": sum(t["end_line"]-t["start_line"]+1 for t in targets),
               "output_capped": output_capped,
-              "coverage_guaranteed": False}), file=sys.stderr)
+              "coverage_guaranteed": status == "auto_full"}), file=sys.stderr)
         print(render_slices_from_file(target_file, targets), end="")
         # Usable raw fallback is a successful extraction; stderr identifies failure.
         return 0

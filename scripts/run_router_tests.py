@@ -83,7 +83,7 @@ def run_case(
     if not real and "mock_response" in case:
         env["ROUTER_MOCK_RESPONSE"] = json.dumps(case["mock_response"])
 
-    cmd = [sys.executable, str(ROUTER_PATH), mode, str(fixture)]
+    cmd = [sys.executable, str(ROUTER_PATH), mode, str(fixture), "--force-model"]
     if query:
         cmd.extend(["--query", query])
 

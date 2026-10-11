@@ -1,0 +1,277 @@
+{
+  "measured_router_sha256": "1bf0c079dc62499401e07b904e1378c12070ef2b360a2d3d5ba656bd20a17e0f",
+  "tasks": [
+    {
+      "task_id": "cpython_subprocess_timeout",
+      "conditions": {
+        "v2.1": {
+          "tokens": 27836,
+          "seconds": 12.730862999800593,
+          "correct": 18,
+          "total": 18,
+          "model_calls": 3,
+          "statuses": [
+            "model",
+            "model",
+            "model"
+          ]
+        },
+        "v2.2": {
+          "tokens": 29638,
+          "seconds": 8.010510874912143,
+          "correct": 18,
+          "total": 18,
+          "model_calls": 0,
+          "statuses": [
+            "auto_full",
+            "auto_full",
+            "auto_full"
+          ]
+        }
+      }
+    },
+    {
+      "task_id": "cpython_asyncio_connections",
+      "conditions": {
+        "v2.1": {
+          "tokens": 28370,
+          "seconds": 16.079065582947806,
+          "correct": 18,
+          "total": 18,
+          "model_calls": 3,
+          "statuses": [
+            "model",
+            "model",
+            "model"
+          ]
+        },
+        "v2.2": {
+          "tokens": 26554,
+          "seconds": 10.13202212518081,
+          "correct": 18,
+          "total": 18,
+          "model_calls": 0,
+          "statuses": [
+            "auto_full",
+            "auto_full",
+            "auto_full"
+          ]
+        }
+      }
+    },
+    {
+      "task_id": "cpython_ubsan_failure",
+      "conditions": {
+        "v2.1": {
+          "tokens": 50021,
+          "seconds": 14.153011291055009,
+          "correct": 18,
+          "total": 18,
+          "model_calls": 3,
+          "statuses": [
+            "model",
+            "model",
+            "model"
+          ]
+        },
+        "v2.2": {
+          "tokens": 51445,
+          "seconds": 15.761102167190984,
+          "correct": 18,
+          "total": 18,
+          "model_calls": 3,
+          "statuses": [
+            "model",
+            "model",
+            "model"
+          ]
+        }
+      }
+    },
+    {
+      "task_id": "scipy_distributed_failures",
+      "conditions": {
+        "v2.1": {
+          "tokens": 52567,
+          "seconds": 17.46359145687893,
+          "correct": 18,
+          "total": 18,
+          "model_calls": 3,
+          "statuses": [
+            "model",
+            "model",
+            "model"
+          ]
+        },
+        "v2.2": {
+          "tokens": 52569,
+          "seconds": 13.959555126028135,
+          "correct": 18,
+          "total": 18,
+          "model_calls": 3,
+          "statuses": [
+            "model",
+            "model",
+            "model"
+          ]
+        }
+      }
+    }
+  ],
+  "decision_validation": {
+    "released_router_sha256": "de04848ca716c2fc9c1714ebf8b679a69e2e2eb416292af8cd7d638ac5260d46",
+    "decisions": [
+      {
+        "task_id": "cpython_subprocess_timeout",
+        "strategy": "auto_full"
+      },
+      {
+        "task_id": "cpython_asyncio_connections",
+        "strategy": "auto_full"
+      },
+      {
+        "task_id": "cpython_ubsan_failure",
+        "strategy": "model"
+      },
+      {
+        "task_id": "scipy_distributed_failures",
+        "strategy": "model"
+      }
+    ],
+    "note": "Post-measurement numeric/gap-label query matching fix does not change any measured decision. Cloud prompt/call implementation unchanged."
+  },
+  "trials": [
+    {
+      "trial_id": "cpython_subprocess_timeout-1-routed",
+      "task_id": "cpython_subprocess_timeout",
+      "repeat": 1,
+      "total_tokens": 29641,
+      "total_cached_tokens": 0,
+      "total_seconds": 8.625327415764332,
+      "visible_lines": 2223,
+      "grounded_correct": 6,
+      "facts_total": 6
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-1-routed",
+      "task_id": "cpython_asyncio_connections",
+      "repeat": 1,
+      "total_tokens": 26601,
+      "total_cached_tokens": 3968,
+      "total_seconds": 10.13202212518081,
+      "visible_lines": 2052,
+      "grounded_correct": 6,
+      "facts_total": 6
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-1-routed",
+      "task_id": "cpython_ubsan_failure",
+      "repeat": 1,
+      "total_tokens": 94305,
+      "total_cached_tokens": 50560,
+      "total_seconds": 15.761102167190984,
+      "visible_lines": 45,
+      "grounded_correct": 6,
+      "facts_total": 6
+    },
+    {
+      "trial_id": "scipy_distributed_failures-1-routed",
+      "task_id": "scipy_distributed_failures",
+      "repeat": 1,
+      "total_tokens": 52569,
+      "total_cached_tokens": 0,
+      "total_seconds": 14.401224958943203,
+      "visible_lines": 33,
+      "grounded_correct": 6,
+      "facts_total": 6
+    },
+    {
+      "trial_id": "cpython_subprocess_timeout-2-routed",
+      "task_id": "cpython_subprocess_timeout",
+      "repeat": 2,
+      "total_tokens": 29638,
+      "total_cached_tokens": 3968,
+      "total_seconds": 8.010510874912143,
+      "visible_lines": 2223,
+      "grounded_correct": 6,
+      "facts_total": 6
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-2-routed",
+      "task_id": "cpython_asyncio_connections",
+      "repeat": 2,
+      "total_tokens": 26548,
+      "total_cached_tokens": 0,
+      "total_seconds": 10.686064207926393,
+      "visible_lines": 2052,
+      "grounded_correct": 6,
+      "facts_total": 6
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-2-routed",
+      "task_id": "cpython_ubsan_failure",
+      "repeat": 2,
+      "total_tokens": 51445,
+      "total_cached_tokens": 3840,
+      "total_seconds": 16.54877054109238,
+      "visible_lines": 51,
+      "grounded_correct": 6,
+      "facts_total": 6
+    },
+    {
+      "trial_id": "scipy_distributed_failures-2-routed",
+      "task_id": "scipy_distributed_failures",
+      "repeat": 2,
+      "total_tokens": 52569,
+      "total_cached_tokens": 7808,
+      "total_seconds": 13.959555126028135,
+      "visible_lines": 33,
+      "grounded_correct": 6,
+      "facts_total": 6
+    },
+    {
+      "trial_id": "cpython_subprocess_timeout-3-routed",
+      "task_id": "cpython_subprocess_timeout",
+      "repeat": 3,
+      "total_tokens": 29638,
+      "total_cached_tokens": 3968,
+      "total_seconds": 7.996524083893746,
+      "visible_lines": 2223,
+      "grounded_correct": 6,
+      "facts_total": 6
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-3-routed",
+      "task_id": "cpython_asyncio_connections",
+      "repeat": 3,
+      "total_tokens": 26554,
+      "total_cached_tokens": 0,
+      "total_seconds": 8.502116000978276,
+      "visible_lines": 2052,
+      "grounded_correct": 6,
+      "facts_total": 6
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-3-routed",
+      "task_id": "cpython_ubsan_failure",
+      "repeat": 3,
+      "total_tokens": 49993,
+      "total_cached_tokens": 0,
+      "total_seconds": 13.589248875854537,
+      "visible_lines": 27,
+      "grounded_correct": 6,
+      "facts_total": 6
+    },
+    {
+      "trial_id": "scipy_distributed_failures-3-routed",
+      "task_id": "scipy_distributed_failures",
+      "repeat": 3,
+      "total_tokens": 54246,
+      "total_cached_tokens": 3840,
+      "total_seconds": 12.952540582977235,
+      "visible_lines": 56,
+      "grounded_correct": 6,
+      "facts_total": 6
+    }
+  ]
+}
