@@ -1,6 +1,6 @@
 # token-router Claude Code Bootstrap
 
-Use this router for focused questions about oversized evidence. It runs fixed GPT-6 Luna Light (`gpt-6-luna`, effort `low`) through Codex CLI using the existing ChatGPT login. Candidate text and the query are sent to the cloud, and each real call consumes Codex subscription usage. No API key is required.
+Use this router for focused questions about oversized evidence. Optional cloud selection runs fixed GPT-6 Luna Light (`gpt-6-luna`, effort `low`) through Codex CLI using the existing ChatGPT login. Candidate text and the query are sent to the cloud, and each real call consumes Codex subscription usage. No API key is required.
 
 Resolve the repository or installed skill directory to an absolute path before running; do not assume it is the caller's current directory:
 
@@ -18,4 +18,4 @@ python3 "/absolute/path/to/token-router/scripts/router.py" agent_context "/absol
 
 For known symbols, use search or add `--deterministic` to extract without a model. Do not invoke Luna solely because a file exceeds a line threshold. Inspect stderr coverage/truncation and `status=fallback` even when exit status is 0; expand missing evidence before answering. See [SKILL.md](SKILL.md) for retrieval choices.
 
-Default v2.2 routing can bypass Luna automatically. `auto_full` returns the entire source even beyond the selection line cap; `auto_candidates` returns all admitted candidates but can omit other relevant source text. Use `--force-model` to require cloud selection, and inspect `model_called` when measuring usage.
+Default v2.3 `--optimize tokens` never invokes Luna. It returns candidate ranges with neighboring context only when their rendered character count is at least 15% smaller and within budget; otherwise it passes a moderate source through whole or returns exit 2 / `needs_targeted_read` for targeted search. This is a character heuristic, not a token-savings guarantee. Token-first packets may exceed 160 lines. `--optimize latency` restores v2.2 automatic routing; `--force-model` requires cloud selection. Count router, main answer, and recovery reads together. See [SKILL.md](SKILL.md) for exact thresholds.

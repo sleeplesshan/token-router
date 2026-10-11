@@ -44,7 +44,7 @@ def env_float(name: str, default: float, minimum: float | None = None) -> float:
     return value
 
 
-VERSION = "2.2.0"
+VERSION = "2.3.0"
 MODEL_NAME = "gpt-6-luna"
 REASONING_EFFORT = "low"
 CODEX_BIN = os.environ.get("ROUTER_CODEX_BIN", "codex")
@@ -113,6 +113,8 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
                         help="Select ranked raw slices locally without a model call.")
     policy.add_argument("--force-model", action="store_true",
                         help="Disable automatic bypass and ask Luna to select ranges.")
+    parser.add_argument("--optimize", choices=("tokens", "latency"), default="tokens",
+                        help="tokens (default): no automatic model call; latency: v2.2 compatibility policy.")
     return parser.parse_args(argv[1:])
 
 
@@ -690,6 +692,7 @@ def targets_from_numbered_content(
     total_lines: int,
     reason: str,
     mode: str = "error_log",
+    apply_cap: bool = True,
 ) -> list[dict[str, Any]]:
     line_numbers = [
         int(match.group(1))
@@ -707,7 +710,7 @@ def targets_from_numbered_content(
         ranges.append({"start_line": start, "end_line": previous, "reason": reason})
         start = previous = line_no
     ranges.append({"start_line": start, "end_line": previous, "reason": reason})
-    return normalize_targets({"targets": ranges}, total_lines, mode=mode)
+    return normalize_targets({"targets": ranges}, total_lines, mode=mode) if apply_cap else ranges
 
 
 def slice_raw(lines: list[str], start: int, end: int) -> str:
@@ -793,8 +796,19 @@ def slice_raw_file(file_path: Path, start: int, end: int) -> str:
 
 
 def render_slices_from_file(file_path: Path, targets: list[dict[str, Any]]) -> str:
+    # Targets are sorted disjoint ranges; read the source once, not once per range.
+    chunks = [[] for _ in targets]
+    current = 0
+    with file_path.open("r", encoding="utf-8", errors="replace") as handle:
+        for line_no, line in enumerate(handle, 1):
+            while current < len(targets) and line_no > targets[current]["end_line"]:
+                current += 1
+            if current == len(targets):
+                break
+            if line_no >= targets[current]["start_line"]:
+                chunks[current].append(line)
     rendered: list[str] = []
-    for target in targets:
+    for target, source_chunks in zip(targets, chunks):
         start = target["start_line"]
         end = target["end_line"]
         reason = target["reason"]
@@ -802,7 +816,7 @@ def render_slices_from_file(file_path: Path, targets: list[dict[str, Any]]) -> s
             [
                 f"#### Target Location Reason: {reason}",
                 f"--- [RAW CONTENT FROM LINE {start} TO {end}] ---",
-                slice_raw_file(file_path, start, end),
+                "".join(source_chunks),
                 "--- [END OF SLICE] ---",
                 "",
             ]
@@ -828,6 +842,32 @@ def automatic_strategy(source_chars, candidate_raw_chars, candidate, visible, tr
             and all(query_matches(candidate_source, [term]) for term in terms)):
         return "auto_candidates"
     return "model"
+
+
+def expand_candidate_context(targets, total_lines):
+    """Preserve candidate cores and two neighboring lines before packet admission."""
+    result = []
+    for target in targets:
+        start = max(1, target["start_line"] - OUTPUT_CONTEXT_LINES)
+        end = min(total_lines, target["end_line"] + OUTPUT_CONTEXT_LINES)
+        if result and start <= result[-1]["end_line"] + 1:
+            result[-1]["end_line"] = max(end, result[-1]["end_line"])
+        else:
+            result.append({"start_line": start, "end_line": end,
+                           "reason": "deterministic candidate evidence with neighboring context"})
+    return result
+
+
+def token_first_strategy(source_chars, full_rendered_chars, candidate_rendered_chars, has_candidates):
+    """Compare like-for-like rendered characters, never label this token accounting."""
+    if source_chars <= AUTO_SMALL_CHARS:
+        return "auto_full"
+    if (has_candidates and candidate_rendered_chars <= MAX_PROMPT_CHARS
+            and candidate_rendered_chars <= full_rendered_chars * 0.85):
+        return "auto_candidates"
+    if source_chars <= AUTO_FULL_CHARS:
+        return "auto_full"
+    return "needs_targeted_read"
 
 
 def main(argv: list[str]) -> int:
@@ -875,16 +915,41 @@ def main(argv: list[str]) -> int:
             "policy": "ranked-distributed-tail", "complete_source": len(visible) == total,
         }), file=sys.stderr)
         status = "deterministic" if args.deterministic else "model"
+        candidate_output = None
+        token_targets = None
         if not args.deterministic and not args.force_model:
-            status = automatic_strategy(source_chars, candidate_raw_chars, candidate, visible, truncated, terms)
+            if args.optimize == "latency":
+                status = automatic_strategy(source_chars, candidate_raw_chars, candidate, visible, truncated, terms)
+            else:
+                token_targets = targets_from_numbered_content(candidate, total,
+                    "deterministic candidate evidence", mode=mode, apply_cap=False)
+                token_targets = expand_candidate_context(token_targets, total)
+                candidate_output = render_slices_from_file(target_file, token_targets) if token_targets else ""
+                whole = [{"start_line": 1, "end_line": total, "reason": "automatic full-source bypass; no model call; raw source preserved"}]
+                full_chars = source_chars + len(render_slices("", whole))
+                status = token_first_strategy(source_chars, full_chars, len(candidate_output), bool(token_targets))
+                print("[token-router decision] " + json.dumps({
+                    "objective": "tokens", "full_rendered_chars": full_chars,
+                    "candidate_rendered_chars": len(candidate_output),
+                    "rendered_char_reduction": 1-len(candidate_output)/full_chars if full_chars else 0,
+                    "minimum_char_reduction": 0.15, "token_savings_guaranteed": False,
+                }), file=sys.stderr)
+                if status == "needs_targeted_read":
+                    print("[token-router status] " + json.dumps({"status": status,
+                        "model_called": False, "model_failed": False,
+                        "reason": "No sufficiently smaller bounded evidence packet; narrow the query or read targeted source ranges.",
+                        "suggested_ranges": [[t["start_line"],t["end_line"]] for t in token_targets[:12]],
+                    }), file=sys.stderr)
+                    return 2
         failure = None
         output_capped = False
         if status == "auto_full":
             targets = [{"start_line": 1, "end_line": total,
                         "reason": "automatic full-source bypass; no model call; raw source preserved"}]
         elif status == "auto_candidates":
-            targets = targets_from_numbered_content(candidate, total,
+            targets = token_targets if token_targets is not None else targets_from_numbered_content(candidate, total,
                 "automatic complete-candidate bypass; source may contain omitted evidence", mode=mode)
+            output_capped = truncated
         if status.startswith("auto_"):
             print('[token-router usage] ' + json.dumps({"input_tokens": 0,
                   "output_tokens": 0, "cached_input_tokens": 0}), file=sys.stderr)
@@ -914,8 +979,10 @@ def main(argv: list[str]) -> int:
               "model_failed": failure is not None, "reason": failure,
               "output_lines": sum(t["end_line"]-t["start_line"]+1 for t in targets),
               "output_capped": output_capped,
+              "objective": args.optimize,
               "coverage_guaranteed": status == "auto_full"}), file=sys.stderr)
-        print(render_slices_from_file(target_file, targets), end="")
+        print(candidate_output if status == "auto_candidates" and candidate_output is not None
+              else render_slices_from_file(target_file, targets), end="")
         # Usable raw fallback is a successful extraction; stderr identifies failure.
         return 0
     except (OSError, TypeError, ValueError, RuntimeError) as exc:

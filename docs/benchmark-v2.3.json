@@ -1,0 +1,357 @@
+{
+  "measured_router_sha256": "a1c49e7570606e2df4e670e0de8ce0761ae2f74214a45497a6d7f4274a476942",
+  "tasks": [
+    {
+      "task_id": "cpython_subprocess_timeout",
+      "v2.2": {
+        "tokens": 29638,
+        "seconds": 8.010510874912143,
+        "correct": 18,
+        "total": 18,
+        "model_calls": 0,
+        "statuses": [
+          "auto_full",
+          "auto_full",
+          "auto_full"
+        ]
+      },
+      "v2.3": {
+        "tokens": 23815,
+        "seconds": 8.318731791106984,
+        "correct": 18,
+        "total": 18
+      }
+    },
+    {
+      "task_id": "cpython_asyncio_connections",
+      "v2.2": {
+        "tokens": 26554,
+        "seconds": 10.13202212518081,
+        "correct": 18,
+        "total": 18,
+        "model_calls": 0,
+        "statuses": [
+          "auto_full",
+          "auto_full",
+          "auto_full"
+        ]
+      },
+      "v2.3": {
+        "tokens": 26552,
+        "seconds": 9.062621125020087,
+        "correct": 18,
+        "total": 18
+      }
+    },
+    {
+      "task_id": "cpython_ubsan_failure",
+      "v2.2": {
+        "tokens": 51445,
+        "seconds": 15.761102167190984,
+        "correct": 18,
+        "total": 18,
+        "model_calls": 3,
+        "statuses": [
+          "model",
+          "model",
+          "model"
+        ]
+      },
+      "v2.3": {
+        "tokens": 49699,
+        "seconds": 9.133397666970268,
+        "correct": 18,
+        "total": 18
+      }
+    },
+    {
+      "task_id": "scipy_distributed_failures",
+      "v2.2": {
+        "tokens": 52569,
+        "seconds": 13.959555126028135,
+        "correct": 18,
+        "total": 18,
+        "model_calls": 3,
+        "statuses": [
+          "model",
+          "model",
+          "model"
+        ]
+      },
+      "v2.3": {
+        "tokens": 51839,
+        "seconds": 9.348264666739851,
+        "correct": 18,
+        "total": 18
+      }
+    }
+  ],
+  "trials": [
+    {
+      "trial_id": "cpython_subprocess_timeout-1-routed",
+      "total_tokens": 23815,
+      "seconds": 7.720948333153501,
+      "correct": 6,
+      "total": 6,
+      "router_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0
+      },
+      "status": {
+        "status": "auto_candidates",
+        "model_called": false,
+        "model_failed": false,
+        "reason": null,
+        "output_lines": 1665,
+        "output_capped": true,
+        "objective": "tokens",
+        "coverage_guaranteed": false
+      }
+    },
+    {
+      "trial_id": "cpython_subprocess_timeout-2-routed",
+      "total_tokens": 23815,
+      "seconds": 8.322342084022239,
+      "correct": 6,
+      "total": 6,
+      "router_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0
+      },
+      "status": {
+        "status": "auto_candidates",
+        "model_called": false,
+        "model_failed": false,
+        "reason": null,
+        "output_lines": 1665,
+        "output_capped": true,
+        "objective": "tokens",
+        "coverage_guaranteed": false
+      }
+    },
+    {
+      "trial_id": "cpython_subprocess_timeout-3-routed",
+      "total_tokens": 23813,
+      "seconds": 8.318731791106984,
+      "correct": 6,
+      "total": 6,
+      "router_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0
+      },
+      "status": {
+        "status": "auto_candidates",
+        "model_called": false,
+        "model_failed": false,
+        "reason": null,
+        "output_lines": 1665,
+        "output_capped": true,
+        "objective": "tokens",
+        "coverage_guaranteed": false
+      }
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-1-routed",
+      "total_tokens": 26558,
+      "seconds": 9.270778834121302,
+      "correct": 6,
+      "total": 6,
+      "router_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0
+      },
+      "status": {
+        "status": "auto_full",
+        "model_called": false,
+        "model_failed": false,
+        "reason": null,
+        "output_lines": 2052,
+        "output_capped": false,
+        "objective": "tokens",
+        "coverage_guaranteed": true
+      }
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-2-routed",
+      "total_tokens": 26552,
+      "seconds": 7.722116708057001,
+      "correct": 6,
+      "total": 6,
+      "router_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0
+      },
+      "status": {
+        "status": "auto_full",
+        "model_called": false,
+        "model_failed": false,
+        "reason": null,
+        "output_lines": 2052,
+        "output_capped": false,
+        "objective": "tokens",
+        "coverage_guaranteed": true
+      }
+    },
+    {
+      "trial_id": "cpython_asyncio_connections-3-routed",
+      "total_tokens": 26550,
+      "seconds": 9.062621125020087,
+      "correct": 6,
+      "total": 6,
+      "router_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0
+      },
+      "status": {
+        "status": "auto_full",
+        "model_called": false,
+        "model_failed": false,
+        "reason": null,
+        "output_lines": 2052,
+        "output_capped": false,
+        "objective": "tokens",
+        "coverage_guaranteed": true
+      }
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-1-routed",
+      "total_tokens": 49701,
+      "seconds": 9.65560358390212,
+      "correct": 6,
+      "total": 6,
+      "router_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0
+      },
+      "status": {
+        "status": "auto_candidates",
+        "model_called": false,
+        "model_failed": false,
+        "reason": null,
+        "output_lines": 760,
+        "output_capped": true,
+        "objective": "tokens",
+        "coverage_guaranteed": false
+      }
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-2-routed",
+      "total_tokens": 49699,
+      "seconds": 9.133397666970268,
+      "correct": 6,
+      "total": 6,
+      "router_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0
+      },
+      "status": {
+        "status": "auto_candidates",
+        "model_called": false,
+        "model_failed": false,
+        "reason": null,
+        "output_lines": 760,
+        "output_capped": true,
+        "objective": "tokens",
+        "coverage_guaranteed": false
+      }
+    },
+    {
+      "trial_id": "cpython_ubsan_failure-3-routed",
+      "total_tokens": 49699,
+      "seconds": 9.041068873833865,
+      "correct": 6,
+      "total": 6,
+      "router_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0
+      },
+      "status": {
+        "status": "auto_candidates",
+        "model_called": false,
+        "model_failed": false,
+        "reason": null,
+        "output_lines": 760,
+        "output_capped": true,
+        "objective": "tokens",
+        "coverage_guaranteed": false
+      }
+    },
+    {
+      "trial_id": "scipy_distributed_failures-1-routed",
+      "total_tokens": 51837,
+      "seconds": 9.011795250000432,
+      "correct": 6,
+      "total": 6,
+      "router_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0
+      },
+      "status": {
+        "status": "auto_candidates",
+        "model_called": false,
+        "model_failed": false,
+        "reason": null,
+        "output_lines": 1007,
+        "output_capped": true,
+        "objective": "tokens",
+        "coverage_guaranteed": false
+      }
+    },
+    {
+      "trial_id": "scipy_distributed_failures-2-routed",
+      "total_tokens": 51839,
+      "seconds": 9.348264666739851,
+      "correct": 6,
+      "total": 6,
+      "router_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0
+      },
+      "status": {
+        "status": "auto_candidates",
+        "model_called": false,
+        "model_failed": false,
+        "reason": null,
+        "output_lines": 1007,
+        "output_capped": true,
+        "objective": "tokens",
+        "coverage_guaranteed": false
+      }
+    },
+    {
+      "trial_id": "scipy_distributed_failures-3-routed",
+      "total_tokens": 51841,
+      "seconds": 9.390050125075504,
+      "correct": 6,
+      "total": 6,
+      "router_usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "cached_input_tokens": 0
+      },
+      "status": {
+        "status": "auto_candidates",
+        "model_called": false,
+        "model_failed": false,
+        "reason": null,
+        "output_lines": 1007,
+        "output_capped": true,
+        "objective": "tokens",
+        "coverage_guaranteed": false
+      }
+    }
+  ],
+  "pre_fix_correct": 69,
+  "pre_fix_total": 72
+}

@@ -7,12 +7,13 @@
 
 **Select relevant raw lines from oversized files before sending them to your main reasoning model.**
 
-Version **2.2.0** uses **GPT-6 Luna Light** through Codex CLI: model `gpt-6-luna`, reasoning effort `low`, fixed by the router. It reuses your existing Codex ChatGPT login and subscription. No API key, local model, or local model server is required.
+Version **2.3.0** defaults to Python-only token-first extraction and optionally uses **GPT-6 Luna Light** through Codex CLI: model `gpt-6-luna`, reasoning effort `low`, fixed by the router. It reuses your existing Codex ChatGPT login and subscription. No API key, local model, or local model server is required.
 
 ## How it works
 
 1. Python ranks query/diagnostic windows, reserves distributed and recent evidence, and applies a character budget before rendering in original line order.
-2. An automatic policy skips Luna for small sources, dense candidate sets in moderate sources, or small untruncated candidates. Otherwise Codex CLI sends candidates and your query to GPT-6 Luna Light. `--force-model` disables bypass; `--deterministic` requires bounded Python-only extraction.
+2. Default `--optimize tokens` avoids a selector-model call entirely. Candidate ranges include two neighboring lines and are admitted only if the rendered packet is at least 15% smaller than full rendering and fits the character budget. Otherwise sources up to 100,000 characters pass through whole; larger cases return exit 2 (`needs_targeted_read`) with suggested ranges and no raw stdout. Sources up to 12,000 characters always pass through whole.
+   `--optimize latency` preserves v2.2 automatic routing; `--force-model` explicitly requires Luna, while `--deterministic` requests ranked extraction with the line cap.
 3. Python validates and merges the ranges, then extracts raw text from the original file.
 4. Your main agent reasons over the selected evidence and retrieves wider ranges when necessary.
 
@@ -80,7 +81,7 @@ The provider, model `gpt-6-luna`, and effort `low` are fixed. There is no model/
 | `ROUTER_CODEX_BIN` | `codex` | Codex CLI executable name or absolute path |
 | `ROUTER_TIMEOUT` | `120` | Codex subprocess timeout in seconds |
 | `ROUTER_MAX_CHARS` | `120000` | Maximum line-numbered candidate content sent to the router model |
-| `ROUTER_MAX_OUTPUT_LINES` | `160` | Maximum extracted raw lines returned to the main agent |
+| `ROUTER_MAX_OUTPUT_LINES` | `160` | Maximum model/deterministic selected lines; token-first packets and whole-source bypass are exempt |
 | `ROUTER_AUTO_SMALL_CHARS` | `12000` | Whole-source bypass threshold in raw characters |
 | `ROUTER_AUTO_FULL_CHARS` | `100000` | Whole-source bypass ceiling when candidate raw characters cover at least 65% of source |
 | `ROUTER_AUTO_CANDIDATE_CHARS` | `12000` | Candidate bypass ceiling; also requires no truncation, all query terms present, and fit within output line cap |
@@ -122,3 +123,8 @@ python3 scripts/run_router_tests.py tests/router-tests.json --real
 See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [SUPPORT.md](SUPPORT.md). Use sanitized fixtures in public reports. Licensed under [MIT](LICENSE).
 
 The [automatic-bypass follow-up](docs/benchmark-auto-routing.md) records v2.2 call counts, accuracy, token totals and latency. Thresholds are practical initial heuristics, not measured universal break-even points.
+
+
+## Token-first default
+
+The 15% margin is a rendered-character heuristic, not a token guarantee. Default routing adds no Luna usage; only explicit cloud options do. Candidate output is bounded by `ROUTER_MAX_CHARS`, preserves all admitted ranges plus neighbors, and can exceed 160 lines. It can still omit relevant evidence. Exit 2 / `needs_targeted_read` means search or narrow the query, not automatic cloud retry. Measure recovery reads and answer output too when comparing total tokens. See [v2.3 real-file measurements](docs/benchmark-token-priority.md), including the accuracy regression caught before release. The compatibility option `--optimize latency` is not a guarantee of lower wall time.

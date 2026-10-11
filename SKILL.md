@@ -11,7 +11,7 @@ Reduce the main agent's input context while retaining evidence needed for its ta
 
 - For a known symbol, exact error, or short file, use ordinary search and nearby raw lines first. File length alone (such as 300 lines) is not a reason to invoke Luna.
 - Use `--deterministic` for bounded keyword/context extraction when relevant identifiers are known. This runs Python only, with no model call. Verify that the returned evidence answers the question.
-- Use cloud routing when candidates remain large and semantic selection can help. If the candidate set is nearly the whole source and the main model can read it comfortably, read directly. An extra model call may increase both total tokens and latency.
+- Use explicit `--force-model` only when semantic selection is worth the extra call. If the candidate set is nearly the whole source and the main model can read it comfortably, read directly. An extra model call may increase both total tokens and latency.
 - For a complete audit, broad architecture question, or cross-file refactor, retrieve the full necessary context. Small excerpts cannot establish completeness.
 
 ## Run
@@ -22,7 +22,9 @@ Resolve `scripts/router.py` relative to **this installed SKILL.md**, never the c
 python3 "/absolute/path/to/token-router/scripts/router.py" heavy_code "/absolute/path/to/target.py" --query "token expiration" --deterministic
 ```
 
-The default is automatic: small sources and moderately sized sources with dense candidates are passed through whole; small untruncated candidate sets can be returned directly. Other cases use Luna. Add `--force-model` to require Luna, or `--deterministic` to require bounded local extraction; these flags are mutually exclusive. Whole-source bypass deliberately ignores the 160-line selection cap to avoid silently dropping evidence. Pick `error_log` for logs/stack traces, `heavy_code` for focused source investigations, or `agent_context` for optional references.
+The default `--optimize tokens` never calls Luna automatically. Python keeps admitted candidates plus two neighboring lines, and returns them only when the rendered packet fits the character budget and is at least 15% smaller than whole-source rendering. Small sources (up to 12,000 characters) pass through whole. If extraction cannot meaningfully reduce a source up to 100,000 characters, read it whole (`auto_full`). Larger unhelpful packets return exit 2 / `needs_targeted_read`, with suggested ranges and no raw output: narrow the query or search/read targeted ranges; do not blindly retry or enable Luna.
+
+`--optimize latency` retains the v2.2 automatic policy and can call Luna; its name does not promise the fastest result. `--force-model` explicitly requires Luna; `--deterministic` requires ranked extraction capped at 160 lines. These two flags are mutually exclusive. Token-first candidate packets and whole-source bypass deliberately ignore the 160-line selection cap; token-first candidate packets still obey the character budget. Pick `error_log` for logs, `heavy_code` for source, or `agent_context` for optional references.
 
 Use specific symbols, error messages, or task terms in `--query`; avoid pasting a long checklist of generic questions. Keep the full task for the main analyst. Inspect candidate/output truncation, `model_called`, and fallback diagnostics as well as the raw slices. `auto_full` preserves the entire source; `auto_candidates` preserves only the prefiltered candidates and still requires evidence checks.
 
@@ -40,7 +42,7 @@ Measure Luna **plus** the main model when claiming overall token or speed improv
 
 ## Limits and checks
 
-Automatic thresholds are character heuristics, not token limits: whole source up to 12,000 characters; whole source up to 100,000 characters if candidate raw text covers at least 65%; or all untruncated candidates up to 12,000 characters and the output line cap with every normalized query term present. These thresholds avoid calls, not prove answer completeness.
+The 15% admission margin measures rendered **characters**, not exact model tokens. Avoiding a separate selector call removes its overhead, but answer length, missing evidence, and subsequent reads can still increase total usage. Compare router + main + recovery reads against direct reading before claiming savings. See [token-first measurements](docs/benchmark-token-priority.md). Candidate coverage never proves complete source coverage.
 
 Defaults: `ROUTER_TIMEOUT=120`, `ROUTER_MAX_CHARS=120000`, `ROUTER_MAX_OUTPUT_LINES=160`. Limits can omit necessary evidence. See [configuration](README.md#configuration).
 

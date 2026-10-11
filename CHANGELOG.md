@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.3.0 — Token-first admission
+
+- Default to zero selector-model calls; pass useful bounded candidates directly to the main model.
+- Require 15% rendered-character reduction, otherwise read moderate sources whole or request targeted reads (exit 2).
+- Preserve all admitted candidate ranges with neighboring context; retain explicit Luna and v2.2 compatibility options.
+- Record actual total-token, latency, and grounded-accuracy comparisons, including the pre-release boundary regression.
+
+
 ## 2.2.0 — 2026-10-12
 
 - Skip unnecessary Luna calls automatically for small whole sources, dense candidates in moderate sources, and small untruncated query-matching candidates.
