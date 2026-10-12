@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import io
 from dataclasses import asdict
 import json
@@ -132,10 +133,18 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument('--return-context',choices=('off','bounded'),default=None,help='Optional bounded Python return completion (default: off).')
     parser.add_argument('--return-target',help='Exact single callable return lookup; implies bounded completion; ambiguity preserves bounded output.')
     parser.add_argument('--search-term', action='append', default=[], help='Explicit case-sensitive literal windows; local tokens only, no structural ranking.')
+    parser.add_argument('--symbol', action='append', default=[], help='Exact qualified Python callable; complete bounded definitions, local tokens only.')
+    parser.add_argument('--compact-status', action='store_true', help='Concise actionable stderr; report-json still contains full diagnostics.')
     parser.add_argument('--search-context', type=int, choices=range(13), default=None,
                         help='Neighbors per side for literal search (0-12); omitted: code12/log4. Selected traceback completion still applies.')
     parser.add_argument('--line-numbers', action='store_true', help='Render source line numbers without changing stored raw evidence.')
     args = parser.parse_args(argv[1:])
+    if args.symbol:
+        if args.mode!='heavy_code' or args.force_model or args.deterministic or args.optimize!='tokens' or args.search_term or args.search_context is not None or args.require_term or args.read_scope=='whole' or args.return_target or args.return_context=='bounded':
+            parser.error('symbol requires focused heavy_code local tokens without other selection options')
+        if len(args.symbol)>8 or any(len(s)>256 or not all(p.isidentifier() for p in s.split('.')) for s in args.symbol):
+            parser.error('symbol requires 1-8 qualified Python names, each at most256 characters')
+        args.symbol=list(dict.fromkeys(args.symbol))
     if args.search_context is not None and not args.search_term:
         parser.error('search-context requires search-term')
     if args.search_term:
@@ -996,10 +1005,63 @@ def numbered_packet(packet):
     return Packet(packet.ranges,packet.raw_slices,'\n'.join(rendered))
 
 
+def symbol_packet(args, guard):
+    """Complete explicit callables only: no dependencies or model selection."""
+    raw=guard.probe(1_000_001)
+    base=dict(status='needs_targeted_read',retrieval_mode='python_symbol',
+              semantic_sufficiency='unknown',next_action='read_targeted_ranges',
+              requested_symbols=args.symbol)
+    if len(raw)>1_000_000:
+        return finalize_packet(args,guard,None,{**base,'reason_codes':['symbol_parse_budget'],'scan_complete':False},2)
+    lines=list(io.StringIO(raw,newline=''))
+    if len(lines)>250_000 or any(len(line)>1_000_000 for line in lines):
+        raise SourceLimitError('source exceeds line limits')
+    try:
+        tree=ast.parse(raw)
+    except (SyntaxError,ValueError,RecursionError,MemoryError) as exc:
+        return finalize_packet(args,guard,None,{**base,'reason_codes':['symbol_parse_error'],'detail':type(exc).__name__,'scan_complete':True},2)
+    found={name:[] for name in args.symbol}
+    def visit(node,prefix=''):
+        qualified=prefix
+        if isinstance(node,(ast.ClassDef,ast.FunctionDef,ast.AsyncFunctionDef)):
+            qualified=prefix+'.'+node.name if prefix else node.name
+            if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and qualified in found:
+                start=min([node.lineno]+[d.lineno for d in node.decorator_list])
+                found[qualified].append(Span(start,node.end_lineno))
+        for child in ast.iter_child_nodes(node):
+            visit(child,qualified)
+    try:
+        visit(tree)
+    except RecursionError:
+        return finalize_packet(args,guard,None,{**base,'reason_codes':['symbol_parse_error'],'detail':'RecursionError','scan_complete':True},2)
+    missing=[name for name,spans in found.items() if not spans]
+    ambiguous=[name for name,spans in found.items() if len(spans)>1]
+    base.update(scan_complete=True,missing_symbols=missing,ambiguous_symbols=ambiguous,
+                symbol_ranges={name:[[s.start,s.end] for s in spans] for name,spans in found.items()})
+    if missing or ambiguous:
+        return finalize_packet(args,guard,None,{**base,'reason_codes':['symbol_missing_or_ambiguous']},2)
+    merged=[]
+    for span in sorted({s for spans in found.values() for s in spans},key=lambda s:s.start):
+        if merged and span.start<=merged[-1].end+1:
+            merged[-1]=Span(merged[-1].start,max(merged[-1].end,span.end))
+        else:
+            merged.append(span)
+    targets=[dict(start_line=s.start,end_line=s.end,reason='complete explicitly selected Python callable') for s in merged]
+    packet=packet_from_guard(guard,targets,raw)
+    trial=numbered_packet(packet) if args.line_numbers else packet
+    if len(trial.rendered)>min(MAX_OUTPUT_CHARS,12000):
+        return finalize_packet(args,guard,None,{**base,'reason_codes':['symbol_output_budget'],
+                    'final_output_capped':True},2)
+    if len(raw)>AUTO_SMALL_CHARS and len(trial.rendered)>len(raw)*.85:
+        return finalize_packet(args,guard,None,{**base,'reason_codes':['insufficient_bounded_reduction']},2)
+    return finalize_packet(args,guard,packet,{**base,'status':'auto_candidates',
+               'reason_codes':[],'next_action':None,'full_source_returned':merged==[Span(1,len(lines))]})
+
+
 def literal_search_packet(args, guard):
     """One metadata scan and one selected read; no AST, ranking, tail or model."""
     terms=args.search_term
-    counts={term:0 for term in terms};spans=[];source_chars=0;total=0;line_costs=[];tracebacks=[];trace_open=None;matched_lines=[]
+    counts={term:0 for term in terms};spans=[];source_chars=0;total=0;line_costs=[];tracebacks=[];trace_open=None;matched_lines=[];pytest_open=None;pytest_blocks=[]
     context=args.search_context if args.search_context is not None else (4 if args.mode=='error_log' else 12)
     for n,line in enumerate(guard.lines(),1):
         total=n;source_chars+=len(line)
@@ -1013,6 +1075,11 @@ def literal_search_packet(args, guard):
                 if n-trace_open>64:trace_open=None
                 elif re.match(r'^[A-Za-z_][\w.]*(?:Error|Exception|Interrupt|Exit|Iteration)(?::|$)',clean):
                     tracebacks.append([trace_open,n]);trace_open=None
+            if re.match(r'^_{3,}\s+\S.*\s+_{3,}$',clean):pytest_open=n
+            elif pytest_open is not None:
+                if n-pytest_open>64:pytest_open=None
+                elif re.match(r'^.+:\d+:\s+[A-Za-z_][\w.]*(?:Error|Exception|Warning)$',clean):
+                    pytest_blocks.append([pytest_open,n]);pytest_open=None
         hits=[term for term in terms if term in line or term in ansi_visible]
         for term in hits:counts[term]+=1
         if hits:
@@ -1020,7 +1087,7 @@ def literal_search_packet(args, guard):
             start,end=max(1,n-context),n+context
             if spans and start<=spans[-1][1]+1:spans[-1][1]=max(spans[-1][1],end)
             else:spans.append([start,end])
-    completed=[tb for tb in tracebacks if any(a<=tb[0]<=b for a,b in spans) or any(tb[0]<=n<=tb[1] for n in matched_lines)]
+    completed=[tb for tb in tracebacks+pytest_blocks if any(a<=tb[0]<=b for a,b in spans) or any(tb[0]<=n<=tb[1] for n in matched_lines)]
     merged=[]
     for a,b in sorted(spans+completed):
         b=min(b,total)
@@ -1123,6 +1190,12 @@ def finalize_packet(args, guard, packet, status, code=0):
         compact.pop('source_required')
     if 'checks' in compact:
         compact['checks'] = {k:v for k,v in compact['checks'].items() if k != 'source_required'}
+    if getattr(args,'compact_status',False):
+        keep={'schema_version','status','retrieval_mode','reason_codes','next_action','model_called','model_failed',
+              'source_consistency','final_output_capped','selection_truncated','full_source_returned',
+              'output_lines','output_chars','semantic_sufficiency','missing_search_terms',
+              'absent_required','lost_required','missing_symbols','ambiguous_symbols','detail'}
+        compact={k:v for k,v in compact.items() if k in keep and v is not None and v != []}
     print('[token-router status] '+json.dumps(compact),file=sys.stderr)
     if packet is not None and code==0:
         print(packet.rendered,end='')
@@ -1152,6 +1225,8 @@ def main(argv: list[str]) -> int:
             return numbered_packet(result) if args.line_numbers else result
         if args.search_term:
             return literal_search_packet(args,guard)
+        if args.symbol:
+            return symbol_packet(args,guard)
         terms=normalize_query_terms(args.query.strip())
         auto=not args.force_model and not args.deterministic
         new=auto and args.optimize=='tokens' and args.policy_version=='v2.5'

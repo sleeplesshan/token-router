@@ -1,4 +1,4 @@
 interface:
   display_name: "Token Router"
-  short_description: "Batch incomplete dispersed log evidence; skip code lookups"
-  default_prompt: "Use $token-router only if dispersed error-log context needs batching after ordinary search. Skip code exploration, one location and evidence already sufficient."
+  short_description: "Read bounded complete Python callables or failure blocks"
+  default_prompt: "Use $token-router when branch/order analysis needs complete named callables or dispersed log blocks need context. Reuse evidence and skip simple literal lookups."
