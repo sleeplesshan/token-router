@@ -17,7 +17,7 @@ Explicit `--return-context off --return-target NAME` is an error. Returning to d
 
 ## Output and errors
 
-stdout contains original decoded source slices with headers only on successful extraction. Whole raw lines are returned with original 1-based coordinates. UTF-8 errors become U+FFFD; universal newline decoding converts CRLF and CR to LF. This is decoded text preservation, not byte preservation. The source is never imported, executed or rewritten.
+stdout contains original decoded source slices with headers only on successful extraction. Whole raw lines are returned with original 1-based coordinates. UTF-8 errors become U+FFFD; universal newline decoding converts CRLF and CR to LF. CLI output is UTF-8 with LF even when redirected on a legacy-locale host. This is decoded text preservation, not byte preservation. The source is never imported, executed or rewritten.
 
 - 0: extraction success, including deterministic cloud fallback; never proof of answer accuracy or semantic completeness.
 - 1: input/read/report/source error; no raw stdout.

@@ -49,6 +49,13 @@ class ReleaseContract(unittest.TestCase):
             p=Path(tmp)/'fifo';os.mkfifo(p)
             result=subprocess.run([sys.executable,str(ROOT/'scripts/router.py'),'error_log',str(p)],capture_output=True,text=True,timeout=2)
             self.assertEqual(result.returncode,1);self.assertEqual(result.stdout,'')
+    def test_cli_utf8_output_when_host_requests_ascii(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp)/'한글.py';p.write_bytes('값 = "안녕"\r\n'.encode('utf-8'))
+            env=dict(os.environ,PYTHONIOENCODING='ascii')
+            result=subprocess.run([sys.executable,str(ROOT/'scripts/router.py'),'heavy_code',str(p)],env=env,capture_output=True)
+            self.assertEqual(result.returncode,0)
+            self.assertIn('값 = "안녕"\n',result.stdout.decode('utf-8'));self.assertNotIn(b'\r\n',result.stdout)
     def test_default_has_no_socket_or_subprocess(self):
         with patch('socket.socket',side_effect=AssertionError('network')),patch('subprocess.Popen',side_effect=AssertionError('process')):
             self.assertEqual(self.route(ROOT/'samples/service.py')[0],0)

@@ -5,7 +5,7 @@ import json
 
 FILES = (
     'README.md', 'SKILL.md', 'CLAUDE.md', 'LICENSE', 'SECURITY.md', 'SUPPORT.md',
-    'CHANGELOG.md', 'agents/openai.yaml', 'references/contract.md',
+    'CHANGELOG.md', 'CONTRIBUTING.md', 'docs/release-readiness.md', 'agents/openai.yaml', 'references/contract.md',
     'scripts/router.py', 'scripts/evidence_checks.py', 'scripts/query_matcher.py',
     'scripts/routing_policy.py', 'scripts/source_guard.py',
     'scripts/install.py', 'scripts/distribution.py',

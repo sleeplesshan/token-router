@@ -1253,4 +1253,8 @@ def main(argv: list[str]) -> int:
 
 
 if __name__ == '__main__':
+    # Stable UTF-8/LF CLI output even when redirected on a non-UTF-8 host.
+    for stream in (sys.stdout,sys.stderr):
+        if hasattr(stream,'reconfigure'):
+            stream.reconfigure(encoding='utf-8',newline='\n')
     raise SystemExit(main(sys.argv))

@@ -33,6 +33,12 @@ def main(archive):
             path=dest/'samples'/name;before=path.read_bytes();path.chmod(0o444)
             try:output=run(router,mode,path,'--query',q,cwd=root,env=env);assert q in output;assert path.read_bytes()==before
             finally:path.chmod(0o644)
+        large=root/'return sample.py'
+        large.write_text('# neutral padding abcdefghijklmnopqrstuvwxyz\n'*1500+'def lookup():\n    \"\"\"\n'+'    documentation\n'*40+'    \"\"\"\n    return stored_value\n'+'# neutral padding abcdefghijklmnopqrstuvwxyz\n'*1500,encoding='utf-8')
+        base=run(router,'heavy_code',large,'--query','lookup',cwd=root,env=env)
+        bounded=run(router,'heavy_code',large,'--query','lookup','--return-context','bounded',cwd=root,env=env)
+        target=run(router,'heavy_code',large,'--query','lookup','--return-target','lookup',cwd=root,env=env)
+        assert 'return stored_value' not in base and 'return stored_value' in bounded and target==bounded
         result=json.loads(run(installer,'update','--dest',dest,cwd=root,env=env));assert Path(result['backup']).is_dir()
         run(installer,'restore','--dest',dest,'--backup',result['backup'],cwd=root,env=env)
         run(installer,'uninstall','--dest',dest,cwd=root,env=env);assert not dest.exists();assert Path(result['backup']).exists()
