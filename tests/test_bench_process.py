@@ -1,4 +1,5 @@
 import json
+import os
 from pathlib import Path
 import sys
 import tempfile
@@ -9,6 +10,32 @@ import bench_process as b
 
 
 class BenchProcessTests(unittest.TestCase):
+    @unittest.skipUnless(os.name=='posix','POSIX interrupt handler')
+    def test_overflow_after_timeout_invalidates_completed_usage(self):
+        event=json.dumps(dict(type='turn.completed',usage=dict(input_tokens=10,output_tokens=2)))
+        code=f'''import signal,sys,time
+def stop(*args):
+ print({event!r},flush=True)
+ print('x'*2000,flush=True)
+ sys.exit(0)
+signal.signal(signal.SIGINT,stop)
+time.sleep(5)
+'''
+        with tempfile.TemporaryDirectory() as tmp:
+            r=b.capture([sys.executable,'-u','-c',code],tmp,idle_timeout=.3,absolute_timeout=2,grace=.2,max_bytes=300)
+            self.assertLessEqual(sum(p.stat().st_size for p in Path(tmp).iterdir()),300)
+        self.assertEqual(r['termination_reason'],'idle_timeout')
+        self.assertTrue(r['capture_truncated'])
+        self.assertFalse(r['usage_complete'])
+        self.assertFalse(b.retry_admissible([r]))
+
+    def test_large_stdin_does_not_block_timeout(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            r=b.capture([sys.executable,'-u','-c','import time;time.sleep(5)'],tmp,
+                        prompt='x'*1000000,idle_timeout=.25,absolute_timeout=2,grace=.1)
+        self.assertEqual(r['termination_reason'],'idle_timeout')
+        self.assertLess(r['wall'],3)
+
     def call(self, code, **kwargs):
         with tempfile.TemporaryDirectory() as tmp:
             result = b.capture([sys.executable, '-u', '-c', code], tmp,

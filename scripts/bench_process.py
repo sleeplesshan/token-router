@@ -55,12 +55,23 @@ def capture(cmd, directory, *, prompt='', cwd=None, env=None,
                for name, pipe in [('stdout', p.stdout), ('stderr', p.stderr)]]
     for worker in workers:
         worker.start()
-    p.stdin.write(prompt.encode('utf-8'))
-    p.stdin.close()
+    def send_input():
+        try:
+            p.stdin.write(prompt.encode('utf-8'))
+        except (BrokenPipeError, OSError):
+            pass  # Exit status/events determine whether input was processed.
+        finally:
+            try:
+                p.stdin.close()
+            except OSError:
+                pass
+    sender=threading.Thread(target=send_input,daemon=True)
+    sender.start()
     activity = start
     interrupted = None
     reason = None
     forced = False
+    truncated = False
     closed = set()
     chunks = {'stdout': bytearray(), 'stderr': bytearray()}
     paths = {'stdout': directory/'events.jsonl', 'stderr': directory/'stderr.txt'}
@@ -101,10 +112,12 @@ def capture(cmd, directory, *, prompt='', cwd=None, env=None,
                 continue
             if name == 'stdout':
                 activity = time.monotonic()
-            if sum(map(len, chunks.values()))+len(chunk) > max_bytes and reason is None:
-                reason = 'capture_limit'
-                interrupted = time.monotonic()
-                terminate()
+            if sum(map(len, chunks.values()))+len(chunk) > max_bytes:
+                truncated=True
+                if reason is None:
+                    reason = 'capture_limit'
+                    interrupted = time.monotonic()
+                    terminate()
             # Bound capture during shutdown too; an incomplete log blocks release.
             room=max(0,max_bytes-sum(map(len,chunks.values())))
             kept=chunk[:room]
@@ -120,6 +133,7 @@ def capture(cmd, directory, *, prompt='', cwd=None, env=None,
             stream.close()
         for worker in workers:
             worker.join(timeout=1)
+        sender.join(timeout=1)
     elapsed = time.monotonic()-start
     after = _cpu()
     stdout = chunks['stdout'].decode('utf-8', errors='replace')
@@ -136,10 +150,10 @@ def capture(cmd, directory, *, prompt='', cwd=None, env=None,
         except ValueError:
             pass
     last_start = max((i for i,e in enumerate(parsed) if e.get('type')=='turn.started'), default=-1)
-    complete = reason != 'capture_limit' and known is not None and any(e.get('type')=='turn.completed' for e in parsed[last_start+1:])
+    complete = not truncated and known is not None and any(e.get('type')=='turn.completed' for e in parsed[last_start+1:])
     cpu = None if before is None else after-before
     return dict(returncode=p.returncode, termination_reason=reason,
-        forced_kill=forced, wall=elapsed, cpu=cpu,
+        forced_kill=forced, capture_truncated=truncated, wall=elapsed, cpu=cpu,
         remote_wait_proxy=None if cpu is None else max(0, elapsed-cpu),
         usage=known if complete else None, known_usage_lower_bound=known,
         usage_complete=complete, events=parsed,
