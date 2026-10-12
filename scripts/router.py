@@ -53,7 +53,7 @@ def env_float(name: str, default: float, minimum: float | None = None) -> float:
     return value
 
 
-VERSION = "2.6.0"
+VERSION = "2.7.0-dev"
 MODEL_NAME = "gpt-6-luna"
 REASONING_EFFORT = "low"
 CODEX_BIN = os.environ.get("ROUTER_CODEX_BIN", "codex")
@@ -131,7 +131,15 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument('--report-json')
     parser.add_argument('--return-context',choices=('off','bounded'),default=None,help='Optional bounded Python return completion (default: off).')
     parser.add_argument('--return-target',help='Exact single callable return lookup; implies bounded completion; ambiguity preserves bounded output.')
+    parser.add_argument('--search-term', action='append', default=[], help='Explicit case-sensitive literal windows; local tokens only, no structural ranking.')
+    parser.add_argument('--line-numbers', action='store_true', help='Render source line numbers without changing stored raw evidence.')
     args = parser.parse_args(argv[1:])
+    if args.search_term:
+        if args.force_model or args.deterministic or args.optimize != 'tokens' or args.read_scope == 'whole' or args.require_term or args.return_target or args.return_context == 'bounded':
+            parser.error('search-term requires focused local tokens without return completion or require-term')
+        if any(not t or not t.strip() or '\n' in t or '\r' in t or len(t)>256 for t in args.search_term) or len(args.search_term)>32:
+            parser.error('search-term requires 1-32 nonblank single-line literals, each at most 256 characters')
+        args.search_term = list(dict.fromkeys(args.search_term))
     explicit_policy = args.policy_version is not None or args.read_scope is not None or bool(args.require_term) or args.return_target is not None or args.return_context is not None
     if explicit_policy and (args.deterministic or args.force_model or args.optimize != 'tokens'):
         parser.error('policy-version, require-term, read-scope and return-target require automatic tokens mode')
@@ -975,6 +983,57 @@ def _collect_packet_lines(handle, spans, chunks):
             chunks[current].append(line)
 
 
+def numbered_packet(packet):
+    """Presentation only: source text and coordinates remain in raw_slices."""
+    rendered=[]
+    for span,raw in zip(packet.ranges,packet.raw_slices):
+        body=''.join(f'{n}: {line}' for n,line in enumerate(io.StringIO(raw, newline=''),span.start))
+        rendered.append(f'--- [NUMBERED CONTENT FROM LINE {span.start} TO {span.end}] ---\n'+body+'\n--- [END OF SLICE] ---\n')
+    return Packet(packet.ranges,packet.raw_slices,'\n'.join(rendered))
+
+
+def literal_search_packet(args, guard):
+    """One metadata scan and one selected read; no AST, ranking, tail or model."""
+    terms=args.search_term
+    counts={term:0 for term in terms};spans=[];source_chars=0;total=0;line_costs=[]
+    for n,line in enumerate(guard.lines(),1):
+        total=n;source_chars+=len(line)
+        line_costs.append(len(line)+(len(str(n))+2 if args.line_numbers else 0))
+        hits=[term for term in terms if term in line]
+        for term in hits:counts[term]+=1
+        if hits:
+            start,end=max(1,n-12),n+12
+            if spans and start<=spans[-1][1]+1:spans[-1][1]=max(spans[-1][1],end)
+            else:spans.append([start,end])
+    spans=[Span(a,min(b,total)) for a,b in spans]
+    base={'status':'auto_candidates','retrieval_mode':'literal_search','scan_complete':True,
+          'search_match_lines':counts,'missing_search_terms':[t for t,c in counts.items() if not c],
+          'semantic_sufficiency':'unknown','full_source_returned':False}
+    if not spans:
+        return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
+            'reason_codes':['literal_not_found'],'next_action':'change_search_scope'},2)
+    # Reject excessive source before collecting it in memory.
+    selected_cost=sum(sum(line_costs[x.start-1:x.end]) for x in spans)
+    if selected_cost>min(MAX_OUTPUT_CHARS,12000):
+        return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
+            'reason_codes':['literal_scope_too_broad'],'next_action':'narrow_search_terms',
+            'final_output_capped':True,'suggested_ranges':[[x.start,x.end] for x in spans[:12]]},2)
+    # Entire windows are kept; broad searches abstain instead of arbitrary cuts.
+    targets=[dict(start_line=x.start,end_line=x.end,reason='explicit literal with 12 neighboring lines') for x in spans]
+    packet=packet_from_guard(guard,targets)
+    trial=numbered_packet(packet) if args.line_numbers else packet
+    limit=min(MAX_OUTPUT_CHARS,12000)
+    if len(trial.rendered)>limit:
+        return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
+            'reason_codes':['literal_scope_too_broad'],'next_action':'narrow_search_terms',
+            'final_output_capped':True,'suggested_ranges':[[x.start,x.end] for x in spans[:12]]},2)
+    if source_chars>AUTO_SMALL_CHARS and len(trial.rendered)>source_chars*.85:
+        return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
+            'reason_codes':['insufficient_bounded_reduction'],'next_action':'read_targeted_ranges'},2)
+    base['full_source_returned']=len(spans)==1 and spans[0]==Span(1,total)
+    return finalize_packet(args,guard,packet,base)
+
+
 def finalize_packet(args, guard, packet, status, code=0):
     """All paths emit only after source, output and sidecar checks succeed."""
     status={'schema_version':1,'model_called':False,'model_failed':False,
@@ -984,6 +1043,9 @@ def finalize_packet(args, guard, packet, status, code=0):
             'next_action':None,**status}
     written_report=None
     try:
+        if packet is not None and getattr(args,'line_numbers',False):
+            packet=numbered_packet(packet)
+            status['output_format']='numbered'
         guard.check()
         status['source_consistency']='stat_unchanged'
         status['source_stamp']=list(guard.stamp)
@@ -1063,6 +1125,8 @@ def main(argv: list[str]) -> int:
         guard=SourceGuard(path)
         if not path.is_file() or guard.stamp[2]==0:
             raise ValueError('Source must be a nonempty regular file')
+        if args.search_term:
+            return literal_search_packet(args,guard)
         terms=normalize_query_terms(args.query.strip())
         auto=not args.force_model and not args.deterministic
         new=auto and args.optimize=='tokens' and args.policy_version=='v2.5'

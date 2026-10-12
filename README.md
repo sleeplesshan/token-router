@@ -87,3 +87,7 @@ Both are offline, free of model calls. [CONTRIBUTING.md](CONTRIBUTING.md), [SUPP
 ## Evaluation and appropriate use
 
 Four fixed installed-skill/ordinary-search pairs both answered4/4 correctly. Skill-enabled total tokens were10.65% higher; every task used ordinary search and no router call. This sample demonstrates avoiding needless routing, not savings or automatic discovery. It does not measure the extractor’s benefit on broad large-log questions. A separate replay of the four historical files preserves the released extractor’s output exactly; historical token savings are not relabeled as new measurements. Separately,24 offline default packets match the public release baseline;20 contain all initial required evidence. Detailed conditions and hashes are in the repository [evaluation](docs/release-evaluation/README.md).
+
+## Development candidate (not part of v2.6.0 release)
+
+This branch experiments with `--search-term TEXT --line-numbers` for bounded literal windows and citation-ready lines. It aims to avoid broad structural extraction for questions with known anchors. Adoption requires new same-task comparisons against ordinary search, including all model/skill/follow-up costs. See references/contract.md.
