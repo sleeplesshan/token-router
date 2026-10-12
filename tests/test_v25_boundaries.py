@@ -67,6 +67,9 @@ class BoundaryContracts(unittest.TestCase):
         with patch.object(r,'AUTO_SMALL_CHARS',0),patch.object(r,'MAX_OUTPUT_CHARS',30):
             code,out,status=self.run_cli('--policy-version','v2.5','--read-scope','whole','--require-term','missing')
         self.assertEqual((code,out),(2,''));self.assertEqual(status['absent_required'],['missing'])
+    def test_default_tokens_small_path_skips_ranking(self):
+        with patch.object(r,'ranked_candidates',side_effect=AssertionError('small source must bypass ranking')):
+            self.assertEqual(self.run_cli()[0],0)
     def test_required_occurrence_counts_are_not_witness_truncation(self):
         stats={}
         r.ranked_candidates(lambda:iter(['B B B\n']),'heavy_code',[],120000,diagnostics=stats,required_terms=['B'])

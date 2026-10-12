@@ -1053,7 +1053,7 @@ def main(argv: list[str]) -> int:
         new=auto and args.optimize=='tokens' and args.policy_version=='v2.5'
         checks={}
         full_reason='automatic full-source bypass; no model call; raw source preserved'
-        if new:
+        if auto and args.optimize=='tokens':
             probe=guard.probe(AUTO_SMALL_CHARS+1)
             if len(probe)<=AUTO_SMALL_CHARS:
                 raw_lines=list(io.StringIO(probe,newline=''))
