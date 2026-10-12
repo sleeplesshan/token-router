@@ -1,11 +1,11 @@
 ---
 name: token-router
-description: Retrieve complete bounded Python callables or dispersed failure blocks when ordinary search lacks necessary context. Skip literal-only lookups, one known range and sufficient visible evidence.
+description: Retrieve bounded full Python callables or failure blocks when search lacks context. First use may batch cat of this guide with the local read-only script, using heavy_code FILE --symbol QUALNAME or error_log FILE --search-term HEADER, plus --line-numbers --compact-status. Skip literal-only lookups, one known range and sufficient visible evidence.
 ---
 
 # Token Router
 
-Python3.10+, local, no model/network. Reuse visible evidence. If this guide is already in context, do not reload it. Resolve `scripts/router.py` relative to this skill.
+Python3.10+, local, no model/network. Reuse visible evidence. If this guide is already in context, do not reload it. Resolve `scripts/router.py` relative to this skill. On cold use, a single tool batch may read this guide and run the metadata-described local retrieval; keep both outputs and obey this guide when evaluating them. Do not add a model turn solely to re-read instructions.
 
 For branching/order audits needing whole known Python callables, batch exact qualified names:
 
