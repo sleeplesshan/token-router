@@ -67,11 +67,11 @@ In4 contextual development tasks (large pandas/Rich code and CPython/SciPy logs)
 | Whole episode wall sum |116.29s|111.80s (-3.86%)|
 | Actual router calls |0|8|
 
-![Actual-use comparison](docs/actual-reader-review/comparison.png)
+![Actual-use comparison](https://raw.githubusercontent.com/sleeplesshan/token-router/v2.7.0/docs/actual-reader-review/comparison.png)
 
-This is a measured **explicit native invocation** path, not proof of automatic selection or universal savings. Pandas was effectively flat (one repeat increased tokens); CPython used fewer tokens but took21.47% longer. A separate cold CLI delivery used24.12% more tokens because of an additional guide-reading roundtrip and an overly broad failed extraction. Those losses and all48 new main turns/1,050,651tokens are retained. The guide-inserted experiment is separate. [Full report, per-episode packets, hashes and raw events](docs/actual-reader-review/report.ko.md).
+This is a measured **explicit native invocation** path, not proof of automatic selection or universal savings. Pandas was effectively flat (one repeat increased tokens); CPython used fewer tokens but took21.47% longer. A separate cold CLI delivery used24.12% more tokens because of an additional guide-reading roundtrip and an overly broad failed extraction. Those losses and all48 new main turns/1,050,651tokens are retained. The guide-inserted experiment is separate. [Full report, per-episode packets, hashes and raw events](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/report.ko.md).
 
-Queries answerable by one small search should bypass the skill. The15% rendered-character margin is a heuristic against whole-source size, not a guarantee against efficient ordinary search. New project holdouts, cold implicit savings and other main models remain unmeasured. Use sufficient full context for broad audits and cross-file work. Never route mandatory instructions. Historical [v2.5 evaluation](docs/benchmark-v2.5.md) and other reports retain their original versions and scores.
+Queries answerable by one small search should bypass the skill. The15% rendered-character margin is a heuristic against whole-source size, not a guarantee against efficient ordinary search. New project holdouts, cold implicit savings and other main models remain unmeasured. Use sufficient full context for broad audits and cross-file work. Never route mandatory instructions. Historical [v2.5 evaluation](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/benchmark-v2.5.md) and other reports retain their original versions and scores.
 
 ## Update, restore, remove
 
@@ -97,4 +97,4 @@ python3 scripts/smoke_archive.py dist/token-router-2.7.0.zip
 
 These checks are offline and make no model call. Optional cloud/legacy latency selection is an advanced POSIX compatibility path using fixed `gpt-6-luna`/low via Codex login. It is never automatic, not required, and live Luna access is unvalidated for this release. Your main agent can separately send the extracted evidence to its own model.
 
-[CONTRIBUTING](CONTRIBUTING.md) · [SUPPORT](SUPPORT.md) · [SECURITY](SECURITY.md) · [MIT license](LICENSE). Public samples are synthetic; third-party benchmark material has [separate provenance/notices](docs/actual-reader-review/SOURCES.md).
+[CONTRIBUTING](CONTRIBUTING.md) · [SUPPORT](SUPPORT.md) · [SECURITY](SECURITY.md) · [MIT license](LICENSE). Public samples are synthetic; third-party benchmark material has [separate provenance/notices](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/SOURCES.md).

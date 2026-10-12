@@ -1,6 +1,6 @@
 # Release readiness — v2.7.0
 
-Local explicit extraction is ready; publication requires the current PR's six-job CI. Default remains Python-only tokens, v2.4 admission and return-context off. v2.5 is opt-in. No auto cloud, local inference, embeddings or recovery engine. Optional Luna compatibility is not live-validated.
+Local explicit extraction is ready. [PR #2 CI](https://github.com/sleeplesshan/token-router/actions/runs/38324764260) passed all six jobs ataf804c0; publication also checks the final document head. Default remains Python-only tokens, v2.4 admission and return-context off. v2.5 is opt-in. No auto cloud, local inference, embeddings or recovery engine. Optional Luna compatibility is not live-validated.
 
 ## Checks and evidence
 
@@ -12,7 +12,7 @@ Local explicit extraction is ready; publication requires the current PR's six-jo
 | New readers |Complete decorators/async/nested targets, ambiguity/missing/syntax/whole-batch caps, one guarded probe, selected pytest block, compact stdout/sidecar identity, bounded ambiguity |
 | Default regression |24 mixed tasks /8 pinned projects match publicv2.6.0 atf68dc09 with defaultv2.4 query policy; optional new selectors are separate |
 | Archive lifecycle |Install/read-only source/update/restore/uninstall from isolated Unicode/space paths with empty PATH/no key; symbol/literal/numbering smoke |
-| Cross-platform execution |Required: Linux/macOS/Windows × Python3.10/3.14 current PR CI; publication gate, not inferred from local tests |
+| Cross-platform execution |PASS: [Linux/macOS/Windows × Python3.10/3.14](https://github.com/sleeplesshan/token-router/actions/runs/38324764260), including181-test suites/manifest/archive smoke; final-head CI remains the publication gate |
 | Native installed-skill comparison |16 episodes, actual router8/8, fixed-rubric48/48 both arms, completion8/8 both; total tokens-18.23% and observed wall sum-3.86% |
 | Automatic selection / cold implicit |Not established. Earlier cold CLI delivery increased tokens24.12%; no middleware guarantee |
 | Main timeout/cost capture |All48 new main turns have complete usage; no timeout/retry. Final16 native counters/command counts reconciled against ordered raw events |
@@ -23,7 +23,7 @@ Local explicit extraction is ready; publication requires the current PR's six-jo
 
 Stable predecessor: v2.6.0 atf68dc09bab5c331034feff4137bf91f41a36e880. The final real-use measurement pins package2.7.0 candidate/commit3ad145c, unchanged defaultv2.4 policy, exact user prompt/source/guide/runtime hashes and gpt-6.1-sol medium. Released runtime and guide hashes must match those measured paths; later documentation/research provenance commits are identified separately by the release manifest. No past benchmark is relabeled as a new model run.
 
-[Actual-reader report](actual-reader-review/report.ko.md), [ledger](actual-reader-review/episodes.json), [native raw audit](actual-reader-review/native-audit.json), [execution lock](actual-reader-review/run-native-lock.json), [source notices](actual-reader-review/SOURCES.md).
+[Actual-reader report](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/report.ko.md), [ledger](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/episodes.json), [native raw audit](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/native-audit.json), [execution lock](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/run-native-lock.json), [source notices](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/SOURCES.md).
 
 The four development tasks use known public code/log families; repeats are not independent projects. Pandas savings are negligible and one repeat increases tokens. CPython token savings coexist with21.47% longer time. Overall timing is descriptive; remote wait cannot be isolated from wall-minus-child-CPU. Default query output preservation does not imply every new literal output matches old literal behavior: selected failure completion intentionally adds evidence.
 
