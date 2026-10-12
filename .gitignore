@@ -12,3 +12,5 @@ venv/
 *.out
 dist/
 build/
+
+!samples/*.log
