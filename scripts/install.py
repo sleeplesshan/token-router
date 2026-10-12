@@ -25,7 +25,11 @@ def smoke(root):
 def replace(stage,dest):
     backup=None
     if dest.exists():
-        backup=dest.with_name(dest.name+'.backup-'+uuid.uuid4().hex[:12]);os.replace(dest,backup)
+        backup_root=dest.parent
+        if dest.parent.name=='skills' and dest.parent.parent.name in ('.agents','.codex'):
+            backup_root=dest.parent.parent/'skill-backups'
+            backup_root.mkdir(parents=True,exist_ok=True)
+        backup=backup_root/(dest.name+'.backup-'+uuid.uuid4().hex[:12]);os.replace(dest,backup)
     try:os.replace(stage,dest)
     except BaseException:
         if backup is not None:os.replace(backup,dest)

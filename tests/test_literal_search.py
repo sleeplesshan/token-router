@@ -82,3 +82,14 @@ class SelectedTracebackTests(unittest.TestCase):
             with contextlib.redirect_stdout(out),contextlib.redirect_stderr(err):
                 code=r.main(['router.py','error_log',str(path),'--search-term','ERROR: selected','--line-numbers'])
             self.assertEqual(code,0);self.assertNotIn('outside bound',out.getvalue())
+
+class InstallDiscoveryBoundary(unittest.TestCase):
+    def test_backup_is_outside_discoverable_skill_directory(self):
+        spec=importlib.util.spec_from_file_location('installer_boundary',Path(__file__).resolve().parents[1]/'scripts/install.py')
+        installer=importlib.util.module_from_spec(spec);spec.loader.exec_module(installer)
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);dest=root/'.agents/skills/token-router';dest.mkdir(parents=True);(dest/'SKILL.md').write_text('previous')
+            stage=root/'stage';stage.mkdir();(stage/'SKILL.md').write_text('new')
+            backup=installer.replace(stage,dest)
+            self.assertEqual(backup.parent,root/'.agents/skill-backups');self.assertEqual((backup/'SKILL.md').read_text(),'previous')
+            self.assertEqual([p.parent.name for p in dest.parent.glob('*/SKILL.md')],['token-router'])
