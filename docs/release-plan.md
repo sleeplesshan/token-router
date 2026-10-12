@@ -13,3 +13,5 @@ Required: raw text/coordinates, source/final cap safety, managed install/update/
 Evaluation: freeze >=24 new tasks from >=8 public pinned independent sources before evaluating. Stress fixtures separate. Old examples are regression only. Actual skill/no-skill comparison max4 pairs/8 episodes, preflight1, CLI25, known350000tokens,600s monotonic,2 recovery/episode; same gpt-6.1-sol medium subscription and CLI0.162.1. Existing byte+16384 admission and240s pair reserve. Stop unknown usage/capacity/contract error; no retry/model/account change.
 
 Publication boundary: produce archive/checksum/PR body/release draft/readiness; no main push/tag/GitHub release/global installation/AGENTS/auth changes.
+
+Publication follow-up: the user subsequently authorized PR → CI → release → backed-up global installation. This initial plan remains historical; current results and CI evidence are in release-readiness.md.

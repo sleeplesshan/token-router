@@ -2,9 +2,14 @@
 
 Retrieve original, numbered line ranges from large code files, logs and optional references before a reasoning model reads them. **Python-only by default: no Codex, login, model or network request required.** It selects evidence; it does not summarize, execute code, prove completeness, or guarantee token/time savings.
 
-**2.6.0**. Python **3.10–3.14**, standard library. Basic CLI targets Linux/macOS/Windows; actual validation and remaining platform checks are recorded in [release readiness](docs/release-readiness.md). Optional cloud selection has a narrower advanced support contract.
+**2.6.0**. Python **3.10–3.14**, standard library. Basic CLI is CI-tested on Linux/macOS/Windows with Python3.10 and3.14; actual validation and optional-feature limits are recorded in [release readiness](docs/release-readiness.md). Optional cloud selection has a narrower advanced support contract.
 
 ## Install and first use
+
+```sh
+git clone --branch v2.6.0 --depth 1 https://github.com/sleeplesshan/token-router.git
+cd token-router
+```
 
 Use a reviewed checkout or verify the SHA-256 beside a downloaded release archive before extracting it. A checksum detects changes; it does not authenticate the publisher. Download the versioned archive and checksum from [Releases](https://github.com/sleeplesshan/token-router/releases). From its extracted directory:
 

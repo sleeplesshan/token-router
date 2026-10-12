@@ -71,3 +71,7 @@ python3 scripts/run_router_tests.py tests/router-tests.json
 `--fetch` explicitly downloads only manifest-pinned sources, verifies SHA-256, and never calls models. Without it, supply those source files under the same relative paths. Results refuse overwrite; use a fresh workdir. Runtime Python3.10–3.14; plotting alone needs matplotlib. A local Python3.14 installation lacked CA certificates during download; Python3.10 with its normal trust store downloaded and replayed successfully. Do not disable TLS verification. Source licenses/provenance are recorded separately; third-party source bodies are excluded from product/public data.
 
 Archive smoke uses scripts/smoke_archive.py. Current local platform validation is macOS arm64Python3.10.20/3.14.5; Linux/Windows CI is prepared, not passed. Automatic selection, actual routed-agent recovery and live Luna remain unmeasured; local contract tests are not substitutes for those agent outcomes.
+
+## Publication follow-up (after measurement)
+
+Release CI subsequently passed Linux/macOS/Windows × Python3.10/3.14. It exposed a Windows metadata difference, corrected with native ChangeTime checks; the code differs from the measured runtime on that platform. Original measurements and hashes above remain unchanged. See [current readiness](../release-readiness.md) for CI evidence. No new model calls were made for publication.

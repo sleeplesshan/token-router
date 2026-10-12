@@ -1,22 +1,22 @@
 # Release readiness — 2.6.0
 
-Decision: **B — basic local product is ready for review; optional cloud and automatic agent selection are not validated release guarantees.** Default is Python-only tokens, v2.4 policy, return-context off. Bounded return context and exact target filtering are explicit advanced local options. Publication and a backed-up global skill update are now authorized; they follow PR review and passing CI.
+Decision: **B — basic local product is ready for publication; optional cloud and automatic agent selection are not validated release guarantees.** Default is Python-only tokens, v2.4 policy, return-context off. Bounded return context and exact target filtering are explicit advanced local options. The reviewed release is published through PR #1. Machine-specific backup/install receipts are kept locally rather than embedded in the portable artifact.
 
 ## Contract and scope
 
 The release branch starts from public v2.5.0 `1737ae2`, not an experimental branch merge. Only verified return-context product changes/tests were imported from `1a7c0a8`. Package version, admission policy and product commit are separate. A deterministic archive pins the exact clean source commit and file SHA-256 inventory in release-manifest.json.
 
-Validated runtime scope: macOS arm64, Python3.10 and3.14. Linux/Windows matrix is configured but has not executed for this branch; do not advertise those as tested. Core code is portable and default execution does not import resource or probe Codex. Cloud is POSIX-only compatibility behavior and no live Luna access was tested. Default use needs no model/login/network.
+Validated basic runtime scope: Linux, macOS and Windows, Python3.10 and3.14, through the six-job GitHub Actions matrix. Intermediate Python versions are expected compatible, not individually tested. Core code is portable and default execution does not import resource or probe Codex. Cloud is POSIX-only compatibility behavior and no live Luna access was tested. Default use needs no model/login/network.
 
 ## Checks
 
 | Gate | Result | Evidence |
 |---|---|---|
 | Historical pre-branch suite | PASS | 165 tests on preserved experiment branch |
-| Current product regression | PASS | Full current suite, includes meaningful install/option/input regressions; see release validation summary |
+| Current product regression | PASS | 147 collected tests; platform-specific skips for POSIX transport/FIFO and Windows refusal; includes install/input regressions |
 | Existing manifest scenarios | PASS | 10 offline scenarios |
 | Python3.10 /3.14 macOS | PASS | Local suites |
-| Linux/Windows execution | NOT RUN | Prepared 6-job read-only CI matrix; no current-branch remote run |
+| Linux/macOS/Windows execution | PASS | [Six-job CI](https://github.com/sleeplesshan/token-router/actions/runs/38256738861), Python3.10 and3.14, includes archive smoke |
 | Default no network/model/subprocess | PASS | Forbidden socket/subprocess mocks; archive smoke uses empty PATH/no key |
 | Input/output/source contracts | PASS | mutation, replacement, stale sidecar, FIFO, limits, coordinates, cap, Unicode/LF |
 | POSIX selector child cleanup | PASS | Real local dummy process tree timeout; no model |
@@ -27,9 +27,9 @@ Validated runtime scope: macOS arm64, Python3.10 and3.14. Linux/Windows matrix i
 | Agent automatic selection | NOT RUN | No middleware/always-on claim |
 | Fresh installed-skill paired model evaluation | PASS | Repaired harness completed 4 pairs/8 episodes; both arms4/4; tokens +10.65%, time +10.21%; no router calls |
 | Mixed local evaluation | PASS | 24 new tasks /8 projects, default output identical to release baseline; no broader answer-quality claim |
-| Global skill update | NOT RUN | Authorized after release; backup and hash verification required |
+| Machine-specific global installation | NOT APPLICABLE | Portable artifact does not assert installation state; local backup/hash receipt verifies deployment |
 | Auth/AGENTS mutation | NOT APPLICABLE | Not needed for installation |
-| Public GitHub tag/release | NOT RUN | Authorized; follows passing CI and PR merge |
+| Publication state | NOT APPLICABLE | Verify published tag and assets on the GitHub release page; not a runtime test |
 
 ## Fresh evaluation limitations
 
@@ -43,7 +43,7 @@ The measured installed SKILL matches final SKILL; its runtime came from873de65. 
 
 ## Publication and rollback
 
-Keep the reviewed candidate archive/checksum/inventory together. Validate the pending CI platforms, publish the authorized branch/PR and exact tag/release. Do not attach historical savings to changed product hashes. Current publication state is also available on the GitHub release page.
+Keep the reviewed candidate archive/checksum/inventory together. CI validates the supported platform matrix; publication uses the reviewed PR and exact tag/commit. Do not attach historical savings to changed product hashes. Current publication state is also available on the GitHub release page.
 
 Rollback with a verified installation backup, or a clean checkout/archive of public **v2.5.0 at1737ae2c360c1b495f627cf61f51b20f27ea806b**. Do not revert only an experimental return-context commit. Unmanaged old skill folders should be preserved and replaced manually after validating a new destination.
 
