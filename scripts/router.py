@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import argparse
+import io
+from dataclasses import asdict
 import json
 import os
 import re
@@ -20,7 +22,9 @@ from typing import Any
 # Allow both direct CLI execution and file-based test imports.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from query_matcher import compile_matcher
-from evidence_checks import assess_query_evidence, complete_python_statements
+from evidence_checks import assess_query_evidence, complete_python_statements, required_pattern, assess_packet_evidence
+from routing_policy import Span, ScanFacts, Packet, RouteDecision, decide_packet
+from source_guard import SourceGuard, SourceChanged
 
 
 def env_int(name: str, default: int, minimum: int | None = None) -> int:
@@ -49,7 +53,7 @@ def env_float(name: str, default: float, minimum: float | None = None) -> float:
     return value
 
 
-VERSION = "2.4.0"
+VERSION = "2.5.0"
 MODEL_NAME = "gpt-6-luna"
 REASONING_EFFORT = "low"
 CODEX_BIN = os.environ.get("ROUTER_CODEX_BIN", "codex")
@@ -60,6 +64,7 @@ LOG_TAIL_LINES = env_int("ROUTER_LOG_TAIL_LINES", 200, minimum=0)
 STREAM_THRESHOLD_BYTES = env_int("ROUTER_STREAM_THRESHOLD_BYTES", 5_000_000, minimum=1)
 CODE_CONTEXT_LINES = env_int("ROUTER_CODE_CONTEXT_LINES", 8, minimum=0)
 AGENT_CONTEXT_LINES = env_int("ROUTER_AGENT_CONTEXT_LINES", 6, minimum=0)
+MAX_OUTPUT_CHARS = env_int("ROUTER_MAX_OUTPUT_CHARS", 120000, minimum=1)
 MAX_OUTPUT_LINES = env_int("ROUTER_MAX_OUTPUT_LINES", 160, minimum=1)
 OUTPUT_CONTEXT_LINES = env_int("ROUTER_OUTPUT_CONTEXT_LINES", 2, minimum=0)
 AUTO_SMALL_CHARS = env_int("ROUTER_AUTO_SMALL_CHARS", 12000, minimum=0)
@@ -120,7 +125,25 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
                         help="Disable automatic bypass and ask Luna to select ranges.")
     parser.add_argument("--optimize", choices=("tokens", "latency"), default="tokens",
                         help="tokens (default): no automatic model call; latency: v2.2 compatibility policy.")
-    return parser.parse_args(argv[1:])
+    parser.add_argument('--policy-version', choices=('v2.4','v2.5'), default=None)
+    parser.add_argument('--require-term', action='append', default=[])
+    parser.add_argument('--read-scope', choices=('focused','whole'), default=None)
+    parser.add_argument('--report-json')
+    args = parser.parse_args(argv[1:])
+    explicit_policy = args.policy_version is not None or args.read_scope is not None or bool(args.require_term)
+    if explicit_policy and (args.deterministic or args.force_model or args.optimize != 'tokens'):
+        parser.error('policy-version, require-term and read-scope require automatic tokens mode')
+    args.policy_version = args.policy_version or 'v2.4'
+    args.read_scope = args.read_scope or 'focused'
+    if args.policy_version == 'v2.4' and (args.require_term or args.read_scope != 'focused'):
+        parser.error('require-term and whole scope require --policy-version v2.5')
+    try:
+        for term in args.require_term:
+            required_pattern(term)
+    except ValueError as exc:
+        parser.error(str(exc))
+    args.require_term = list(dict.fromkeys(args.require_term))
+    return args
 
 
 def read_text(path: Path) -> str:
@@ -175,13 +198,16 @@ SEVERE_LOG_PATTERN = re.compile(
 
 
 def ranked_candidates(line_factory, mode: str, query_terms: list[str], max_chars: int,
-                      max_lines: int | None = None, diagnostics: dict | None = None):
+                      max_lines: int | None = None, diagnostics: dict | None = None, required_terms=()):
     """Two passes; retain line metadata, never an unbounded copy of streaming text.
 
     Allocate a small tail reserve and one anchor per file region, then rank rare
     query hits and diagnostics. Whole original lines are admitted by cost, so a
     giant early line cannot consume the budget or hide later failures.
     """
+    source_chars = 0
+    required_patterns = [(t,required_pattern(t)) for t in required_terms]
+    source_required = {t:{'count':0,'witness_lines':[]} for t in required_terms}
     patterns = [term_pattern(term) for term in query_terms]
     match_terms = compile_matcher(query_terms)
     counts = Counter()
@@ -192,6 +218,13 @@ def ranked_candidates(line_factory, mode: str, query_terms: list[str], max_chars
     keyword = {"error_log": LOG_KEYWORD_PATTERN, "heavy_code": CODE_KEYWORD_PATTERN,
                "agent_context": AGENT_CONTEXT_KEYWORD_PATTERN}[mode]
     for n, line in enumerate(line_factory(), 1):
+        source_chars += len(line)
+        for term,pattern in required_patterns:
+            count = sum(1 for _ in pattern.finditer(line))
+            if count:
+                source_required[term]['count'] += count
+                if len(source_required[term]['witness_lines']) < 64:
+                    source_required[term]['witness_lines'].append(n)
         if mode == "error_log" and re.search(r"_{3,}\s+\S.*\s+_{3,}", line):
             traceback_headers.append(n-1)
         hits = match_terms(line)
@@ -209,6 +242,7 @@ def ranked_candidates(line_factory, mode: str, query_terms: list[str], max_chars
         metadata.append((len(f"{n}: {line}") + 34, hits, score))
     if diagnostics is not None:
         diagnostics.update(assess_query_evidence(query_terms, counts))
+        diagnostics.update(source_chars=source_chars, source_required=source_required)
     total = len(metadata)
     if not total:
         return "", False, 0, 0, []
@@ -289,6 +323,8 @@ def ranked_candidates(line_factory, mode: str, query_terms: list[str], max_chars
         selected_hits = {hit for i in selected for hit in metadata[i][1]}
         diagnostics.update(assess_query_evidence(query_terms, selected_hits))
     pairs = [(n, line) for n, line in enumerate(line_factory(), 1) if n-1 in selected]
+    if diagnostics is not None:
+        diagnostics['candidate_raw_chars'] = sum(len(line) for _,line in pairs)
     rendered, _ = render_numbered_pairs(pairs, max_chars)
     return rendered, len(selected) < len(eligible), len(eligible), total, sorted(i+1 for i in selected)
 
@@ -882,140 +918,255 @@ def token_first_strategy(source_chars, full_rendered_chars, candidate_rendered_c
     return "needs_targeted_read"
 
 
+def validate_model_targets(mapping, total_lines, visible):
+    if not isinstance(mapping, dict) or set(mapping) != {'targets'} or not isinstance(mapping['targets'], list) or not mapping['targets']:
+        raise ValueError('invalid model target shape')
+    allowed = set(visible)
+    cleaned = []
+    for t in mapping['targets']:
+        if not isinstance(t,dict) or set(t) != {'start_line','end_line','reason'}:
+            raise ValueError('invalid model target fields')
+        a,b = t['start_line'],t['end_line']
+        if type(a) is not int or type(b) is not int or not 1 <= a <= b <= total_lines:
+            raise ValueError('invalid model coordinates')
+        if not isinstance(t['reason'],str) or any(n not in allowed for n in range(a,b+1)):
+            raise ValueError('model target outside visible candidates or invalid reason')
+        cleaned.append(dict(start_line=a,end_line=b,reason=t['reason'][:256]))
+    return {'targets':cleaned}
+
+
+def packet_from_guard(guard, targets, text=None):
+    spans = tuple(Span(t['start_line'],t['end_line']) for t in targets)
+    chunks = [[] for _ in spans]
+    if text is None:
+        with guard.open() as handle:
+            _collect_packet_lines(handle,spans,chunks)
+    else:
+        _collect_packet_lines(io.StringIO(text, newline=''),spans,chunks)
+    raw = tuple(''.join(c) for c in chunks)
+    rendered=[]
+    for target,content in zip(targets,raw):
+        rendered.extend([f"#### Target Location Reason: {target['reason']}",
+            f"--- [RAW CONTENT FROM LINE {target['start_line']} TO {target['end_line']}] ---",
+            content,'--- [END OF SLICE] ---',''])
+    return Packet(spans,raw,'\n'.join(rendered).rstrip()+'\n' if rendered else '')
+
+
+def _collect_packet_lines(handle, spans, chunks):
+    current=0
+    for n,line in enumerate(handle,1):
+        while current < len(spans) and n > spans[current].end:
+            current+=1
+        if current == len(spans):
+            break
+        if n >= spans[current].start:
+            chunks[current].append(line)
+
+
+def finalize_packet(args, guard, packet, status, code=0):
+    """All paths emit only after source, output and sidecar checks succeed."""
+    status={'schema_version':1,'model_called':False,'model_failed':False,
+            'selection_truncated':False,'final_output_capped':False,
+            'full_source_returned':False,'reason_codes':[],**status}
+    try:
+        guard.check()
+        status['source_consistency']='stat_unchanged'
+        status['source_stamp']=list(guard.stamp)
+        if packet is not None and len(packet.rendered)>MAX_OUTPUT_CHARS:
+            packet=None;code=2
+            status.update(status='needs_targeted_read',final_output_capped=True,
+                full_source_returned=False,coverage_guaranteed=False,
+                reason_codes=status['reason_codes']+['output_budget_exceeded'],next_action='narrow_query')
+        if packet is not None:
+            status['output_lines']=sum(s.end-s.start+1 for s in packet.ranges)
+            status['output_chars']=len(packet.rendered)
+        else:
+            status['output_lines']=0;status['output_chars']=0
+        status['open_count']=guard.open_count
+        if args.report_json:
+            dest=Path(args.report_json).expanduser()
+            if dest.resolve()==Path(args.target_file).expanduser().resolve() or (dest.exists() and os.path.samefile(dest,args.target_file)):
+                raise ValueError('report path aliases input')
+            # Atomic report replacement. Raw source and model prompts are excluded.
+            with tempfile.NamedTemporaryFile(mode='w',encoding='utf-8',dir=dest.parent,delete=False) as f:
+                tmp=Path(f.name)
+                json.dump(status,f,ensure_ascii=False,indent=2)
+            try:
+                guard.check()
+                os.replace(tmp,dest)
+            finally:
+                tmp.unlink(missing_ok=True)
+        guard.check()
+    except SourceChanged:
+        packet=None;code=1
+        status.update(status='error',reason_codes=['source_changed'],source_consistency='changed',
+                      output_lines=0,output_chars=0,full_source_returned=False,coverage_guaranteed=False)
+    except (OSError,ValueError) as exc:
+        packet=None;code=1
+        status.update(status='error',reason_codes=['report_or_finalization_error'],reason=str(exc),
+                      output_lines=0,output_chars=0,full_source_returned=False,coverage_guaranteed=False)
+    compact=dict(status)
+    if 'suggested_ranges' in compact:
+        compact['suggested_ranges']=compact['suggested_ranges'][:12]
+    if 'source_required' in compact:
+        compact.pop('source_required')
+    if 'checks' in compact:
+        compact['checks'] = {k:v for k,v in compact['checks'].items() if k != 'source_required'}
+    print('[token-router status] '+json.dumps(compact),file=sys.stderr)
+    if packet is not None and code==0:
+        print(packet.rendered,end='')
+    return code
+
+
 def main(argv: list[str]) -> int:
     try:
-        args = parse_args(argv)
+        args=parse_args(argv)
     except SystemExit as exc:
-        if exc.code:
-            print(usage(), file=sys.stderr)
         return int(exc.code or 0)
-
-    mode = args.mode
-    target_file = Path(args.target_file).expanduser()
-    query = args.query.strip()
-
-    if not target_file.exists():
-        print(fallback(f"File not found: {target_file}", mode=mode))
-        return 1
-    if not target_file.is_file():
-        print(fallback(f"Path is not a regular file: {target_file}", mode=mode))
-        return 1
-
-    file_size = target_file.stat().st_size
-    if file_size == 0:
-        print(fallback("File is empty.", mode=mode))
-        return 1
-
+    path=Path(args.target_file).expanduser()
+    guard=None
+    status={'status':'error','objective':args.optimize,'policy_version':args.policy_version}
     try:
-        def lines():
-            with target_file.open("r", encoding="utf-8", errors="replace") as handle:
-                yield from handle
-        terms = normalize_query_terms(query)
-        checks = {}
-        candidate, truncated, eligible, total, visible = ranked_candidates(
-            lines, mode, terms, MAX_PROMPT_CHARS, diagnostics=checks)
-        visible_set = set(visible)
-        source_chars = candidate_raw_chars = 0
-        for line_no, line in enumerate(lines(), 1):
-            source_chars += len(line)
-            if line_no in visible_set:
-                candidate_raw_chars += len(line)
-        print("[token-router coverage] " + json.dumps({
-            "total_lines": total, "candidate_lines": eligible, "visible_lines": len(visible),
-            "candidate_chars": len(candidate), "source_chars": source_chars,
-            "candidate_raw_chars": candidate_raw_chars,
-            "truncated": truncated,
-            "policy": "ranked-distributed-tail", "complete_source": len(visible) == total,
-        }), file=sys.stderr)
-        status = "deterministic" if args.deterministic else "model"
-        candidate_output = None
-        token_targets = None
-        if not args.deterministic and not args.force_model:
-            if args.optimize == "latency":
-                status = automatic_strategy(source_chars, candidate_raw_chars, candidate, visible, truncated, terms)
+        if args.report_json:
+            dest=Path(args.report_json).expanduser()
+            if dest.resolve()==path.resolve() or (dest.exists() and path.exists() and os.path.samefile(dest,path)):
+                raise ValueError('report path aliases input')
+        guard=SourceGuard(path)
+        if not path.is_file() or guard.stamp[2]==0:
+            raise ValueError('Source must be a nonempty regular file')
+        terms=normalize_query_terms(args.query.strip())
+        auto=not args.force_model and not args.deterministic
+        new=auto and args.optimize=='tokens' and args.policy_version=='v2.5'
+        checks={}
+        full_reason='automatic full-source bypass; no model call; raw source preserved'
+        if new and args.read_scope=='whole':
+            total=0; source_chars=0; chunks=[]; hits=set()
+            matcher=compile_matcher(terms)
+            source_required={t:{'count':0,'witness_lines':[]} for t in args.require_term}
+            for total,line in enumerate(guard.lines(),1):
+                source_chars+=len(line);hits.update(matcher(line))
+                if source_chars<=MAX_OUTPUT_CHARS:
+                    chunks.append(line)
+                for term in args.require_term:
+                    source_required[term]['count']+=sum(1 for _ in required_pattern(term).finditer(line))
+            matched=tuple(t for i,t in enumerate(terms) if i in hits)
+            raw=''.join(chunks)
+            if source_chars>MAX_OUTPUT_CHARS:
+                return finalize_packet(args,guard,None,{**status,'status':'needs_targeted_read',
+                    'reason_codes':['output_budget_exceeded'],'final_output_capped':True,
+                    'next_action':'narrow_query','scan_complete':True},2)
+            packet=packet_from_guard(guard,[dict(start_line=1,end_line=total,reason=full_reason)],raw)
+            evidence=assess_packet_evidence(terms,(),matched,packet.raw_slices,args.require_term,source_required)
+            print('[token-router usage] '+json.dumps(dict(input_tokens=0,output_tokens=0,cached_input_tokens=0)),file=sys.stderr)
+            return finalize_packet(args,guard,packet,{**status,'status':'auto_full','checks':asdict(evidence),
+                'packet_query_anchor':evidence.packet_query_anchor,'absent_required':list(evidence.absent_required),
+                'lost_required':[],'reason_codes':['whole_scope'],'full_source_returned':True,
+                'coverage_guaranteed':True,'scan_complete':True})
+        candidate,truncated,eligible,total,visible=ranked_candidates(guard.lines,args.mode,terms,MAX_PROMPT_CHARS,
+                    diagnostics=checks,required_terms=args.require_term)
+        visible_set=set(visible)
+        source_chars=candidate_raw_chars=0
+        for n,line in enumerate(guard.lines(),1):
+            source_chars+=len(line)
+            if n in visible_set:
+                candidate_raw_chars+=len(line)
+        checks.update(source_chars=source_chars,candidate_raw_chars=candidate_raw_chars)
+        scan=ScanFacts(total,checks['source_chars'],checks['candidate_raw_chars'],
+                       tuple(checks.get('source_matched_terms',())),guard.stamp)
+        print('[token-router coverage] '+json.dumps(dict(total_lines=total,candidate_lines=eligible,
+            visible_lines=len(visible),candidate_chars=len(candidate),source_chars=scan.source_chars,
+            candidate_raw_chars=scan.selected_raw_chars,truncated=truncated,policy='ranked-distributed-tail',
+            complete_source=len(visible)==total)),file=sys.stderr)
+        whole=[dict(start_line=1,end_line=total,reason=full_reason)]
+        full_chars=scan.source_chars+len(render_slices('',whole))
+        action='deterministic' if args.deterministic else 'model'
+        packet=None;targets=[];decision=RouteDecision(action)
+        if auto and args.optimize=='latency':
+            action=automatic_strategy(scan.source_chars,scan.selected_raw_chars,candidate,visible,truncated,terms)
+        elif auto:
+            targets=expand_candidate_context(targets_from_numbered_content(candidate,total,
+                      'deterministic candidate evidence',mode=args.mode,apply_cap=False),total)
+            checks['boundary']={'syntax':'unknown','reason':'not_python_or_size_limit'}
+            if not (new and args.read_scope=='whole') and args.mode=='heavy_code' and path.suffix=='.py' and guard.stamp[2]<=1_000_000:
+                targets,checks['boundary']=complete_python_statements(guard.read_text(),targets)
+            packet=packet_from_guard(guard,targets)
+            evidence=assess_packet_evidence(terms,checks['matched_terms'],scan.source_terms,
+                        packet.raw_slices,args.require_term,checks['source_required'])
+            checks.update(asdict(evidence))
+            if new:
+                decision=decide_packet(checks=evidence,required=args.require_term,source_chars=scan.source_chars,
+                    full_chars=full_chars,packet_chars=len(packet.rendered),has_candidates=bool(targets),
+                    small_limit=AUTO_SMALL_CHARS,full_limit=AUTO_FULL_CHARS,candidate_limit=MAX_PROMPT_CHARS,
+                    output_limit=MAX_OUTPUT_CHARS,whole=args.read_scope=='whole')
+                action=decision.action
             else:
-                token_targets = targets_from_numbered_content(candidate, total,
-                    "deterministic candidate evidence", mode=mode, apply_cap=False)
-                token_targets = expand_candidate_context(token_targets, total)
-                checks['boundary'] = {'syntax': 'unknown', 'reason': 'not_python_or_size_limit'}
-                if mode == 'heavy_code' and target_file.suffix == '.py' and file_size <= 1_000_000:
-                    token_targets, checks['boundary'] = complete_python_statements(
-                        read_text(target_file), token_targets)
-                candidate_output = render_slices_from_file(target_file, token_targets) if token_targets else ""
-                whole = [{"start_line": 1, "end_line": total, "reason": "automatic full-source bypass; no model call; raw source preserved"}]
-                full_chars = source_chars + len(render_slices("", whole))
-                status = token_first_strategy(source_chars, full_chars, len(candidate_output), bool(token_targets))
-                if status == 'auto_candidates' and checks['query_anchor'] == 'missing':
-                    status = 'auto_full' if source_chars <= AUTO_FULL_CHARS else 'needs_targeted_read'
-                checks['packet_within_budget'] = len(candidate_output) <= MAX_PROMPT_CHARS
-                checks['reduction_satisfied'] = len(candidate_output) <= full_chars * .85
-                print("[token-router decision] " + json.dumps({
-                    "action": status, "checks": checks,
-                    "objective": "tokens", "full_rendered_chars": full_chars,
-                    "candidate_rendered_chars": len(candidate_output),
-                    "rendered_char_reduction": 1-len(candidate_output)/full_chars if full_chars else 0,
-                    "minimum_char_reduction": 0.15, "token_savings_guaranteed": False,
-                }), file=sys.stderr)
-                if status == "needs_targeted_read":
-                    print("[token-router status] " + json.dumps({"status": status,
-                        "model_called": False, "model_failed": False,
-                        "reason": "No sufficiently smaller bounded evidence packet; narrow the query or read targeted source ranges.",
-                        "checks": checks,
-                        "next_action": "search_query_terms" if checks['query_anchor'] == 'missing' else "narrow_query",
-                        "search_terms": checks['unmatched_terms'][:12],
-                        "suggested_ranges": [] if checks['query_anchor'] == 'missing' else [[t["start_line"],t["end_line"]] for t in token_targets[:12]],
-                    }), file=sys.stderr)
-                    return 2
-        failure = None
-        output_capped = False
-        if status == "auto_full":
-            targets = [{"start_line": 1, "end_line": total,
-                        "reason": "automatic full-source bypass; no model call; raw source preserved"}]
-        elif status == "auto_candidates":
-            targets = token_targets if token_targets is not None else targets_from_numbered_content(candidate, total,
-                "automatic complete-candidate bypass; source may contain omitted evidence", mode=mode)
-            output_capped = truncated
-        if status.startswith("auto_"):
-            print('[token-router usage] ' + json.dumps({"input_tokens": 0,
-                  "output_tokens": 0, "cached_input_tokens": 0}), file=sys.stderr)
-        if status == "model":
+                action=token_first_strategy(scan.source_chars,full_chars,len(packet.rendered),bool(targets))
+                if action=='auto_candidates' and checks['query_anchor']=='missing':
+                    action='auto_full' if scan.source_chars<=AUTO_FULL_CHARS else 'needs_targeted_read'
+                decision=RouteDecision(action,(), 'search_query_terms' if checks['query_anchor']=='missing' else 'narrow_query')
+            checks.update(packet_within_budget=len(packet.rendered)<=MAX_PROMPT_CHARS,
+                          reduction_satisfied=len(packet.rendered)<=full_chars*.85)
+            print('[token-router decision] '+json.dumps(dict(action=action,checks={k:v for k,v in checks.items() if k != 'source_required'},objective='tokens',
+                full_rendered_chars=full_chars,candidate_rendered_chars=len(packet.rendered),
+                rendered_char_reduction=1-len(packet.rendered)/full_chars,minimum_char_reduction=.15,
+                token_savings_guaranteed=False)),file=sys.stderr)
+            status.update(checks=checks,packet_query_anchor=evidence.packet_query_anchor,
+                          absent_required=list(evidence.absent_required),lost_required=list(evidence.lost_required),
+                          reason_codes=list(decision.reason_codes),next_action=decision.next_action)
+            if action=='needs_targeted_read':
+                witnesses=[]
+                for term in evidence.lost_required:
+                    for n in checks['source_required'][term]['witness_lines']:
+                        witnesses.append([max(1,n-OUTPUT_CONTEXT_LINES),min(total,n+OUTPUT_CONTEXT_LINES)])
+                status.update(status=action,source_required=checks['source_required'],suggested_ranges=witnesses,
+                    suggestions_truncated=len(witnesses)>12 or any(v['count']>len(v['witness_lines']) for v in checks['source_required'].values()),
+                    search_terms=checks['unmatched_terms'][:12],scan_complete=True)
+                return finalize_packet(args,guard,None,status,2)
+        failure=None
+        if action=='auto_full':
+            targets=whole;packet=packet_from_guard(guard,targets)
+        elif action=='auto_candidates' and packet is None:
+            targets=targets_from_numbered_content(candidate,total,'automatic complete-candidate bypass; source may contain omitted evidence',mode=args.mode)
+        if action.startswith('auto_'):
+            print('[token-router usage] '+json.dumps(dict(input_tokens=0,output_tokens=0,cached_input_tokens=0)),file=sys.stderr)
+        if action=='model':
+            status['model_called']=True
             try:
-                mapping = call_codex(build_prompt("", mode, query=query,
-                    prebuilt_content=candidate, prebuilt_candidate_count=len(visible),
-                    prebuilt_candidate_kind="ranked/distributed/tail",
-                    prebuilt_truncated=truncated))
-                targets = normalize_targets(mapping, total, mode=mode)
-                targets = add_output_context(targets, total)
-                output_capped = any("truncated by ROUTER_MAX_OUTPUT_LINES" in t["reason"]
-                                    for t in targets) or len(mapping["targets"]) > MAX_OUTPUT_LINES
-            except (OSError, TypeError, ValueError, RuntimeError) as exc:
-                failure = str(exc)
-                status = "fallback"
-        if args.deterministic or failure is not None:
-            selected, selection_truncated, _, _, _ = ranked_candidates(
-                lines, mode, terms, MAX_PROMPT_CHARS, max_lines=MAX_OUTPUT_LINES)
-            output_capped = selection_truncated
-            targets = targets_from_numbered_content(selected, total,
-                "ranked local selection (" + status + ")", mode=mode)
+                guard.check()
+                mapping=call_codex(build_prompt('',args.mode,query=args.query,prebuilt_content=candidate,
+                    prebuilt_candidate_count=len(visible),prebuilt_candidate_kind='ranked/distributed/tail',prebuilt_truncated=truncated))
+                guard.check()
+                mapping=validate_model_targets(mapping,total,visible)
+                targets=add_output_context(normalize_targets(mapping,total,args.mode),total)
+            except SourceChanged:
+                raise
+            except (OSError,TypeError,ValueError,RuntimeError) as exc:
+                failure=str(exc);action='fallback'
+        if args.deterministic or failure:
+            selected,truncated,_,_,_=ranked_candidates(guard.lines,args.mode,terms,MAX_PROMPT_CHARS,max_lines=MAX_OUTPUT_LINES)
+            targets=targets_from_numbered_content(selected,total,'ranked local selection ('+action+')',mode=args.mode)
             if not targets:
-                raise ValueError("No complete source line fits the configured budget")
-        print("[token-router status] " + json.dumps({"status": status,
-              "model_called": not args.deterministic and not status.startswith("auto_"),
-              "model_failed": failure is not None, "reason": failure,
-              "output_lines": sum(t["end_line"]-t["start_line"]+1 for t in targets),
-              "output_capped": output_capped,
-              "objective": args.optimize,
-              "coverage_guaranteed": status == "auto_full"}), file=sys.stderr)
-        print(candidate_output if status == "auto_candidates" and candidate_output is not None
-              else render_slices_from_file(target_file, targets), end="")
-        # Usable raw fallback is a successful extraction; stderr identifies failure.
-        return 0
-    except (OSError, TypeError, ValueError, RuntimeError) as exc:
-        print("[token-router status] " + json.dumps({"status": "error", "reason": str(exc)}),
-              file=sys.stderr)
-        print(fallback(str(exc), mode=mode))
+                raise ValueError('No complete source line fits the configured budget')
+        if packet is None or action in ('model','fallback','deterministic'):
+            packet=packet_from_guard(guard,targets)
+        if auto and args.optimize=='tokens':
+            final=assess_packet_evidence(terms,checks.get('core_terms',()),scan.source_terms,packet.raw_slices,
+                                       args.require_term,checks['source_required'])
+            checks.update(asdict(final))
+            status.update(checks=checks,packet_query_anchor=final.packet_query_anchor,absent_required=list(final.absent_required),
+                          lost_required=list(final.lost_required))
+        capped=truncated or any('truncated by ROUTER_MAX_OUTPUT_LINES' in t['reason'] for t in targets)
+        status.update(status=action,model_failed=failure is not None,reason=failure,
+            output_capped=capped,selection_truncated=capped,coverage_guaranteed=action=='auto_full',
+            full_source_returned=action=='auto_full',scan_complete=True)
+        return finalize_packet(args,guard,packet,status)
+    except (OSError,TypeError,ValueError,RuntimeError) as exc:
+        status.update(status='error',reason=str(exc),reason_codes=['source_changed' if isinstance(exc,SourceChanged) else 'read_or_input_error'])
+        if guard is not None:
+            return finalize_packet(args,guard,None,status,1)
+        print('[token-router status] '+json.dumps({'schema_version':1,**status}),file=sys.stderr)
         return 1
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     raise SystemExit(main(sys.argv))

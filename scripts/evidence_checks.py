@@ -48,3 +48,28 @@ def complete_python_statements(text, targets, max_span=12, max_added=128):
     unresolved = sum(1 for a,b in spans if any(a<=t['end_line']<b or a<t['start_line']<=b for t in result))
     return result, {'syntax':'parsed', 'added_lines':len(selected)-original,
                     'crossing_nodes':unresolved, 'boundary_status':'partial' if unresolved else 'satisfied', 'semantic_sufficiency':'unknown'}
+
+
+def required_pattern(term):
+    import re
+    if not term or any(c.isspace() for c in term):
+        raise ValueError('required literals must be nonempty and contain no whitespace')
+    return re.compile(r'(?<!\w)' + re.escape(term) + r'(?!\w)')
+
+
+def assess_packet_evidence(terms, core_terms, source_terms, raw_slices, required, source_required):
+    from query_matcher import compile_matcher
+    from routing_policy import EvidenceChecks
+    matcher = compile_matcher(terms)
+    hits = set()
+    present_required = set()
+    patterns = [(term,required_pattern(term)) for term in required]
+    # Each raw slice is separate: no synthetic match across omitted text.
+    for raw in raw_slices:
+        hits.update(matcher(raw))
+        present_required.update(term for term,pattern in patterns if pattern.search(raw))
+    return EvidenceChecks(tuple(source_terms),tuple(core_terms),
+        tuple(t for i,t in enumerate(terms) if i in hits),
+        tuple(t for t in required if not source_required.get(t,{}).get('count',0)),
+        tuple(t for t in required if source_required.get(t,{}).get('count',0) and t not in present_required),
+        'satisfied' if hits else ('missing' if terms else 'unknown'))

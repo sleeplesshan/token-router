@@ -46,11 +46,6 @@
           "start_line": 12,
           "end_line": 20,
           "reason": "second"
-        },
-        {
-          "start_line": "bad",
-          "end_line": 30,
-          "reason": "malformed"
         }
       ]
     },
