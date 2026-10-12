@@ -995,20 +995,36 @@ def numbered_packet(packet):
 def literal_search_packet(args, guard):
     """One metadata scan and one selected read; no AST, ranking, tail or model."""
     terms=args.search_term
-    counts={term:0 for term in terms};spans=[];source_chars=0;total=0;line_costs=[]
+    counts={term:0 for term in terms};spans=[];source_chars=0;total=0;line_costs=[];tracebacks=[];trace_open=None
+    context=4 if args.mode=='error_log' else 12
     for n,line in enumerate(guard.lines(),1):
         total=n;source_chars+=len(line)
         line_costs.append(len(line)+(len(str(n))+2 if args.line_numbers else 0))
+        if args.mode=='error_log':
+            clean=re.sub(r'\x1b\[[0-9;]*m','',line)
+            clean=re.sub(r'^\d{4}-\d{2}-\d{2}T\S+\s+','',clean).strip()
+            if clean=='Traceback (most recent call last):':trace_open=n
+            elif trace_open is not None:
+                if n-trace_open>64:trace_open=None
+                elif re.match(r'^[A-Za-z_][\w.]*(?:Error|Exception|Interrupt|Exit|Iteration)(?::|$)',clean):
+                    tracebacks.append([trace_open,n]);trace_open=None
         hits=[term for term in terms if term in line]
         for term in hits:counts[term]+=1
         if hits:
-            start,end=max(1,n-12),n+12
+            start,end=max(1,n-context),n+context
             if spans and start<=spans[-1][1]+1:spans[-1][1]=max(spans[-1][1],end)
             else:spans.append([start,end])
-    spans=[Span(a,min(b,total)) for a,b in spans]
+    completed=[tb for tb in tracebacks if any(a<=tb[1] and b>=tb[0] for a,b in spans)]
+    merged=[]
+    for a,b in sorted(spans+completed):
+        b=min(b,total)
+        if merged and a<=merged[-1][1]+1:merged[-1][1]=max(merged[-1][1],b)
+        else:merged.append([a,b])
+    spans=[Span(a,b) for a,b in merged]
     base={'status':'auto_candidates','retrieval_mode':'literal_search','scan_complete':True,
           'search_match_lines':counts,'missing_search_terms':[t for t,c in counts.items() if not c],
-          'semantic_sufficiency':'unknown','full_source_returned':False}
+          'semantic_sufficiency':'unknown','full_source_returned':False,
+          'context_lines':context,'traceback_completed_blocks':len(completed)}
     if not spans:
         return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
             'reason_codes':['literal_not_found'],'next_action':'change_search_scope'},2)
@@ -1019,7 +1035,7 @@ def literal_search_packet(args, guard):
             'reason_codes':['literal_scope_too_broad'],'next_action':'narrow_search_terms',
             'final_output_capped':True,'suggested_ranges':[[x.start,x.end] for x in spans[:12]]},2)
     # Entire windows are kept; broad searches abstain instead of arbitrary cuts.
-    targets=[dict(start_line=x.start,end_line=x.end,reason='explicit literal with 12 neighboring lines') for x in spans]
+    targets=[dict(start_line=x.start,end_line=x.end,reason='explicit literal window; bounded selected traceback completion') for x in spans]
     packet=packet_from_guard(guard,targets)
     trial=numbered_packet(packet) if args.line_numbers else packet
     limit=min(MAX_OUTPUT_CHARS,12000)
@@ -1125,6 +1141,9 @@ def main(argv: list[str]) -> int:
         guard=SourceGuard(path)
         if not path.is_file() or guard.stamp[2]==0:
             raise ValueError('Source must be a nonempty regular file')
+        def make_packet(targets, text=None):
+            result=packet_from_guard(guard,targets,text)
+            return numbered_packet(result) if args.line_numbers else result
         if args.search_term:
             return literal_search_packet(args,guard)
         terms=normalize_query_terms(args.query.strip())
@@ -1140,7 +1159,7 @@ def main(argv: list[str]) -> int:
                 source_required={t:{'count':sum(len(list(required_pattern(t).finditer(line))) for line in raw_lines),'witness_lines':[],'witnesses_truncated':False} for t in args.require_term}
                 matched=tuple(t for t in terms if query_matches(probe,[t]))
                 evidence=assess_packet_evidence(terms,(),matched,(probe,),args.require_term,source_required)
-                packet=packet_from_guard(guard,[dict(start_line=1,end_line=total,reason=full_reason)],probe)
+                packet=make_packet([dict(start_line=1,end_line=total,reason=full_reason)],probe)
                 print('[token-router usage] '+json.dumps(dict(input_tokens=0,output_tokens=0,cached_input_tokens=0)),file=sys.stderr)
                 return finalize_packet(args,guard,packet,{**status,'status':'auto_full','checks':{'query_anchor':'unknown','core_scan_skipped':True,**asdict(evidence)},
                     'source_required':source_required,
@@ -1167,7 +1186,7 @@ def main(argv: list[str]) -> int:
                     'packet_query_anchor':evidence.packet_query_anchor,
                     'absent_required':list(evidence.absent_required),'lost_required':list(evidence.lost_required),
                     'next_action':'narrow_query','scan_complete':True},2)
-            packet=packet_from_guard(guard,[dict(start_line=1,end_line=total,reason=full_reason)],raw)
+            packet=make_packet([dict(start_line=1,end_line=total,reason=full_reason)],raw)
             evidence=assess_packet_evidence(terms,(),matched,packet.raw_slices,args.require_term,source_required)
             print('[token-router usage] '+json.dumps(dict(input_tokens=0,output_tokens=0,cached_input_tokens=0)),file=sys.stderr)
             return finalize_packet(args,guard,packet,{**status,'status':'auto_full','checks':{'query_anchor':'unknown','core_scan_skipped':True,**asdict(evidence)},
@@ -1198,7 +1217,7 @@ def main(argv: list[str]) -> int:
                 syntax_text=guard.read_text()
                 targets,checks['boundary']=complete_python_statements(syntax_text,targets,return_spans=return_spans if args.return_context=='bounded' else None,
                     **({'return_definitions':return_definitions} if args.return_target is not None else {}))
-            packet=packet_from_guard(guard,targets)
+            packet=make_packet(targets)
             evidence=assess_packet_evidence(terms,checks['matched_terms'],scan.source_terms,
                         packet.raw_slices,args.require_term,checks['source_required'])
             checks.update(asdict(evidence))
@@ -1230,12 +1249,12 @@ def main(argv: list[str]) -> int:
                 base_targets,base_packet=targets,packet
                 approved_spans=[]
                 targets,packet,patch_report=bounded_return_supplement(syntax_text,targets,packet,return_spans,
-                    lambda spans:packet_from_guard(guard,spans,syntax_text),accepts_return_patch,
+                    lambda spans:make_packet(spans,syntax_text),accepts_return_patch,
                     **({'accepted_spans':approved_spans} if args.return_target is not None else {}))
                 if args.return_target is not None:
                     targets,packet,target_report=limit_return_target(args.return_target,return_definitions,
                         base_targets,base_packet,targets,packet,approved_spans,
-                        lambda spans:packet_from_guard(guard,spans,syntax_text),accepts_return_patch)
+                        lambda spans:make_packet(spans,syntax_text),accepts_return_patch)
                     status['return_target']=target_report
                 guard.check()  # Cancellation must never turn source mutation into success.
                 status['return_supplement']=patch_report
@@ -1266,7 +1285,7 @@ def main(argv: list[str]) -> int:
                 return finalize_packet(args,guard,None,status,2)
         failure=None
         if action=='auto_full':
-            targets=whole;packet=packet_from_guard(guard,targets)
+            targets=whole;packet=make_packet(targets)
         elif action=='auto_candidates' and packet is None:
             targets=targets_from_numbered_content(candidate,total,'automatic complete-candidate bypass; source may contain omitted evidence',mode=args.mode)
         if action.startswith('auto_'):
@@ -1290,7 +1309,7 @@ def main(argv: list[str]) -> int:
             if not targets:
                 raise ValueError('No complete source line fits the configured budget')
         if packet is None or action in ('model','fallback','deterministic'):
-            packet=packet_from_guard(guard,targets)
+            packet=make_packet(targets)
         if auto and args.optimize=='tokens':
             final=assess_packet_evidence(terms,checks.get('core_terms',()),scan.source_terms,packet.raw_slices,
                                        args.require_term,checks['source_required'])

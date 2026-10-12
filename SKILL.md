@@ -13,7 +13,7 @@ When several known locations need surrounding context, batch the question's exac
 
 `python3 "<skill>/scripts/router.py" heavy_code "<file>" --search-term "literal A" --search-term "literal B" --line-numbers`
 
-Use `error_log` for logs. Search terms are explicit case-sensitive literals, including phrases, not inferred mandatory evidence. This path returns all matching windows with12 neighboring lines, without structural ranking or an unrelated tail. Broad output is withheld; narrow terms or read the reported ranges. Missing terms may belong to another allowed file.
+Use `error_log` for logs. Search terms are explicit case-sensitive literals, including phrases, not inferred mandatory evidence. This path returns all matching windows with12 neighboring lines for code or4 for logs, without structural ranking or an unrelated tail. A selected Python traceback may extend to its terminating exception within64 lines. Broad output is withheld; narrow terms or read the reported ranges. Missing terms may belong to another allowed file.
 
 For broad questions without useful literals, use `--query "focused question" --line-numbers`. Keep the query specific rather than copying generic task instructions. Check status and whether returned evidence supports each claim. `auto_full` means whole source; exit2/needs_targeted_read requires targeted reading. Source changes invalidate the packet. Do not repeat an unchanged file/query/range or reread numbered evidence just to obtain citation coordinates. Read only missing context.
 

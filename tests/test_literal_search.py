@@ -58,3 +58,27 @@ class LiteralSearchTests(unittest.TestCase):
         with patch.object(r.SourceGuard,'check',changed):
             code,out,status=self.run_cli('needle\n',['--search-term','needle','--line-numbers'])
         self.assertEqual((code,out),(1,''));self.assertEqual(status['source_consistency'],'changed')
+
+class SelectedTracebackTests(unittest.TestCase):
+    def test_selected_timestamped_traceback_completes_without_unrelated_block(self):
+        lines=['padding\n']*300
+        lines[100]='2026-10-12T01:00:00Z ERROR: worker\n'
+        lines[103]='2026-10-12T01:00:00Z Traceback (most recent call last):\n'
+        for i in range(104,130):lines[i]='2026-10-12T01:00:00Z   File x, line 2\n'
+        lines[130]='2026-10-12T01:00:00Z \x1b[31mValueError\x1b[0m: failed\n'
+        lines[200]='Traceback (most recent call last):\n';lines[201]='RuntimeError: unrelated\n'
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'incident.log';path.write_text(''.join(lines))
+            out,err=io.StringIO(),io.StringIO()
+            with contextlib.redirect_stdout(out),contextlib.redirect_stderr(err):
+                code=r.main(['router.py','error_log',str(path),'--search-term','ERROR: worker','--line-numbers'])
+            self.assertEqual(code,0);self.assertIn('131: ',out.getvalue());self.assertNotIn('unrelated',out.getvalue())
+            status=json.loads(err.getvalue().split('] ',1)[1]);self.assertEqual(status['traceback_completed_blocks'],1)
+    def test_long_traceback_does_not_expand_without_a_bounded_terminator(self):
+        lines=['padding\n']*300;lines[20]='ERROR: selected\n';lines[23]='Traceback (most recent call last):\n';lines[110]='ValueError: outside bound\n'
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'incident.log';path.write_text(''.join(lines))
+            out,err=io.StringIO(),io.StringIO()
+            with contextlib.redirect_stdout(out),contextlib.redirect_stderr(err):
+                code=r.main(['router.py','error_log',str(path),'--search-term','ERROR: selected','--line-numbers'])
+            self.assertEqual(code,0);self.assertNotIn('outside bound',out.getvalue())
