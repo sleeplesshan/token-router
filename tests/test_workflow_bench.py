@@ -2,6 +2,8 @@ import importlib.util
 import json
 from pathlib import Path
 import unittest
+import tempfile
+from unittest.mock import patch
 
 spec=importlib.util.spec_from_file_location('workflow',Path(__file__).parents[1]/'scripts/run_workflow_bench.py')
 w=importlib.util.module_from_spec(spec);spec.loader.exec_module(w)
@@ -67,6 +69,23 @@ class WorkflowTests(unittest.TestCase):
     def test_diagnostics_whitelist(self):
         d=w.compact_diagnostic('[token-router status] '+json.dumps({'status':'needs_targeted_read','reason_codes':['x'],'suggested_ranges':[[2,5]],'secret':'must not expose'}))
         self.assertNotIn('secret',d);self.assertEqual(d['suggested_ranges'],[[2,5]])
+    def test_duplicate_answer_ids_are_not_silently_selected(self):
+        task={'facts':[{'id':'x','accepted_answers':['yes'],'required_evidence':[dict(file='a',start_line=1,end_line=1)]}]}
+        answer=dict(id='x',answer='yes',evidence=[dict(file='a',start_line=1,end_line=1)])
+        self.assertFalse(w.grade(task,{'answers':[answer,answer]},answer['evidence'])[0]['factual'])
+    def test_failed_and_missing_usage_are_retained(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);(root/'a.txt').write_text('x\n')
+            task=dict(id='failure',primary='a',files={'a':'a.txt'},query='x',facts=[],split='dev')
+            for unknown in (False,True):
+                call=dict(returncode=1,seconds=.01,answer={},usage={k:0 for k in w.FIELDS})
+                call['usage'].update(input_tokens=40,output_tokens=10)
+                if unknown:call['usage_unknown']=True
+                with patch.object(w,'main_call',return_value=call):
+                    result=w.episode(task,'full',1,root,{},root/'runs')
+                self.assertEqual(len(result['calls']),1)
+                self.assertEqual(result['total_tokens'],None if unknown else 50)
+                self.assertEqual(result['usage_complete'],not unknown)
     def test_search_only_task_terms(self):
         lines=['neutral\n']*50;lines[25]='some_symbol()\n'
         spans=w.search_ranges(lines,['some_symbol'])

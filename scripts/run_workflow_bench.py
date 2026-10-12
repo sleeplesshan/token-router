@@ -154,7 +154,9 @@ def covered(file,a,b,ranges):
 
 
 def grade(task, response, visible):
-    answers={a['id']:a for a in response.get('answers',[])};scores=[]
+    supplied=response.get('answers',[])
+    ids=[a['id'] for a in supplied]
+    answers={a['id']:a for a in supplied if ids.count(a['id'])==1};scores=[]
     for fact in task['facts']:
         answer=answers.get(fact['id'],{});citations=answer.get('evidence',[])
         match=answer.get('answer','').strip().strip('`') in fact['accepted_answers']
