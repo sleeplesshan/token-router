@@ -39,5 +39,5 @@ def main():
     import os
     env=os.environ.copy();env['TOKEN_ROUTER_REPO']=str(ROOT)
     subprocess.run([sys.executable,str(work/'mixed.py')],env=env,check=True)
-    (work/'replay-provenance.json').write_text(json.dumps({'package_version':'2.6.0','policy_version':'v2.4','baseline':BASELINE,'candidate_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'model':'none','manifest_sha256':hashlib.sha256(manifest).hexdigest()},indent=2)+'\n')
+    (work/'replay-provenance.json').write_text(json.dumps({'package_version':subprocess.check_output([sys.executable,str(ROOT/'scripts/router.py'),'--version'],text=True).strip(),'policy_version':'v2.4','baseline':BASELINE,'candidate_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'model':'none','manifest_sha256':hashlib.sha256(manifest).hexdigest()},indent=2)+'\n')
 if __name__=='__main__':main()
