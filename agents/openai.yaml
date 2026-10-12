@@ -1,4 +1,4 @@
 interface:
   display_name: "Token Router"
   short_description: "Read bounded complete Python callables or failure blocks"
-  default_prompt: "Use $token-router when branch/order analysis needs complete named callables or dispersed log blocks need context. Reuse evidence and skip simple literal lookups. If the guide is not already provided, batch its reading with the metadata-described local retrieval to avoid an extra model roundtrip."
+  default_prompt: "Use $token-router when branch/order analysis needs complete named callables or dispersed log blocks need context. Reuse evidence and skip simple literal lookups."
