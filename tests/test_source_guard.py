@@ -49,6 +49,15 @@ class SourceGuardTests(unittest.TestCase):
 
     def test_rotation_while_descriptor_still_open(self):
         guard = g.SourceGuard(self.path)
+        if os.name == 'nt':
+            with guard.open():
+                with self.assertRaises(PermissionError):
+                    self.path.rename(self.path.with_name('old'))
+            self.path.rename(self.path.with_name('old'))
+            self.path.write_text('alpha\nbeta\n')
+            with self.assertRaises(g.SourceChangedError):
+                guard.read()
+            return
         with self.assertRaises(g.SourceChangedError):
             with guard.open():
                 self.path.rename(self.path.with_name('old'))
@@ -69,9 +78,17 @@ class SourceGuardTests(unittest.TestCase):
         guard = g.SourceGuard(self.path)
         iterator = guard.lines()
         self.assertEqual(next(iterator), 'alpha\n')
-        self.path.unlink()
-        with self.assertRaises(g.SourceChangedError):
+        if os.name == 'nt':
+            with self.assertRaises(PermissionError):
+                self.path.unlink()
             iterator.close()
+            self.path.unlink()
+            with self.assertRaises(g.SourceChangedError):
+                guard.read()
+        else:
+            self.path.unlink()
+            with self.assertRaises(g.SourceChangedError):
+                iterator.close()
 
     def test_decode_replacement_and_empty_file(self):
         self.path.write_bytes(b'\xff\n')

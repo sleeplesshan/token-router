@@ -24,6 +24,50 @@ class SourceChanged(OSError):
 SourceChangedError = SourceChanged
 
 
+def _windows_change_time(path=None, fd=None, follow=True):
+    """Read NT change time: Windows st_ctime is creation time, not POSIX ctime.
+
+    Query metadata only, never file content. Unsupported filesystems/APIs fail
+    closed rather than silently dropping the mutation check.
+    """
+    import ctypes
+    from ctypes import wintypes
+    import msvcrt
+
+    class BasicInfo(ctypes.Structure):
+        _fields_ = [(name, ctypes.c_longlong) for name in
+                    ('creation', 'access', 'write', 'change')] + [('attributes', wintypes.DWORD)]
+
+    kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+    query = kernel.GetFileInformationByHandleEx
+    query.argtypes = [wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD]
+    query.restype = wintypes.BOOL
+    close = kernel.CloseHandle
+    close.argtypes = [wintypes.HANDLE]
+    close.restype = wintypes.BOOL
+    owned = fd is None
+    if owned:
+        create = kernel.CreateFileW
+        create.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD,
+                           ctypes.c_void_p, wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE]
+        create.restype = wintypes.HANDLE
+        # READ_ATTRIBUTES; share read/write/delete; OPEN_EXISTING.
+        flags = 0x02000000 | (0 if follow else 0x00200000)
+        handle = create(str(path), 0x80, 7, None, 3, flags, None)
+        if handle == ctypes.c_void_p(-1).value:
+            raise ctypes.WinError(ctypes.get_last_error())
+    else:
+        handle = msvcrt.get_osfhandle(fd)
+    try:
+        info = BasicInfo()
+        if not query(handle, 0, ctypes.byref(info), ctypes.sizeof(info)):
+            raise ctypes.WinError(ctypes.get_last_error())
+        return info.change * 100
+    finally:
+        if owned:
+            close(handle)
+
+
 class SourceGuard:
     """Guard repeated UTF-8 reads using path and open-descriptor identities.
 
@@ -38,20 +82,33 @@ class SourceGuard:
         info = self.path.stat()
         if not stat.S_ISREG(info.st_mode):
             raise ValueError("Source must be a regular file (FIFO/devices unsupported)")
-        self.baseline = self._identity(info)
+        self.baseline = self._path_identity()
         self.stamp = self.baseline
         self.open_count = 0
-        self.link_baseline = self._identity(self.path.lstat())
+        self.link_baseline = self._path_identity(follow=False)
         self.check()
 
     @staticmethod
     def _identity(info: os.stat_result) -> tuple[int, int, int, int, int]:
         return info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns
 
+    def _path_identity(self, follow=True):
+        info = self.path.stat() if follow else self.path.lstat()
+        identity = self._identity(info)
+        if os.name == 'nt':
+            identity = identity[:4] + (_windows_change_time(path=self.path, follow=follow),)
+        return identity
+
+    def _fd_identity(self, fd):
+        identity = self._identity(os.fstat(fd))
+        if os.name == 'nt':
+            identity = identity[:4] + (_windows_change_time(fd=fd),)
+        return identity
+
     def check(self) -> None:
         try:
-            matches = (self._identity(self.path.stat()) == self.baseline
-                       and self._identity(self.path.lstat()) == self.link_baseline)
+            matches = (self._path_identity() == self.baseline
+                       and self._path_identity(follow=False) == self.link_baseline)
         except OSError as exc:
             raise SourceChangedError('source_changed: source unavailable during guarded read') from exc
         if not matches:
@@ -76,13 +133,13 @@ class SourceGuard:
         except OSError as exc:
             raise SourceChangedError('source_changed: source could not be reopened') from exc
         try:
-            if self._identity(os.fstat(handle.fileno())) != self.baseline:
+            if self._fd_identity(handle.fileno()) != self.baseline:
                 raise SourceChangedError('source_changed: opened descriptor differs from source')
             self.check()
             try:
                 yield handle
             finally:
-                if self._identity(os.fstat(handle.fileno())) != self.baseline:
+                if self._fd_identity(handle.fileno()) != self.baseline:
                     raise SourceChangedError('source_changed: opened source changed during read')
                 self.check()
         finally:
