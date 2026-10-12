@@ -1,4 +1,4 @@
 interface:
   display_name: "Token Router"
-  short_description: "Select bounded raw evidence with local token-aware routing"
-  default_prompt: "Use $token-router to assess whether focused raw evidence retrieval helps this task, using the default local tokens policy and checking missing context."
+  short_description: "Batch incomplete dispersed log evidence; skip code lookups"
+  default_prompt: "Use $token-router only if dispersed error-log context needs batching after ordinary search. Skip code exploration, one location and evidence already sufficient."

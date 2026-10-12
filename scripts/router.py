@@ -53,7 +53,7 @@ def env_float(name: str, default: float, minimum: float | None = None) -> float:
     return value
 
 
-VERSION = "2.7.0-dev"
+VERSION = "2.7.0"
 MODEL_NAME = "gpt-6-luna"
 REASONING_EFFORT = "low"
 CODEX_BIN = os.environ.get("ROUTER_CODEX_BIN", "codex")
