@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.6.0 — 2026-10-12
+
+- Keep v2.4 local admission and shared safety as the default; optional bounded Python return completion and exact return-target filtering. Explicit off+target is a usage error.
+- Bound regular-file input resources, reject FIFO/devices before read, invalidate stale reports on source mutation, distinguish usage errors, clean up POSIX cloud process groups on interruption.
+- Add verified staged install/update/backup restore/uninstall, minimal deterministic zip/inventory, offline sample smoke.
+- Shorten the skill and document actual text/newline, status, resource, cloud and platform contracts. Default runtime remains Python3.10+ with no model/network/login.
+- Pass six-job Linux/macOS/Windows × Python3.10/3.14 CI. Use native Windows change-time metadata and explicitly test open-file locking/unsupported cloud behavior; see readiness.
+
+Migration: existing three modes/flags remain. Unmanaged copied installations are not overwritten. Install to a new directory, verify, then replace manually. New limits may abstain on previously unbounded input. Old research package versions and scores remain unchanged.
+
 ## 2.5.0 — Final evidence contracts (opt-in policy)
 
 - Separate source, core, and actual packet evidence; add explicit required literals, whole scope, and report sidecars.

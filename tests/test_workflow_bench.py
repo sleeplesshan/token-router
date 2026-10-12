@@ -30,6 +30,16 @@ class WorkflowTests(unittest.TestCase):
     def test_tools_and_missing_usage_rejected(self):
         with self.assertRaises(ValueError):w.usage_from_events('{}')
         with self.assertRaises(ValueError):w.usage_from_events(json.dumps({'item':{'type':'command_execution'}}))
+    def test_installed_skill_tools_require_explicit_usage_contract(self):
+        events=[{'type':'item.completed','item':{'type':'command_execution'}},
+                {'type':'turn.completed','usage':{'input_tokens':12182,'output_tokens':112}}]
+        text='\n'.join(map(json.dumps,events))
+        with self.assertRaises(ValueError):w.usage_from_events(text)
+        u=w.usage_from_events(text,allow_tools=True)
+        self.assertEqual(u['input_tokens']+u['output_tokens'],12294)
+        for usage in ({},{'input_tokens':0},{'input_tokens':True,'output_tokens':1}):
+            with self.assertRaises(ValueError):
+                w.usage_from_events(json.dumps({'type':'turn.completed','usage':usage}),allow_tools=True)
     def test_related_file_and_budget(self):
         files={'primary.py':['x\n']*300,'related.py':['y\n']*250}
         r,_=w.admit_read({'file':'related.py','start_line':1,'end_line':250},files)

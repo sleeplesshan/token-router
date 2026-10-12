@@ -46,6 +46,7 @@ class CodexTransportTests(unittest.TestCase):
             result = router.call_codex("private prompt 한글")
         return result, captured
 
+    @unittest.skipUnless(os.name == "posix", "Optional cloud transport is POSIX-only")
     def test_fixed_model_auth_isolation_schema_and_stdin(self):
         os.environ.update(OPENAI_API_KEY="secret-api", CODEX_API_KEY="secret-codex",
                           OPENAI_BASE_URL="https://unexpected.example", PATH="/kept")
@@ -80,26 +81,31 @@ class CodexTransportTests(unittest.TestCase):
         self.assertLess(len(captured["instructions"]), 1000)
         self.assertFalse(Path(captured["cwd"]).exists(), "temporary artifacts must be removed")
 
+    @unittest.skipUnless(os.name == "posix", "Optional cloud transport is POSIX-only")
     def test_missing_cli_has_actionable_error(self):
         with patch.object(router.subprocess, "Popen", side_effect=FileNotFoundError):
             with self.assertRaisesRegex(RuntimeError, "Codex CLI not found"):
                 router.call_codex("prompt")
 
+    @unittest.skipUnless(os.name == "posix", "Optional cloud transport is POSIX-only")
     def test_nonzero_does_not_echo_child_diagnostics(self):
         with self.assertRaises(RuntimeError) as caught:
             self.run_transport(returncode=7, stdout="secret-output", stderr="secret-key")
         self.assertIn("status 7", str(caught.exception))
         self.assertNotIn("secret", str(caught.exception))
 
+    @unittest.skipUnless(os.name == "posix", "Optional cloud transport is POSIX-only")
     def test_missing_and_empty_output_rejected(self):
         for output in (None, ""):
             with self.subTest(output=output), self.assertRaisesRegex(ValueError, "no structured"):
                 self.run_transport(output=output)
 
+    @unittest.skipUnless(os.name == "posix", "Optional cloud transport is POSIX-only")
     def test_invalid_output_rejected(self):
         with self.assertRaises(json.JSONDecodeError):
             self.run_transport(output="not JSON")
 
+    @unittest.skipUnless(os.name == "posix", "Optional cloud transport is POSIX-only")
     def test_timeout_kills_and_reaps_child(self):
         process = Mock(pid=12345)
         process.communicate.side_effect = [subprocess.TimeoutExpired("codex", 1), ("", "")]
@@ -113,6 +119,13 @@ class CodexTransportTests(unittest.TestCase):
             process.kill.assert_called_once_with()
         self.assertEqual(process.communicate.call_count, 2)
 
+    @unittest.skipUnless(os.name == 'nt', 'Windows cloud rejection')
+    def test_windows_cloud_refused_before_process_launch(self):
+        with patch.object(router.subprocess, 'Popen') as launch:
+            with self.assertRaisesRegex(RuntimeError, 'only on POSIX'):
+                router.call_codex('prompt')
+            launch.assert_not_called()
+
     def test_recursion_refused_before_launch(self):
         os.environ["TOKEN_ROUTER_ACTIVE"] = "1"
         with patch.object(router.subprocess, "Popen") as launch:
@@ -120,6 +133,7 @@ class CodexTransportTests(unittest.TestCase):
                 router.call_codex("prompt")
         launch.assert_not_called()
 
+    @unittest.skipUnless(os.name == "posix", "Optional cloud transport is POSIX-only")
     def test_usage_only_emits_integer_counts(self):
         event = {"type": "turn.completed", "usage": {
             "input_tokens": 20, "output_tokens": 5, "private": "secret", "flag": True

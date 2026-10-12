@@ -1,0 +1,816 @@
+{
+  "scope": "Explicit installed-skill workflow versus ordinary search; not forced extraction or automatic selection. 4 fixed tasks, one pair each.",
+  "model": "gpt-6.1-sol",
+  "reasoning": "medium",
+  "cli": "0.162.1",
+  "package_version": "2.6.0",
+  "policy_version": "v2.4",
+  "return_context": "off",
+  "harness_commit": "538a03e6023858403a7fb4a96f31d7fd242e4992",
+  "installed_source_commit": "873de65",
+  "installed_skill_sha256": "4a004c8d70025d18ce0c14f3278cc55000b8109e54b532789eac0027391c81d6",
+  "modules": {
+    "router.py": {
+      "measured_installed_sha256": "9fe67dbfe61d6179dc1afc1ad856aedb9cb2a7e9b9ad47899d8bfdf006eefeca",
+      "final_sha256": "b44c206645bf86f5fbb16c06569eed2133b85cfdcd0eb5e0880537de58531128",
+      "identical": false
+    },
+    "evidence_checks.py": {
+      "measured_installed_sha256": "42c5e04344acb4d864715043e05021fff66b63dd7d1000a650c2dd41b723de6d",
+      "final_sha256": "42c5e04344acb4d864715043e05021fff66b63dd7d1000a650c2dd41b723de6d",
+      "identical": true
+    },
+    "query_matcher.py": {
+      "measured_installed_sha256": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+      "final_sha256": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+      "identical": true
+    },
+    "routing_policy.py": {
+      "measured_installed_sha256": "a84a9934c9e5b0e9156a13bec6e6c5df8a0a5daa029c749438251fcc16d18cb8",
+      "final_sha256": "a84a9934c9e5b0e9156a13bec6e6c5df8a0a5daa029c749438251fcc16d18cb8",
+      "identical": true
+    },
+    "source_guard.py": {
+      "measured_installed_sha256": "92043148c396a798c825d2cb64c792d6191078cfc6df11c327a0bc1b91340674",
+      "final_sha256": "92043148c396a798c825d2cb64c792d6191078cfc6df11c327a0bc1b91340674",
+      "identical": true
+    }
+  },
+  "paired_episodes": 8,
+  "rows": [
+    {
+      "task": "attrs_own",
+      "arms": {
+        "plain": {
+          "usage": {
+            "input_tokens": 16982,
+            "output_tokens": 112,
+            "cached_input_tokens": 0,
+            "reasoning_output_tokens": 0
+          },
+          "cli_wall": 11.28644175012596,
+          "cli_cpu": 1.292056,
+          "remote_wait_proxy": 9.994385750125959,
+          "prompt_sha256": "f9db85dc6127bb096d612b8290fa6fa73345bc42ba49709d3cd26a6b1f48e262",
+          "instructions_sha256": "4af89d4ec4fb83fe115a189c137e099177e3fdf761e4d4f590b1327dedfe81ea",
+          "answer": {
+            "answers": [
+              {
+                "id": "answer",
+                "answer": "attrib_name in cls.__dict__",
+                "evidence": [
+                  {
+                    "file": "src/attr/_make.py",
+                    "start_line": 317,
+                    "end_line": 317
+                  }
+                ]
+              }
+            ],
+            "read_requests": [],
+            "search_requests": []
+          },
+          "scores": [
+            {
+              "id": "answer",
+              "factual": true,
+              "sufficient_evidence": true
+            }
+          ],
+          "total_tokens": 17094,
+          "source_commands": 1,
+          "router_calls": 0,
+          "recovery_commands": 0,
+          "visible_citation_audit": "PASS",
+          "command": "/bin/zsh -lc \"rg -n -A 16 -B 3 'def _has_own_attribute' src/attr/_make.py\""
+        },
+        "skill": {
+          "usage": {
+            "input_tokens": 13711,
+            "output_tokens": 112,
+            "cached_input_tokens": 0,
+            "reasoning_output_tokens": 0
+          },
+          "cli_wall": 9.962032375158742,
+          "cli_cpu": 1.0372210000000002,
+          "remote_wait_proxy": 8.924811375158741,
+          "prompt_sha256": "8a31c3b7e2b807e646411ab65f1aaa6d776e81f0992d131c465d35ed1bd52d83",
+          "instructions_sha256": "4af89d4ec4fb83fe115a189c137e099177e3fdf761e4d4f590b1327dedfe81ea",
+          "answer": {
+            "answers": [
+              {
+                "id": "answer",
+                "answer": "attrib_name in cls.__dict__",
+                "evidence": [
+                  {
+                    "file": "src/attr/_make.py",
+                    "start_line": 313,
+                    "end_line": 317
+                  }
+                ]
+              }
+            ],
+            "read_requests": [],
+            "search_requests": []
+          },
+          "scores": [
+            {
+              "id": "answer",
+              "factual": true,
+              "sufficient_evidence": true
+            }
+          ],
+          "total_tokens": 13823,
+          "source_commands": 1,
+          "router_calls": 0,
+          "recovery_commands": 0,
+          "visible_citation_audit": "PASS",
+          "command": "/bin/zsh -lc \"rg -n -A 12 -B 2 'def _has_own_attribute' src/attr/_make.py\""
+        }
+      },
+      "paired_token_delta": -3271,
+      "paired_wall_delta": -1.3244093749672174
+    },
+    {
+      "task": "log_first_warn",
+      "arms": {
+        "plain": {
+          "usage": {
+            "input_tokens": 12007,
+            "output_tokens": 109,
+            "cached_input_tokens": 5760,
+            "reasoning_output_tokens": 0
+          },
+          "cli_wall": 17.810572791146114,
+          "cli_cpu": 1.1693069999999999,
+          "remote_wait_proxy": 16.641265791146115,
+          "prompt_sha256": "72c51ea5f280bc2a3784dac208835e3f87b5e7a6d9fc2793187bd147356c3236",
+          "instructions_sha256": "4af89d4ec4fb83fe115a189c137e099177e3fdf761e4d4f590b1327dedfe81ea",
+          "answer": {
+            "answers": [
+              {
+                "id": "answer",
+                "answer": "blk_-2918118818249673980",
+                "evidence": [
+                  {
+                    "file": "HDFS/HDFS_2k.log",
+                    "start_line": 78,
+                    "end_line": 78
+                  }
+                ]
+              }
+            ],
+            "read_requests": [],
+            "search_requests": []
+          },
+          "scores": [
+            {
+              "id": "answer",
+              "factual": true,
+              "sufficient_evidence": true
+            }
+          ],
+          "total_tokens": 12116,
+          "source_commands": 1,
+          "router_calls": 0,
+          "recovery_commands": 0,
+          "visible_citation_audit": "PASS",
+          "command": "/bin/zsh -lc \"rg -n -m 1 'WARN' HDFS/HDFS_2k.log\""
+        },
+        "skill": {
+          "usage": {
+            "input_tokens": 13859,
+            "output_tokens": 109,
+            "cached_input_tokens": 6528,
+            "reasoning_output_tokens": 0
+          },
+          "cli_wall": 15.680608582915738,
+          "cli_cpu": 1.206874,
+          "remote_wait_proxy": 14.473734582915739,
+          "prompt_sha256": "5a8e31da52cb7132045559d081a8c01e87196d75106d7e60eaeea04a227c9600",
+          "instructions_sha256": "4af89d4ec4fb83fe115a189c137e099177e3fdf761e4d4f590b1327dedfe81ea",
+          "answer": {
+            "answers": [
+              {
+                "id": "answer",
+                "answer": "blk_-2918118818249673980",
+                "evidence": [
+                  {
+                    "file": "HDFS/HDFS_2k.log",
+                    "start_line": 78,
+                    "end_line": 78
+                  }
+                ]
+              }
+            ],
+            "read_requests": [],
+            "search_requests": []
+          },
+          "scores": [
+            {
+              "id": "answer",
+              "factual": true,
+              "sufficient_evidence": true
+            }
+          ],
+          "total_tokens": 13968,
+          "source_commands": 1,
+          "router_calls": 0,
+          "recovery_commands": 0,
+          "visible_citation_audit": "PASS",
+          "command": "/bin/zsh -lc \"rg -n -m 5 'WARN' HDFS/HDFS_2k.log\""
+        }
+      },
+      "paired_token_delta": 1852,
+      "paired_wall_delta": -2.1299642082303762
+    },
+    {
+      "task": "rust_capacity",
+      "arms": {
+        "plain": {
+          "usage": {
+            "input_tokens": 12160,
+            "output_tokens": 112,
+            "cached_input_tokens": 10368,
+            "reasoning_output_tokens": 0
+          },
+          "cli_wall": 18.254131499910727,
+          "cli_cpu": 1.1977309999999992,
+          "remote_wait_proxy": 17.05640049991073,
+          "prompt_sha256": "c341f05e7ac936409cc12eb186c1e6852a8e38439097a9426cdc0fd27ab12567",
+          "instructions_sha256": "4af89d4ec4fb83fe115a189c137e099177e3fdf761e4d4f590b1327dedfe81ea",
+          "answer": {
+            "answers": [
+              {
+                "id": "answer",
+                "answer": "self.buf.capacity()",
+                "evidence": [
+                  {
+                    "file": "library/alloc/src/vec/mod.rs",
+                    "start_line": 1429,
+                    "end_line": 1431
+                  }
+                ]
+              }
+            ],
+            "read_requests": [],
+            "search_requests": []
+          },
+          "scores": [
+            {
+              "id": "answer",
+              "factual": true,
+              "sufficient_evidence": true
+            }
+          ],
+          "total_tokens": 12272,
+          "source_commands": 1,
+          "router_calls": 0,
+          "recovery_commands": 0,
+          "visible_citation_audit": "PASS",
+          "command": "/bin/zsh -lc \"rg -n -A 9 -B 4 'fn capacity\\\\(' library/alloc/src/vec/mod.rs\""
+        },
+        "skill": {
+          "usage": {
+            "input_tokens": 13723,
+            "output_tokens": 112,
+            "cached_input_tokens": 6528,
+            "reasoning_output_tokens": 0
+          },
+          "cli_wall": 19.618822458200157,
+          "cli_cpu": 1.153982000000001,
+          "remote_wait_proxy": 18.464840458200158,
+          "prompt_sha256": "84c91dd9d9fb04f78867470d4e8f8d2d766d9f10c7d99d23565694a3f5d25d2a",
+          "instructions_sha256": "4af89d4ec4fb83fe115a189c137e099177e3fdf761e4d4f590b1327dedfe81ea",
+          "answer": {
+            "answers": [
+              {
+                "id": "answer",
+                "answer": "self.buf.capacity()",
+                "evidence": [
+                  {
+                    "file": "library/alloc/src/vec/mod.rs",
+                    "start_line": 1429,
+                    "end_line": 1431
+                  }
+                ]
+              }
+            ],
+            "read_requests": [],
+            "search_requests": []
+          },
+          "scores": [
+            {
+              "id": "answer",
+              "factual": true,
+              "sufficient_evidence": true
+            }
+          ],
+          "total_tokens": 13835,
+          "source_commands": 1,
+          "router_calls": 0,
+          "recovery_commands": 0,
+          "visible_citation_audit": "PASS",
+          "command": "/bin/zsh -lc \"rg -n -A 5 -B 4 'fn capacity\\\\(' library/alloc/src/vec/mod.rs\""
+        }
+      },
+      "paired_token_delta": 1563,
+      "paired_wall_delta": 1.3646909582894295
+    },
+    {
+      "task": "ruff_language",
+      "arms": {
+        "plain": {
+          "usage": {
+            "input_tokens": 13176,
+            "output_tokens": 98,
+            "cached_input_tokens": 5760,
+            "reasoning_output_tokens": 0
+          },
+          "cli_wall": 10.67104854201898,
+          "cli_cpu": 1.0232729999999997,
+          "remote_wait_proxy": 9.64777554201898,
+          "prompt_sha256": "dba02739023fe702d5ab35f524be24b63a20e7cdc07948dea3032aea4d4e3df8",
+          "instructions_sha256": "4af89d4ec4fb83fe115a189c137e099177e3fdf761e4d4f590b1327dedfe81ea",
+          "answer": {
+            "answers": [
+              {
+                "id": "answer",
+                "answer": "Rust",
+                "evidence": [
+                  {
+                    "file": "README.md",
+                    "start_line": 14,
+                    "end_line": 14
+                  }
+                ]
+              }
+            ],
+            "read_requests": [],
+            "search_requests": []
+          },
+          "scores": [
+            {
+              "id": "answer",
+              "factual": true,
+              "sufficient_evidence": true
+            }
+          ],
+          "total_tokens": 13274,
+          "source_commands": 1,
+          "router_calls": 0,
+          "recovery_commands": 0,
+          "visible_citation_audit": "PASS",
+          "command": "/bin/zsh -lc \"rg -n -i -C 4 'linter|written|implemented|rust' README.md\""
+        },
+        "skill": {
+          "usage": {
+            "input_tokens": 18865,
+            "output_tokens": 98,
+            "cached_input_tokens": 8832,
+            "reasoning_output_tokens": 0
+          },
+          "cli_wall": 18.6844128749799,
+          "cli_cpu": 1.1707730000000005,
+          "remote_wait_proxy": 17.513639874979898,
+          "prompt_sha256": "2a57e5b6e9768806b2c61c17f972d7d20824b6dc3728e49051655ed63bf27a3b",
+          "instructions_sha256": "4af89d4ec4fb83fe115a189c137e099177e3fdf761e4d4f590b1327dedfe81ea",
+          "answer": {
+            "answers": [
+              {
+                "id": "answer",
+                "answer": "Rust",
+                "evidence": [
+                  {
+                    "file": "README.md",
+                    "start_line": 14,
+                    "end_line": 14
+                  }
+                ]
+              }
+            ],
+            "read_requests": [],
+            "search_requests": []
+          },
+          "scores": [
+            {
+              "id": "answer",
+              "factual": true,
+              "sufficient_evidence": true
+            }
+          ],
+          "total_tokens": 18963,
+          "source_commands": 1,
+          "router_calls": 0,
+          "recovery_commands": 0,
+          "visible_citation_audit": "PASS",
+          "command": "/bin/zsh -lc \"rg -n -i -C 3 'linter|written in|implemented in' README.md\""
+        }
+      },
+      "paired_token_delta": 5689,
+      "paired_wall_delta": 8.013364332960919
+    }
+  ],
+  "arms": {
+    "plain": {
+      "episodes": 4,
+      "correct_with_visible_evidence": 4,
+      "completed": 4,
+      "abstentions": 0,
+      "recovery_commands": 0,
+      "router_calls": 0,
+      "total_tokens": 54756,
+      "median_tokens": 12773.0,
+      "total_cli_wall": 58.02219458320178,
+      "median_cli_wall": 14.548507270636037,
+      "total_cli_cpu": 4.682366999999999,
+      "remote_wait_proxy": 53.33982758320178
+    },
+    "skill": {
+      "episodes": 4,
+      "correct_with_visible_evidence": 4,
+      "completed": 4,
+      "abstentions": 0,
+      "recovery_commands": 0,
+      "router_calls": 0,
+      "total_tokens": 60589,
+      "median_tokens": 13901.5,
+      "total_cli_wall": 63.945876291254535,
+      "median_cli_wall": 17.18251072894782,
+      "total_cli_cpu": 4.568850000000001,
+      "remote_wait_proxy": 59.37702629125454
+    }
+  },
+  "median_paired_token_delta": 1707.5,
+  "median_paired_wall_delta": 0.02014079166110605,
+  "all_run_known_tokens": 133723,
+  "all_run_cli_calls": 10,
+  "paired_tokens": 115345,
+  "prior_failed_harness_and_preflight_tokens": 18378,
+  "all_stage_wall": 137.50495208287612,
+  "unknown_usage": false,
+  "provenance_note": "Isolated update refused changed prerelease inventory without modifying old installation. Measured skill matches final SKILL. Only router entrypoint UTF-8/LF stream configuration differs from final runtime; default 24-task output equality separately verified. No router command occurred in these model episodes.",
+  "input_sources": [
+    {
+      "task": "cache_invalid_size",
+      "group": "mahmoud/boltons",
+      "full_read_comparison_chars": 34684,
+      "router_initial_chars": 34684,
+      "initial_complete": true,
+      "status": "auto_full",
+      "full_local_wall": 0.00043120793998241425,
+      "full_local_cpu": 0.00016599999999999948,
+      "router_local_wall": 0.011219500098377466,
+      "router_local_cpu": 0.01122,
+      "source_sha256": {
+        "boltons/cacheutils.py": "77f6c35dc6332482c2f3f57b13059f3c1962641fbb7a6212aa7fd221c6d8aaad"
+      }
+    },
+    {
+      "task": "cache_miss",
+      "group": "mahmoud/boltons",
+      "full_read_comparison_chars": 34684,
+      "router_initial_chars": 34684,
+      "initial_complete": true,
+      "status": "auto_full",
+      "full_local_wall": 0.00012212502770125866,
+      "full_local_cpu": 0.00012200000000000405,
+      "router_local_wall": 0.013707500183954835,
+      "router_local_cpu": 0.013699000000000003,
+      "source_sha256": {
+        "boltons/cacheutils.py": "77f6c35dc6332482c2f3f57b13059f3c1962641fbb7a6212aa7fd221c6d8aaad"
+      }
+    },
+    {
+      "task": "cache_on_miss",
+      "group": "mahmoud/boltons",
+      "full_read_comparison_chars": 34684,
+      "router_initial_chars": 29032,
+      "initial_complete": true,
+      "status": "auto_candidates",
+      "full_local_wall": 0.00010733306407928467,
+      "full_local_cpu": 0.00010699999999999599,
+      "router_local_wall": 0.010772000066936016,
+      "router_local_cpu": 0.010762999999999998,
+      "source_sha256": {
+        "boltons/cacheutils.py": "77f6c35dc6332482c2f3f57b13059f3c1962641fbb7a6212aa7fd221c6d8aaad"
+      }
+    },
+    {
+      "task": "attrs_bool",
+      "group": "python-attrs/attrs",
+      "full_read_comparison_chars": 127740,
+      "router_initial_chars": 77839,
+      "initial_complete": true,
+      "status": "auto_candidates",
+      "full_local_wall": 0.0007674579974263906,
+      "full_local_cpu": 0.0005049999999999985,
+      "router_local_wall": 0.03599591599777341,
+      "router_local_cpu": 0.03598,
+      "source_sha256": {
+        "src/attr/_make.py": "db3b8d7a08c7ed547459e6828e906ae4044e234d0144c189595bdf56cff61a91"
+      }
+    },
+    {
+      "task": "attrs_own",
+      "group": "python-attrs/attrs",
+      "full_read_comparison_chars": 127740,
+      "router_initial_chars": 77270,
+      "initial_complete": true,
+      "status": "auto_candidates",
+      "full_local_wall": 0.0004111670423299074,
+      "full_local_cpu": 0.00041100000000000164,
+      "router_local_wall": 0.02537333290092647,
+      "router_local_cpu": 0.025365,
+      "source_sha256": {
+        "src/attr/_make.py": "db3b8d7a08c7ed547459e6828e906ae4044e234d0144c189595bdf56cff61a91"
+      }
+    },
+    {
+      "task": "attrs_classvar",
+      "group": "python-attrs/attrs",
+      "full_read_comparison_chars": 127740,
+      "router_initial_chars": 0,
+      "initial_complete": false,
+      "status": "needs_targeted_read",
+      "full_local_wall": 0.0003981669433414936,
+      "full_local_cpu": 0.0003979999999999956,
+      "router_local_wall": 0.029033750062808394,
+      "router_local_cpu": 0.029025,
+      "source_sha256": {
+        "src/attr/_make.py": "db3b8d7a08c7ed547459e6828e906ae4044e234d0144c189595bdf56cff61a91"
+      }
+    },
+    {
+      "task": "redis_debug",
+      "group": "redis/redis-py",
+      "full_read_comparison_chars": 107249,
+      "router_initial_chars": 81999,
+      "initial_complete": true,
+      "status": "auto_candidates",
+      "full_local_wall": 0.000568249961361289,
+      "full_local_cpu": 0.0003840000000000024,
+      "router_local_wall": 0.020016707945615053,
+      "router_local_cpu": 0.020009000000000002,
+      "source_sha256": {
+        "redis/client.py": "af86687cb4f75cf93b332428d27f72c9ee782c4e6cf8f2468f4b04e3872eaed8"
+      }
+    },
+    {
+      "task": "redis_encoder",
+      "group": "redis/redis-py",
+      "full_read_comparison_chars": 118374,
+      "router_initial_chars": 107249,
+      "initial_complete": false,
+      "status": "auto_full",
+      "full_local_wall": 0.0005744590889662504,
+      "full_local_cpu": 0.00041999999999999676,
+      "router_local_wall": 0.029139166930690408,
+      "router_local_cpu": 0.02913,
+      "source_sha256": {
+        "redis/client.py": "af86687cb4f75cf93b332428d27f72c9ee782c4e6cf8f2468f4b04e3872eaed8",
+        "redis/exceptions.py": "fcee20068e882b7eea413ded0192eda2bd47fcfca2777931aab5e7f933103763"
+      }
+    },
+    {
+      "task": "redis_upper",
+      "group": "redis/redis-py",
+      "full_read_comparison_chars": 107249,
+      "router_initial_chars": 82735,
+      "initial_complete": false,
+      "status": "auto_candidates",
+      "full_local_wall": 0.00032766605727374554,
+      "full_local_cpu": 0.0003280000000000019,
+      "router_local_wall": 0.023579957894980907,
+      "router_local_cpu": 0.023572,
+      "source_sha256": {
+        "redis/client.py": "af86687cb4f75cf93b332428d27f72c9ee782c4e6cf8f2468f4b04e3872eaed8"
+      }
+    },
+    {
+      "task": "express_status",
+      "group": "expressjs/express",
+      "full_read_comparison_chars": 30316,
+      "router_initial_chars": 30316,
+      "initial_complete": true,
+      "status": "auto_full",
+      "full_local_wall": 0.00041220802813768387,
+      "full_local_cpu": 0.00016700000000000048,
+      "router_local_wall": 0.00862820795737207,
+      "router_local_cpu": 0.008629000000000005,
+      "source_sha256": {
+        "lib/response.js": "efe24afe2978d0bf2ad52d5b163a7af0d25d965e5dfc75979c4fcc883c60a510"
+      }
+    },
+    {
+      "task": "express_json",
+      "group": "expressjs/express",
+      "full_read_comparison_chars": 30316,
+      "router_initial_chars": 22999,
+      "initial_complete": true,
+      "status": "auto_candidates",
+      "full_local_wall": 0.0001582079567015171,
+      "full_local_cpu": 0.00015899999999999942,
+      "router_local_wall": 0.008179834112524986,
+      "router_local_cpu": 0.008178000000000001,
+      "source_sha256": {
+        "lib/response.js": "efe24afe2978d0bf2ad52d5b163a7af0d25d965e5dfc75979c4fcc883c60a510"
+      }
+    },
+    {
+      "task": "express_chain",
+      "group": "expressjs/express",
+      "full_read_comparison_chars": 30316,
+      "router_initial_chars": 30316,
+      "initial_complete": true,
+      "status": "auto_full",
+      "full_local_wall": 0.00014316686429083347,
+      "full_local_cpu": 0.0001419999999999963,
+      "router_local_wall": 0.007285958854481578,
+      "router_local_cpu": 0.007286000000000001,
+      "source_sha256": {
+        "lib/response.js": "efe24afe2978d0bf2ad52d5b163a7af0d25d965e5dfc75979c4fcc883c60a510"
+      }
+    },
+    {
+      "task": "rust_new",
+      "group": "rust-lang/rust",
+      "full_read_comparison_chars": 205401,
+      "router_initial_chars": 82335,
+      "initial_complete": true,
+      "status": "auto_candidates",
+      "full_local_wall": 0.0008792909793555737,
+      "full_local_cpu": 0.0006929999999999992,
+      "router_local_wall": 0.024723458103835583,
+      "router_local_cpu": 0.024717000000000003,
+      "source_sha256": {
+        "library/alloc/src/vec/mod.rs": "397387d035f7acd813c23a402b65c48c1ccfaf26bda2e47389d873cb3c6c5a84"
+      }
+    },
+    {
+      "task": "rust_capacity",
+      "group": "rust-lang/rust",
+      "full_read_comparison_chars": 205401,
+      "router_initial_chars": 81469,
+      "initial_complete": true,
+      "status": "auto_candidates",
+      "full_local_wall": 0.0006607919931411743,
+      "full_local_cpu": 0.0006610000000000019,
+      "router_local_wall": 0.032166208839043975,
+      "router_local_cpu": 0.03215,
+      "source_sha256": {
+        "library/alloc/src/vec/mod.rs": "397387d035f7acd813c23a402b65c48c1ccfaf26bda2e47389d873cb3c6c5a84"
+      }
+    },
+    {
+      "task": "rust_length",
+      "group": "rust-lang/rust",
+      "full_read_comparison_chars": 205401,
+      "router_initial_chars": 60536,
+      "initial_complete": false,
+      "status": "auto_candidates",
+      "full_local_wall": 0.0006097080186009407,
+      "full_local_cpu": 0.0006090000000000054,
+      "router_local_wall": 0.02348816697485745,
+      "router_local_cpu": 0.023471,
+      "source_sha256": {
+        "library/alloc/src/vec/mod.rs": "397387d035f7acd813c23a402b65c48c1ccfaf26bda2e47389d873cb3c6c5a84"
+      }
+    },
+    {
+      "task": "log_first_warn",
+      "group": "logpai/loghub",
+      "full_read_comparison_chars": 296776,
+      "router_initial_chars": 117350,
+      "initial_complete": true,
+      "status": "auto_candidates",
+      "full_local_wall": 0.0006693750619888306,
+      "full_local_cpu": 0.00047599999999999726,
+      "router_local_wall": 0.06773358304053545,
+      "router_local_cpu": 0.067704,
+      "source_sha256": {
+        "HDFS/HDFS_2k.log": "7c967000980c086ed55fa6544ba4f05fe66d44622795e890c68caf8bbb635035"
+      }
+    },
+    {
+      "task": "log_last",
+      "group": "logpai/loghub",
+      "full_read_comparison_chars": 296776,
+      "router_initial_chars": 117350,
+      "initial_complete": true,
+      "status": "auto_candidates",
+      "full_local_wall": 0.0003935841377824545,
+      "full_local_cpu": 0.0003939999999999916,
+      "router_local_wall": 0.04040958406403661,
+      "router_local_cpu": 0.040386,
+      "source_sha256": {
+        "HDFS/HDFS_2k.log": "7c967000980c086ed55fa6544ba4f05fe66d44622795e890c68caf8bbb635035"
+      }
+    },
+    {
+      "task": "log_named",
+      "group": "logpai/loghub",
+      "full_read_comparison_chars": 296776,
+      "router_initial_chars": 62352,
+      "initial_complete": true,
+      "status": "auto_candidates",
+      "full_local_wall": 0.0003915419802069664,
+      "full_local_cpu": 0.00039100000000000246,
+      "router_local_wall": 0.05650525004602969,
+      "router_local_cpu": 0.056484999999999994,
+      "source_sha256": {
+        "HDFS/HDFS_2k.log": "7c967000980c086ed55fa6544ba4f05fe66d44622795e890c68caf8bbb635035"
+      }
+    },
+    {
+      "task": "ruff_language",
+      "group": "astral-sh/ruff",
+      "full_read_comparison_chars": 21807,
+      "router_initial_chars": 21807,
+      "initial_complete": true,
+      "status": "auto_full",
+      "full_local_wall": 0.0002617079298943281,
+      "full_local_cpu": 0.0001370000000000121,
+      "router_local_wall": 0.006218582857400179,
+      "router_local_cpu": 0.006218999999999999,
+      "source_sha256": {
+        "README.md": "284bf1f18d1a8081f7b47399eb4f16ffc17595730bbf998e374b95c6838a4e91"
+      }
+    },
+    {
+      "task": "ruff_license",
+      "group": "astral-sh/ruff",
+      "full_read_comparison_chars": 21807,
+      "router_initial_chars": 21807,
+      "initial_complete": true,
+      "status": "auto_full",
+      "full_local_wall": 9.420886635780334e-05,
+      "full_local_cpu": 9.299999999999586e-05,
+      "router_local_wall": 0.006621749838814139,
+      "router_local_cpu": 0.006621999999999999,
+      "source_sha256": {
+        "README.md": "284bf1f18d1a8081f7b47399eb4f16ffc17595730bbf998e374b95c6838a4e91"
+      }
+    },
+    {
+      "task": "ruff_cache",
+      "group": "astral-sh/ruff",
+      "full_read_comparison_chars": 21807,
+      "router_initial_chars": 21807,
+      "initial_complete": true,
+      "status": "auto_full",
+      "full_local_wall": 8.445815183222294e-05,
+      "full_local_cpu": 8.400000000000074e-05,
+      "router_local_wall": 0.006800041999667883,
+      "router_local_cpu": 0.0068000000000000005,
+      "source_sha256": {
+        "README.md": "284bf1f18d1a8081f7b47399eb4f16ffc17595730bbf998e374b95c6838a4e91"
+      }
+    },
+    {
+      "task": "celery_ack",
+      "group": "celery/celery",
+      "full_read_comparison_chars": 90076,
+      "router_initial_chars": 90076,
+      "initial_complete": true,
+      "status": "auto_full",
+      "full_local_wall": 0.0006086661014705896,
+      "full_local_cpu": 0.0003449999999999981,
+      "router_local_wall": 0.02767037507146597,
+      "router_local_cpu": 0.027465999999999997,
+      "source_sha256": {
+        "docs/userguide/tasks.rst": "8d232fa026d83f9cdd4318f03af5cc3bbcda075da9fc88b58e9ef57a9c0ed5f9"
+      }
+    },
+    {
+      "task": "celery_rate",
+      "group": "celery/celery",
+      "full_read_comparison_chars": 90076,
+      "router_initial_chars": 69782,
+      "initial_complete": true,
+      "status": "auto_candidates",
+      "full_local_wall": 0.0003094170242547989,
+      "full_local_cpu": 0.0003100000000000047,
+      "router_local_wall": 0.017608084017410874,
+      "router_local_cpu": 0.017598999999999997,
+      "source_sha256": {
+        "docs/userguide/tasks.rst": "8d232fa026d83f9cdd4318f03af5cc3bbcda075da9fc88b58e9ef57a9c0ed5f9"
+      }
+    },
+    {
+      "task": "celery_none",
+      "group": "celery/celery",
+      "full_read_comparison_chars": 90076,
+      "router_initial_chars": 90076,
+      "initial_complete": true,
+      "status": "auto_full",
+      "full_local_wall": 0.00029608397744596004,
+      "full_local_cpu": 0.0002960000000000046,
+      "router_local_wall": 0.02195329195819795,
+      "router_local_cpu": 0.021945999999999997,
+      "source_sha256": {
+        "docs/userguide/tasks.rst": "8d232fa026d83f9cdd4318f03af5cc3bbcda075da9fc88b58e9ef57a9c0ed5f9"
+      }
+    }
+  ]
+}

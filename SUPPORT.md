@@ -1,11 +1,7 @@
 # Support
 
-For usage questions, open a GitHub Discussion if enabled, or a regular issue. For bugs, include a minimal sanitized reproduction, Python/Codex CLI versions, and relevant `ROUTER_*` settings. Never share credentials or Codex authentication files.
+For a bug report include `--version`, Python/OS, mode/options, sanitized input, current exit code and structured stderr status. Report-json may help but can expose query terms/paths; review it first. Do not attach authentication or private source. No login is needed for default extraction.
 
-v2 requires a compatible Codex CLI, ChatGPT login, and access to fixed `gpt-6-luna` with `low` reasoning. It consumes Codex subscription usage. Check `codex login status` and the CLI version when diagnosing setup failures.
+`needs_targeted_read`: narrow the query or inspect specific ranges/other allowed files. `input_limit`: use a stable bounded regular file or another targeted reader. `source_changed`: inspect a stable version before retrying. `usage_error`: consult `--help` and references/contract.md. Installer modification errors: preserve edits separately; do not force overwrite.
 
-- [Usage and configuration](README.md)
-- [Historical benchmarks and evaluation caveats](docs/benchmark-report.md)
-- [Regression fixtures](tests/router-tests.json)
-- [Claude Code bootstrap](CLAUDE.md)
-- [Private security reporting](SECURITY.md)
+Automatic skill selection is host-dependent. Try manual `$token-router` invocation or the installed script's absolute path. Optional cloud failures never require changing your default local installation or adding an API key. Revert installations with a verified backup or clean previous release checkout.

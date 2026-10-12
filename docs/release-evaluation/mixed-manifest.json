@@ -1,0 +1,1013 @@
+{
+  "schema_version": 1,
+  "default_policy": "v2.4",
+  "default_return_context": "off",
+  "sources": [
+    {
+      "repo": "mahmoud/boltons",
+      "path": "boltons/cacheutils.py",
+      "commit": "4e5faa3d7e4008d89e0d8bf1ea87b6d9a061a16d",
+      "url": "https://raw.githubusercontent.com/mahmoud/boltons/4e5faa3d7e4008d89e0d8bf1ea87b6d9a061a16d/boltons/cacheutils.py",
+      "file": "sources/mahmoud/boltons/boltons/cacheutils.py",
+      "sha256": "77f6c35dc6332482c2f3f57b13059f3c1962641fbb7a6212aa7fd221c6d8aaad",
+      "bytes": 30408
+    },
+    {
+      "repo": "python-attrs/attrs",
+      "path": "src/attr/_make.py",
+      "commit": "644b4e165bfbeee7e127de6fcbda08b64014316f",
+      "url": "https://raw.githubusercontent.com/python-attrs/attrs/644b4e165bfbeee7e127de6fcbda08b64014316f/src/attr/_make.py",
+      "file": "sources/python-attrs/attrs/src/attr/_make.py",
+      "sha256": "db3b8d7a08c7ed547459e6828e906ae4044e234d0144c189595bdf56cff61a91",
+      "bytes": 108039
+    },
+    {
+      "repo": "redis/redis-py",
+      "path": "redis/client.py",
+      "commit": "fb1b096d300c7311094dd5c3fec2bbc7968ae4c1",
+      "url": "https://raw.githubusercontent.com/redis/redis-py/fb1b096d300c7311094dd5c3fec2bbc7968ae4c1/redis/client.py",
+      "file": "sources/redis/redis-py/redis/client.py",
+      "sha256": "af86687cb4f75cf93b332428d27f72c9ee782c4e6cf8f2468f4b04e3872eaed8",
+      "bytes": 94316
+    },
+    {
+      "repo": "expressjs/express",
+      "path": "lib/response.js",
+      "commit": "a419aa7350389a275ab45fde2e849ed1f02449ef",
+      "url": "https://raw.githubusercontent.com/expressjs/express/a419aa7350389a275ab45fde2e849ed1f02449ef/lib/response.js",
+      "file": "sources/expressjs/express/lib/response.js",
+      "sha256": "efe24afe2978d0bf2ad52d5b163a7af0d25d965e5dfc75979c4fcc883c60a510",
+      "bytes": 25089
+    },
+    {
+      "repo": "rust-lang/rust",
+      "path": "library/alloc/src/vec/mod.rs",
+      "commit": "fb5f32bdbe75e9114c62589cb86ace65f14a5b78",
+      "url": "https://raw.githubusercontent.com/rust-lang/rust/fb5f32bdbe75e9114c62589cb86ace65f14a5b78/library/alloc/src/vec/mod.rs",
+      "file": "sources/rust-lang/rust/library/alloc/src/vec/mod.rs",
+      "sha256": "397387d035f7acd813c23a402b65c48c1ccfaf26bda2e47389d873cb3c6c5a84",
+      "bytes": 177597
+    },
+    {
+      "repo": "logpai/loghub",
+      "path": "HDFS/HDFS_2k.log",
+      "commit": "dd61d0952749ee7963bde24220d1be5ede023033",
+      "url": "https://raw.githubusercontent.com/logpai/loghub/dd61d0952749ee7963bde24220d1be5ede023033/HDFS/HDFS_2k.log",
+      "file": "sources/logpai/loghub/HDFS/HDFS_2k.log",
+      "sha256": "7c967000980c086ed55fa6544ba4f05fe66d44622795e890c68caf8bbb635035",
+      "bytes": 287848
+    },
+    {
+      "repo": "astral-sh/ruff",
+      "path": "README.md",
+      "commit": "d7643470cb1aac6f86fe8cbefafc8a700fadec22",
+      "url": "https://raw.githubusercontent.com/astral-sh/ruff/d7643470cb1aac6f86fe8cbefafc8a700fadec22/README.md",
+      "file": "sources/astral-sh/ruff/README.md",
+      "sha256": "284bf1f18d1a8081f7b47399eb4f16ffc17595730bbf998e374b95c6838a4e91",
+      "bytes": 19655
+    },
+    {
+      "repo": "celery/celery",
+      "path": "docs/userguide/tasks.rst",
+      "commit": "a7bbf62a1b33568f6b20796aae479de8722478b6",
+      "url": "https://raw.githubusercontent.com/celery/celery/a7bbf62a1b33568f6b20796aae479de8722478b6/docs/userguide/tasks.rst",
+      "file": "sources/celery/celery/docs/userguide/tasks.rst",
+      "sha256": "8d232fa026d83f9cdd4318f03af5cc3bbcda075da9fc88b58e9ef57a9c0ed5f9",
+      "bytes": 77020
+    },
+    {
+      "repo": "redis/redis-py",
+      "path": "redis/exceptions.py",
+      "commit": "fb1b096d300c7311094dd5c3fec2bbc7968ae4c1",
+      "url": "https://raw.githubusercontent.com/redis/redis-py/fb1b096d300c7311094dd5c3fec2bbc7968ae4c1/redis/exceptions.py",
+      "file": "sources/redis/redis-py/redis/exceptions.py",
+      "sha256": "fcee20068e882b7eea413ded0192eda2bd47fcfca2777931aab5e7f933103763",
+      "bytes": 9515
+    }
+  ],
+  "tasks": [
+    {
+      "id": "cache_invalid_size",
+      "group": "mahmoud/boltons",
+      "query": "For an invalid zero cache size, which exception class is raised?",
+      "primary": "boltons/cacheutils.py",
+      "files": {
+        "boltons/cacheutils.py": "sources/mahmoud/boltons/boltons/cacheutils.py"
+      },
+      "mode": "heavy_code",
+      "language": "en",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "For an invalid zero cache size, which exception class is raised? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "ValueError"
+          ],
+          "required_evidence": [
+            {
+              "file": "boltons/cacheutils.py",
+              "start_line": 118,
+              "end_line": 119
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "boltons/cacheutils.py",
+                "start_line": 118,
+                "end_line": 119
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cache_miss",
+      "group": "mahmoud/boltons",
+      "query": "LRU.get에서 키가 없으면 반환하는 표현식은?",
+      "primary": "boltons/cacheutils.py",
+      "files": {
+        "boltons/cacheutils.py": "sources/mahmoud/boltons/boltons/cacheutils.py"
+      },
+      "mode": "heavy_code",
+      "language": "ko",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "LRU.get에서 키가 없으면 반환하는 표현식은? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "default"
+          ],
+          "required_evidence": [
+            {
+              "file": "boltons/cacheutils.py",
+              "start_line": 248,
+              "end_line": 253
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "boltons/cacheutils.py",
+                "start_line": 248,
+                "end_line": 253
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cache_on_miss",
+      "group": "mahmoud/boltons",
+      "query": "Which exception rejects a noncallable on_miss?",
+      "primary": "boltons/cacheutils.py",
+      "files": {
+        "boltons/cacheutils.py": "sources/mahmoud/boltons/boltons/cacheutils.py"
+      },
+      "mode": "heavy_code",
+      "language": "en",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "Which exception rejects a noncallable on_miss? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "TypeError"
+          ],
+          "required_evidence": [
+            {
+              "file": "boltons/cacheutils.py",
+              "start_line": 125,
+              "end_line": 128
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "boltons/cacheutils.py",
+                "start_line": 125,
+                "end_line": 128
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "attrs_bool",
+      "group": "python-attrs/attrs",
+      "query": "NOTHING의 __bool__ 반환 리터럴은?",
+      "primary": "src/attr/_make.py",
+      "files": {
+        "src/attr/_make.py": "sources/python-attrs/attrs/src/attr/_make.py"
+      },
+      "mode": "heavy_code",
+      "language": "ko",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "NOTHING의 __bool__ 반환 리터럴은? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "False"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/attr/_make.py",
+              "start_line": 76,
+              "end_line": 77
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/attr/_make.py",
+                "start_line": 76,
+                "end_line": 77
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "attrs_own",
+      "group": "python-attrs/attrs",
+      "query": "What expression does _has_own_attribute return?",
+      "primary": "src/attr/_make.py",
+      "files": {
+        "src/attr/_make.py": "sources/python-attrs/attrs/src/attr/_make.py"
+      },
+      "mode": "heavy_code",
+      "language": "en",
+      "return_target": "_has_own_attribute",
+      "facts": [
+        {
+          "id": "answer",
+          "question": "What expression does _has_own_attribute return? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "attrib_name in cls.__dict__"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/attr/_make.py",
+              "start_line": 317,
+              "end_line": 317
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/attr/_make.py",
+                "start_line": 317,
+                "end_line": 317
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "attrs_classvar",
+      "group": "python-attrs/attrs",
+      "query": "_is_class_var의 최종 반환식은?",
+      "primary": "src/attr/_make.py",
+      "files": {
+        "src/attr/_make.py": "sources/python-attrs/attrs/src/attr/_make.py"
+      },
+      "mode": "heavy_code",
+      "language": "ko",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "_is_class_var의 최종 반환식은? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "annot.startswith(_CLASSVAR_PREFIXES)"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/attr/_make.py",
+              "start_line": 310,
+              "end_line": 310
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/attr/_make.py",
+                "start_line": 310,
+                "end_line": 310
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "redis_debug",
+      "group": "redis/redis-py",
+      "query": "What expression does is_debug_log_enabled return?",
+      "primary": "redis/client.py",
+      "files": {
+        "redis/client.py": "sources/redis/redis-py/redis/client.py"
+      },
+      "mode": "heavy_code",
+      "language": "en",
+      "return_target": "is_debug_log_enabled",
+      "facts": [
+        {
+          "id": "answer",
+          "question": "What expression does is_debug_log_enabled return? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "logger.isEnabledFor(logging.DEBUG)"
+          ],
+          "required_evidence": [
+            {
+              "file": "redis/client.py",
+              "start_line": 117,
+              "end_line": 117
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "redis/client.py",
+                "start_line": 117,
+                "end_line": 117
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "redis_encoder",
+      "group": "redis/redis-py",
+      "query": "Redis.get_encoder가 호출하는 전체 메서드 이름은?",
+      "primary": "redis/client.py",
+      "files": {
+        "redis/client.py": "sources/redis/redis-py/redis/client.py",
+        "redis/exceptions.py": "sources/redis/redis-py/redis/exceptions.py"
+      },
+      "mode": "heavy_code",
+      "language": "ko",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "Redis.get_encoder가 호출하는 전체 메서드 이름은? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "self.connection_pool.get_encoder"
+          ],
+          "required_evidence": [
+            {
+              "file": "redis/client.py",
+              "start_line": 589,
+              "end_line": 591
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "redis/client.py",
+                "start_line": 589,
+                "end_line": 591
+              }
+            ]
+          ]
+        },
+        {
+          "id": "base_error",
+          "question": "In the other allowed file, what is RedisError directly derived from? Answer only its base class name.",
+          "accepted_answers": [
+            "Exception"
+          ],
+          "required_evidence": [
+            {
+              "file": "redis/exceptions.py",
+              "start_line": 13,
+              "end_line": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "redis_upper",
+      "group": "redis/redis-py",
+      "query": "What string transformation does CaseInsensitiveDict.__getitem__ apply to k?",
+      "primary": "redis/client.py",
+      "files": {
+        "redis/client.py": "sources/redis/redis-py/redis/client.py"
+      },
+      "mode": "heavy_code",
+      "language": "en",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "What string transformation does CaseInsensitiveDict.__getitem__ apply to k? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "upper"
+          ],
+          "required_evidence": [
+            {
+              "file": "redis/client.py",
+              "start_line": 151,
+              "end_line": 152
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "redis/client.py",
+                "start_line": 151,
+                "end_line": 152
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "express_status",
+      "group": "expressjs/express",
+      "query": "res.status가 비정수 code에 발생시키는 예외 클래스는?",
+      "primary": "lib/response.js",
+      "files": {
+        "lib/response.js": "sources/expressjs/express/lib/response.js"
+      },
+      "mode": "heavy_code",
+      "language": "ko",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "res.status가 비정수 code에 발생시키는 예외 클래스는? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "TypeError"
+          ],
+          "required_evidence": [
+            {
+              "file": "lib/response.js",
+              "start_line": 65,
+              "end_line": 69
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "lib/response.js",
+                "start_line": 65,
+                "end_line": 69
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "express_json",
+      "group": "expressjs/express",
+      "query": "What Content-Type does res.json set when missing?",
+      "primary": "lib/response.js",
+      "files": {
+        "lib/response.js": "sources/expressjs/express/lib/response.js"
+      },
+      "mode": "heavy_code",
+      "language": "en",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "What Content-Type does res.json set when missing? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "application/json"
+          ],
+          "required_evidence": [
+            {
+              "file": "lib/response.js",
+              "start_line": 244,
+              "end_line": 247
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "lib/response.js",
+                "start_line": 244,
+                "end_line": 247
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "express_chain",
+      "group": "expressjs/express",
+      "query": "res.status의 성공 경로 반환식은?",
+      "primary": "lib/response.js",
+      "files": {
+        "lib/response.js": "sources/expressjs/express/lib/response.js"
+      },
+      "mode": "heavy_code",
+      "language": "ko",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "res.status의 성공 경로 반환식은? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "this"
+          ],
+          "required_evidence": [
+            {
+              "file": "lib/response.js",
+              "start_line": 75,
+              "end_line": 76
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "lib/response.js",
+                "start_line": 75,
+                "end_line": 76
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rust_new",
+      "group": "rust-lang/rust",
+      "query": "What initial numeric length is stored by Vec::new?",
+      "primary": "library/alloc/src/vec/mod.rs",
+      "files": {
+        "library/alloc/src/vec/mod.rs": "sources/rust-lang/rust/library/alloc/src/vec/mod.rs"
+      },
+      "mode": "heavy_code",
+      "language": "en",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "What initial numeric length is stored by Vec::new? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "0"
+          ],
+          "required_evidence": [
+            {
+              "file": "library/alloc/src/vec/mod.rs",
+              "start_line": 464,
+              "end_line": 466
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "library/alloc/src/vec/mod.rs",
+                "start_line": 464,
+                "end_line": 466
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rust_capacity",
+      "group": "rust-lang/rust",
+      "query": "Vec의 capacity 메서드 본문 표현식은?",
+      "primary": "library/alloc/src/vec/mod.rs",
+      "files": {
+        "library/alloc/src/vec/mod.rs": "sources/rust-lang/rust/library/alloc/src/vec/mod.rs"
+      },
+      "mode": "heavy_code",
+      "language": "ko",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "Vec의 capacity 메서드 본문 표현식은? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "self.buf.capacity()"
+          ],
+          "required_evidence": [
+            {
+              "file": "library/alloc/src/vec/mod.rs",
+              "start_line": 1429,
+              "end_line": 1431
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "library/alloc/src/vec/mod.rs",
+                "start_line": 1429,
+                "end_line": 1431
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rust_length",
+      "group": "rust-lang/rust",
+      "query": "What field expression does Vec::len return?",
+      "primary": "library/alloc/src/vec/mod.rs",
+      "files": {
+        "library/alloc/src/vec/mod.rs": "sources/rust-lang/rust/library/alloc/src/vec/mod.rs"
+      },
+      "mode": "heavy_code",
+      "language": "en",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "What field expression does Vec::len return? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "self.len"
+          ],
+          "required_evidence": [
+            {
+              "file": "library/alloc/src/vec/mod.rs",
+              "start_line": 3144,
+              "end_line": 3147
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "library/alloc/src/vec/mod.rs",
+                "start_line": 3144,
+                "end_line": 3147
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "log_first_warn",
+      "group": "logpai/loghub",
+      "query": "가장 이른 WARN 이벤트에서 실패한 block 식별자는?",
+      "primary": "HDFS/HDFS_2k.log",
+      "files": {
+        "HDFS/HDFS_2k.log": "sources/logpai/loghub/HDFS/HDFS_2k.log"
+      },
+      "mode": "error_log",
+      "language": "ko",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "가장 이른 WARN 이벤트에서 실패한 block 식별자는? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "blk_-2918118818249673980"
+          ],
+          "required_evidence": [
+            {
+              "file": "HDFS/HDFS_2k.log",
+              "start_line": 78,
+              "end_line": 78
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "HDFS/HDFS_2k.log",
+                "start_line": 78,
+                "end_line": 78
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "log_last",
+      "group": "logpai/loghub",
+      "query": "Which block is being received in the final event?",
+      "primary": "HDFS/HDFS_2k.log",
+      "files": {
+        "HDFS/HDFS_2k.log": "sources/logpai/loghub/HDFS/HDFS_2k.log"
+      },
+      "mode": "error_log",
+      "language": "en",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "Which block is being received in the final event? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "blk_4343207286455274569"
+          ],
+          "required_evidence": [
+            {
+              "file": "HDFS/HDFS_2k.log",
+              "start_line": 2000,
+              "end_line": 2000
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "HDFS/HDFS_2k.log",
+                "start_line": 2000,
+                "end_line": 2000
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "log_named",
+      "group": "logpai/loghub",
+      "query": "blk_8376667364205250596 경고의 수신 상대 IP는?",
+      "primary": "HDFS/HDFS_2k.log",
+      "files": {
+        "HDFS/HDFS_2k.log": "sources/logpai/loghub/HDFS/HDFS_2k.log"
+      },
+      "mode": "error_log",
+      "language": "ko",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "blk_8376667364205250596 경고의 수신 상대 IP는? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "10.251.91.159"
+          ],
+          "required_evidence": [
+            {
+              "file": "HDFS/HDFS_2k.log",
+              "start_line": 79,
+              "end_line": 79
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "HDFS/HDFS_2k.log",
+                "start_line": 79,
+                "end_line": 79
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ruff_language",
+      "group": "astral-sh/ruff",
+      "query": "Which language implements the described Python linter?",
+      "primary": "README.md",
+      "files": {
+        "README.md": "sources/astral-sh/ruff/README.md"
+      },
+      "mode": "agent_context",
+      "language": "en",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "Which language implements the described Python linter? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "Rust"
+          ],
+          "required_evidence": [
+            {
+              "file": "README.md",
+              "start_line": 14,
+              "end_line": 14
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "README.md",
+                "start_line": 14,
+                "end_line": 14
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ruff_license",
+      "group": "astral-sh/ruff",
+      "query": "이 프로젝트의 라이선스 이름은?",
+      "primary": "README.md",
+      "files": {
+        "README.md": "sources/astral-sh/ruff/README.md"
+      },
+      "mode": "agent_context",
+      "language": "ko",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "이 프로젝트의 라이선스 이름은? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "MIT"
+          ],
+          "required_evidence": [
+            {
+              "file": "README.md",
+              "start_line": 422,
+              "end_line": 422
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "README.md",
+                "start_line": 422,
+                "end_line": 422
+              }
+            ],
+            [
+              {
+                "file": "README.md",
+                "start_line": 448,
+                "end_line": 448
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ruff_cache",
+      "group": "astral-sh/ruff",
+      "query": "Which hidden directory named for this tool is excluded in the sample configuration?",
+      "primary": "README.md",
+      "files": {
+        "README.md": "sources/astral-sh/ruff/README.md"
+      },
+      "mode": "agent_context",
+      "language": "en",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "Which hidden directory named for this tool is excluded in the sample configuration? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            ".ruff_cache"
+          ],
+          "required_evidence": [
+            {
+              "file": "README.md",
+              "start_line": 238,
+              "end_line": 238
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "README.md",
+                "start_line": 238,
+                "end_line": 238
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "celery_ack",
+      "group": "celery/celery",
+      "query": "멱등 작업을 실행한 뒤 acknowledge하려면 어떤 옵션을 켜야 하나요?",
+      "primary": "docs/userguide/tasks.rst",
+      "files": {
+        "docs/userguide/tasks.rst": "sources/celery/celery/docs/userguide/tasks.rst"
+      },
+      "mode": "agent_context",
+      "language": "ko",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "멱등 작업을 실행한 뒤 acknowledge하려면 어떤 옵션을 켜야 하나요? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "acks_late"
+          ],
+          "required_evidence": [
+            {
+              "file": "docs/userguide/tasks.rst",
+              "start_line": 28,
+              "end_line": 30
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "docs/userguide/tasks.rst",
+                "start_line": 28,
+                "end_line": 30
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "celery_rate",
+      "group": "celery/celery",
+      "query": "Is Task.rate_limit global or per worker instance?",
+      "primary": "docs/userguide/tasks.rst",
+      "files": {
+        "docs/userguide/tasks.rst": "sources/celery/celery/docs/userguide/tasks.rst"
+      },
+      "mode": "agent_context",
+      "language": "en",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "Is Task.rate_limit global or per worker instance? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "per worker instance"
+          ],
+          "required_evidence": [
+            {
+              "file": "docs/userguide/tasks.rst",
+              "start_line": 1032,
+              "end_line": 1033
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "docs/userguide/tasks.rst",
+                "start_line": 1032,
+                "end_line": 1033
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "celery_none",
+      "group": "celery/celery",
+      "query": "Task.rate_limit에서 제한을 끄는 상수는?",
+      "primary": "docs/userguide/tasks.rst",
+      "files": {
+        "docs/userguide/tasks.rst": "sources/celery/celery/docs/userguide/tasks.rst"
+      },
+      "mode": "agent_context",
+      "language": "ko",
+      "return_target": null,
+      "facts": [
+        {
+          "id": "answer",
+          "question": "Task.rate_limit에서 제한을 끄는 상수는? Answer only the requested expression/name/value; cite original lines.",
+          "accepted_answers": [
+            "None"
+          ],
+          "required_evidence": [
+            {
+              "file": "docs/userguide/tasks.rst",
+              "start_line": 1019,
+              "end_line": 1020
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "docs/userguide/tasks.rst",
+                "start_line": 1019,
+                "end_line": 1020
+              }
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "selection": "24 pre-evaluation questions, 8 independent project/source groups; 12 Korean/12 English; not a random user distribution. No swapping by activation.",
+  "cloud_ids": [
+    "attrs_own",
+    "log_first_warn",
+    "rust_capacity",
+    "ruff_language"
+  ],
+  "stress_queries": [
+    "unrelated_nonexistent_identifier_731",
+    "capacity threshold mystery",
+    "여러 파일의 관계를 설명하세요"
+  ],
+  "gold_frozen_before_outputs": true
+}

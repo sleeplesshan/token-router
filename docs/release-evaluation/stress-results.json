@@ -1,0 +1,50 @@
+[
+  {
+    "name": "long_line.py",
+    "bytes": 1000001,
+    "code": 2,
+    "raw_chars": 0,
+    "status": "needs_targeted_read",
+    "reason_codes": [
+      "input_limit"
+    ],
+    "wall": 0.003283542115241289,
+    "cpu": 0.003072000000000002,
+    "peak_rss_bytes": 26968064
+  },
+  {
+    "name": "many_lines.py",
+    "bytes": 500002,
+    "code": 2,
+    "raw_chars": 0,
+    "status": "needs_targeted_read",
+    "reason_codes": [
+      "input_limit"
+    ],
+    "wall": 0.2240592078305781,
+    "cpu": 0.22368000000000002,
+    "peak_rss_bytes": 49709056
+  },
+  {
+    "name": "complex.py",
+    "bytes": 772780,
+    "code": 0,
+    "raw_chars": 31159,
+    "status": "auto_candidates",
+    "reason_codes": [],
+    "wall": 0.2728527910076082,
+    "cpu": 0.272577,
+    "peak_rss_bytes": 129433600
+  },
+  {
+    "name": "truncated.py",
+    "bytes": 16013,
+    "code": 0,
+    "raw_chars": 405,
+    "status": "auto_candidates",
+    "reason_codes": [],
+    "wall": 0.01310795801691711,
+    "cpu": 0.013099000000000003,
+    "peak_rss_bytes": 26181632
+  }
+]

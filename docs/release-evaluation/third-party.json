@@ -1,0 +1,74 @@
+[
+  {
+    "repo": "mahmoud/boltons",
+    "commit": "4e5faa3d7e4008d89e0d8bf1ea87b6d9a061a16d",
+    "spdx": "NOASSERTION",
+    "license_path": "LICENSE",
+    "url": "https://github.com/mahmoud/boltons/blob/4e5faa3d7e4008d89e0d8bf1ea87b6d9a061a16d/LICENSE",
+    "runtime_redistributed": false,
+    "note": "Upstream metadata only; separate data-set licenses may differ. Download pinned sources for local evaluation, not included in release."
+  },
+  {
+    "repo": "python-attrs/attrs",
+    "commit": "644b4e165bfbeee7e127de6fcbda08b64014316f",
+    "spdx": "MIT",
+    "license_path": "LICENSE",
+    "url": "https://github.com/python-attrs/attrs/blob/644b4e165bfbeee7e127de6fcbda08b64014316f/LICENSE",
+    "runtime_redistributed": false,
+    "note": "Upstream metadata only; separate data-set licenses may differ. Download pinned sources for local evaluation, not included in release."
+  },
+  {
+    "repo": "redis/redis-py",
+    "commit": "fb1b096d300c7311094dd5c3fec2bbc7968ae4c1",
+    "spdx": "MIT",
+    "license_path": "LICENSE",
+    "url": "https://github.com/redis/redis-py/blob/fb1b096d300c7311094dd5c3fec2bbc7968ae4c1/LICENSE",
+    "runtime_redistributed": false,
+    "note": "Upstream metadata only; separate data-set licenses may differ. Download pinned sources for local evaluation, not included in release."
+  },
+  {
+    "repo": "expressjs/express",
+    "commit": "a419aa7350389a275ab45fde2e849ed1f02449ef",
+    "spdx": "MIT",
+    "license_path": "LICENSE",
+    "url": "https://github.com/expressjs/express/blob/a419aa7350389a275ab45fde2e849ed1f02449ef/LICENSE",
+    "runtime_redistributed": false,
+    "note": "Upstream metadata only; separate data-set licenses may differ. Download pinned sources for local evaluation, not included in release."
+  },
+  {
+    "repo": "rust-lang/rust",
+    "commit": "fb5f32bdbe75e9114c62589cb86ace65f14a5b78",
+    "spdx": "NOASSERTION",
+    "license_path": "LICENSE-APACHE",
+    "url": "https://github.com/rust-lang/rust/blob/fb5f32bdbe75e9114c62589cb86ace65f14a5b78/LICENSE-APACHE",
+    "runtime_redistributed": false,
+    "note": "Upstream metadata only; separate data-set licenses may differ. Download pinned sources for local evaluation, not included in release."
+  },
+  {
+    "repo": "logpai/loghub",
+    "commit": "dd61d0952749ee7963bde24220d1be5ede023033",
+    "spdx": "NOASSERTION",
+    "license_path": "LICENSE",
+    "url": "https://github.com/logpai/loghub/blob/dd61d0952749ee7963bde24220d1be5ede023033/LICENSE",
+    "runtime_redistributed": false,
+    "note": "Upstream metadata only; separate data-set licenses may differ. Download pinned sources for local evaluation, not included in release."
+  },
+  {
+    "repo": "astral-sh/ruff",
+    "commit": "d7643470cb1aac6f86fe8cbefafc8a700fadec22",
+    "spdx": "MIT",
+    "license_path": "LICENSE",
+    "url": "https://github.com/astral-sh/ruff/blob/d7643470cb1aac6f86fe8cbefafc8a700fadec22/LICENSE",
+    "runtime_redistributed": false,
+    "note": "Upstream metadata only; separate data-set licenses may differ. Download pinned sources for local evaluation, not included in release."
+  },
+  {
+    "repo": "celery/celery",
+    "commit": "a7bbf62a1b33568f6b20796aae479de8722478b6",
+    "spdx": "NOASSERTION",
+    "license_path": "LICENSE",
+    "url": "https://github.com/celery/celery/blob/a7bbf62a1b33568f6b20796aae479de8722478b6/LICENSE",
+    "runtime_redistributed": false,
+    "note": "Upstream metadata only; separate data-set licenses may differ. Download pinned sources for local evaluation, not included in release."
+  }
+]

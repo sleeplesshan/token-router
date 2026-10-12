@@ -35,7 +35,7 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
-def usage_from_events(text):
+def usage_from_events(text, *, allow_tools=False):
     """Prefer latest cumulative total; otherwise sum unique completed turns.
 
     Event/turn ids deduplicate retransmissions. Exact id-less duplicate events
@@ -49,15 +49,20 @@ def usage_from_events(text):
         except ValueError: continue
         if not isinstance(event, dict): continue
         item = event.get('item', {})
-        if isinstance(item, dict) and item.get('type') not in (None,'agent_message','reasoning','error'):
+        if not allow_tools and isinstance(item, dict) and item.get('type') not in (None,'agent_message','reasoning','error'):
             raise ValueError('Unexpected model tool use: '+str(item.get('type')))
         info = event.get('info') or event.get('payload', {}).get('info', {})
         if isinstance(info, dict) and isinstance(info.get('total_token_usage'), dict):
             snapshot=info['total_token_usage']
+            if any(type(snapshot.get(k)) is not int or snapshot[k]<0 for k in ('input_tokens','output_tokens')):
+                raise ValueError('Incomplete cumulative usage')
             cumulative={k:max(int((cumulative or {}).get(k,0)),int(snapshot.get(k,0))) for k in FIELDS}
         if event.get('type') == 'turn.completed':
             key = event.get('turn_id') or event.get('id') or json.dumps(event, sort_keys=True)
-            turns[key] = event.get('usage', {})
+            usage = event.get('usage', {})
+            if not isinstance(usage,dict) or any(type(usage.get(k)) is not int or usage[k]<0 for k in ('input_tokens','output_tokens')):
+                raise ValueError('Incomplete completed usage')
+            turns[key] = usage
     if cumulative is not None:
         aliases={'cached_input_tokens':'cached_input_tokens','reasoning_output_tokens':'reasoning_output_tokens'}
         return {k:int(cumulative.get(aliases.get(k,k),0)) for k in FIELDS}

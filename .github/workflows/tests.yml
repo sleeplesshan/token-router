@@ -1,17 +1,28 @@
-name: Router tests
+name: Router offline tests
 on:
   push:
+    branches: [main]
   pull_request:
+permissions:
+  contents: read
 jobs:
   offline:
-    runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ['3.10', '3.13']
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ['3.10', '3.14']
+    runs-on: ${{ matrix.os }}
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, verified Git ref
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5, verified Git ref
         with:
           python-version: ${{ matrix.python-version }}
-      - run: python -m unittest discover -s tests -p 'test_*.py'
+      - run: python -m unittest discover -s tests
       - run: python scripts/run_router_tests.py tests/router-tests.json
+      - run: python scripts/build_release.py --output dist
+      - run: python scripts/smoke_archive.py dist/token-router-2.6.0.zip

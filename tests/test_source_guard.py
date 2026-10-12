@@ -2,6 +2,7 @@ import importlib.util
 import os
 from pathlib import Path
 import tempfile
+import time
 import unittest
 
 SPEC = importlib.util.spec_from_file_location('source_guard', Path(__file__).resolve().parents[1] / 'scripts/source_guard.py')
@@ -27,6 +28,10 @@ class SourceGuardTests(unittest.TestCase):
     def test_same_size_mutation_even_restored_mtime(self):
         guard = g.SourceGuard(self.path)
         initial = self.path.stat()
+        # Metadata guards cannot distinguish writes within the same clock tick.
+        # Exercise a changed metadata timestamp, not atomic snapshot semantics.
+        if os.name == 'nt':
+            time.sleep(0.05)
         self.path.write_text('ALPHA\nBETA\n')
         os.utime(self.path, ns=(initial.st_atime_ns, initial.st_mtime_ns))
         with self.assertRaises(g.SourceChangedError):
@@ -45,10 +50,21 @@ class SourceGuardTests(unittest.TestCase):
         with self.assertRaises(g.SourceChangedError):
             with guard.open() as handle:
                 self.assertEqual(handle.readline(), 'alpha\n')
+                if os.name == 'nt':
+                    time.sleep(0.05)
                 self.path.write_text('alpha\nBETA\n')
 
     def test_rotation_while_descriptor_still_open(self):
         guard = g.SourceGuard(self.path)
+        if os.name == 'nt':
+            with guard.open():
+                with self.assertRaises(PermissionError):
+                    self.path.rename(self.path.with_name('old'))
+            self.path.rename(self.path.with_name('old'))
+            self.path.write_text('alpha\nbeta\n')
+            with self.assertRaises(g.SourceChangedError):
+                guard.read()
+            return
         with self.assertRaises(g.SourceChangedError):
             with guard.open():
                 self.path.rename(self.path.with_name('old'))
@@ -69,9 +85,17 @@ class SourceGuardTests(unittest.TestCase):
         guard = g.SourceGuard(self.path)
         iterator = guard.lines()
         self.assertEqual(next(iterator), 'alpha\n')
-        self.path.unlink()
-        with self.assertRaises(g.SourceChangedError):
+        if os.name == 'nt':
+            with self.assertRaises(PermissionError):
+                self.path.unlink()
             iterator.close()
+            self.path.unlink()
+            with self.assertRaises(g.SourceChangedError):
+                guard.read()
+        else:
+            self.path.unlink()
+            with self.assertRaises(g.SourceChangedError):
+                iterator.close()
 
     def test_decode_replacement_and_empty_file(self):
         self.path.write_bytes(b'\xff\n')
