@@ -1039,6 +1039,20 @@ def main(argv: list[str]) -> int:
         new=auto and args.optimize=='tokens' and args.policy_version=='v2.5'
         checks={}
         full_reason='automatic full-source bypass; no model call; raw source preserved'
+        if new:
+            probe=guard.probe(AUTO_SMALL_CHARS+1)
+            if len(probe)<=AUTO_SMALL_CHARS:
+                raw_lines=list(io.StringIO(probe,newline=''))
+                total=len(raw_lines)
+                source_required={t:{'count':sum(len(list(required_pattern(t).finditer(line))) for line in raw_lines),'witness_lines':[]} for t in args.require_term}
+                matched=tuple(t for t in terms if query_matches(probe,[t]))
+                evidence=assess_packet_evidence(terms,(),matched,(probe,),args.require_term,source_required)
+                packet=packet_from_guard(guard,[dict(start_line=1,end_line=total,reason=full_reason)],probe)
+                print('[token-router usage] '+json.dumps(dict(input_tokens=0,output_tokens=0,cached_input_tokens=0)),file=sys.stderr)
+                return finalize_packet(args,guard,packet,{**status,'status':'auto_full','checks':asdict(evidence),
+                    'packet_query_anchor':evidence.packet_query_anchor,'absent_required':list(evidence.absent_required),
+                    'lost_required':[],'reason_codes':['small_source'],'full_source_returned':True,
+                    'coverage_guaranteed':True,'scan_complete':True})
         if new and args.read_scope=='whole':
             total=0; source_chars=0; chunks=[]; hits=set()
             matcher=compile_matcher(terms)
@@ -1064,13 +1078,6 @@ def main(argv: list[str]) -> int:
                 'coverage_guaranteed':True,'scan_complete':True})
         candidate,truncated,eligible,total,visible=ranked_candidates(guard.lines,args.mode,terms,MAX_PROMPT_CHARS,
                     diagnostics=checks,required_terms=args.require_term)
-        visible_set=set(visible)
-        source_chars=candidate_raw_chars=0
-        for n,line in enumerate(guard.lines(),1):
-            source_chars+=len(line)
-            if n in visible_set:
-                candidate_raw_chars+=len(line)
-        checks.update(source_chars=source_chars,candidate_raw_chars=candidate_raw_chars)
         scan=ScanFacts(total,checks['source_chars'],checks['candidate_raw_chars'],
                        tuple(checks.get('source_matched_terms',())),guard.stamp)
         print('[token-router coverage] '+json.dumps(dict(total_lines=total,candidate_lines=eligible,
