@@ -102,7 +102,7 @@ class ReleaseContract(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp);pidfile=root/'pid';fake=root/'fake'
             fake.write_text('#!'+sys.executable+'\nimport subprocess,sys,time\nfrom pathlib import Path\np=subprocess.Popen([sys.executable,"-c","import time;time.sleep(60)"])\nPath('+repr(str(pidfile))+').write_text(str(p.pid))\ntime.sleep(60)\n');fake.chmod(0o755)
-            with patch.object(r,'CODEX_BIN',str(fake)),patch.object(r,'TIMEOUT_SECONDS',0.5),patch.dict(os.environ,{'ROUTER_MOCK_RESPONSE':''}):
+            with patch.object(r,'CODEX_BIN',str(fake)),patch.object(r,'TIMEOUT_SECONDS',3),patch.dict(os.environ,{'ROUTER_MOCK_RESPONSE':''}):
                 os.environ.pop('ROUTER_MOCK_RESPONSE',None)
                 with self.assertRaises(RuntimeError):r.call_codex('test')
             pid=int(pidfile.read_text());state=subprocess.run(['ps','-o','stat=','-p',str(pid)],capture_output=True,text=True).stdout.strip()

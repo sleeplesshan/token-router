@@ -39,10 +39,14 @@ The actual installed-skill comparison completed four fixed pairs with gpt-6.1-so
 
 The first valid tool event had caused a harness failure, not an account/provider failure. Its raw usage and original result remain preserved. Including preflight and that unpaired call: **133,723known tokens,10CLI calls,137.505s**; all within the original budget. Cached/reasoning subsets were not re-added. Physical request counts/server hard caps are unobserved.
 
-The measured installed SKILL matches final SKILL; its runtime came from873de65. A safe inventory-mismatch refusal prevented an intermediate installation update. Final runtime differs only in CLI UTF-8/LF configuration from that measured installation; the router never executed in those agent episodes. All five hashes and this distinction are recorded in repository evaluation data. Current local default packets were independently rechecked24/24 identical to baseline. This is not proof of automatic selection or routed recovery. Those paths and live Luna remain outside the validated basic-product guarantee.
+The measured installed SKILL matches final SKILL; its runtime came from873de65. A safe inventory-mismatch refusal prevented an intermediate installation update. The measured installation predates CLI UTF-8/LF configuration and the release CI fix for native Windows change-time metadata; the router never executed in those agent episodes. All five hashes and this distinction are recorded in repository evaluation data. Local default packets were independently rechecked24/24 identical to baseline before the Windows-only metadata fix. The fix preserves POSIX identity checks and adds no model calls. This is not proof of automatic selection or routed recovery. Those paths and live Luna remain outside the validated basic-product guarantee.
 
 ## Publication and rollback
 
 Keep the reviewed candidate archive/checksum/inventory together. Validate the pending CI platforms, publish the authorized branch/PR and exact tag/release. Do not attach historical savings to changed product hashes. Current publication state is also available on the GitHub release page.
 
 Rollback with a verified installation backup, or a clean checkout/archive of public **v2.5.0 at1737ae2c360c1b495f627cf61f51b20f27ea806b**. Do not revert only an experimental return-context commit. Unmanaged old skill folders should be preserved and replaced manually after validating a new destination.
+
+## CI compatibility correction
+
+Initial Windows CI exposed POSIX transport tests running against the deliberately disabled Windows cloud path, open-file deletion assumptions, and Windows stat ctime being creation time. The release reads native ChangeTime for Windows path/descriptor checks; API failure is closed. Mutation tests remain enabled, with Windows open-handle locking tested explicitly. Optional cloud transport cases are POSIX-only and Windows refusal is tested. [Microsoft FILE_BASIC_INFO](https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-file_basic_info). The process-tree timeout fixture allows three seconds for process startup; runtime timeout defaults are unchanged.
