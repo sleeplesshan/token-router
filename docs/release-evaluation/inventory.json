@@ -1,0 +1,19 @@
+{
+  "README.md": "14d7aad29d1e2ad653e08acd060c1c6db057ea29f73e66826f63f194dff924e7",
+  "comparison.png": "e641995429cb9e3b18e03d4735e71303277691e365c942d496c6b2eb7957f9e3",
+  "comparison.svg": "4d2481910887712d1ff397124aba24c97ae95fb28d60fd563da36d98ac727433",
+  "historical-equivalence.json": "d1223ae526b0c781ff5d3139685255f90041aeaa04cc66596bac4c639906dc6d",
+  "mixed-manifest.json": "8736f9e21c0de859a8da61f33c0bdd9690cdb661ca0d9f56b75e14a50a72d76d",
+  "mixed-manifest.sha256": "e5a382799f5927d5c093c28161cd0c0f09c5d7b65f9706df89e4752c1bb58acb",
+  "mixed-results-final.json": "5e5bde5878f82e14130b755e915271ddd08b2d841ea7189e4584c517a2d89e8f",
+  "offline-context.png": "9848914bcaf53364e40f41e7a21c7d87515eab01f16ef38709c8a7ce6059cdf3",
+  "paired-results.json": "5ae73240eaf1fb1199f57ca57869180d840c225d5d9cfee45a863fd737261b2f",
+  "plot.py": "77bff529d5d4b56d6a32daf8d654c2ed1ec4bb9c580dbc45311303f90d56db40",
+  "raw-evidence-hashes.json": "d6aa461bb5f1226baa03f8839456c21974f22e211fe4d37ae35a335cea5329b3",
+  "replay_worker.py": "c7459ce9be0d41283442c7d13fe706b21433fe4147baf43c2863023c59f7ea52",
+  "stress-results.json": "2a841028412050fd0fa6297f1544bc1fcc45de7415922bb3af36d0d85d04f6ae",
+  "summary.json": "4b8b1e301d7322ec0e0da991ce54316c0b4626af392ea3d802931006c767643d",
+  "third-party.json": "a818ebc077a03227e7f439b469858ea45161c2ac5067929c59ff770bec308927",
+  "unpaired-evidence.json": "9120ebe0dc274211f5ef1e9cd3e8ccf0f07c260033653b9a5e47fc9b4fff6502",
+  "usage-correction.json": "069402eb8a6931884c23cb3a5a4d416ce06f66711bc296c41b75b3014209bcb1"
+}

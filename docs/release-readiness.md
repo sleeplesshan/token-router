@@ -22,10 +22,10 @@ Validated runtime scope: macOS arm64, Python3.10 and3.14. Linux/Windows matrix i
 | POSIX selector child cleanup | PASS | Real local dummy process tree timeout; no model |
 | Live Luna selector | NOT RUN | Not required or advertised for basic product |
 | Managed install/update/restore/remove | PASS | Isolated paths, staged failure and swap rollback, edit/extra-file refusal |
-| Runtime archive-only smoke | NOT RUN | Final artifact validation recorded before publication |
+| Runtime archive-only smoke | PASS | Clean commit archive, isolated examples/update/restore/uninstall; final checksums recorded separately |
 | Installed skill discovery | PASS | Local Codex0.162.1 skills/list identified isolated repo skill; other skills disabled per invocation |
 | Agent automatic selection | NOT RUN | No middleware/always-on claim |
-| Fresh installed-skill paired model evaluation | NOT RUN | Stopped after preflight and one unpaired ordinary-search episode: harness contract mismatch |
+| Fresh installed-skill paired model evaluation | PASS | Repaired harness completed 4 pairs/8 episodes; both arms4/4; tokens +10.65%, time +10.21%; no router calls |
 | Mixed local evaluation | PASS | 24 new tasks /8 projects, default output identical to release baseline; no broader answer-quality claim |
 | Global install/auth/AGENTS mutation | NOT APPLICABLE | Explicitly outside scope |
 | Public GitHub tag/release | NOT RUN | Requires separate approval |
@@ -34,9 +34,11 @@ Validated runtime scope: macOS arm64, Python3.10 and3.14. Linux/Windows matrix i
 
 24 fixed questions from8 pinned independent projects: Python, JavaScript, Rust, logs and optional documentation;12 Korean/12 English. Original sources are downloaded separately and excluded from the distribution. Synthetic stresses and repeated queries are not independent real tasks. Default packets match baseline on24/24. Initial full-task evidence appears in20/24; the remaining4 need recovery or another allowed file. M activation changed0 of15 eligible mode tasks; target options were checked only when the question explicitly supplied a name. This is insufficient reason to default-enable return supplementation.
 
-The actual agent run used gpt-6.1-sol/medium, Codex0.162.1, existing ChatGPT auth, read-only tools and an installed isolated skill. It did not use the old skills-disabled packet-replay contract as proof of skill behavior. Unfortunately its reused usage parser rejected the first valid command_execution event. The run stopped without retry as required. Raw usage was present: preflight6084 + unpaired ordinary-search12294 = **18378 known tokens**, two CLI invocations,15.499s. The original stopped ledger is preserved; a separate correction restores known usage. No paired token/time/quality effect can be computed. Tool-enabled accounting was then fixed and regression-tested without another model call. Do not label this an account capacity failure or missing provider usage.
+The actual installed-skill comparison completed four fixed pairs with gpt-6.1-sol/medium and Codex0.162.1 after the user explicitly authorized repairing the packet-only usage parser. Every episode used one ordinary search and cited visible source. Both arms4/4 correct/completed; no recovery/abstention/router calls. Plain54,756tokens/58.022s versus skill60,589tokens/63.946s: **no savings demonstrated**. Four pairs do not establish general equivalence or timing effects.
 
-The unpaired ordinary-search answer was correct and cited the actual returned line. It is not compared against an unexecuted skill arm. Automatic skill decisions, real follow-up behavior on changed sources/missing files, and new total-token savings remain unmeasured. Installation discovery and local router tests are different evidence.
+The first valid tool event had caused a harness failure, not an account/provider failure. Its raw usage and original result remain preserved. Including preflight and that unpaired call: **133,723known tokens,10CLI calls,137.505s**; all within the original budget. Cached/reasoning subsets were not re-added. Physical request counts/server hard caps are unobserved.
+
+The measured installed SKILL matches final SKILL; its runtime came from873de65. A safe inventory-mismatch refusal prevented an intermediate installation update. Final runtime differs only in CLI UTF-8/LF configuration from that measured installation; the router never executed in those agent episodes. All five hashes and this distinction are recorded in repository evaluation data. Current local default packets were independently rechecked24/24 identical to baseline. This is not proof of automatic selection or routed recovery. Those paths and live Luna remain outside the validated basic-product guarantee.
 
 ## Publication and rollback
 

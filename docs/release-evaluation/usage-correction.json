@@ -1,0 +1,32 @@
+{
+  "reason": "Old packet-only usage parser rejected valid command_execution events; raw final usage is present. Original stopped run and budget remain unchanged. No new calls.",
+  "known_total": 18378,
+  "usage_unknown_after_raw_audit": false,
+  "calls": [
+    {
+      "name": "preflight",
+      "usage": {
+        "input_tokens": 6062,
+        "output_tokens": 22,
+        "cached_input_tokens": 0,
+        "reasoning_output_tokens": 0
+      },
+      "event_sha256": "179de1ad1be9100a639329cb13d8648c29ed1a86379370861fee90181c3391c7",
+      "total": 6084
+    },
+    {
+      "name": "attrs_own-plain",
+      "usage": {
+        "input_tokens": 12182,
+        "output_tokens": 112,
+        "cached_input_tokens": 0,
+        "reasoning_output_tokens": 0
+      },
+      "event_sha256": "4eead512df73e82411a28db17c01fae266c7d2a3e48cd94cb8cdab254c437b71",
+      "total": 12294
+    }
+  ],
+  "paired_results": 0,
+  "source_retrievals": 1,
+  "recovery": 0
+}

@@ -1,0 +1,31 @@
+{
+  "answer": {
+    "answers": [
+      {
+        "id": "answer",
+        "answer": "attrib_name in cls.__dict__",
+        "evidence": [
+          {
+            "file": "src/attr/_make.py",
+            "start_line": 317,
+            "end_line": 317
+          }
+        ]
+      }
+    ],
+    "read_requests": [],
+    "search_requests": []
+  },
+  "commands": [
+    {
+      "command": "/bin/zsh -lc \"rg -n -A 18 -B 3 'def _has_own_attribute' src/attr/_make.py\"",
+      "exit_code": 0,
+      "status": "completed"
+    }
+  ],
+  "prompt_sha256": "f9db85dc6127bb096d612b8290fa6fa73345bc42ba49709d3cd26a6b1f48e262",
+  "instructions_sha256": "4af89d4ec4fb83fe115a189c137e099177e3fdf761e4d4f590b1327dedfe81ea",
+  "cli_wall": 9.547574833035469,
+  "cli_cpu": 1.1218939999999997,
+  "remote_wait_proxy": 8.42568083303547
+}
