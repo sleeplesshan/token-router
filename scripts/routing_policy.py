@@ -26,6 +26,10 @@ class Packet:
     def __post_init__(self):
         if len(self.ranges) != len(self.raw_slices):
             raise ValueError('packet range/content mismatch')
+        for span,raw in zip(self.ranges,self.raw_slices):
+            lines=raw.count('\n') + (1 if raw and not raw.endswith('\n') else 0)
+            if lines != span.end-span.start+1:
+                raise ValueError('packet source line count does not match coordinates')
         if any(a.end >= b.start for a,b in zip(self.ranges,self.ranges[1:])):
             raise ValueError('packet ranges must be sorted and disjoint')
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Route large files through GPT-6 Luna Light via Codex CLI and print raw target line slices."""
+"""Select raw evidence locally; optionally use Codex GPT-6 Luna Light."""
 
 from __future__ import annotations
 
@@ -108,7 +108,7 @@ def usage() -> str:
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Route large files through GPT-6 Luna Light via Codex CLI and print raw target line slices."
+        description="Select raw evidence locally; optionally use Codex GPT-6 Luna Light."
     )
     parser.add_argument("--version", action="version", version=f"token-router {VERSION}")
     parser.add_argument("mode", choices=sorted(VALID_MODES))
