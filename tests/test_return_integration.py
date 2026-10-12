@@ -19,6 +19,9 @@ class ReturnIntegration(unittest.TestCase):
             '# neutral padding abcdefghijklmnopqrstuvwxyz\n'*1500)
 
     def run_route(self,flags=(),baseline=False):
+        flags=list(flags)
+        if not any(x in flags for x in ('--force-model','--deterministic','--optimize')):
+            flags=['--return-context','bounded',*flags]
         out,err=io.StringIO(),io.StringIO()
         with contextlib.ExitStack() as stack:
             if baseline:

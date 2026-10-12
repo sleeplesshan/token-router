@@ -24,7 +24,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from query_matcher import compile_matcher
 from evidence_checks import assess_query_evidence, complete_python_statements, required_pattern, assess_packet_evidence, bounded_return_supplement, limit_return_target
 from routing_policy import Span, ScanFacts, Packet, RouteDecision, decide_packet
-from source_guard import SourceGuard, SourceChanged
+from source_guard import SourceLimitError, SourceGuard, SourceChanged
 
 
 def env_int(name: str, default: int, minimum: int | None = None) -> int:
@@ -53,7 +53,7 @@ def env_float(name: str, default: float, minimum: float | None = None) -> float:
     return value
 
 
-VERSION = "2.5.0"
+VERSION = "2.6.0"
 MODEL_NAME = "gpt-6-luna"
 REASONING_EFFORT = "low"
 CODEX_BIN = os.environ.get("ROUTER_CODEX_BIN", "codex")
@@ -129,11 +129,17 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument('--require-term', action='append', default=[])
     parser.add_argument('--read-scope', choices=('focused','whole'), default=None)
     parser.add_argument('--report-json')
-    parser.add_argument('--return-target',help='Experimental: explicit single callable return lookup; unresolved targets preserve M.')
+    parser.add_argument('--return-context',choices=('off','bounded'),default=None,help='Optional bounded Python return completion (default: off).')
+    parser.add_argument('--return-target',help='Exact single callable return lookup; implies bounded completion; ambiguity preserves bounded output.')
     args = parser.parse_args(argv[1:])
-    explicit_policy = args.policy_version is not None or args.read_scope is not None or bool(args.require_term) or args.return_target is not None
+    explicit_policy = args.policy_version is not None or args.read_scope is not None or bool(args.require_term) or args.return_target is not None or args.return_context is not None
     if explicit_policy and (args.deterministic or args.force_model or args.optimize != 'tokens'):
         parser.error('policy-version, require-term, read-scope and return-target require automatic tokens mode')
+    if args.return_target is not None and args.return_context == 'off':
+        parser.error('return-target conflicts with return-context off')
+    if (args.return_context == 'bounded' or args.return_target is not None) and (args.mode != 'heavy_code' or args.read_scope == 'whole'):
+        parser.error('return completion requires heavy_code and focused scope')
+    args.return_context = args.return_context or ('bounded' if args.return_target is not None else 'off')
     args.policy_version = args.policy_version or 'v2.4'
     args.read_scope = args.read_scope or 'focused'
     if args.policy_version == 'v2.4' and (args.require_term or args.read_scope != 'focused'):
@@ -545,6 +551,8 @@ def call_codex(prompt: str) -> dict[str, Any]:
     if os.environ.get("TOKEN_ROUTER_ACTIVE") == "1":
         raise RuntimeError("Recursive token-router invocation refused")
 
+    if os.name != "posix":
+        raise RuntimeError("Optional cloud selection is supported only on POSIX; use local extraction")
     with tempfile.TemporaryDirectory(prefix="token-router-") as workspace:
         root = Path(workspace)
         instructions_path = root / "instructions.md"
@@ -575,7 +583,7 @@ def call_codex(prompt: str) -> dict[str, Any]:
             "-c", "apps._default.enabled=false",
             "-c", 'web_search="disabled"',
             "-c", "project_doc_max_bytes=0",
-            "-c", "skills.max_context_tokens=1",
+            "-c", "skills.include_instructions=false",
             "--output-schema", str(schema_path),
             "--output-last-message", str(output_path),
             "--json", "--color", "never", "-",
@@ -595,7 +603,7 @@ def call_codex(prompt: str) -> dict[str, Any]:
             raise RuntimeError("Codex CLI not found; install it or set ROUTER_CODEX_BIN") from exc
         try:
             stdout, _stderr = process.communicate(prompt, timeout=TIMEOUT_SECONDS)
-        except subprocess.TimeoutExpired as exc:
+        except (subprocess.TimeoutExpired, KeyboardInterrupt) as exc:
             try:
                 if os.name == "posix":
                     os.killpg(process.pid, signal.SIGKILL)
@@ -604,7 +612,8 @@ def call_codex(prompt: str) -> dict[str, Any]:
             except ProcessLookupError:
                 pass  # The process exited between the timeout and termination.
             process.communicate()
-            raise RuntimeError(f"Codex routing timed out after {TIMEOUT_SECONDS:g}s") from exc
+            if isinstance(exc,KeyboardInterrupt):raise
+            raise RuntimeError(f"Codex routing interrupted or timed out after {TIMEOUT_SECONDS:g}s") from exc
         if process.returncode:
             # CLI diagnostics can contain user content. Never echo them in fallback.
             raise RuntimeError(
@@ -1007,9 +1016,10 @@ def finalize_packet(args, guard, packet, status, code=0):
     except SourceChanged:
         # A source change after atomic report replacement invalidates that report.
         # Earlier write failures must not remove a pre-existing report.
-        if written_report is not None:
+        invalid_report = written_report or (Path(args.report_json).expanduser() if args.report_json else None)
+        if invalid_report is not None and invalid_report.resolve()!=Path(args.target_file).expanduser().resolve():
             try:
-                written_report.unlink(missing_ok=True)
+                invalid_report.unlink(missing_ok=True)
                 status['report_invalidated']=True
             except OSError:
                 status['report_invalidation_failed']=True
@@ -1039,6 +1049,8 @@ def main(argv: list[str]) -> int:
     try:
         args=parse_args(argv)
     except SystemExit as exc:
+        if exc.code:
+            print('[token-router status] '+json.dumps(dict(schema_version=1,status='usage_error',reason_codes=['usage_error'],model_called=False,source_consistency='not_checked')),file=sys.stderr)
         return int(exc.code or 0)
     path=Path(args.target_file).expanduser()
     guard=None
@@ -1120,7 +1132,7 @@ def main(argv: list[str]) -> int:
             checks['boundary']={'syntax':'unknown','reason':'not_python_or_size_limit'}
             if not (new and args.read_scope=='whole') and args.mode=='heavy_code' and path.suffix=='.py' and guard.stamp[2]<=1_000_000:
                 syntax_text=guard.read_text()
-                targets,checks['boundary']=complete_python_statements(syntax_text,targets,return_spans=return_spans,
+                targets,checks['boundary']=complete_python_statements(syntax_text,targets,return_spans=return_spans if args.return_context=='bounded' else None,
                     **({'return_definitions':return_definitions} if args.return_target is not None else {}))
             packet=packet_from_guard(guard,targets)
             evidence=assess_packet_evidence(terms,checks['matched_terms'],scan.source_terms,
@@ -1226,6 +1238,12 @@ def main(argv: list[str]) -> int:
             output_capped=capped,selection_truncated=capped,coverage_guaranteed=action=='auto_full',
             full_source_returned=action=='auto_full',scan_complete=True)
         return finalize_packet(args,guard,packet,status)
+    except KeyboardInterrupt:
+        status.update(status='error',reason_codes=['interrupted'],scan_complete=False)
+        return finalize_packet(args,guard,None,status,130) if guard is not None else 130
+    except SourceLimitError as exc:
+        status.update(status='needs_targeted_read',reason_codes=['input_limit'],reason=str(exc),scan_complete=False,next_action='use_bounded_regular_file',full_source_returned=False)
+        return finalize_packet(args,guard,None,status,2) if guard is not None else 2
     except (OSError,TypeError,ValueError,RuntimeError) as exc:
         status.update(status='error',reason=str(exc),reason_codes=['source_changed' if isinstance(exc,SourceChanged) else 'read_or_input_error'])
         if guard is not None:
