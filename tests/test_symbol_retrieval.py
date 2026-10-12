@@ -71,6 +71,7 @@ class SymbolRetrievalTests(unittest.TestCase):
         full=self.call(text,['--symbol','f','--line-numbers'])
         compact=self.call(text,['--symbol','f','--line-numbers','--compact-status'])
         self.assertEqual(full[:2],compact[:2]);self.assertNotIn('source_stamp',compact[2])
+        self.assertIn('symbol_ranges',full[2]);self.assertNotIn('symbol_ranges',compact[2])
         self.assertFalse(compact[2]['model_called']);self.assertEqual(compact[2]['semantic_sufficiency'],'unknown')
         with tempfile.TemporaryDirectory() as tmp:
             path=Path(tmp)/'full.json'

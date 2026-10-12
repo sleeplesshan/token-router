@@ -1193,6 +1193,9 @@ def finalize_packet(args, guard, packet, status, code=0):
     if 'checks' in compact:
         compact['checks'] = {k:v for k,v in compact['checks'].items() if k != 'source_required'}
     if getattr(args,'compact_status',False):
+        if code == 0:
+            for field in ('symbol_ranges','symbol_occurrences','symbol_ranges_truncated'):
+                compact.pop(field,None)  # Numbered packet already provides these coordinates.
         keep={'schema_version','status','retrieval_mode','reason_codes','next_action','model_called','model_failed',
               'source_consistency','final_output_capped','selection_truncated','full_source_returned',
               'output_lines','output_chars','semantic_sufficiency','missing_search_terms',
