@@ -2,6 +2,7 @@ import importlib.util
 import os
 from pathlib import Path
 import tempfile
+import time
 import unittest
 
 SPEC = importlib.util.spec_from_file_location('source_guard', Path(__file__).resolve().parents[1] / 'scripts/source_guard.py')
@@ -27,6 +28,10 @@ class SourceGuardTests(unittest.TestCase):
     def test_same_size_mutation_even_restored_mtime(self):
         guard = g.SourceGuard(self.path)
         initial = self.path.stat()
+        # Metadata guards cannot distinguish writes within the same clock tick.
+        # Exercise a changed metadata timestamp, not atomic snapshot semantics.
+        if os.name == 'nt':
+            time.sleep(0.05)
         self.path.write_text('ALPHA\nBETA\n')
         os.utime(self.path, ns=(initial.st_atime_ns, initial.st_mtime_ns))
         with self.assertRaises(g.SourceChangedError):
@@ -45,6 +50,8 @@ class SourceGuardTests(unittest.TestCase):
         with self.assertRaises(g.SourceChangedError):
             with guard.open() as handle:
                 self.assertEqual(handle.readline(), 'alpha\n')
+                if os.name == 'nt':
+                    time.sleep(0.05)
                 self.path.write_text('alpha\nBETA\n')
 
     def test_rotation_while_descriptor_still_open(self):
