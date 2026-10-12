@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.5.0 — Final evidence contracts (opt-in policy)
+
+- Separate source, core, and actual packet evidence; add explicit required literals, whole scope, and report sidecars.
+- Guard repeated reads against source mutation; strictly validate model coordinates and candidate membership.
+- Cap final rendered output in every path, including fallback. Oversized output is withheld, never silently cut.
+- Reuse small-source probes and collect character counts during existing scans.
+- Keep v2.4 admission as default after 96 paired episodes: v2.5 total tokens were 1.73% lower, but median time was 1.43% higher and no quality advantage was established. See [evaluation](docs/benchmark-v2.5.md).
+
+
 ## 2.4.0 — Evidence admission and faster matching
 
 - Separate lexical evidence, budget, reduction, and boundary diagnostics; abstain from unrelated candidate packets.

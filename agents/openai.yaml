@@ -1,4 +1,4 @@
 interface:
   display_name: "Token Router"
-  short_description: "Route large files through Codex GPT-6 Luna Light"
-  default_prompt: "Use $token-router to select relevant raw lines from this large file using GPT-6 Luna Light and my existing Codex login."
+  short_description: "Select bounded raw evidence with local token-aware routing"
+  default_prompt: "Use $token-router to assess whether focused raw evidence retrieval helps this task, using the default local tokens policy and checking missing context."

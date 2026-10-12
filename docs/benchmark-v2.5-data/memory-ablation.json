@@ -1,0 +1,114 @@
+[
+  {
+    "arm": "pre_optimization",
+    "repeat": 0,
+    "seconds": 0.6231456249952316,
+    "rss_bytes": 56918016,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "v2.5",
+    "repeat": 0,
+    "seconds": 0.46930749993771315,
+    "rss_bytes": 54099968,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "v2.5",
+    "repeat": 1,
+    "seconds": 0.4690090410877019,
+    "rss_bytes": 53870592,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "pre_optimization",
+    "repeat": 1,
+    "seconds": 0.4773808750323951,
+    "rss_bytes": 53837824,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "pre_optimization",
+    "repeat": 2,
+    "seconds": 0.46733708400279284,
+    "rss_bytes": 54132736,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "v2.5",
+    "repeat": 2,
+    "seconds": 0.467094040941447,
+    "rss_bytes": 53870592,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "v2.5",
+    "repeat": 3,
+    "seconds": 0.4673220000695437,
+    "rss_bytes": 53821440,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "pre_optimization",
+    "repeat": 3,
+    "seconds": 0.4682571250014007,
+    "rss_bytes": 54132736,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "pre_optimization",
+    "repeat": 4,
+    "seconds": 0.46753033390268683,
+    "rss_bytes": 53854208,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "v2.5",
+    "repeat": 4,
+    "seconds": 0.4750071249436587,
+    "rss_bytes": 54067200,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "v2.5",
+    "repeat": 5,
+    "seconds": 0.47056091693229973,
+    "rss_bytes": 53903360,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "pre_optimization",
+    "repeat": 5,
+    "seconds": 0.4744023750536144,
+    "rss_bytes": 53968896,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "pre_optimization",
+    "repeat": 6,
+    "seconds": 0.4723598749842495,
+    "rss_bytes": 54018048,
+    "exit": 0,
+    "chars": 80636
+  },
+  {
+    "arm": "v2.5",
+    "repeat": 6,
+    "seconds": 0.47590345796197653,
+    "rss_bytes": 53854208,
+    "exit": 0,
+    "chars": 80636
+  }
+]

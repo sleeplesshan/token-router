@@ -1,0 +1,953 @@
+{
+  "schema_version": 1,
+  "created_date": "2026-10-12",
+  "purpose": "Workflow comparison with at most two model-requested recovery reads; public source tasks not sampled from prior benchmark projects.",
+  "splits": {
+    "dev_groups": [
+      "requests",
+      "flask"
+    ],
+    "locked_groups": [
+      "click",
+      "httpx",
+      "urllib3",
+      "django"
+    ]
+  },
+  "arms": [
+    "search",
+    "full",
+    "v2.4",
+    "v2.5"
+  ],
+  "repeats": 2,
+  "max_episodes": 96,
+  "pilot": "dev first repeat (16 episodes), included in final 96",
+  "source_policy": "Complete unmodified pinned public source files; SHA-256 verified before every execution. Related files are explicitly allowlisted.",
+  "grading": "Exact accepted answer plus complete cited and visible coverage of at least one independently annotated sufficient evidence set. No overlap-only credit. Gold never enters prompts, retrieval or recovery.",
+  "sources": [
+    {
+      "group": "requests",
+      "repo": "psf/requests",
+      "commit": "611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60",
+      "path": "src/requests/sessions.py",
+      "local": "data/requests/src/requests/sessions.py",
+      "url": "https://raw.githubusercontent.com/psf/requests/611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60/src/requests/sessions.py",
+      "sha256": "3d2089736ced93b2b405624a943f866d22652b17df06a85eb010f86272fc3e7d",
+      "lines": 920
+    },
+    {
+      "group": "flask",
+      "repo": "pallets/flask",
+      "commit": "d086db856be187255b8ec61ef409357393020f32",
+      "path": "src/flask/app.py",
+      "local": "data/flask/src/flask/app.py",
+      "url": "https://raw.githubusercontent.com/pallets/flask/d086db856be187255b8ec61ef409357393020f32/src/flask/app.py",
+      "sha256": "510b83880097af4450933561cba96e5a1c432bf53ea9264ca947da53752e3a2b",
+      "lines": 1625
+    },
+    {
+      "group": "click",
+      "repo": "pallets/click",
+      "commit": "2247b35ea1c47c727d7a06e51fa280e12a863ff6",
+      "path": "src/click/core.py",
+      "local": "data/click/src/click/core.py",
+      "url": "https://raw.githubusercontent.com/pallets/click/2247b35ea1c47c727d7a06e51fa280e12a863ff6/src/click/core.py",
+      "sha256": "26307e89b7b23e512d3a696b820197b6fd27bbbee9f6b9822f479d851523fcd9",
+      "lines": 4038
+    },
+    {
+      "group": "httpx",
+      "repo": "encode/httpx",
+      "commit": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+      "path": "httpx/_models.py",
+      "local": "data/httpx/httpx/_models.py",
+      "url": "https://raw.githubusercontent.com/encode/httpx/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/httpx/_models.py",
+      "sha256": "af118b075a5bcece608acbc989b221703935cbea128a4a98ca21a23ff3e860ac",
+      "lines": 1277
+    },
+    {
+      "group": "urllib3",
+      "repo": "urllib3/urllib3",
+      "commit": "5ebe9bf9f691646dcabdb259ffabfc6108ded5e8",
+      "path": "src/urllib3/util/retry.py",
+      "local": "data/urllib3/src/urllib3/util/retry.py",
+      "url": "https://raw.githubusercontent.com/urllib3/urllib3/5ebe9bf9f691646dcabdb259ffabfc6108ded5e8/src/urllib3/util/retry.py",
+      "sha256": "2eda8108de2cb2b5b19edad348893f05c77601836f299166c35a56f5a9a80078",
+      "lines": 571
+    },
+    {
+      "group": "django",
+      "repo": "django/django",
+      "commit": "0f34a4cf9f1b5f3e68decbdca76aebb71268ba93",
+      "path": "django/core/paginator.py",
+      "local": "data/django/django/core/paginator.py",
+      "url": "https://raw.githubusercontent.com/django/django/0f34a4cf9f1b5f3e68decbdca76aebb71268ba93/django/core/paginator.py",
+      "sha256": "4aa0caaf15faa16577fbf0cd3e890cb5d4de924cbf313894835c7fa6f371590f",
+      "lines": 455
+    },
+    {
+      "group": "requests",
+      "repo": "psf/requests",
+      "commit": "611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60",
+      "path": "src/requests/models.py",
+      "local": "data/requests/src/requests/models.py",
+      "url": "https://raw.githubusercontent.com/psf/requests/611c6162cbc4ac2020a2f91c7cfa4f3abf9bbb60/src/requests/models.py",
+      "sha256": "a3351c3c12a86bf5ed211533875350bc4791e9327a685f8c19ba54343e471e26",
+      "lines": 1184
+    },
+    {
+      "group": "flask",
+      "repo": "pallets/flask",
+      "commit": "d086db856be187255b8ec61ef409357393020f32",
+      "path": "src/flask/ctx.py",
+      "local": "data/flask/src/flask/ctx.py",
+      "url": "https://raw.githubusercontent.com/pallets/flask/d086db856be187255b8ec61ef409357393020f32/src/flask/ctx.py",
+      "sha256": "e21952d044159438765eb27848b0fe4c75f83faee8645181a09a1eccb1d5cab7",
+      "lines": 540
+    },
+    {
+      "group": "click",
+      "repo": "pallets/click",
+      "commit": "2247b35ea1c47c727d7a06e51fa280e12a863ff6",
+      "path": "src/click/exceptions.py",
+      "local": "data/click/src/click/exceptions.py",
+      "url": "https://raw.githubusercontent.com/pallets/click/2247b35ea1c47c727d7a06e51fa280e12a863ff6/src/click/exceptions.py",
+      "sha256": "1ef498df81b86ae8ff6d8451f3e4fc094f09c2aff5f8e72c454e1ecdfa337849",
+      "lines": 378
+    },
+    {
+      "group": "httpx",
+      "repo": "encode/httpx",
+      "commit": "b5addb64f0161ff6bfe94c124ef76f6a1fba5254",
+      "path": "httpx/_exceptions.py",
+      "local": "data/httpx/httpx/_exceptions.py",
+      "url": "https://raw.githubusercontent.com/encode/httpx/b5addb64f0161ff6bfe94c124ef76f6a1fba5254/httpx/_exceptions.py",
+      "sha256": "494a7dec969198444f988c6ab8dc480273a6f2aa11ae523a094e0cbc90f1b7d7",
+      "lines": 377
+    },
+    {
+      "group": "urllib3",
+      "repo": "urllib3/urllib3",
+      "commit": "5ebe9bf9f691646dcabdb259ffabfc6108ded5e8",
+      "path": "src/urllib3/exceptions.py",
+      "local": "data/urllib3/src/urllib3/exceptions.py",
+      "url": "https://raw.githubusercontent.com/urllib3/urllib3/5ebe9bf9f691646dcabdb259ffabfc6108ded5e8/src/urllib3/exceptions.py",
+      "sha256": "8503c7a2aa38cb0e3a7ac3525647225505d5520031580825b21e8c6f242d6be4",
+      "lines": 335
+    },
+    {
+      "group": "django",
+      "repo": "django/django",
+      "commit": "0f34a4cf9f1b5f3e68decbdca76aebb71268ba93",
+      "path": "django/utils/inspect.py",
+      "local": "data/django/django/utils/inspect.py",
+      "url": "https://raw.githubusercontent.com/django/django/0f34a4cf9f1b5f3e68decbdca76aebb71268ba93/django/utils/inspect.py",
+      "sha256": "11c7e764b7619077ed14c0f226a31fd3318c0258c4fb1a05c9226fb6b2d6f97d",
+      "lines": 162
+    }
+  ],
+  "tasks": [
+    {
+      "id": "requests_auth_en",
+      "group": "requests",
+      "split": "dev",
+      "language": "en",
+      "primary": "src/requests/sessions.py",
+      "query": "Inspect rebuild_auth redirect credential stripping and netrc reauthentication.",
+      "search_terms": [
+        "rebuild_auth"
+      ],
+      "files": {
+        "src/requests/sessions.py": "data/requests/src/requests/sessions.py",
+        "src/requests/models.py": "data/requests/src/requests/models.py"
+      },
+      "facts": [
+        {
+          "id": "strip",
+          "question": "Give the exact method-call expression used in the Authorization removal condition.",
+          "accepted_answers": [
+            "self.should_strip_auth(original_url, url)"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/requests/sessions.py",
+              "start_line": 324,
+              "end_line": 327
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/requests/sessions.py",
+                "start_line": 324,
+                "end_line": 327
+              }
+            ]
+          ]
+        },
+        {
+          "id": "netrc",
+          "question": "Give the exact conditional expression assigned to new_auth.",
+          "accepted_answers": [
+            "get_netrc_auth(url) if self.trust_env else None"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/requests/sessions.py",
+              "start_line": 330,
+              "end_line": 332
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/requests/sessions.py",
+                "start_line": 330,
+                "end_line": 332
+              }
+            ]
+          ]
+        }
+      ],
+      "required_terms": [
+        "rebuild_auth"
+      ]
+    },
+    {
+      "id": "requests_redirect_ko",
+      "group": "requests",
+      "split": "dev",
+      "language": "ko",
+      "primary": "src/requests/sessions.py",
+      "query": "rebuild_method의 redirect 상태별 HTTP 메서드 변경과 HEAD 예외를 확인하세요.",
+      "search_terms": [
+        "rebuild_method"
+      ],
+      "files": {
+        "src/requests/sessions.py": "data/requests/src/requests/sessions.py",
+        "src/requests/models.py": "data/requests/src/requests/models.py"
+      },
+      "facts": [
+        {
+          "id": "head",
+          "question": "codes.found 분기에서 GET으로 바꾸지 않는 메서드 문자열만 답하세요.",
+          "accepted_answers": [
+            "HEAD"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/requests/sessions.py",
+              "start_line": 384,
+              "end_line": 385
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/requests/sessions.py",
+                "start_line": 384,
+                "end_line": 385
+              }
+            ]
+          ]
+        },
+        {
+          "id": "moved",
+          "question": "codes.moved 분기에서 GET 변경 대상인 기존 메서드 문자열만 답하세요.",
+          "accepted_answers": [
+            "POST"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/requests/sessions.py",
+              "start_line": 389,
+              "end_line": 390
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/requests/sessions.py",
+                "start_line": 389,
+                "end_line": 390
+              }
+            ]
+          ]
+        }
+      ],
+      "required_terms": [
+        "rebuild_method"
+      ]
+    },
+    {
+      "id": "flask_propagate_en",
+      "group": "flask",
+      "split": "dev",
+      "language": "en",
+      "primary": "src/flask/app.py",
+      "query": "Inspect handle_exception propagation default and exception signaling.",
+      "search_terms": [
+        "handle_exception"
+      ],
+      "files": {
+        "src/flask/app.py": "data/flask/src/flask/app.py",
+        "src/flask/ctx.py": "data/flask/src/flask/ctx.py"
+      },
+      "facts": [
+        {
+          "id": "default",
+          "question": "When propagate is None, give the exact expression assigned to it.",
+          "accepted_answers": [
+            "self.testing or self.debug"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/flask/app.py",
+              "start_line": 929,
+              "end_line": 930
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/flask/app.py",
+                "start_line": 929,
+                "end_line": 930
+              }
+            ]
+          ]
+        },
+        {
+          "id": "signal",
+          "question": "Give the dotted signal method invoked before propagation is decided, without arguments.",
+          "accepted_answers": [
+            "got_request_exception.send"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/flask/app.py",
+              "start_line": 926,
+              "end_line": 927
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/flask/app.py",
+                "start_line": 926,
+                "end_line": 927
+              }
+            ]
+          ]
+        }
+      ],
+      "required_terms": [
+        "handle_exception"
+      ]
+    },
+    {
+      "id": "flask_async_ko",
+      "group": "flask",
+      "split": "dev",
+      "language": "ko",
+      "primary": "src/flask/app.py",
+      "query": "ensure_sync와 async_to_sync의 비동기 변환 및 의존성 실패 처리를 확인하세요.",
+      "search_terms": [
+        "ensure_sync",
+        "async_to_sync"
+      ],
+      "files": {
+        "src/flask/app.py": "data/flask/src/flask/app.py",
+        "src/flask/ctx.py": "data/flask/src/flask/ctx.py"
+      },
+      "facts": [
+        {
+          "id": "wrapper",
+          "question": "coroutine 함수일 때 ensure_sync가 반환하는 정확한 호출 표현식을 답하세요.",
+          "accepted_answers": [
+            "self.async_to_sync(func)"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/flask/app.py",
+              "start_line": 1074,
+              "end_line": 1075
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/flask/app.py",
+                "start_line": 1074,
+                "end_line": 1075
+              }
+            ]
+          ]
+        },
+        {
+          "id": "missing",
+          "question": "asgiref import 실패 시 발생시키는 예외 클래스명만 답하세요.",
+          "accepted_answers": [
+            "RuntimeError"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/flask/app.py",
+              "start_line": 1095,
+              "end_line": 1097
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/flask/app.py",
+                "start_line": 1095,
+                "end_line": 1097
+              }
+            ]
+          ]
+        }
+      ],
+      "required_terms": [
+        "ensure_sync",
+        "async_to_sync"
+      ]
+    },
+    {
+      "id": "click_exit_en",
+      "group": "click",
+      "split": "locked",
+      "language": "en",
+      "primary": "src/click/core.py",
+      "query": "Inspect Context.exit cleanup ordering and Context.fail exception behavior.",
+      "search_terms": [
+        "def exit",
+        "def fail"
+      ],
+      "files": {
+        "src/click/core.py": "data/click/src/click/core.py",
+        "src/click/exceptions.py": "data/click/src/click/exceptions.py"
+      },
+      "facts": [
+        {
+          "id": "cleanup",
+          "question": "Give the method call executed immediately before raising Exit, without arguments.",
+          "accepted_answers": [
+            "self.close"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/click/core.py",
+              "start_line": 856,
+              "end_line": 857
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/click/core.py",
+                "start_line": 856,
+                "end_line": 857
+              }
+            ]
+          ]
+        },
+        {
+          "id": "fail",
+          "question": "Give the exception class raised by Context.fail.",
+          "accepted_answers": [
+            "UsageError"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/click/core.py",
+              "start_line": 843,
+              "end_line": 843
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/click/core.py",
+                "start_line": 843,
+                "end_line": 843
+              }
+            ]
+          ]
+        }
+      ],
+      "required_terms": [
+        "exit",
+        "fail"
+      ]
+    },
+    {
+      "id": "click_parameter_ko",
+      "group": "click",
+      "split": "locked",
+      "language": "ko",
+      "primary": "src/click/core.py",
+      "query": "Context의 parameter source 저장과 없는 값의 조회 동작을 확인하세요.",
+      "search_terms": [
+        "set_parameter_source",
+        "get_parameter_source"
+      ],
+      "files": {
+        "src/click/core.py": "data/click/src/click/core.py",
+        "src/click/exceptions.py": "data/click/src/click/exceptions.py"
+      },
+      "facts": [
+        {
+          "id": "storage",
+          "question": "set_parameter_source가 source를 대입하는 정확한 왼쪽 표현식을 답하세요.",
+          "accepted_answers": [
+            "self._parameter_source[name]"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/click/core.py",
+              "start_line": 968,
+              "end_line": 968
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/click/core.py",
+                "start_line": 968,
+                "end_line": 968
+              }
+            ]
+          ]
+        },
+        {
+          "id": "lookup",
+          "question": "get_parameter_source의 반환 표현식을 정확히 답하세요.",
+          "accepted_answers": [
+            "self._parameter_source.get(name)"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/click/core.py",
+              "start_line": 986,
+              "end_line": 986
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/click/core.py",
+                "start_line": 986,
+                "end_line": 986
+              }
+            ]
+          ]
+        }
+      ],
+      "required_terms": [
+        "set_parameter_source",
+        "get_parameter_source"
+      ]
+    },
+    {
+      "id": "httpx_status_en",
+      "group": "httpx",
+      "split": "locked",
+      "language": "en",
+      "primary": "httpx/_models.py",
+      "query": "Inspect Response.raise_for_status request prerequisites and success handling.",
+      "search_terms": [
+        "raise_for_status"
+      ],
+      "files": {
+        "httpx/_models.py": "data/httpx/httpx/_models.py",
+        "httpx/_exceptions.py": "data/httpx/httpx/_exceptions.py"
+      },
+      "facts": [
+        {
+          "id": "request",
+          "question": "What exception class is raised when the response has no request?",
+          "accepted_answers": [
+            "RuntimeError"
+          ],
+          "required_evidence": [
+            {
+              "file": "httpx/_models.py",
+              "start_line": 798,
+              "end_line": 802
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "httpx/_models.py",
+                "start_line": 798,
+                "end_line": 802
+              }
+            ]
+          ]
+        },
+        {
+          "id": "success",
+          "question": "Give the exact returned expression in the is_success branch.",
+          "accepted_answers": [
+            "self"
+          ],
+          "required_evidence": [
+            {
+              "file": "httpx/_models.py",
+              "start_line": 805,
+              "end_line": 806
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "httpx/_models.py",
+                "start_line": 805,
+                "end_line": 806
+              }
+            ]
+          ]
+        }
+      ],
+      "required_terms": [
+        "raise_for_status"
+      ]
+    },
+    {
+      "id": "httpx_stream_ko",
+      "group": "httpx",
+      "split": "locked",
+      "language": "ko",
+      "primary": "httpx/_models.py",
+      "query": "Response.iter_raw의 소비·닫힘 검사 순서와 정상 완료 정리를 확인하세요.",
+      "search_terms": [
+        "iter_raw"
+      ],
+      "files": {
+        "httpx/_models.py": "data/httpx/httpx/_models.py",
+        "httpx/_exceptions.py": "data/httpx/httpx/_exceptions.py"
+      },
+      "facts": [
+        {
+          "id": "consumed",
+          "question": "이미 소비되고 닫힌 상태가 모두 참이면 먼저 발생하는 예외 클래스명만 답하세요.",
+          "accepted_answers": [
+            "StreamConsumed"
+          ],
+          "required_evidence": [
+            {
+              "file": "httpx/_models.py",
+              "start_line": 939,
+              "end_line": 942
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "httpx/_models.py",
+                "start_line": 939,
+                "end_line": 942
+              }
+            ]
+          ]
+        },
+        {
+          "id": "close",
+          "question": "chunker.flush 순회 이후 호출하는 정리 메서드명을 인자 없이 답하세요.",
+          "accepted_answers": [
+            "self.close"
+          ],
+          "required_evidence": [
+            {
+              "file": "httpx/_models.py",
+              "start_line": 956,
+              "end_line": 959
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "httpx/_models.py",
+                "start_line": 956,
+                "end_line": 959
+              }
+            ]
+          ]
+        }
+      ],
+      "required_terms": [
+        "iter_raw"
+      ]
+    },
+    {
+      "id": "urllib3_backoff_en",
+      "group": "urllib3",
+      "split": "locked",
+      "language": "en",
+      "primary": "src/urllib3/util/retry.py",
+      "query": "Inspect Retry.get_backoff_time consecutive-error handling and upper bound.",
+      "search_terms": [
+        "get_backoff_time"
+      ],
+      "files": {
+        "src/urllib3/util/retry.py": "data/urllib3/src/urllib3/util/retry.py",
+        "src/urllib3/exceptions.py": "data/urllib3/src/urllib3/exceptions.py"
+      },
+      "facts": [
+        {
+          "id": "short",
+          "question": "What numeric literal is returned when consecutive_errors_len is at most one?",
+          "accepted_answers": [
+            "0"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/urllib3/util/retry.py",
+              "start_line": 334,
+              "end_line": 335
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/urllib3/util/retry.py",
+                "start_line": 334,
+                "end_line": 335
+              }
+            ]
+          ]
+        },
+        {
+          "id": "cap",
+          "question": "Give the exact attribute used as the upper clamp in the final return expression.",
+          "accepted_answers": [
+            "self.backoff_max"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/urllib3/util/retry.py",
+              "start_line": 337,
+              "end_line": 340
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/urllib3/util/retry.py",
+                "start_line": 337,
+                "end_line": 340
+              }
+            ]
+          ]
+        }
+      ],
+      "required_terms": [
+        "get_backoff_time"
+      ]
+    },
+    {
+      "id": "urllib3_retry_ko",
+      "group": "urllib3",
+      "split": "locked",
+      "language": "ko",
+      "primary": "src/urllib3/util/retry.py",
+      "query": "Retry.is_retry의 메서드 허용 검사와 Retry-After 조건을 확인하세요.",
+      "search_terms": [
+        "def is_retry"
+      ],
+      "files": {
+        "src/urllib3/util/retry.py": "data/urllib3/src/urllib3/util/retry.py",
+        "src/urllib3/exceptions.py": "data/urllib3/src/urllib3/exceptions.py"
+      },
+      "facts": [
+        {
+          "id": "gate",
+          "question": "허용되지 않은 메서드에 대해 반환하는 Python 리터럴만 답하세요.",
+          "accepted_answers": [
+            "False"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/urllib3/util/retry.py",
+              "start_line": 434,
+              "end_line": 435
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/urllib3/util/retry.py",
+                "start_line": 434,
+                "end_line": 435
+              }
+            ]
+          ]
+        },
+        {
+          "id": "header",
+          "question": "최종 bool 조건에서 Retry-After 존중 여부를 검사하는 정확한 속성명을 답하세요.",
+          "accepted_answers": [
+            "self.respect_retry_after_header"
+          ],
+          "required_evidence": [
+            {
+              "file": "src/urllib3/util/retry.py",
+              "start_line": 440,
+              "end_line": 444
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "src/urllib3/util/retry.py",
+                "start_line": 440,
+                "end_line": 444
+              }
+            ]
+          ]
+        }
+      ],
+      "required_terms": [
+        "is_retry"
+      ]
+    },
+    {
+      "id": "django_page_en",
+      "group": "django",
+      "split": "locked",
+      "language": "en",
+      "primary": "django/core/paginator.py",
+      "query": "Inspect synchronous Paginator.get_page recovery for invalid page numbers.",
+      "search_terms": [
+        "def get_page"
+      ],
+      "files": {
+        "django/core/paginator.py": "data/django/django/core/paginator.py",
+        "django/utils/inspect.py": "data/django/django/utils/inspect.py"
+      },
+      "facts": [
+        {
+          "id": "noninteger",
+          "question": "What numeric literal is used after PageNotAnInteger?",
+          "accepted_answers": [
+            "1"
+          ],
+          "required_evidence": [
+            {
+              "file": "django/core/paginator.py",
+              "start_line": 163,
+              "end_line": 164
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "django/core/paginator.py",
+                "start_line": 163,
+                "end_line": 164
+              }
+            ]
+          ]
+        },
+        {
+          "id": "empty",
+          "question": "Give the exact expression assigned after EmptyPage in synchronous get_page.",
+          "accepted_answers": [
+            "self.num_pages"
+          ],
+          "required_evidence": [
+            {
+              "file": "django/core/paginator.py",
+              "start_line": 165,
+              "end_line": 166
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "django/core/paginator.py",
+                "start_line": 165,
+                "end_line": 166
+              }
+            ]
+          ]
+        }
+      ],
+      "required_terms": [
+        "get_page"
+      ]
+    },
+    {
+      "id": "django_count_ko",
+      "group": "django",
+      "split": "locked",
+      "language": "ko",
+      "primary": "django/core/paginator.py",
+      "query": "동기 Paginator의 count 최적화 조건과 num_pages의 빈 목록 처리를 확인하세요.",
+      "search_terms": [
+        "def count",
+        "def num_pages"
+      ],
+      "files": {
+        "django/core/paginator.py": "data/django/django/core/paginator.py",
+        "django/utils/inspect.py": "data/django/django/utils/inspect.py"
+      },
+      "facts": [
+        {
+          "id": "count",
+          "question": "count 메서드 최적화가 불가능할 때 반환하는 정확한 표현식을 답하세요.",
+          "accepted_answers": [
+            "len(self.object_list)"
+          ],
+          "required_evidence": [
+            {
+              "file": "django/core/paginator.py",
+              "start_line": 181,
+              "end_line": 184
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "django/core/paginator.py",
+                "start_line": 181,
+                "end_line": 184
+              }
+            ]
+          ]
+        },
+        {
+          "id": "zero",
+          "question": "count가 0이고 첫 빈 페이지가 허용되지 않을 때 num_pages가 반환하는 숫자만 답하세요.",
+          "accepted_answers": [
+            "0"
+          ],
+          "required_evidence": [
+            {
+              "file": "django/core/paginator.py",
+              "start_line": 189,
+              "end_line": 190
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "django/core/paginator.py",
+                "start_line": 189,
+                "end_line": 190
+              }
+            ]
+          ]
+        }
+      ],
+      "required_terms": [
+        "count",
+        "num_pages"
+      ]
+    }
+  ],
+  "recovery": "At most two model-requested read OR literal-search actions across explicitly listed files; each at most 200 new lines / 24000 rendered characters. Duplicate/covered requests blocked. Same required query literals visible to every arm; v2.5 additionally receives them via require-term."
+}

@@ -1,0 +1,6356 @@
+{
+  "schema_version": 1,
+  "metric": "secondary post-hoc independent adjudication; frozen strict scores unchanged",
+  "scope": "All completed episodes at refresh; strict passes retained, strict failures individually inspected",
+  "manifest_sha256": "92d20b1b7da56446769482854de67b29a2645b05d1c269405a586d88e2de9368",
+  "episodes_reviewed": 96,
+  "complete": true,
+  "entries": [
+    {
+      "task": "click_exit_en",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "cleanup",
+      "strict": {
+        "id": "cleanup",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 849,
+          "end_line": 857
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 856,
+            "end_line": 857
+          }
+        ]
+      ],
+      "result_sha256": "0df129f837f583f125815f368cf54997e3a34b01c5e1eb86f562ce43a3c77e77"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "fail",
+      "strict": {
+        "id": "fail",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "UsageError",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 837,
+          "end_line": 843
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 843,
+            "end_line": 843
+          }
+        ]
+      ],
+      "result_sha256": "0df129f837f583f125815f368cf54997e3a34b01c5e1eb86f562ce43a3c77e77"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "cleanup",
+      "strict": {
+        "id": "cleanup",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 849,
+          "end_line": 857
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 856,
+            "end_line": 857
+          }
+        ]
+      ],
+      "result_sha256": "a483eb243521fb35086d317c64d5c6743a1850b94b3e33ff5a820458ae414e80"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "fail",
+      "strict": {
+        "id": "fail",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "UsageError",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 837,
+          "end_line": 843
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 843,
+            "end_line": 843
+          }
+        ]
+      ],
+      "result_sha256": "a483eb243521fb35086d317c64d5c6743a1850b94b3e33ff5a820458ae414e80"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "cleanup",
+      "strict": {
+        "id": "cleanup",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "empty_call_parentheses_equivalent: method call without arguments is self.close(), source line 856",
+      "answer": "self.close()",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 849,
+          "end_line": 857
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 856,
+            "end_line": 857
+          }
+        ]
+      ],
+      "result_sha256": "0aba8b77bf146a5b9fd6b9fceb02a0690605d114e812f2e6affbe734adac586c"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "fail",
+      "strict": {
+        "id": "fail",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "UsageError",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 837,
+          "end_line": 843
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 843,
+            "end_line": 843
+          }
+        ]
+      ],
+      "result_sha256": "0aba8b77bf146a5b9fd6b9fceb02a0690605d114e812f2e6affbe734adac586c"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "cleanup",
+      "strict": {
+        "id": "cleanup",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 849,
+          "end_line": 857
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 856,
+            "end_line": 857
+          }
+        ]
+      ],
+      "result_sha256": "f5c36d06525567ab029ea06020d1f8233c17e58e15a7853deb65663e4a57c605"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "fail",
+      "strict": {
+        "id": "fail",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "UsageError",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 837,
+          "end_line": 843
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 843,
+            "end_line": 843
+          }
+        ]
+      ],
+      "result_sha256": "f5c36d06525567ab029ea06020d1f8233c17e58e15a7853deb65663e4a57c605"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "cleanup",
+      "strict": {
+        "id": "cleanup",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 849,
+          "end_line": 857
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 856,
+            "end_line": 857
+          }
+        ]
+      ],
+      "result_sha256": "2af9f5e560066dacf09bd61102fff7731bdd668ed49fe0d092cbeeaad43c5eef"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "fail",
+      "strict": {
+        "id": "fail",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "UsageError",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 837,
+          "end_line": 843
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 843,
+            "end_line": 843
+          }
+        ]
+      ],
+      "result_sha256": "2af9f5e560066dacf09bd61102fff7731bdd668ed49fe0d092cbeeaad43c5eef"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "cleanup",
+      "strict": {
+        "id": "cleanup",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 849,
+          "end_line": 857
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 856,
+            "end_line": 857
+          }
+        ]
+      ],
+      "result_sha256": "ecde93ca7e97f1bd80b193c5b5bcc5ea5e9e740352bec3661ed0532639cebc4c"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "fail",
+      "strict": {
+        "id": "fail",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "UsageError",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 837,
+          "end_line": 843
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 843,
+            "end_line": 843
+          }
+        ]
+      ],
+      "result_sha256": "ecde93ca7e97f1bd80b193c5b5bcc5ea5e9e740352bec3661ed0532639cebc4c"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "cleanup",
+      "strict": {
+        "id": "cleanup",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 849,
+          "end_line": 857
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 856,
+            "end_line": 857
+          }
+        ]
+      ],
+      "result_sha256": "eb42297e02a3d65830ecb26ceaaf08d1f90aa84ab0e0293fd78123a4a615c771"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "fail",
+      "strict": {
+        "id": "fail",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "UsageError",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 837,
+          "end_line": 843
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 843,
+            "end_line": 843
+          }
+        ]
+      ],
+      "result_sha256": "eb42297e02a3d65830ecb26ceaaf08d1f90aa84ab0e0293fd78123a4a615c771"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "cleanup",
+      "strict": {
+        "id": "cleanup",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "empty_call_parentheses_equivalent: method call without arguments is self.close(), source line 856",
+      "answer": "self.close()",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 849,
+          "end_line": 857
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 856,
+            "end_line": 857
+          }
+        ]
+      ],
+      "result_sha256": "40ba6f57fc4351506fcb8b310ff76943baccd28d2b8178b5db9e058264013f2b"
+    },
+    {
+      "task": "click_exit_en",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "fail",
+      "strict": {
+        "id": "fail",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "UsageError",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 837,
+          "end_line": 843
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 843,
+            "end_line": 843
+          }
+        ]
+      ],
+      "result_sha256": "40ba6f57fc4351506fcb8b310ff76943baccd28d2b8178b5db9e058264013f2b"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "storage",
+      "strict": {
+        "id": "storage",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self._parameter_source[name]",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 961,
+          "end_line": 968
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 968,
+            "end_line": 968
+          }
+        ]
+      ],
+      "result_sha256": "cc445ed2c793a44c7c1123bf90fd5ae15432ff4cf3957848853a322ea9fc83c8"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "lookup",
+      "strict": {
+        "id": "lookup",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "exact_expression_plus_supported_explanation: get(name) and absent-name None behavior supported by lines 980-986",
+      "answer": "self._parameter_source.get(name) — 저장된 source가 없으면 None을 반환합니다.",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 970,
+          "end_line": 986
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 986,
+            "end_line": 986
+          }
+        ]
+      ],
+      "result_sha256": "cc445ed2c793a44c7c1123bf90fd5ae15432ff4cf3957848853a322ea9fc83c8"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "storage",
+      "strict": {
+        "id": "storage",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self._parameter_source[name]",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 961,
+          "end_line": 968
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 968,
+            "end_line": 968
+          }
+        ]
+      ],
+      "result_sha256": "1eb46fb1d19063da920196d6c20680eb8e61e72a923845f5a67a4a0a553dd5dd"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "lookup",
+      "strict": {
+        "id": "lookup",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "exact_expression_plus_supported_explanation: get(name) and absent-name None behavior supported by lines 980-986",
+      "answer": "self._parameter_source.get(name) — 없는 이름은 None을 반환합니다.",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 979,
+          "end_line": 986
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 986,
+            "end_line": 986
+          }
+        ]
+      ],
+      "result_sha256": "1eb46fb1d19063da920196d6c20680eb8e61e72a923845f5a67a4a0a553dd5dd"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "storage",
+      "strict": {
+        "id": "storage",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self._parameter_source[name]",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 961,
+          "end_line": 968
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 968,
+            "end_line": 968
+          }
+        ]
+      ],
+      "result_sha256": "5ae5cbec40ccd0f5d000f33b4bd2d82e38ee2f8aa88ed6e8ea38e1b64a739ab9"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "lookup",
+      "strict": {
+        "id": "lookup",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "exact_expression_plus_supported_explanation: get(name) and absent-name None behavior supported by lines 980-986",
+      "answer": "self._parameter_source.get(name) — 저장되지 않은 name이면 None을 반환합니다.",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 970,
+          "end_line": 986
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 986,
+            "end_line": 986
+          }
+        ]
+      ],
+      "result_sha256": "5ae5cbec40ccd0f5d000f33b4bd2d82e38ee2f8aa88ed6e8ea38e1b64a739ab9"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "storage",
+      "strict": {
+        "id": "storage",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self._parameter_source[name]",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 961,
+          "end_line": 968
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 968,
+            "end_line": 968
+          }
+        ]
+      ],
+      "result_sha256": "61c944f86d2825257599cb42bef4af0541009e715d38a9bb2d9ed90e1b16aa9e"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "lookup",
+      "strict": {
+        "id": "lookup",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "exact_expression_plus_supported_explanation: get(name) and absent-name None behavior supported by lines 980-986",
+      "answer": "self._parameter_source.get(name) — 없는 이름은 None을 반환합니다.",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 970,
+          "end_line": 986
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 986,
+            "end_line": 986
+          }
+        ]
+      ],
+      "result_sha256": "61c944f86d2825257599cb42bef4af0541009e715d38a9bb2d9ed90e1b16aa9e"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "storage",
+      "strict": {
+        "id": "storage",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self._parameter_source[name]",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 961,
+          "end_line": 968
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 968,
+            "end_line": 968
+          }
+        ]
+      ],
+      "result_sha256": "c94a43126979b8c905b1382d2372c2cbf6abb1a7d76d3c2ce1c766b494ccb8aa"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "lookup",
+      "strict": {
+        "id": "lookup",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "exact_expression_plus_supported_explanation: absent-name None behavior supported by lines 980-986",
+      "answer": "self._parameter_source.get(name) — 저장된 값이 없으면 None을 반환합니다.",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 970,
+          "end_line": 986
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 986,
+            "end_line": 986
+          }
+        ]
+      ],
+      "result_sha256": "c94a43126979b8c905b1382d2372c2cbf6abb1a7d76d3c2ce1c766b494ccb8aa"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "storage",
+      "strict": {
+        "id": "storage",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self._parameter_source[name]",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 961,
+          "end_line": 968
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 968,
+            "end_line": 968
+          }
+        ]
+      ],
+      "result_sha256": "d1cdda360ce5f1a2d551b957631c82e9fa50445bd30d2592a2b994df999c15cd"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "lookup",
+      "strict": {
+        "id": "lookup",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self._parameter_source.get(name)",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 970,
+          "end_line": 986
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 986,
+            "end_line": 986
+          }
+        ]
+      ],
+      "result_sha256": "d1cdda360ce5f1a2d551b957631c82e9fa50445bd30d2592a2b994df999c15cd"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "storage",
+      "strict": {
+        "id": "storage",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self._parameter_source[name]",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 961,
+          "end_line": 968
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 968,
+            "end_line": 968
+          }
+        ]
+      ],
+      "result_sha256": "715846dd728142c05947ad7c37b6503335bf0b16408a5005c6b9fd76ba8a51f1"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "lookup",
+      "strict": {
+        "id": "lookup",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self._parameter_source.get(name)",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 970,
+          "end_line": 986
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 986,
+            "end_line": 986
+          }
+        ]
+      ],
+      "result_sha256": "715846dd728142c05947ad7c37b6503335bf0b16408a5005c6b9fd76ba8a51f1"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "storage",
+      "strict": {
+        "id": "storage",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self._parameter_source[name]",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 961,
+          "end_line": 968
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 968,
+            "end_line": 968
+          }
+        ]
+      ],
+      "result_sha256": "d07a74cfb00ceb62d9f8ecb79356771aca19fa02d349c288138cf8b7b61e83d5"
+    },
+    {
+      "task": "click_parameter_ko",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "lookup",
+      "strict": {
+        "id": "lookup",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self._parameter_source.get(name)",
+      "citations": [
+        {
+          "file": "src/click/core.py",
+          "start_line": 970,
+          "end_line": 986
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/click/core.py",
+            "start_line": 986,
+            "end_line": 986
+          }
+        ]
+      ],
+      "result_sha256": "d07a74cfb00ceb62d9f8ecb79356771aca19fa02d349c288138cf8b7b61e83d5"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "count",
+      "strict": {
+        "id": "count",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "len(self.object_list)",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 178,
+          "end_line": 184
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 181,
+            "end_line": 184
+          }
+        ]
+      ],
+      "result_sha256": "70fed7ee36d606aaefcf41df740186938431caa67ae190712681c83135e170e6"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "zero",
+      "strict": {
+        "id": "zero",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 186,
+          "end_line": 192
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 189,
+            "end_line": 190
+          }
+        ]
+      ],
+      "result_sha256": "70fed7ee36d606aaefcf41df740186938431caa67ae190712681c83135e170e6"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "count",
+      "strict": {
+        "id": "count",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "len(self.object_list)",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 178,
+          "end_line": 184
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 181,
+            "end_line": 184
+          }
+        ]
+      ],
+      "result_sha256": "5baee577b1b250949eab71cfc4d080c037e5fef231cafe75e49ddcadad75fa3b"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "zero",
+      "strict": {
+        "id": "zero",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 186,
+          "end_line": 190
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 189,
+            "end_line": 190
+          }
+        ]
+      ],
+      "result_sha256": "5baee577b1b250949eab71cfc4d080c037e5fef231cafe75e49ddcadad75fa3b"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "count",
+      "strict": {
+        "id": "count",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "len(self.object_list)",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 178,
+          "end_line": 184
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 181,
+            "end_line": 184
+          }
+        ]
+      ],
+      "result_sha256": "d697cabf69dba88ec3da1ff0209a3a4a4bd20288739ed35032a0e40a1eface79"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "zero",
+      "strict": {
+        "id": "zero",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 186,
+          "end_line": 192
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 189,
+            "end_line": 190
+          }
+        ]
+      ],
+      "result_sha256": "d697cabf69dba88ec3da1ff0209a3a4a4bd20288739ed35032a0e40a1eface79"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "count",
+      "strict": {
+        "id": "count",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "len(self.object_list)",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 178,
+          "end_line": 184
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 181,
+            "end_line": 184
+          }
+        ]
+      ],
+      "result_sha256": "4da1721c082e53ffc8081357948dbedb00bc2867d7a066cc253fac3d6fd27fec"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "zero",
+      "strict": {
+        "id": "zero",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 186,
+          "end_line": 190
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 189,
+            "end_line": 190
+          }
+        ]
+      ],
+      "result_sha256": "4da1721c082e53ffc8081357948dbedb00bc2867d7a066cc253fac3d6fd27fec"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "count",
+      "strict": {
+        "id": "count",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "len(self.object_list)",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 178,
+          "end_line": 184
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 181,
+            "end_line": 184
+          }
+        ]
+      ],
+      "result_sha256": "32fef6c92d18245a5309608ec3e1ad092611501592373a7cb20676b646fd52e8"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "zero",
+      "strict": {
+        "id": "zero",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 186,
+          "end_line": 190
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 189,
+            "end_line": 190
+          }
+        ]
+      ],
+      "result_sha256": "32fef6c92d18245a5309608ec3e1ad092611501592373a7cb20676b646fd52e8"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "count",
+      "strict": {
+        "id": "count",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "len(self.object_list)",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 179,
+          "end_line": 184
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 181,
+            "end_line": 184
+          }
+        ]
+      ],
+      "result_sha256": "5c20de773ae22bae00b5237f6124245661b0b912a3834c22c33bf373a64a7718"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "zero",
+      "strict": {
+        "id": "zero",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 187,
+          "end_line": 190
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 189,
+            "end_line": 190
+          }
+        ]
+      ],
+      "result_sha256": "5c20de773ae22bae00b5237f6124245661b0b912a3834c22c33bf373a64a7718"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "count",
+      "strict": {
+        "id": "count",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "len(self.object_list)",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 178,
+          "end_line": 184
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 181,
+            "end_line": 184
+          }
+        ]
+      ],
+      "result_sha256": "2820ff28c0fa7a32423053c353a1c9564e772bbbf2d56740990da79055f2509a"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "zero",
+      "strict": {
+        "id": "zero",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 186,
+          "end_line": 192
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 189,
+            "end_line": 190
+          }
+        ]
+      ],
+      "result_sha256": "2820ff28c0fa7a32423053c353a1c9564e772bbbf2d56740990da79055f2509a"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "count",
+      "strict": {
+        "id": "count",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "len(self.object_list)",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 178,
+          "end_line": 184
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 181,
+            "end_line": 184
+          }
+        ]
+      ],
+      "result_sha256": "be2579715766fcff99a76381a1b93f8a7d38fa26125ea8edf687fcf1765fb3a3"
+    },
+    {
+      "task": "django_count_ko",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "zero",
+      "strict": {
+        "id": "zero",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 186,
+          "end_line": 190
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 189,
+            "end_line": 190
+          }
+        ]
+      ],
+      "result_sha256": "be2579715766fcff99a76381a1b93f8a7d38fa26125ea8edf687fcf1765fb3a3"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "noninteger",
+      "strict": {
+        "id": "noninteger",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "1",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 164
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 163,
+            "end_line": 164
+          }
+        ]
+      ],
+      "result_sha256": "425fa80b7c836c893207d0b60304a3e87d826b9490ebe81ba7294d28980c33d0"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "empty",
+      "strict": {
+        "id": "empty",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.num_pages",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 167
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 165,
+            "end_line": 166
+          }
+        ]
+      ],
+      "result_sha256": "425fa80b7c836c893207d0b60304a3e87d826b9490ebe81ba7294d28980c33d0"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "noninteger",
+      "strict": {
+        "id": "noninteger",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "1",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 164
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 163,
+            "end_line": 164
+          }
+        ]
+      ],
+      "result_sha256": "3a518868b401f669f77f4eb42f825616eeb588400aa428b04ebb65a56417326c"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "empty",
+      "strict": {
+        "id": "empty",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.num_pages",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 166
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 165,
+            "end_line": 166
+          }
+        ]
+      ],
+      "result_sha256": "3a518868b401f669f77f4eb42f825616eeb588400aa428b04ebb65a56417326c"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "noninteger",
+      "strict": {
+        "id": "noninteger",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "1",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 164
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 163,
+            "end_line": 164
+          }
+        ]
+      ],
+      "result_sha256": "64b5accbdc3ff2de99283abf66cf492210fc914c7539859637188ac59c9edcef"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "empty",
+      "strict": {
+        "id": "empty",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.num_pages",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 167
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 165,
+            "end_line": 166
+          }
+        ]
+      ],
+      "result_sha256": "64b5accbdc3ff2de99283abf66cf492210fc914c7539859637188ac59c9edcef"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "noninteger",
+      "strict": {
+        "id": "noninteger",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "1",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 167
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 163,
+            "end_line": 164
+          }
+        ]
+      ],
+      "result_sha256": "64dcbe0224efa9bddb22f3bc774183805ad8265f25fdc9c463f6c6fe843f3225"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "empty",
+      "strict": {
+        "id": "empty",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.num_pages",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 167
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 165,
+            "end_line": 166
+          }
+        ]
+      ],
+      "result_sha256": "64dcbe0224efa9bddb22f3bc774183805ad8265f25fdc9c463f6c6fe843f3225"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "noninteger",
+      "strict": {
+        "id": "noninteger",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "1",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 167
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 163,
+            "end_line": 164
+          }
+        ]
+      ],
+      "result_sha256": "3d948f0e79ecfdda9637d6189bc182a55500a87c6df86bb3c15a3a6edb3da0a1"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "empty",
+      "strict": {
+        "id": "empty",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.num_pages",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 167
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 165,
+            "end_line": 166
+          }
+        ]
+      ],
+      "result_sha256": "3d948f0e79ecfdda9637d6189bc182a55500a87c6df86bb3c15a3a6edb3da0a1"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "noninteger",
+      "strict": {
+        "id": "noninteger",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "1",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 164
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 163,
+            "end_line": 164
+          }
+        ]
+      ],
+      "result_sha256": "a812cc83afe1dffbca1d21b48bc79a1c2a591c09b7929ab203ce540dca6666ff"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "empty",
+      "strict": {
+        "id": "empty",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.num_pages",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 166
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 165,
+            "end_line": 166
+          }
+        ]
+      ],
+      "result_sha256": "a812cc83afe1dffbca1d21b48bc79a1c2a591c09b7929ab203ce540dca6666ff"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "noninteger",
+      "strict": {
+        "id": "noninteger",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "1",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 167
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 163,
+            "end_line": 164
+          }
+        ]
+      ],
+      "result_sha256": "9487bbbbcb418290d1f048b61cfd6b3877b30b6d29fbdc23b48d320bcec55407"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "empty",
+      "strict": {
+        "id": "empty",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.num_pages",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 167
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 165,
+            "end_line": 166
+          }
+        ]
+      ],
+      "result_sha256": "9487bbbbcb418290d1f048b61cfd6b3877b30b6d29fbdc23b48d320bcec55407"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "noninteger",
+      "strict": {
+        "id": "noninteger",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "1",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 167
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 163,
+            "end_line": 164
+          }
+        ]
+      ],
+      "result_sha256": "ec985629940e1d422142b57c49fba7c7f2379b589ab55e5a20c1121780a95e21"
+    },
+    {
+      "task": "django_page_en",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "empty",
+      "strict": {
+        "id": "empty",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.num_pages",
+      "citations": [
+        {
+          "file": "django/core/paginator.py",
+          "start_line": 156,
+          "end_line": 167
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "django/core/paginator.py",
+            "start_line": 165,
+            "end_line": 166
+          }
+        ]
+      ],
+      "result_sha256": "ec985629940e1d422142b57c49fba7c7f2379b589ab55e5a20c1121780a95e21"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "wrapper",
+      "strict": {
+        "id": "wrapper",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.async_to_sync(func)",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1065,
+          "end_line": 1077
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1074,
+            "end_line": 1075
+          }
+        ]
+      ],
+      "result_sha256": "5f1e3ac10aff7ff191a3d6f861c8c104bffade146dcda23abe022dfa39991623"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "missing",
+      "strict": {
+        "id": "missing",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1093,
+          "end_line": 1098
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1095,
+            "end_line": 1097
+          }
+        ]
+      ],
+      "result_sha256": "5f1e3ac10aff7ff191a3d6f861c8c104bffade146dcda23abe022dfa39991623"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "wrapper",
+      "strict": {
+        "id": "wrapper",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.async_to_sync(func)",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1074,
+          "end_line": 1075
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1074,
+            "end_line": 1075
+          }
+        ]
+      ],
+      "result_sha256": "dc76500b65ac9492bc3ba8840c001514ad3dbdfca8319d953599e8ecabecaeb7"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "missing",
+      "strict": {
+        "id": "missing",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1093,
+          "end_line": 1098
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1095,
+            "end_line": 1097
+          }
+        ]
+      ],
+      "result_sha256": "dc76500b65ac9492bc3ba8840c001514ad3dbdfca8319d953599e8ecabecaeb7"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "wrapper",
+      "strict": {
+        "id": "wrapper",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.async_to_sync(func)",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1065,
+          "end_line": 1077
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1074,
+            "end_line": 1075
+          }
+        ]
+      ],
+      "result_sha256": "db5c597bc1f4554f3b668e66535a0087d147e841bfac025a04a2a5efa37b7559"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "missing",
+      "strict": {
+        "id": "missing",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1093,
+          "end_line": 1098
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1095,
+            "end_line": 1097
+          }
+        ]
+      ],
+      "result_sha256": "db5c597bc1f4554f3b668e66535a0087d147e841bfac025a04a2a5efa37b7559"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "wrapper",
+      "strict": {
+        "id": "wrapper",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.async_to_sync(func)",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1065,
+          "end_line": 1077
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1074,
+            "end_line": 1075
+          }
+        ]
+      ],
+      "result_sha256": "ca28e65cb6099a08e8eac7e3e9c8bf8b5e717bc9de144b12c9d3236ae7c8d68f"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "missing",
+      "strict": {
+        "id": "missing",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1093,
+          "end_line": 1098
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1095,
+            "end_line": 1097
+          }
+        ]
+      ],
+      "result_sha256": "ca28e65cb6099a08e8eac7e3e9c8bf8b5e717bc9de144b12c9d3236ae7c8d68f"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "wrapper",
+      "strict": {
+        "id": "wrapper",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.async_to_sync(func)",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1065,
+          "end_line": 1077
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1074,
+            "end_line": 1075
+          }
+        ]
+      ],
+      "result_sha256": "80ed39f004896775b31f4908e93cf2981705649d6d62c73f3090a9040ac6bba0"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "missing",
+      "strict": {
+        "id": "missing",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1093,
+          "end_line": 1098
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1095,
+            "end_line": 1097
+          }
+        ]
+      ],
+      "result_sha256": "80ed39f004896775b31f4908e93cf2981705649d6d62c73f3090a9040ac6bba0"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "wrapper",
+      "strict": {
+        "id": "wrapper",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.async_to_sync(func)",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1074,
+          "end_line": 1075
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1074,
+            "end_line": 1075
+          }
+        ]
+      ],
+      "result_sha256": "1d9add8aaaad839db6c65e2d9ec3708bc58eb08250f584d87a4ac714b636095f"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "missing",
+      "strict": {
+        "id": "missing",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1093,
+          "end_line": 1098
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1095,
+            "end_line": 1097
+          }
+        ]
+      ],
+      "result_sha256": "1d9add8aaaad839db6c65e2d9ec3708bc58eb08250f584d87a4ac714b636095f"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "wrapper",
+      "strict": {
+        "id": "wrapper",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.async_to_sync(func)",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1065,
+          "end_line": 1077
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1074,
+            "end_line": 1075
+          }
+        ]
+      ],
+      "result_sha256": "2a9136735714a17a3cb0a4b03291d086c72e725a0d051769b2d2e192f64cb3d9"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "missing",
+      "strict": {
+        "id": "missing",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1093,
+          "end_line": 1098
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1095,
+            "end_line": 1097
+          }
+        ]
+      ],
+      "result_sha256": "2a9136735714a17a3cb0a4b03291d086c72e725a0d051769b2d2e192f64cb3d9"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "wrapper",
+      "strict": {
+        "id": "wrapper",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.async_to_sync(func)",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1065,
+          "end_line": 1077
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1074,
+            "end_line": 1075
+          }
+        ]
+      ],
+      "result_sha256": "c8a88833ef413589c7b2ac8d1548d3c89b1042e31969820dc820cff8264770da"
+    },
+    {
+      "task": "flask_async_ko",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "missing",
+      "strict": {
+        "id": "missing",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 1093,
+          "end_line": 1098
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 1095,
+            "end_line": 1097
+          }
+        ]
+      ],
+      "result_sha256": "c8a88833ef413589c7b2ac8d1548d3c89b1042e31969820dc820cff8264770da"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "default",
+      "strict": {
+        "id": "default",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.testing or self.debug",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 927,
+          "end_line": 930
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 929,
+            "end_line": 930
+          }
+        ]
+      ],
+      "result_sha256": "5841c18ddf48cd6399cbf0f76fbb732881e5b0cbeb4e3804d06fed841062191b"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "signal",
+      "strict": {
+        "id": "signal",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "got_request_exception.send",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 925,
+          "end_line": 932
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 926,
+            "end_line": 927
+          }
+        ]
+      ],
+      "result_sha256": "5841c18ddf48cd6399cbf0f76fbb732881e5b0cbeb4e3804d06fed841062191b"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "default",
+      "strict": {
+        "id": "default",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.testing or self.debug",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 929,
+          "end_line": 930
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 929,
+            "end_line": 930
+          }
+        ]
+      ],
+      "result_sha256": "e8439fbd2ed6b6d8d73012283ec8d2735695bcee8c32ae4a4e58396cdcefc0ad"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "signal",
+      "strict": {
+        "id": "signal",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "got_request_exception.send",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 925,
+          "end_line": 932
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 926,
+            "end_line": 927
+          }
+        ]
+      ],
+      "result_sha256": "e8439fbd2ed6b6d8d73012283ec8d2735695bcee8c32ae4a4e58396cdcefc0ad"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "default",
+      "strict": {
+        "id": "default",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.testing or self.debug",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 927,
+          "end_line": 930
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 929,
+            "end_line": 930
+          }
+        ]
+      ],
+      "result_sha256": "58a81997f37f01829cf109c17e3171dfc5a1808889487bd1d514a5288d7e58af"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "signal",
+      "strict": {
+        "id": "signal",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "got_request_exception.send",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 925,
+          "end_line": 932
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 926,
+            "end_line": 927
+          }
+        ]
+      ],
+      "result_sha256": "58a81997f37f01829cf109c17e3171dfc5a1808889487bd1d514a5288d7e58af"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "default",
+      "strict": {
+        "id": "default",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.testing or self.debug",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 927,
+          "end_line": 930
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 929,
+            "end_line": 930
+          }
+        ]
+      ],
+      "result_sha256": "8db66f42150641ce9bff74a6455e5a41e5cc52a99d1d1c32a29b206054f9fa08"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "signal",
+      "strict": {
+        "id": "signal",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "got_request_exception.send",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 925,
+          "end_line": 932
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 926,
+            "end_line": 927
+          }
+        ]
+      ],
+      "result_sha256": "8db66f42150641ce9bff74a6455e5a41e5cc52a99d1d1c32a29b206054f9fa08"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "default",
+      "strict": {
+        "id": "default",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.testing or self.debug",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 927,
+          "end_line": 930
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 929,
+            "end_line": 930
+          }
+        ]
+      ],
+      "result_sha256": "fadf2c4cc25796ecf3426e757b1d490e67ee224f59a53fa6afcf36e9cfda4b85"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "signal",
+      "strict": {
+        "id": "signal",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "got_request_exception.send",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 925,
+          "end_line": 932
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 926,
+            "end_line": 927
+          }
+        ]
+      ],
+      "result_sha256": "fadf2c4cc25796ecf3426e757b1d490e67ee224f59a53fa6afcf36e9cfda4b85"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "default",
+      "strict": {
+        "id": "default",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.testing or self.debug",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 929,
+          "end_line": 930
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 929,
+            "end_line": 930
+          }
+        ]
+      ],
+      "result_sha256": "8e4b1a0c66a9496cde3f206e32673e61fef68d34be792f3c3e48b36a3a461e91"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "signal",
+      "strict": {
+        "id": "signal",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "got_request_exception.send",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 925,
+          "end_line": 932
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 926,
+            "end_line": 927
+          }
+        ]
+      ],
+      "result_sha256": "8e4b1a0c66a9496cde3f206e32673e61fef68d34be792f3c3e48b36a3a461e91"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "default",
+      "strict": {
+        "id": "default",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.testing or self.debug",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 927,
+          "end_line": 930
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 929,
+            "end_line": 930
+          }
+        ]
+      ],
+      "result_sha256": "f7278e2919eac78d2728cbc515e11af577906eace59dc0935e1b25f61fb64d84"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "signal",
+      "strict": {
+        "id": "signal",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "got_request_exception.send",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 925,
+          "end_line": 932
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 926,
+            "end_line": 927
+          }
+        ]
+      ],
+      "result_sha256": "f7278e2919eac78d2728cbc515e11af577906eace59dc0935e1b25f61fb64d84"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "default",
+      "strict": {
+        "id": "default",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.testing or self.debug",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 927,
+          "end_line": 930
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 929,
+            "end_line": 930
+          }
+        ]
+      ],
+      "result_sha256": "d2a664f0538c530c3851e3c98fefe3b84881c26a5a50f0125060f39aff8729a9"
+    },
+    {
+      "task": "flask_propagate_en",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "signal",
+      "strict": {
+        "id": "signal",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "got_request_exception.send",
+      "citations": [
+        {
+          "file": "src/flask/app.py",
+          "start_line": 925,
+          "end_line": 932
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/flask/app.py",
+            "start_line": 926,
+            "end_line": 927
+          }
+        ]
+      ],
+      "result_sha256": "d2a664f0538c530c3851e3c98fefe3b84881c26a5a50f0125060f39aff8729a9"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "request",
+      "strict": {
+        "id": "request",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 794,
+          "end_line": 803
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 798,
+            "end_line": 802
+          }
+        ]
+      ],
+      "result_sha256": "9d4d7bddeeda3897d9e147924df7bcb9abebeee4680755d269aad7a903ccc2eb"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "success",
+      "strict": {
+        "id": "success",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "return_statement_or_parenthetical_equivalent: source lines 805-806 return self",
+      "answer": "self (return self)",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 805,
+          "end_line": 806
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 805,
+            "end_line": 806
+          }
+        ]
+      ],
+      "result_sha256": "9d4d7bddeeda3897d9e147924df7bcb9abebeee4680755d269aad7a903ccc2eb"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "request",
+      "strict": {
+        "id": "request",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 798,
+          "end_line": 803
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 798,
+            "end_line": 802
+          }
+        ]
+      ],
+      "result_sha256": "6cff64465faf7a669d7fced643b16a228cfc180c912bdcb538f0f5a1d55bc78b"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "success",
+      "strict": {
+        "id": "success",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "return_statement_or_parenthetical_equivalent: source lines 805-806 return self",
+      "answer": "return self",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 805,
+          "end_line": 806
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 805,
+            "end_line": 806
+          }
+        ]
+      ],
+      "result_sha256": "6cff64465faf7a669d7fced643b16a228cfc180c912bdcb538f0f5a1d55bc78b"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "request",
+      "strict": {
+        "id": "request",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 794,
+          "end_line": 803
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 798,
+            "end_line": 802
+          }
+        ]
+      ],
+      "result_sha256": "717e374b613b4ce9aa7e614b2a766376476ffb8eb2a11a94522c14dd21c3589b"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "success",
+      "strict": {
+        "id": "success",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "return_statement_or_parenthetical_equivalent: source lines 805-806 return self",
+      "answer": "return self",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 805,
+          "end_line": 806
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 805,
+            "end_line": 806
+          }
+        ]
+      ],
+      "result_sha256": "717e374b613b4ce9aa7e614b2a766376476ffb8eb2a11a94522c14dd21c3589b"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "request",
+      "strict": {
+        "id": "request",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 794,
+          "end_line": 803
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 798,
+            "end_line": 802
+          }
+        ]
+      ],
+      "result_sha256": "9c0394882959e112b6bdfb9678578f29877330f78ab596385f99df36fb04d813"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "success",
+      "strict": {
+        "id": "success",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "return_statement_or_parenthetical_equivalent: source lines 805-806 return self",
+      "answer": "self (return self)",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 805,
+          "end_line": 806
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 805,
+            "end_line": 806
+          }
+        ]
+      ],
+      "result_sha256": "9c0394882959e112b6bdfb9678578f29877330f78ab596385f99df36fb04d813"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "request",
+      "strict": {
+        "id": "request",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 794,
+          "end_line": 803
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 798,
+            "end_line": 802
+          }
+        ]
+      ],
+      "result_sha256": "c48f9796d0f8a10633f4f17a0574034fc786d6850f1c00d4021b326602a9ea3b"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "success",
+      "strict": {
+        "id": "success",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "return_statement_or_parenthetical_equivalent: lines 805-806 return self",
+      "answer": "self (return self)",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 805,
+          "end_line": 806
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 805,
+            "end_line": 806
+          }
+        ]
+      ],
+      "result_sha256": "c48f9796d0f8a10633f4f17a0574034fc786d6850f1c00d4021b326602a9ea3b"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "request",
+      "strict": {
+        "id": "request",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 798,
+          "end_line": 803
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 798,
+            "end_line": 802
+          }
+        ]
+      ],
+      "result_sha256": "4848d8617a3e48c46689147c4aaa00fa9818db9b41edfdf17d20659f31028233"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "success",
+      "strict": {
+        "id": "success",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "return_statement_or_parenthetical_equivalent: lines 805-806 return self",
+      "answer": "self (exact statement: `return self`)",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 805,
+          "end_line": 806
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 805,
+            "end_line": 806
+          }
+        ]
+      ],
+      "result_sha256": "4848d8617a3e48c46689147c4aaa00fa9818db9b41edfdf17d20659f31028233"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "request",
+      "strict": {
+        "id": "request",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 794,
+          "end_line": 803
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 798,
+            "end_line": 802
+          }
+        ]
+      ],
+      "result_sha256": "a01509f2d044983f9814bd92526ceb9589dfaeaeb39e282ecd6678dab8d2c773"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "success",
+      "strict": {
+        "id": "success",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "return_statement_or_parenthetical_equivalent: lines 805-806 return self",
+      "answer": "self (return self)",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 805,
+          "end_line": 806
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 805,
+            "end_line": 806
+          }
+        ]
+      ],
+      "result_sha256": "a01509f2d044983f9814bd92526ceb9589dfaeaeb39e282ecd6678dab8d2c773"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "request",
+      "strict": {
+        "id": "request",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "RuntimeError",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 794,
+          "end_line": 803
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 798,
+            "end_line": 802
+          }
+        ]
+      ],
+      "result_sha256": "c2e4439823a30a1a81adbaf53560f0b43bf6ab5c80a720bb8b5928124e66f9ad"
+    },
+    {
+      "task": "httpx_status_en",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "success",
+      "strict": {
+        "id": "success",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "return_statement_or_parenthetical_equivalent: lines 805-806 return self",
+      "answer": "self (return self)",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 805,
+          "end_line": 806
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 805,
+            "end_line": 806
+          }
+        ]
+      ],
+      "result_sha256": "c2e4439823a30a1a81adbaf53560f0b43bf6ab5c80a720bb8b5928124e66f9ad"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "consumed",
+      "strict": {
+        "id": "consumed",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "StreamConsumed",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 935,
+          "end_line": 942
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 939,
+            "end_line": 942
+          }
+        ]
+      ],
+      "result_sha256": "df4ec9d741af7d6cccd34d96730c59780d34fc75883a629b4e650f04a231ec70"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "close",
+      "strict": {
+        "id": "close",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 956,
+          "end_line": 959
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 956,
+            "end_line": 959
+          }
+        ]
+      ],
+      "result_sha256": "df4ec9d741af7d6cccd34d96730c59780d34fc75883a629b4e650f04a231ec70"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "consumed",
+      "strict": {
+        "id": "consumed",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "StreamConsumed",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 935,
+          "end_line": 942
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 939,
+            "end_line": 942
+          }
+        ]
+      ],
+      "result_sha256": "9510ec7dd1fb2e0c0620b5c7dae392f52f4b1e5b77707c59f3aa8aa30b2028e5"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "close",
+      "strict": {
+        "id": "close",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 956,
+          "end_line": 959
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 956,
+            "end_line": 959
+          }
+        ]
+      ],
+      "result_sha256": "9510ec7dd1fb2e0c0620b5c7dae392f52f4b1e5b77707c59f3aa8aa30b2028e5"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "consumed",
+      "strict": {
+        "id": "consumed",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "StreamConsumed",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 935,
+          "end_line": 942
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 939,
+            "end_line": 942
+          }
+        ]
+      ],
+      "result_sha256": "e1d5d58c10367dfb0344f5ee339fb1b928f030fe2aec4f0675ee2f461f5d0900"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "close",
+      "strict": {
+        "id": "close",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 956,
+          "end_line": 959
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 956,
+            "end_line": 959
+          }
+        ]
+      ],
+      "result_sha256": "e1d5d58c10367dfb0344f5ee339fb1b928f030fe2aec4f0675ee2f461f5d0900"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "consumed",
+      "strict": {
+        "id": "consumed",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "StreamConsumed",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 935,
+          "end_line": 942
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 939,
+            "end_line": 942
+          }
+        ]
+      ],
+      "result_sha256": "6523da6b7a9315cdf0e3aba59ab16577b44f9b4bd44b34eb767e8d890b8a6cde"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "close",
+      "strict": {
+        "id": "close",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 956,
+          "end_line": 959
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 956,
+            "end_line": 959
+          }
+        ]
+      ],
+      "result_sha256": "6523da6b7a9315cdf0e3aba59ab16577b44f9b4bd44b34eb767e8d890b8a6cde"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "consumed",
+      "strict": {
+        "id": "consumed",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "StreamConsumed",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 935,
+          "end_line": 942
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 939,
+            "end_line": 942
+          }
+        ]
+      ],
+      "result_sha256": "00bd277bbbf9244b2ffdf21dc3c3d194399a240512ae00a4ba33915a6e857c17"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "close",
+      "strict": {
+        "id": "close",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 935,
+          "end_line": 959
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 956,
+            "end_line": 959
+          }
+        ]
+      ],
+      "result_sha256": "00bd277bbbf9244b2ffdf21dc3c3d194399a240512ae00a4ba33915a6e857c17"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "consumed",
+      "strict": {
+        "id": "consumed",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "StreamConsumed",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 935,
+          "end_line": 942
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 939,
+            "end_line": 942
+          }
+        ]
+      ],
+      "result_sha256": "9c480fa4ef8b5405f7e428532b86816574d4cca09f097b6ac9c13c5527db7e70"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "close",
+      "strict": {
+        "id": "close",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 956,
+          "end_line": 959
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 956,
+            "end_line": 959
+          }
+        ]
+      ],
+      "result_sha256": "9c480fa4ef8b5405f7e428532b86816574d4cca09f097b6ac9c13c5527db7e70"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "consumed",
+      "strict": {
+        "id": "consumed",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "StreamConsumed",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 935,
+          "end_line": 942
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 939,
+            "end_line": 942
+          }
+        ]
+      ],
+      "result_sha256": "feefefaf8cb3442bb5b1bdc39020020996ff376dd58847b50e0797c0e1e6ff4b"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "close",
+      "strict": {
+        "id": "close",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.close",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 956,
+          "end_line": 959
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 956,
+            "end_line": 959
+          }
+        ]
+      ],
+      "result_sha256": "feefefaf8cb3442bb5b1bdc39020020996ff376dd58847b50e0797c0e1e6ff4b"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "consumed",
+      "strict": {
+        "id": "consumed",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "StreamConsumed",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 935,
+          "end_line": 942
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 939,
+            "end_line": 942
+          }
+        ]
+      ],
+      "result_sha256": "c333e9af76758b1697cd36d52e1c3cda0d9c1a482f3684bf73ecfad091dde0b0"
+    },
+    {
+      "task": "httpx_stream_ko",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "close",
+      "strict": {
+        "id": "close",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "method_name_without_receiver: question asks method name without arguments, line 959 is self.close() after flush at 956-957",
+      "answer": "close",
+      "citations": [
+        {
+          "file": "httpx/_models.py",
+          "start_line": 956,
+          "end_line": 959
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "httpx/_models.py",
+            "start_line": 956,
+            "end_line": 959
+          }
+        ]
+      ],
+      "result_sha256": "c333e9af76758b1697cd36d52e1c3cda0d9c1a482f3684bf73ecfad091dde0b0"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "strip",
+      "strict": {
+        "id": "strip",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.should_strip_auth(original_url, url)",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 324,
+          "end_line": 327
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 324,
+            "end_line": 327
+          }
+        ]
+      ],
+      "result_sha256": "81171536453218fe369d52c7c5016c3ce245e310670135cb90219824fc02d22c"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "netrc",
+      "strict": {
+        "id": "netrc",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "get_netrc_auth(url) if self.trust_env else None",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 329,
+          "end_line": 332
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 330,
+            "end_line": 332
+          }
+        ]
+      ],
+      "result_sha256": "81171536453218fe369d52c7c5016c3ce245e310670135cb90219824fc02d22c"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "strip",
+      "strict": {
+        "id": "strip",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.should_strip_auth(original_url, url)",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 324,
+          "end_line": 327
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 324,
+            "end_line": 327
+          }
+        ]
+      ],
+      "result_sha256": "129fe08cc7eb708ddf1c79c669aa583f992fbd2aab682328009ff8c3c84d9b2b"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "netrc",
+      "strict": {
+        "id": "netrc",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "get_netrc_auth(url) if self.trust_env else None",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 329,
+          "end_line": 332
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 330,
+            "end_line": 332
+          }
+        ]
+      ],
+      "result_sha256": "129fe08cc7eb708ddf1c79c669aa583f992fbd2aab682328009ff8c3c84d9b2b"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "strip",
+      "strict": {
+        "id": "strip",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.should_strip_auth(original_url, url)",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 324,
+          "end_line": 327
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 324,
+            "end_line": 327
+          }
+        ]
+      ],
+      "result_sha256": "b82d064bf19cb6ac9c3527c15385d9b92c6257fbb98010f5394b7d3c3dd85a2b"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "netrc",
+      "strict": {
+        "id": "netrc",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "get_netrc_auth(url) if self.trust_env else None",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 329,
+          "end_line": 332
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 330,
+            "end_line": 332
+          }
+        ]
+      ],
+      "result_sha256": "b82d064bf19cb6ac9c3527c15385d9b92c6257fbb98010f5394b7d3c3dd85a2b"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "strip",
+      "strict": {
+        "id": "strip",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.should_strip_auth(original_url, url)",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 324,
+          "end_line": 327
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 324,
+            "end_line": 327
+          }
+        ]
+      ],
+      "result_sha256": "f3eb7c5df98e33ca5cc337c2062c7a0f66b0a5c5326e3b7558c7d3c091ac135c"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "netrc",
+      "strict": {
+        "id": "netrc",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "get_netrc_auth(url) if self.trust_env else None",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 329,
+          "end_line": 332
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 330,
+            "end_line": 332
+          }
+        ]
+      ],
+      "result_sha256": "f3eb7c5df98e33ca5cc337c2062c7a0f66b0a5c5326e3b7558c7d3c091ac135c"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "strip",
+      "strict": {
+        "id": "strip",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.should_strip_auth(original_url, url)",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 324,
+          "end_line": 327
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 324,
+            "end_line": 327
+          }
+        ]
+      ],
+      "result_sha256": "427581600da0e9a7f5e3b1c6f5daae1d4f0745738178e4a9b8989b6dc8e5bcd3"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "netrc",
+      "strict": {
+        "id": "netrc",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "get_netrc_auth(url) if self.trust_env else None",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 329,
+          "end_line": 332
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 330,
+            "end_line": 332
+          }
+        ]
+      ],
+      "result_sha256": "427581600da0e9a7f5e3b1c6f5daae1d4f0745738178e4a9b8989b6dc8e5bcd3"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "strip",
+      "strict": {
+        "id": "strip",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.should_strip_auth(original_url, url)",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 324,
+          "end_line": 327
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 324,
+            "end_line": 327
+          }
+        ]
+      ],
+      "result_sha256": "aa98346d7eb42646d0a7fee83a81aefb398f1675a78e76e287ce0865d3cfda85"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "netrc",
+      "strict": {
+        "id": "netrc",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "get_netrc_auth(url) if self.trust_env else None",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 329,
+          "end_line": 332
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 330,
+            "end_line": 332
+          }
+        ]
+      ],
+      "result_sha256": "aa98346d7eb42646d0a7fee83a81aefb398f1675a78e76e287ce0865d3cfda85"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "strip",
+      "strict": {
+        "id": "strip",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.should_strip_auth(original_url, url)",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 324,
+          "end_line": 327
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 324,
+            "end_line": 327
+          }
+        ]
+      ],
+      "result_sha256": "57de71ae743931f0c1773f2393f23721e68a4fe68f3cda818d6a2edeefb6337e"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "netrc",
+      "strict": {
+        "id": "netrc",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "get_netrc_auth(url) if self.trust_env else None",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 329,
+          "end_line": 332
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 330,
+            "end_line": 332
+          }
+        ]
+      ],
+      "result_sha256": "57de71ae743931f0c1773f2393f23721e68a4fe68f3cda818d6a2edeefb6337e"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "strip",
+      "strict": {
+        "id": "strip",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.should_strip_auth(original_url, url)",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 324,
+          "end_line": 327
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 324,
+            "end_line": 327
+          }
+        ]
+      ],
+      "result_sha256": "a5c9b72f3d6e786ce9d86c75ba219ec9fbd305802f5ab5bd51438c289f944bca"
+    },
+    {
+      "task": "requests_auth_en",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "netrc",
+      "strict": {
+        "id": "netrc",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "get_netrc_auth(url) if self.trust_env else None",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 329,
+          "end_line": 332
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 330,
+            "end_line": 332
+          }
+        ]
+      ],
+      "result_sha256": "a5c9b72f3d6e786ce9d86c75ba219ec9fbd305802f5ab5bd51438c289f944bca"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "head",
+      "strict": {
+        "id": "head",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "HEAD",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 384,
+          "end_line": 385
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 384,
+            "end_line": 385
+          }
+        ]
+      ],
+      "result_sha256": "e306687a95217193be8556744b77f5047de1c9c5fdf7544f3d9257693d727083"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "moved",
+      "strict": {
+        "id": "moved",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "POST",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 389,
+          "end_line": 390
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 389,
+            "end_line": 390
+          }
+        ]
+      ],
+      "result_sha256": "e306687a95217193be8556744b77f5047de1c9c5fdf7544f3d9257693d727083"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "head",
+      "strict": {
+        "id": "head",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "HEAD",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 384,
+          "end_line": 385
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 384,
+            "end_line": 385
+          }
+        ]
+      ],
+      "result_sha256": "d372f34f0d5af7853834a010fb586a9d68c0b388ca626a5a7b51d693ab12cabd"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "moved",
+      "strict": {
+        "id": "moved",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "POST",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 389,
+          "end_line": 390
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 389,
+            "end_line": 390
+          }
+        ]
+      ],
+      "result_sha256": "d372f34f0d5af7853834a010fb586a9d68c0b388ca626a5a7b51d693ab12cabd"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "head",
+      "strict": {
+        "id": "head",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "HEAD",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 384,
+          "end_line": 385
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 384,
+            "end_line": 385
+          }
+        ]
+      ],
+      "result_sha256": "97d307a2123625d654476db0467bed55d53a0f3679db3423b203b721422dce7c"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "moved",
+      "strict": {
+        "id": "moved",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "POST",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 389,
+          "end_line": 390
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 389,
+            "end_line": 390
+          }
+        ]
+      ],
+      "result_sha256": "97d307a2123625d654476db0467bed55d53a0f3679db3423b203b721422dce7c"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "head",
+      "strict": {
+        "id": "head",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "HEAD",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 384,
+          "end_line": 385
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 384,
+            "end_line": 385
+          }
+        ]
+      ],
+      "result_sha256": "e7dfadc4638b0ae3260e780db32c8988ab5e22be29e619c6d0ee3cc40d20b665"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "moved",
+      "strict": {
+        "id": "moved",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "POST",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 389,
+          "end_line": 390
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 389,
+            "end_line": 390
+          }
+        ]
+      ],
+      "result_sha256": "e7dfadc4638b0ae3260e780db32c8988ab5e22be29e619c6d0ee3cc40d20b665"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "head",
+      "strict": {
+        "id": "head",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "HEAD",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 384,
+          "end_line": 385
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 384,
+            "end_line": 385
+          }
+        ]
+      ],
+      "result_sha256": "dbc1f232d2ff92c8d5354000a958a8399fbf609f9c5a80486a957112c3bec659"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "moved",
+      "strict": {
+        "id": "moved",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "POST",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 389,
+          "end_line": 390
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 389,
+            "end_line": 390
+          }
+        ]
+      ],
+      "result_sha256": "dbc1f232d2ff92c8d5354000a958a8399fbf609f9c5a80486a957112c3bec659"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "head",
+      "strict": {
+        "id": "head",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "HEAD",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 384,
+          "end_line": 385
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 384,
+            "end_line": 385
+          }
+        ]
+      ],
+      "result_sha256": "9f349ac6e75f00b137da734aa905113f4568d4b0607f19fea35ef344e0e4b715"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "moved",
+      "strict": {
+        "id": "moved",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "POST",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 389,
+          "end_line": 390
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 389,
+            "end_line": 390
+          }
+        ]
+      ],
+      "result_sha256": "9f349ac6e75f00b137da734aa905113f4568d4b0607f19fea35ef344e0e4b715"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "head",
+      "strict": {
+        "id": "head",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "HEAD",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 384,
+          "end_line": 385
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 384,
+            "end_line": 385
+          }
+        ]
+      ],
+      "result_sha256": "6fee805bc42622b26aad0cb0a617b0dc5cab5931a348b5dfb91e976d3bc90c00"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "moved",
+      "strict": {
+        "id": "moved",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "POST",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 389,
+          "end_line": 390
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 389,
+            "end_line": 390
+          }
+        ]
+      ],
+      "result_sha256": "6fee805bc42622b26aad0cb0a617b0dc5cab5931a348b5dfb91e976d3bc90c00"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "head",
+      "strict": {
+        "id": "head",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "HEAD",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 384,
+          "end_line": 385
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 384,
+            "end_line": 385
+          }
+        ]
+      ],
+      "result_sha256": "fd9e28315eee6eefbebfe7bf82f0f1a679b79228d23cdaea392d70c70cf456f6"
+    },
+    {
+      "task": "requests_redirect_ko",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "moved",
+      "strict": {
+        "id": "moved",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "POST",
+      "citations": [
+        {
+          "file": "src/requests/sessions.py",
+          "start_line": 389,
+          "end_line": 390
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/requests/sessions.py",
+            "start_line": 389,
+            "end_line": 390
+          }
+        ]
+      ],
+      "result_sha256": "fd9e28315eee6eefbebfe7bf82f0f1a679b79228d23cdaea392d70c70cf456f6"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "short",
+      "strict": {
+        "id": "short",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 334,
+          "end_line": 335
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 334,
+            "end_line": 335
+          }
+        ]
+      ],
+      "result_sha256": "771c335e57b8c1120b3ba4302e82a5729b2a332f3aa0403bb0419c0b10704be9"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "cap",
+      "strict": {
+        "id": "cap",
+        "factual": true,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "narrower_sufficient_evidence: line 340 alone explicitly min-clamps with self.backoff_max; lines 337-339 compute input and are unnecessary for asked attribute",
+      "answer": "self.backoff_max",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 340,
+          "end_line": 340
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 340,
+            "end_line": 340
+          }
+        ]
+      ],
+      "result_sha256": "771c335e57b8c1120b3ba4302e82a5729b2a332f3aa0403bb0419c0b10704be9"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "short",
+      "strict": {
+        "id": "short",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 334,
+          "end_line": 335
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 334,
+            "end_line": 335
+          }
+        ]
+      ],
+      "result_sha256": "f7f30f4b06fc81a9abb1b470211b6d3c5b3cf352bf9655f8e136ebb9d7f92f10"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "cap",
+      "strict": {
+        "id": "cap",
+        "factual": true,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "narrower_sufficient_evidence: line 340 alone explicitly min-clamps with self.backoff_max; lines 337-339 compute input and are unnecessary for asked attribute",
+      "answer": "self.backoff_max",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 340,
+          "end_line": 340
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 340,
+            "end_line": 340
+          }
+        ]
+      ],
+      "result_sha256": "f7f30f4b06fc81a9abb1b470211b6d3c5b3cf352bf9655f8e136ebb9d7f92f10"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "short",
+      "strict": {
+        "id": "short",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 334,
+          "end_line": 335
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 334,
+            "end_line": 335
+          }
+        ]
+      ],
+      "result_sha256": "e21c808f741cce046c61b0cba09a381c0c26a2fcc830becb80c5c0d2d06f234f"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "cap",
+      "strict": {
+        "id": "cap",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.backoff_max",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 337,
+          "end_line": 340
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 337,
+            "end_line": 340
+          }
+        ]
+      ],
+      "result_sha256": "e21c808f741cce046c61b0cba09a381c0c26a2fcc830becb80c5c0d2d06f234f"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "short",
+      "strict": {
+        "id": "short",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 334,
+          "end_line": 335
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 334,
+            "end_line": 335
+          }
+        ]
+      ],
+      "result_sha256": "411709ccbdbda528935170ff51c64c78d7b022b9d0aa115d693d6864ef6248f5"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "cap",
+      "strict": {
+        "id": "cap",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "self.backoff_max",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 337,
+          "end_line": 340
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 337,
+            "end_line": 340
+          }
+        ]
+      ],
+      "result_sha256": "411709ccbdbda528935170ff51c64c78d7b022b9d0aa115d693d6864ef6248f5"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "short",
+      "strict": {
+        "id": "short",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 334,
+          "end_line": 335
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 334,
+            "end_line": 335
+          }
+        ]
+      ],
+      "result_sha256": "aa93f80659ecf6640d61210728a4cb022a47e0c1da72df66eb970d33c50fe0a6"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "cap",
+      "strict": {
+        "id": "cap",
+        "factual": true,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "narrower_sufficient_evidence: line 340 explicitly min-clamps with self.backoff_max; lines 337-339 are unnecessary for asked attribute",
+      "answer": "self.backoff_max",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 340,
+          "end_line": 340
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 340,
+            "end_line": 340
+          }
+        ]
+      ],
+      "result_sha256": "aa93f80659ecf6640d61210728a4cb022a47e0c1da72df66eb970d33c50fe0a6"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "short",
+      "strict": {
+        "id": "short",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 334,
+          "end_line": 335
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 334,
+            "end_line": 335
+          }
+        ]
+      ],
+      "result_sha256": "7bed7ab2be8a9a3c63e9074015d75b3000ba311ca99e2cc89961470cd8ba3a10"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "cap",
+      "strict": {
+        "id": "cap",
+        "factual": true,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "narrower_sufficient_evidence: line 340 explicitly min-clamps with self.backoff_max; lines 337-339 are unnecessary for asked attribute",
+      "answer": "self.backoff_max",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 340,
+          "end_line": 340
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 340,
+            "end_line": 340
+          }
+        ]
+      ],
+      "result_sha256": "7bed7ab2be8a9a3c63e9074015d75b3000ba311ca99e2cc89961470cd8ba3a10"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "short",
+      "strict": {
+        "id": "short",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 334,
+          "end_line": 335
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 334,
+            "end_line": 335
+          }
+        ]
+      ],
+      "result_sha256": "bbb040413dc4f139fd59c5d054234cfdb55026ee853df83d23099121adafe0d0"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "cap",
+      "strict": {
+        "id": "cap",
+        "factual": true,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "narrower_sufficient_evidence: line 340 explicitly min-clamps with self.backoff_max; lines 337-339 are unnecessary for asked attribute",
+      "answer": "self.backoff_max",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 340,
+          "end_line": 340
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 340,
+            "end_line": 340
+          }
+        ]
+      ],
+      "result_sha256": "bbb040413dc4f139fd59c5d054234cfdb55026ee853df83d23099121adafe0d0"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "short",
+      "strict": {
+        "id": "short",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "0",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 334,
+          "end_line": 335
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 334,
+            "end_line": 335
+          }
+        ]
+      ],
+      "result_sha256": "21908c15c216693fb4ad8ae40e25ff436b5b6a5bbc4e98860c21b408f2b98e76"
+    },
+    {
+      "task": "urllib3_backoff_en",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "cap",
+      "strict": {
+        "id": "cap",
+        "factual": true,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "narrower_sufficient_evidence: line 340 explicitly min-clamps with self.backoff_max; lines 337-339 are unnecessary for asked attribute",
+      "answer": "self.backoff_max",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 340,
+          "end_line": 340
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 340,
+            "end_line": 340
+          }
+        ]
+      ],
+      "result_sha256": "21908c15c216693fb4ad8ae40e25ff436b5b6a5bbc4e98860c21b408f2b98e76"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "gate",
+      "strict": {
+        "id": "gate",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "False",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 434,
+          "end_line": 435
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 434,
+            "end_line": 435
+          }
+        ]
+      ],
+      "result_sha256": "0ea75fc8dd42c507f45dea602944b3e6d9b4bdc64e0dfe6f999f35c7252a8077"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 1,
+      "arm": "full",
+      "fact_id": "header",
+      "strict": {
+        "id": "header",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "attribute_name_without_receiver: question asks attribute name; self receiver is not part of attribute name, source line 442",
+      "answer": "respect_retry_after_header",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 440,
+          "end_line": 445
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 440,
+            "end_line": 444
+          }
+        ]
+      ],
+      "result_sha256": "0ea75fc8dd42c507f45dea602944b3e6d9b4bdc64e0dfe6f999f35c7252a8077"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "gate",
+      "strict": {
+        "id": "gate",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "False",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 421,
+          "end_line": 423
+        },
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 434,
+          "end_line": 435
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 434,
+            "end_line": 435
+          }
+        ]
+      ],
+      "result_sha256": "bad5a73155e31f6dd8210fb33f460759e2b45022cd39ab97765182c1a58310d5"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 1,
+      "arm": "search",
+      "fact_id": "header",
+      "strict": {
+        "id": "header",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "attribute_name_without_receiver: question asks attribute name; self receiver is not part of attribute name, source line 442",
+      "answer": "respect_retry_after_header",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 440,
+          "end_line": 445
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 440,
+            "end_line": 444
+          }
+        ]
+      ],
+      "result_sha256": "bad5a73155e31f6dd8210fb33f460759e2b45022cd39ab97765182c1a58310d5"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "gate",
+      "strict": {
+        "id": "gate",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "False",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 434,
+          "end_line": 435
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 434,
+            "end_line": 435
+          }
+        ]
+      ],
+      "result_sha256": "c71087ec9f6468fd1ef82e937e4f204e7e327d471f1022c948d2d7221c8bc420"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 1,
+      "arm": "v2.4",
+      "fact_id": "header",
+      "strict": {
+        "id": "header",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "attribute_name_without_receiver: question asks attribute name; self receiver is not part of attribute name, source line 442",
+      "answer": "respect_retry_after_header",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 440,
+          "end_line": 445
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 440,
+            "end_line": 444
+          }
+        ]
+      ],
+      "result_sha256": "c71087ec9f6468fd1ef82e937e4f204e7e327d471f1022c948d2d7221c8bc420"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "gate",
+      "strict": {
+        "id": "gate",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "False",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 434,
+          "end_line": 435
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 434,
+            "end_line": 435
+          }
+        ]
+      ],
+      "result_sha256": "f7a0beae2e2d775f02f153e4a7869a0cab9f4e4588d19a52172952d2de5727aa"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 1,
+      "arm": "v2.5",
+      "fact_id": "header",
+      "strict": {
+        "id": "header",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "attribute_name_without_receiver: question asks attribute name; self receiver is not part of attribute name, source line 442",
+      "answer": "respect_retry_after_header",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 440,
+          "end_line": 445
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 440,
+            "end_line": 444
+          }
+        ]
+      ],
+      "result_sha256": "f7a0beae2e2d775f02f153e4a7869a0cab9f4e4588d19a52172952d2de5727aa"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "gate",
+      "strict": {
+        "id": "gate",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "False",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 417,
+          "end_line": 435
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 434,
+            "end_line": 435
+          }
+        ]
+      ],
+      "result_sha256": "f02fb99b0a21fc5891016bdfe4003d7c39a7ef3f756ba91d7dbc59b2e044654a"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 2,
+      "arm": "full",
+      "fact_id": "header",
+      "strict": {
+        "id": "header",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "attribute_name_without_receiver: question asks attribute name, source line 442",
+      "answer": "respect_retry_after_header",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 440,
+          "end_line": 445
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 440,
+            "end_line": 444
+          }
+        ]
+      ],
+      "result_sha256": "f02fb99b0a21fc5891016bdfe4003d7c39a7ef3f756ba91d7dbc59b2e044654a"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "gate",
+      "strict": {
+        "id": "gate",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "False",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 421,
+          "end_line": 423
+        },
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 434,
+          "end_line": 435
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 434,
+            "end_line": 435
+          }
+        ]
+      ],
+      "result_sha256": "5e480abb090408e1120d3ee4ee6c08d0838f8ea4084ca101401adc9db51ea2fc"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 2,
+      "arm": "search",
+      "fact_id": "header",
+      "strict": {
+        "id": "header",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "attribute_name_without_receiver: question asks attribute name, source line 442",
+      "answer": "respect_retry_after_header",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 440,
+          "end_line": 445
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 440,
+            "end_line": 444
+          }
+        ]
+      ],
+      "result_sha256": "5e480abb090408e1120d3ee4ee6c08d0838f8ea4084ca101401adc9db51ea2fc"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "gate",
+      "strict": {
+        "id": "gate",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "False",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 434,
+          "end_line": 435
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 434,
+            "end_line": 435
+          }
+        ]
+      ],
+      "result_sha256": "caff6ae4d3229dc633ba9a923bc281ca0bbffe393c25ef2b998a6fcfc3cb11a9"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 2,
+      "arm": "v2.4",
+      "fact_id": "header",
+      "strict": {
+        "id": "header",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "attribute_name_without_receiver: question asks attribute name, source line 442",
+      "answer": "respect_retry_after_header",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 440,
+          "end_line": 445
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 440,
+            "end_line": 444
+          }
+        ]
+      ],
+      "result_sha256": "caff6ae4d3229dc633ba9a923bc281ca0bbffe393c25ef2b998a6fcfc3cb11a9"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "gate",
+      "strict": {
+        "id": "gate",
+        "factual": true,
+        "sufficient_evidence": true
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "strict_pass_retained",
+      "rationale": "strict_pass_retained",
+      "answer": "False",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 417,
+          "end_line": 435
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 434,
+            "end_line": 435
+          }
+        ]
+      ],
+      "result_sha256": "284558ce6be8fde828dedff986f24aa07e21893cb28200165751d19d345bbfc9"
+    },
+    {
+      "task": "urllib3_retry_ko",
+      "repeat": 2,
+      "arm": "v2.5",
+      "fact_id": "header",
+      "strict": {
+        "id": "header",
+        "factual": false,
+        "sufficient_evidence": false
+      },
+      "reviewed_factual": true,
+      "reviewed_sufficient_evidence": true,
+      "review_status": "independently_adjudicated",
+      "rationale": "attribute_name_without_receiver: question asks attribute name, source line 442",
+      "answer": "respect_retry_after_header",
+      "citations": [
+        {
+          "file": "src/urllib3/util/retry.py",
+          "start_line": 440,
+          "end_line": 445
+        }
+      ],
+      "evidence_sets_used": [
+        [
+          {
+            "file": "src/urllib3/util/retry.py",
+            "start_line": 440,
+            "end_line": 444
+          }
+        ]
+      ],
+      "result_sha256": "284558ce6be8fde828dedff986f24aa07e21893cb28200165751d19d345bbfc9"
+    }
+  ]
+}

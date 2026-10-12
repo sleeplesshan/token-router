@@ -1,0 +1,1052 @@
+[
+  {
+    "task": "small",
+    "arm": "v2.4",
+    "repeat": 0,
+    "seconds": 0.04056937503628433,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": null
+  },
+  {
+    "task": "small",
+    "arm": "pre_optimization",
+    "repeat": 0,
+    "seconds": 0.04598674993030727,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 5
+  },
+  {
+    "task": "small",
+    "arm": "v2.5",
+    "repeat": 0,
+    "seconds": 0.04142316593788564,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 1
+  },
+  {
+    "task": "small",
+    "arm": "v2.5",
+    "repeat": 1,
+    "seconds": 0.038068207912147045,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 1
+  },
+  {
+    "task": "small",
+    "arm": "pre_optimization",
+    "repeat": 1,
+    "seconds": 0.04089349997229874,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 5
+  },
+  {
+    "task": "small",
+    "arm": "v2.4",
+    "repeat": 1,
+    "seconds": 0.038179124938324094,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": null
+  },
+  {
+    "task": "small",
+    "arm": "v2.4",
+    "repeat": 2,
+    "seconds": 0.038165041944012046,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": null
+  },
+  {
+    "task": "small",
+    "arm": "pre_optimization",
+    "repeat": 2,
+    "seconds": 0.04104691697284579,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 5
+  },
+  {
+    "task": "small",
+    "arm": "v2.5",
+    "repeat": 2,
+    "seconds": 0.037940792040899396,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 1
+  },
+  {
+    "task": "small",
+    "arm": "v2.5",
+    "repeat": 3,
+    "seconds": 0.038333124946802855,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 1
+  },
+  {
+    "task": "small",
+    "arm": "pre_optimization",
+    "repeat": 3,
+    "seconds": 0.04164025001227856,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 5
+  },
+  {
+    "task": "small",
+    "arm": "v2.4",
+    "repeat": 3,
+    "seconds": 0.037833417067304254,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": null
+  },
+  {
+    "task": "small",
+    "arm": "v2.4",
+    "repeat": 4,
+    "seconds": 0.037516833981499076,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": null
+  },
+  {
+    "task": "small",
+    "arm": "pre_optimization",
+    "repeat": 4,
+    "seconds": 0.040982000064104795,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 5
+  },
+  {
+    "task": "small",
+    "arm": "v2.5",
+    "repeat": 4,
+    "seconds": 0.038203041069209576,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 1
+  },
+  {
+    "task": "small",
+    "arm": "v2.5",
+    "repeat": 5,
+    "seconds": 0.03817366692237556,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 1
+  },
+  {
+    "task": "small",
+    "arm": "pre_optimization",
+    "repeat": 5,
+    "seconds": 0.04162108385935426,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 5
+  },
+  {
+    "task": "small",
+    "arm": "v2.4",
+    "repeat": 5,
+    "seconds": 0.03990995907224715,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": null
+  },
+  {
+    "task": "small",
+    "arm": "v2.4",
+    "repeat": 6,
+    "seconds": 0.04095024988055229,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": null
+  },
+  {
+    "task": "small",
+    "arm": "pre_optimization",
+    "repeat": 6,
+    "seconds": 0.04252408305183053,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 5
+  },
+  {
+    "task": "small",
+    "arm": "v2.5",
+    "repeat": 6,
+    "seconds": 0.03866445878520608,
+    "returncode": 0,
+    "chars": 8160,
+    "output_hash": "60b996276db43911a31e4f3c12851736522d27e1cd1cf0d28f75741355b1c219",
+    "opens": 1
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.4",
+    "repeat": 0,
+    "seconds": 0.06504100002348423,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": null
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "pre_optimization",
+    "repeat": 0,
+    "seconds": 0.08601241698488593,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.5",
+    "repeat": 0,
+    "seconds": 0.08670804207213223,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.5",
+    "repeat": 1,
+    "seconds": 0.08518833387643099,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "pre_optimization",
+    "repeat": 1,
+    "seconds": 0.08735512499697506,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.4",
+    "repeat": 1,
+    "seconds": 0.06361158401705325,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": null
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.4",
+    "repeat": 2,
+    "seconds": 0.06584850000217557,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": null
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "pre_optimization",
+    "repeat": 2,
+    "seconds": 0.08874908415600657,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.5",
+    "repeat": 2,
+    "seconds": 0.08815508289262652,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.5",
+    "repeat": 3,
+    "seconds": 0.09747312497347593,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "pre_optimization",
+    "repeat": 3,
+    "seconds": 0.08759154193103313,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.4",
+    "repeat": 3,
+    "seconds": 0.064261042047292,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": null
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.4",
+    "repeat": 4,
+    "seconds": 0.0709927910938859,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": null
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "pre_optimization",
+    "repeat": 4,
+    "seconds": 0.0912335419561714,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.5",
+    "repeat": 4,
+    "seconds": 0.08747041691094637,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.5",
+    "repeat": 5,
+    "seconds": 0.08873974997550249,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "pre_optimization",
+    "repeat": 5,
+    "seconds": 0.08651470788754523,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.4",
+    "repeat": 5,
+    "seconds": 0.06368670798838139,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": null
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.4",
+    "repeat": 6,
+    "seconds": 0.06309491698630154,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": null
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "pre_optimization",
+    "repeat": 6,
+    "seconds": 0.08629833301529288,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_asyncio_connections",
+    "arm": "v2.5",
+    "repeat": 6,
+    "seconds": 0.08991554193198681,
+    "returncode": 0,
+    "chars": 79612,
+    "output_hash": "9d77e0f2c6d1de14bcf6c900474fb71e9c99e374e3c0a7874e0b01f6bb44dd4f",
+    "opens": 6
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.4",
+    "repeat": 0,
+    "seconds": 0.06397845805622637,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": null
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "pre_optimization",
+    "repeat": 0,
+    "seconds": 0.0792223340831697,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.5",
+    "repeat": 0,
+    "seconds": 0.07921766606159508,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.5",
+    "repeat": 1,
+    "seconds": 0.07886866689659655,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "pre_optimization",
+    "repeat": 1,
+    "seconds": 0.07974841701798141,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.4",
+    "repeat": 1,
+    "seconds": 0.06178150000050664,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": null
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.4",
+    "repeat": 2,
+    "seconds": 0.06375083304010332,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": null
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "pre_optimization",
+    "repeat": 2,
+    "seconds": 0.08241824992001057,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.5",
+    "repeat": 2,
+    "seconds": 0.0798832499422133,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.5",
+    "repeat": 3,
+    "seconds": 0.08126962510868907,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "pre_optimization",
+    "repeat": 3,
+    "seconds": 0.08106766687706113,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.4",
+    "repeat": 3,
+    "seconds": 0.0629025420639664,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": null
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.4",
+    "repeat": 4,
+    "seconds": 0.06251424993388355,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": null
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "pre_optimization",
+    "repeat": 4,
+    "seconds": 0.08171095908619463,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.5",
+    "repeat": 4,
+    "seconds": 0.07993941707536578,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.5",
+    "repeat": 5,
+    "seconds": 0.08154225000180304,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "pre_optimization",
+    "repeat": 5,
+    "seconds": 0.08211941691115499,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.4",
+    "repeat": 5,
+    "seconds": 0.06262895814143121,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": null
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.4",
+    "repeat": 6,
+    "seconds": 0.0621225421782583,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": null
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "pre_optimization",
+    "repeat": 6,
+    "seconds": 0.08085645805113018,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_subprocess_timeout",
+    "arm": "v2.5",
+    "repeat": 6,
+    "seconds": 0.08048762497492135,
+    "returncode": 0,
+    "chars": 75136,
+    "output_hash": "0d708e56a2b2ed73ca72f9338e4c0b68d4d16fd640c20ce8709f782e17be0309",
+    "opens": 5
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.4",
+    "repeat": 0,
+    "seconds": 0.14536629104986787,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": null
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "pre_optimization",
+    "repeat": 0,
+    "seconds": 0.16454908391460776,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.5",
+    "repeat": 0,
+    "seconds": 0.16223487514071167,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.5",
+    "repeat": 1,
+    "seconds": 0.16415591607801616,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "pre_optimization",
+    "repeat": 1,
+    "seconds": 0.16809575003571808,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.4",
+    "repeat": 1,
+    "seconds": 0.14173283404670656,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": null
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.4",
+    "repeat": 2,
+    "seconds": 0.14135925006121397,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": null
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "pre_optimization",
+    "repeat": 2,
+    "seconds": 0.16337466589175165,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.5",
+    "repeat": 2,
+    "seconds": 0.16256645903922617,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.5",
+    "repeat": 3,
+    "seconds": 0.1715878329705447,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "pre_optimization",
+    "repeat": 3,
+    "seconds": 0.16643720911815763,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.4",
+    "repeat": 3,
+    "seconds": 0.14075875002890825,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": null
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.4",
+    "repeat": 4,
+    "seconds": 0.14216304197907448,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": null
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "pre_optimization",
+    "repeat": 4,
+    "seconds": 0.1651557080913335,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.5",
+    "repeat": 4,
+    "seconds": 0.163601583102718,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.5",
+    "repeat": 5,
+    "seconds": 0.1624257080256939,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "pre_optimization",
+    "repeat": 5,
+    "seconds": 0.16135441698133945,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.4",
+    "repeat": 5,
+    "seconds": 0.14035754115320742,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": null
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.4",
+    "repeat": 6,
+    "seconds": 0.1403978751040995,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": null
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "pre_optimization",
+    "repeat": 6,
+    "seconds": 0.1615572909358889,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "cpython_ubsan_failure",
+    "arm": "v2.5",
+    "repeat": 6,
+    "seconds": 0.16303966590203345,
+    "returncode": 0,
+    "chars": 114262,
+    "output_hash": "c67fc384a746abad9d6e1b269cd11289ec3e64acb7e55ec09f4df8fd0de6ea61",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.4",
+    "repeat": 0,
+    "seconds": 0.1481069999281317,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": null
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "pre_optimization",
+    "repeat": 0,
+    "seconds": 0.16938754194416106,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.5",
+    "repeat": 0,
+    "seconds": 0.16493387497030199,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.5",
+    "repeat": 1,
+    "seconds": 0.1704546669498086,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "pre_optimization",
+    "repeat": 1,
+    "seconds": 0.18164920806884766,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.4",
+    "repeat": 1,
+    "seconds": 0.15261387499049306,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": null
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.4",
+    "repeat": 2,
+    "seconds": 0.15922420797869563,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": null
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "pre_optimization",
+    "repeat": 2,
+    "seconds": 0.1690046670846641,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.5",
+    "repeat": 2,
+    "seconds": 0.1719455411657691,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.5",
+    "repeat": 3,
+    "seconds": 0.168560708174482,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "pre_optimization",
+    "repeat": 3,
+    "seconds": 0.16708116699010134,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.4",
+    "repeat": 3,
+    "seconds": 0.1498946670908481,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": null
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.4",
+    "repeat": 4,
+    "seconds": 0.14948808308690786,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": null
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "pre_optimization",
+    "repeat": 4,
+    "seconds": 0.16739708301611245,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.5",
+    "repeat": 4,
+    "seconds": 0.16846733400598168,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.5",
+    "repeat": 5,
+    "seconds": 0.16598612489178777,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "pre_optimization",
+    "repeat": 5,
+    "seconds": 0.16842862498015165,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.4",
+    "repeat": 5,
+    "seconds": 0.15322012500837445,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": null
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.4",
+    "repeat": 6,
+    "seconds": 0.1514003339689225,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": null
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "pre_optimization",
+    "repeat": 6,
+    "seconds": 0.1666244580410421,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  },
+  {
+    "task": "scipy_distributed_failures",
+    "arm": "v2.5",
+    "repeat": 6,
+    "seconds": 0.16493629105389118,
+    "returncode": 0,
+    "chars": 104753,
+    "output_hash": "4fee0c2f9f9f12ebbc908c5b2474f54448007ee969b1953ec5a9433e5d7d1977",
+    "opens": 4
+  }
+]

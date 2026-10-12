@@ -1,0 +1,86 @@
+[
+  {
+    "task": "requests_auth_en",
+    "stdout_equal": true,
+    "exit_equal": true,
+    "diagnostic_equal": true,
+    "stdout_sha256": "386c6d1b38555c726e00d2ea6bc87853f08494896a6c3ca7fac80bde6fbb63bd"
+  },
+  {
+    "task": "requests_redirect_ko",
+    "stdout_equal": true,
+    "exit_equal": true,
+    "diagnostic_equal": true,
+    "stdout_sha256": "386c6d1b38555c726e00d2ea6bc87853f08494896a6c3ca7fac80bde6fbb63bd"
+  },
+  {
+    "task": "flask_propagate_en",
+    "stdout_equal": true,
+    "exit_equal": true,
+    "diagnostic_equal": true,
+    "stdout_sha256": "0be22315e6ec45ef6bcf4cdc051ff58f30028a318b899073cde5404effc83855"
+  },
+  {
+    "task": "flask_async_ko",
+    "stdout_equal": true,
+    "exit_equal": true,
+    "diagnostic_equal": true,
+    "stdout_sha256": "0896dd2a37a3e72ef5dda80b738a5b2204abd4bd4771780ac24103397b8f737c"
+  },
+  {
+    "task": "click_exit_en",
+    "stdout_equal": true,
+    "exit_equal": true,
+    "diagnostic_equal": true,
+    "stdout_sha256": "cec1fafd203ac123a139e37cb514d13b6d6bdfeefa0e3b4f7b5c995279055c13"
+  },
+  {
+    "task": "click_parameter_ko",
+    "stdout_equal": true,
+    "exit_equal": true,
+    "diagnostic_equal": true,
+    "stdout_sha256": "f33b725448dda54f0e4f05c64c7c229004c9d046c05a37208980b8498b1207e7"
+  },
+  {
+    "task": "httpx_status_en",
+    "stdout_equal": true,
+    "exit_equal": true,
+    "diagnostic_equal": true,
+    "stdout_sha256": "bf128d9ec3c48d63466065bf07ebf75795c5f6e358423b8309c30c1fd78471e5"
+  },
+  {
+    "task": "httpx_stream_ko",
+    "stdout_equal": true,
+    "exit_equal": true,
+    "diagnostic_equal": true,
+    "stdout_sha256": "bf128d9ec3c48d63466065bf07ebf75795c5f6e358423b8309c30c1fd78471e5"
+  },
+  {
+    "task": "urllib3_backoff_en",
+    "stdout_equal": true,
+    "exit_equal": true,
+    "diagnostic_equal": true,
+    "stdout_sha256": "6cba495c40795b6aba7811ad8fce4182e7091537eb2193c494d18aae64092441"
+  },
+  {
+    "task": "urllib3_retry_ko",
+    "stdout_equal": true,
+    "exit_equal": true,
+    "diagnostic_equal": true,
+    "stdout_sha256": "6cba495c40795b6aba7811ad8fce4182e7091537eb2193c494d18aae64092441"
+  },
+  {
+    "task": "django_page_en",
+    "stdout_equal": true,
+    "exit_equal": true,
+    "diagnostic_equal": true,
+    "stdout_sha256": "fd08b74716dde971aa8097e962b8b2b4431689d3569f609e772264f39e929c2e"
+  },
+  {
+    "task": "django_count_ko",
+    "stdout_equal": true,
+    "exit_equal": true,
+    "diagnostic_equal": true,
+    "stdout_sha256": "fd08b74716dde971aa8097e962b8b2b4431689d3569f609e772264f39e929c2e"
+  }
+]

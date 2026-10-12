@@ -5,12 +5,14 @@ description: Select relevant raw line ranges from oversized logs, source files, 
 
 # Token Router
 
+Installed version: **2.5.0**. The default tokens policy remains `v2.4`; the new final-packet policy is opt-in with `--policy-version v2.5` because the 96-episode comparison did not establish a speed or quality advantage.
+
 Reduce the main agent's input context while retaining evidence needed for its task. Cloud selection uses fixed `gpt-6-luna` with `low` reasoning through Codex CLI. It sends candidates and the query to the cloud and consumes Codex subscription usage. No API key or local model is used.
 
 ## Choose the retrieval method
 
 - For a known symbol, exact error, or short file, use ordinary search and nearby raw lines first. File length alone (such as 300 lines) is not a reason to invoke Luna.
-- Use `--deterministic` for bounded keyword/context extraction when relevant identifiers are known. This runs Python only, with no model call. Verify that the returned evidence answers the question.
+- When ordinary search leaves too much context, use the default `--optimize tokens` policy. Use `--deterministic` only when the separate line-capped selection policy is specifically needed. Both run Python only; verify the returned evidence.
 - Use explicit `--force-model` only when semantic selection is worth the extra call. If the candidate set is nearly the whole source and the main model can read it comfortably, read directly. An extra model call may increase both total tokens and latency.
 - For a complete audit, broad architecture question, or cross-file refactor, retrieve the full necessary context. Small excerpts cannot establish completeness.
 
@@ -19,10 +21,10 @@ Reduce the main agent's input context while retaining evidence needed for its ta
 Resolve `scripts/router.py` relative to **this installed SKILL.md**, never the caller's working directory. Use an absolute target path:
 
 ```bash
-python3 "/absolute/path/to/token-router/scripts/router.py" heavy_code "/absolute/path/to/target.py" --query "token expiration" --deterministic
+python3 "/absolute/path/to/token-router/scripts/router.py" heavy_code "/absolute/path/to/target.py" --query "token expiration"
 ```
 
-The default `--optimize tokens` never calls Luna automatically. Python keeps admitted candidates plus two neighboring lines and bounded Python syntax context, and returns them only when the rendered packet fits the character budget and is at least 15% smaller than whole-source rendering. Small sources (up to 12,000 characters) pass through whole. If extraction cannot meaningfully reduce a source up to 100,000 characters, read it whole (`auto_full`). Larger unhelpful packets return exit 2 / `needs_targeted_read`, with suggested ranges and no raw output: narrow the query or search/read targeted ranges; do not blindly retry or enable Luna.
+The default `--optimize tokens` never calls Luna automatically. Python keeps admitted candidates plus two neighboring lines and bounded Python syntax context, and returns them only when the rendered packet fits the character budget and is at least 15% smaller than whole-source rendering. Small sources (up to 12,000 characters) pass through whole if final rendered output fits the output cap. If extraction cannot meaningfully reduce a source up to 100,000 characters, read it whole (`auto_full`). Larger unhelpful packets return exit 2 / `needs_targeted_read`, with suggested ranges and no raw output: narrow the query or search/read targeted ranges; do not blindly retry or enable Luna.
 
 Before admitting a candidate packet, the router records observable query evidence. If a nonempty normalized query has no matching term in the selected candidate cores, it uses whole-source reading for moderate inputs or returns `needs_targeted_read` for larger ones. This is lexical evidence, not a semantic relevance guarantee: partial matches and absent queries remain explicitly limited, and newly added context may contain terms not counted by the core check. Inspect `checks`, `next_action`, and `search_terms`; a missing anchor requests a better search rather than proving the answer is absent.
 
@@ -58,3 +60,22 @@ python3 -m unittest discover -s "/absolute/path/to/token-router/tests" -p 'test_
 ```
 
 Use `--real` only for an intentional cloud check. Historical v1 measurements do not establish Luna performance.
+
+
+See [the v2.5 evaluation](docs/benchmark-v2.5.md): modest aggregate token reduction did not establish per-task savings or faster completion. Search-first remains appropriate.
+
+## v2.5 final-packet policy and common contracts
+
+Use `--policy-version v2.5` to judge lexical evidence in the actual raw output after context expansion. Source matches, core matches, and final packet matches are separate observations; headers and reasons are never evidence. Do not automatically declare all question words mandatory.
+
+Add repeated `--require-term NAME` only for explicit positive literal requirements from the task. Literals are case-sensitive with Unicode identifier boundaries (underscore belongs to the identifier); one-character words and stopwords remain valid. Empty or whitespace-containing literals are rejected. `absent_required` means not found in this source; `lost_required` means found but omitted. Neither proves semantic absence or sufficiency. If bounded whole reading is possible, it can still return the full source with the absence diagnosis.
+
+For `needs_targeted_read`, follow `next_action`: `read_missing_witnesses` uses suggested original ranges; `change_search_scope` searches other permitted files; `search_query_terms` or `narrow_query` refines retrieval. Witnesses identify literal occurrences, not necessarily the answer. Track current accessible context and source version; avoid repeating the same source/query/ranges/action without new evidence. Preserve context across partial overlap, and do not combine coordinates after source changes. The runtime adds no automatic recovery loop.
+
+`--read-scope whole` requests whole-file output within the final budget. Policy, required-term, and scope options only combine with automatic tokens mode; required terms and whole scope require v2.5. Explicit model/deterministic flags still take precedence over automatic behavior and incompatible new options are rejected.
+
+All policies now enforce `ROUTER_MAX_OUTPUT_CHARS` (default 120000) on final rendered output, including headers. An oversized output returns exit 2 without raw text; it is never cut mid-source to fit. This also applies to full reads, model output, deterministic output, and fallback. `final_output_capped=true` means withheld due to the cap, not a partially delivered source.
+
+Source stat guards detect ordinary modification/replacement during reading. `source_changed` returns exit 1 and no raw stdout: use an appropriately fixed input, do not blindly retry a growing log. This is not an atomic snapshot guarantee. Model coordinates must be strict integer ranges wholly inside visible candidates; invalid responses fall back to deterministic selection, subject to the same guards.
+
+`--report-json PATH` writes detailed diagnostics without raw source or credentials. Do not alias the input path. Stderr includes at most 12 witness ranges; the report retains bounded detailed witness metadata and occurrence counts. Do not inject the full report into the main context by default. Inspect `schema_version`, `reason_codes`, `packet_query_anchor`, `source_consistency`, and `full_source_returned`. Exit2 can also be a CLI usage error: require a structured status before interpreting it as retrieval abstention.

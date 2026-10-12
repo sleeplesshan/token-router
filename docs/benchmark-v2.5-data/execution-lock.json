@@ -1,0 +1,51 @@
+{
+  "manifest_sha256": "92d20b1b7da56446769482854de67b29a2645b05d1c269405a586d88e2de9368",
+  "routers": {
+    "v2.4": {
+      "path": "v2.4/scripts/router.py",
+      "sha256": "e15932f6c52ab9ce1b81e98561c2a01613fc4885d4e983222dd35dff9b6907db",
+      "python_modules": {
+        "evidence_checks.py": "8da2cd8a73ea3a2cedfc708f5fb3a41ad6cfb0dea56b1db6c3d750d9b0f33dfc",
+        "query_matcher.py": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+        "router.py": "e15932f6c52ab9ce1b81e98561c2a01613fc4885d4e983222dd35dff9b6907db",
+        "run_router_tests.py": "f6f823a53edb6536dd67451e7d4dce90fedea8ee2089e2940d6f9ab37453b64c"
+      }
+    },
+    "v2.5": {
+      "path": "v2.5/scripts/router.py",
+      "sha256": "f236e047b088d724e101f8c8295be7fe3fef8dbb42e6cb8f75aa21748b854ce3",
+      "python_modules": {
+        "evidence_checks.py": "2e3f29dd766d379e929c82d554ade76430941e243aeeb261694df5974137e5a2",
+        "query_matcher.py": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+        "router.py": "f236e047b088d724e101f8c8295be7fe3fef8dbb42e6cb8f75aa21748b854ce3",
+        "routing_policy.py": "a84a9934c9e5b0e9156a13bec6e6c5df8a0a5daa029c749438251fcc16d18cb8",
+        "run_router_tests.py": "f6f823a53edb6536dd67451e7d4dce90fedea8ee2089e2940d6f9ab37453b64c",
+        "run_workflow_bench.py": "c8028ed9142d488b2004298dbb86c9c841490f21d53f5b32e37fdc0e53de8878",
+        "source_guard.py": "1a3fb37914e5980dcc1701db8bbb1756c00190d2e70360f6f6766a10013d2d14"
+      }
+    }
+  },
+  "model": "gpt-6.1-sol",
+  "effort": "medium",
+  "recovery_reads": 2,
+  "read_lines": 200,
+  "read_chars": 24000,
+  "arms": [
+    "search",
+    "full",
+    "v2.4",
+    "v2.5"
+  ],
+  "path_note": "Only local executable paths are redacted; measured hashes and settings are unchanged.",
+  "measured_commit": "9bedcb1",
+  "release_runtime_commit": "71258dd",
+  "release_python_modules": {
+    "evidence_checks.py": "2e3f29dd766d379e929c82d554ade76430941e243aeeb261694df5974137e5a2",
+    "query_matcher.py": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+    "router.py": "4653b92ddaabb094e8f481ab072595fcc9067d82bf58876bd010c308b5b844d8",
+    "routing_policy.py": "a84a9934c9e5b0e9156a13bec6e6c5df8a0a5daa029c749438251fcc16d18cb8",
+    "run_router_tests.py": "f6f823a53edb6536dd67451e7d4dce90fedea8ee2089e2940d6f9ab37453b64c",
+    "run_workflow_bench.py": "0483d36106e4323cdcde963047366c319587381aef8a0122c743f75f29a564f6",
+    "source_guard.py": "1a3fb37914e5980dcc1701db8bbb1756c00190d2e70360f6f6766a10013d2d14"
+  }
+}

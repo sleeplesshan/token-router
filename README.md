@@ -2,24 +2,24 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![Router](https://img.shields.io/badge/Router-GPT--6%20Luna%20Light-black)
+![Router](https://img.shields.io/badge/Default-Python--only-black)
 ![Codex Skill](https://img.shields.io/badge/OpenAI%20Codex-skill-green)
 
 **Select relevant raw lines from oversized files before sending them to your main reasoning model.**
 
-Version **2.4.0** defaults to Python-only token-first extraction and optionally uses **GPT-6 Luna Light** through Codex CLI: model `gpt-6-luna`, reasoning effort `low`, fixed by the router. It reuses your existing Codex ChatGPT login and subscription. No API key, local model, or local model server is required.
+Version **2.5.0** defaults to Python-only token-first extraction and optionally uses **GPT-6 Luna Light** through Codex CLI: model `gpt-6-luna`, reasoning effort `low`, fixed by the router. It reuses your existing Codex ChatGPT login and subscription. No API key, local model, or local model server is required.
 
 ## How it works
 
 1. Python ranks query/diagnostic windows, reserves distributed and recent evidence, and applies a character budget before rendering in original line order.
-2. Default `--optimize tokens` avoids a selector-model call entirely. Candidate ranges include two neighboring lines and are admitted only if the rendered packet is at least 15% smaller than full rendering and fits the character budget. Otherwise sources up to 100,000 characters pass through whole; larger cases return exit 2 (`needs_targeted_read`) with suggested ranges and no raw stdout. Sources up to 12,000 characters always pass through whole.
+2. Default `--optimize tokens` avoids a selector-model call entirely. Candidate ranges include two neighboring lines and are admitted only if the rendered packet is at least 15% smaller than full rendering and fits the character budget. Otherwise sources up to 100,000 characters pass through whole; larger cases return exit 2 (`needs_targeted_read`) with suggested ranges and no raw stdout. Sources up to 12,000 characters pass through whole when the final rendered output fits the output budget.
    `--optimize latency` preserves v2.2 automatic routing; `--force-model` explicitly requires Luna, while `--deterministic` requests ranked extraction with the line cap.
 3. Python validates and merges the ranges, then extracts raw text from the original file.
 4. Your main agent reasons over the selected evidence and retrieves wider ranges when necessary.
 
 The model selects coordinates; it does not summarize or rewrite evidence. “Lossless” describes the extracted text, **not completeness of selection**. Relevant dependencies can be omitted by either prefiltering or model selection.
 
-**Cloud and usage boundary:** candidate content and the query leave your machine through Codex. Each real routing call consumes Codex subscription usage. Smaller input for your main model does not establish lower total token use or lower total cost; the router also processes input. Speed, quality, and savings depend on the workload. The [real-file benchmark and improvements](docs/benchmark-improvements.md) distinguish main-context reduction from total usage and report evidence lost by v2.0.
+**Cloud and usage boundary:** only optional cloud selection sends candidate content and the query through Codex and consumes Codex subscription usage. The default Python path makes no model call. Smaller input for your main model does not establish lower total token use or lower total cost; the router also processes input. Speed, quality, and savings depend on the workload. The [real-file benchmark and improvements](docs/benchmark-improvements.md) distinguish main-context reduction from total usage and report evidence lost by v2.0.
 
 ## Quick start
 
@@ -30,17 +30,15 @@ Requirements:
 - For cloud selection: a Codex account with access to `gpt-6-luna`, signed in through ChatGPT. Check the [official Codex CLI documentation](https://developers.openai.com/codex/cli/) for installation.
 
 ```bash
-codex login
-codex login status
 python3 scripts/router.py error_log path/to/deploy.log --query "database migration timeout"
 python3 scripts/router.py heavy_code path/to/service.py --query "token expiration"
 python3 scripts/router.py heavy_code path/to/service.py --query "session_token" --deterministic
 python3 scripts/router.py agent_context path/to/agent-context/frontend.md --query "frontend testing workflow"
 ```
 
-Choose ChatGPT sign-in when logging in. If you already use Codex with that login, no separate router credentials are needed. The CLI executable can be specified with `ROUTER_CODEX_BIN` when it is not on `PATH`.
+For optional cloud selection, run `codex login`, choose ChatGPT sign-in, and verify with `codex login status`. If you already use Codex with that login, no separate router credentials are needed. The CLI executable can be specified with `ROUTER_CODEX_BIN` when it is not on `PATH`.
 
-The router fixes model and effort rather than inheriting your main agent's settings. It uses an ephemeral structured-output CLI call that ignores user configuration. Do not use it recursively from inside a routing call. CLI login, model-access, timeout, or output failures produce a diagnostic and bounded deterministic fallback; fallback output is a starting point, not confirmation that the model selected the right evidence.
+For optional cloud selection, the router fixes model and effort rather than inheriting your main agent's settings. It uses an ephemeral structured-output CLI call that ignores user configuration. Do not use it recursively from inside a routing call. CLI login, model-access, timeout, or output failures produce a diagnostic and bounded deterministic fallback; fallback output is a starting point, not confirmation that the model selected the right evidence.
 
 ## Modes
 
@@ -70,7 +68,7 @@ Use $token-router to analyze this large log for payment timeout.
 Use $token-router agent_context to find deployment rules in this reference.
 ```
 
-[SKILL.md](SKILL.md) resolves the executable relative to the installed skill directory, so the caller can be in another project. [CLAUDE.md](CLAUDE.md) describes using the same Python router from Claude Code; routing still requires a Codex login and consumes Codex usage.
+[SKILL.md](SKILL.md) resolves the executable relative to the installed skill directory, so the caller can be in another project. [CLAUDE.md](CLAUDE.md) describes using the same Python router from Claude Code; optional cloud selection still requires a Codex login and consumes Codex usage.
 
 ## Configuration
 
@@ -80,11 +78,12 @@ The provider, model `gpt-6-luna`, and effort `low` are fixed. There is no model/
 |---|---:|---|
 | `ROUTER_CODEX_BIN` | `codex` | Codex CLI executable name or absolute path |
 | `ROUTER_TIMEOUT` | `120` | Codex subprocess timeout in seconds |
-| `ROUTER_MAX_CHARS` | `120000` | Maximum line-numbered candidate content sent to the router model |
+| `ROUTER_MAX_CHARS` | `120000` | Candidate character budget for local admission and optional model input |
+| `ROUTER_MAX_OUTPUT_CHARS` | `120000` | Final rendered output cap, including headers, on every path; minimum 1 |
 | `ROUTER_MAX_OUTPUT_LINES` | `160` | Maximum model/deterministic selected lines; token-first packets and whole-source bypass are exempt |
 | `ROUTER_AUTO_SMALL_CHARS` | `12000` | Whole-source bypass threshold in raw characters |
-| `ROUTER_AUTO_FULL_CHARS` | `100000` | Whole-source bypass ceiling when candidate raw characters cover at least 65% of source |
-| `ROUTER_AUTO_CANDIDATE_CHARS` | `12000` | Candidate bypass ceiling; also requires no truncation, all query terms present, and fit within output line cap |
+| `ROUTER_AUTO_FULL_CHARS` | `100000` | Whole-source ceiling for tokens fallback; latency compatibility also uses a 65% raw ratio |
+| `ROUTER_AUTO_CANDIDATE_CHARS` | `12000` | Latency compatibility only: candidate bypass ceiling, with no truncation, all query terms present, and line-cap fit |
 | `ROUTER_OUTPUT_CONTEXT_LINES` | `2` | Neighbor lines added around model targets using only spare output budget |
 | `ROUTER_STREAM_THRESHOLD_BYTES` | legacy | Deprecated; all sizes now use the same two-pass scan policy |
 | `ROUTER_LOG_CONTEXT_LINES` | `6` | Context around log keyword/query hits |
@@ -92,17 +91,17 @@ The provider, model `gpt-6-luna`, and effort `low` are fixed. There is no model/
 | `ROUTER_CODE_CONTEXT_LINES` | `8` | Context around source query/keyword hits |
 | `ROUTER_AGENT_CONTEXT_LINES` | `6` | Context around instruction-reference hits |
 
-Automatic whole-source bypass preserves every line, even beyond `ROUTER_MAX_OUTPUT_LINES`, within its raw-character thresholds. This prevents a speed optimization from becoming silent evidence loss. `coverage_guaranteed=true` means the whole source was returned, not that the answer is correct. Use `--force-model` or `--deterministic` when an explicitly line-capped path is required. These flags are mutually exclusive. Candidate bypass is still a lossy prefilter; no semantic completeness is promised.
+Automatic whole-source bypass preserves every line, even beyond `ROUTER_MAX_OUTPUT_LINES`, within its raw-character thresholds and the final output character cap. This prevents a speed optimization from becoming silent evidence loss. `coverage_guaranteed=true` means the whole source was returned, not that the answer is correct. Use `--force-model` or `--deterministic` when an explicitly line-capped path is required. These flags are mutually exclusive. Candidate bypass is still a lossy prefilter; no semantic completeness is promised.
 
 Model-selected output ranges are merged and share the line budget across distinct ranges. Model-selected core ranges are preserved first; up to two neighboring lines per side are added when the output budget allows, retaining nearby guards and traceback locations. Any cut is reported; portions of each range can still be lost. `error_log` keeps the newer end within each capped range. Inspect nearby raw lines whenever the answer depends on missing context.
 
 Stderr reports `[token-router coverage]` with source/candidate/visible counts and truncation, `[token-router usage]` for cloud usage, and `[token-router status]` with `auto_full`, `auto_candidates`, `model`, `deterministic`, `fallback`, or `error`, plus `model_called`. Automatic bypass emits zero routing usage. Exit 0 means raw extraction succeeded, **not** that model selection succeeded or evidence is complete. On model failure, inspect `status=fallback` / `model_failed=true`; a missing/unreadable source or no fitting raw line exits 1.
 
-Use exact task identifiers instead of a long generic checklist. For known symbols, start with ordinary search or `--deterministic`; read directly when the candidate set is almost the whole source. Cloud routing remains available when semantic selection is useful. No automatic cloud retry is performed. The scan retains metadata proportional to the number of source lines; it does not promise constant memory. The character budget limits model candidates, while model-selected raw output is limited by lines and can include neighboring or previously omitted source lines.
+Use exact task identifiers instead of a long generic checklist. For known symbols, start with ordinary search and nearby raw lines; read directly when the candidate set is almost the whole source. Cloud routing remains available when semantic selection is useful. No automatic cloud retry is performed. The scan retains metadata proportional to the number of source lines; it does not promise constant memory. The character budget limits model candidates, while every final output is character-capped. Model coordinates must be inside visible candidate ranges; deterministic padding may add neighboring raw lines.
 
 ## Upgrade from v1
 
-v2 removes the Ollama backend entirely. Remove old `OLLAMA_*` configuration; those settings no longer select or configure a provider. Install a compatible Codex CLI, sign in with ChatGPT, and keep the existing three-mode command syntax. Review cloud-data handling before routing files that previously stayed local during selection.
+v2 removes the Ollama backend entirely. Remove old `OLLAMA_*` configuration; those settings no longer select or configure a provider. For optional cloud selection, install a compatible Codex CLI and sign in with ChatGPT. Keep the existing three-mode command syntax. Review cloud-data handling before routing files that previously stayed local during selection.
 
 ## Validation and benchmarks
 
@@ -135,3 +134,19 @@ The 15% margin is a rendered-character heuristic, not a token guarantee. Default
 Default admission now reports query anchors, unmatched terms, packet budget, and reduction independently. No matched term in candidate cores triggers whole reading for moderate sources or a structured search request for larger sources. These are observable checks, not calibrated confidence or semantic sufficiency. Missing-query state is unknown; partial matches are not proof of complete evidence.
 
 Python files up to 1 MB get bounded AST statement/expression completion (12-line nodes, 128 added lines), before final packet admission. Invalid syntax retains the original candidates; remaining crossings are partial. Full control-flow and dependency coverage are not promised. ASCII query components use an index; complex terms and non-ASCII lines retain exact regex semantics. See [paired v2.3/v2.4 measurements](docs/benchmark-evidence-checks.md).
+
+
+## v2.5 opt-in policy and shared safety
+
+The default tokens admission remains `v2.4`; opt in with `--policy-version v2.5`. This selector does not recreate an untouched old executable: source, coordinate, and final-output safety contracts apply to every path. Use the frozen v2.4 release for exact baseline comparison.
+
+```bash
+python3 scripts/router.py heavy_code file.py --query "refresh_token cleanup" --policy-version v2.5 --require-term refresh_token --report-json decision.json
+python3 scripts/router.py heavy_code file.py --policy-version v2.5 --read-scope whole
+```
+
+The new policy checks source/core/final raw evidence separately and can provide witnesses for dropped required literals. Required literals are explicit, case-sensitive, single-token positive requirements; underscores are identifier characters. Whole scope bypasses candidate selection but remains output-bounded. New policy/scope/literal options are incompatible with force-model, deterministic, and latency mode; literal/whole options require v2.5. The report option works with every execution policy and cannot overwrite the input.
+
+New `ROUTER_MAX_OUTPUT_CHARS=120000` (minimum 1) caps final rendered text across every path. Oversized text is withheld with exit 2, not partially cut. `source_changed` is exit 1 with no raw output. Stat guards are not atomic snapshots. Model ranges now require strict integer coordinates entirely inside candidate content; malformed mixed responses fail as a whole and use deterministic fallback. Model reason metadata is limited to 256 characters.
+
+`--report-json` records structured diagnostics, not source bodies. Stderr retains existing keys and adds schema version, final packet anchor, required-literal loss/absence, reasons, source consistency, and final-output cap. All counts are observed heuristics, not calibrated confidence. Inspect the [v2.5 evaluation report](docs/benchmark-v2.5.md) before making performance claims.

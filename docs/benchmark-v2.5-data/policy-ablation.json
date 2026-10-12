@@ -1,0 +1,126 @@
+{
+  "note": "Controlled pure-policy fixtures, not measured corpus accuracy; v24 proxy isolates old core-anchor admission.",
+  "cases": [
+    {
+      "case": "expanded_anchor",
+      "checks": {
+        "source_terms": [
+          "cleanup"
+        ],
+        "core_terms": [],
+        "packet_terms": [
+          "cleanup"
+        ],
+        "absent_required": [],
+        "lost_required": [],
+        "packet_query_anchor": "satisfied",
+        "semantic_sufficiency": "unknown"
+      },
+      "v25": {
+        "action": "auto_candidates",
+        "reason_codes": [],
+        "next_action": null
+      },
+      "v24_proxy": "needs_targeted_read"
+    },
+    {
+      "case": "core_only",
+      "checks": {
+        "source_terms": [
+          "cleanup"
+        ],
+        "core_terms": [
+          "cleanup"
+        ],
+        "packet_terms": [],
+        "absent_required": [],
+        "lost_required": [],
+        "packet_query_anchor": "missing",
+        "semantic_sufficiency": "unknown"
+      },
+      "v25": {
+        "action": "needs_targeted_read",
+        "reason_codes": [
+          "no_packet_query_anchor"
+        ],
+        "next_action": "search_query_terms"
+      },
+      "v24_proxy": "auto_candidates"
+    },
+    {
+      "case": "lost_required",
+      "checks": {
+        "source_terms": [
+          "A",
+          "B"
+        ],
+        "core_terms": [
+          "A"
+        ],
+        "packet_terms": [
+          "A"
+        ],
+        "absent_required": [],
+        "lost_required": [
+          "B"
+        ],
+        "packet_query_anchor": "satisfied",
+        "semantic_sufficiency": "unknown"
+      },
+      "v25": {
+        "action": "needs_targeted_read",
+        "reason_codes": [
+          "required_literal_dropped_from_packet"
+        ],
+        "next_action": "read_missing_witnesses"
+      },
+      "v24_proxy": "auto_candidates"
+    },
+    {
+      "case": "absent_required",
+      "checks": {
+        "source_terms": [
+          "A"
+        ],
+        "core_terms": [
+          "A"
+        ],
+        "packet_terms": [
+          "A"
+        ],
+        "absent_required": [
+          "B"
+        ],
+        "lost_required": [],
+        "packet_query_anchor": "satisfied",
+        "semantic_sufficiency": "unknown"
+      },
+      "v25": {
+        "action": "needs_targeted_read",
+        "reason_codes": [
+          "required_literal_absent_in_this_source"
+        ],
+        "next_action": "change_search_scope"
+      },
+      "v24_proxy": "auto_candidates"
+    },
+    {
+      "case": "explicit_required_preserved",
+      "checks": {
+        "source_terms": [],
+        "core_terms": [],
+        "packet_terms": [],
+        "absent_required": [],
+        "lost_required": [],
+        "packet_query_anchor": "missing",
+        "semantic_sufficiency": "unknown"
+      },
+      "v25": {
+        "action": "auto_candidates",
+        "reason_codes": [],
+        "next_action": null
+      },
+      "v24_proxy": "needs_targeted_read"
+    }
+  ]
+}
