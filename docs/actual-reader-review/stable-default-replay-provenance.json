@@ -1,0 +1,6 @@
+{
+  "baseline": "v2.6.0/f68dc09/default v2.4",
+  "candidate": "2.7.0/3ad145c runtime/default v2.4",
+  "model": "none",
+  "scope": "24 mixed default packets, plus existing matcher stress cases; not model answer efficacy"
+}

@@ -1,12 +1,13 @@
 # Changelog
 
-## 2.7.0 — Unreleased candidate
+## 2.7.0 — 2026-10-13
 
-- Add explicit bounded literal search, numbered presentation and context0..12 while preserving raw default and shared safety.
-- Narrow automatic discovery to dispersed error logs; keep code lookup and one-location work on ordinary search. This is selection guidance, not a hard host interceptor.
-- Keep managed installation backups outside skill discovery.
-- Stream benchmark events and account for complete/partial failure usage; research helper is not installed.
-- Promotion blocked: the new8-episode automatic pilot maintained25/25 facts/citations but used25.9% more tokens, with no reader calls. See docs/activation-gate-review/report.ko.md.
+- Add explicit complete bounded Python callable retrieval (`--symbol`), merged overlaps/decorators and whole-batch refusal for missing/duplicate/syntax/budget failures.
+- Add repeated literal windows (`--search-term`), selected recognizable Python/pytest failure-block completion, context0..12, numbered raw presentation and compact diagnostics. Preserve full report sidecars and common source/coordinate/output guards.
+- Bound duplicate-symbol witnesses/counts and omit successful coordinate duplication from compact status. Keep default query ranking, v2.4 admission, v2.5 opt-in, return-context off and zero default selector calls.
+- Guide reuse and distinctive log headers reduce avoidable rereads. Managed backups stay outside skill discovery. No pre-read guide/execution batching is used.
+- Native Codex installed-skill development comparison: actual router8/8, fixed-rubric48/48 both arms, total193,678→158,361tokens (-18.23%), wall116.29→111.80s (-3.86%). Pandas effectively flat, CPython slower; cold CLI comparison increased costs. No universal/automatic savings claim. Full all48-turn ledger and original/adjudicated scores: [actual-reader review](docs/actual-reader-review/report.ko.md).
+- Stream bounded benchmark capture and preserve failure/unknown usage accounting; research tools are excluded from installed payload.
 
 ## 2.6.0 — 2026-10-12
 

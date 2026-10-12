@@ -1,0 +1,703 @@
+[
+  {
+    "task": "pandas_dispatch",
+    "variant": "previous_literal",
+    "exit": 2,
+    "stdout_chars": 0,
+    "stderr_chars": 969,
+    "sufficient_facts": 0,
+    "facts": 6,
+    "median_local_wall": 0.04645220888778567,
+    "local_wall": [
+      0.0711355828680098,
+      0.04645220888778567,
+      0.049845708068460226,
+      0.04423887492157519,
+      0.04332104208879173
+    ],
+    "status": {
+      "schema_version": 1,
+      "model_called": false,
+      "model_failed": false,
+      "selection_truncated": false,
+      "final_output_capped": true,
+      "full_source_returned": false,
+      "reason_codes": [
+        "literal_scope_too_broad"
+      ],
+      "packet_query_anchor": "unknown",
+      "absent_required": [],
+      "lost_required": [],
+      "next_action": "narrow_search_terms",
+      "status": "needs_targeted_read",
+      "retrieval_mode": "literal_search",
+      "scan_complete": true,
+      "search_match_lines": {
+        "__getitem__": 5,
+        "__setitem__": 6,
+        "_set_item_frame_value": 2
+      },
+      "missing_search_terms": [],
+      "semantic_sufficiency": "unknown",
+      "context_lines": 12,
+      "traceback_completed_blocks": 0,
+      "suggested_ranges": [
+        [
+          4031,
+          4074
+        ],
+        [
+          4120,
+          4146
+        ],
+        [
+          4221,
+          4245
+        ],
+        [
+          4259,
+          4283
+        ],
+        [
+          4289,
+          4313
+        ],
+        [
+          4352,
+          4376
+        ],
+        [
+          4384,
+          4432
+        ],
+        [
+          4715,
+          4739
+        ],
+        [
+          6934,
+          6958
+        ]
+      ],
+      "source_consistency": "stat_unchanged",
+      "source_stamp": [
+        16777231,
+        73759131,
+        447104,
+        1791846879746659508,
+        1791846879746667341
+      ],
+      "output_lines": 0,
+      "output_chars": 0,
+      "open_count": 1
+    },
+    "model_called": false
+  },
+  {
+    "task": "pandas_dispatch",
+    "variant": "new_full_status",
+    "exit": 0,
+    "stdout_chars": 7424,
+    "stderr_chars": 1099,
+    "sufficient_facts": 6,
+    "facts": 6,
+    "median_local_wall": 0.07078025001101196,
+    "local_wall": [
+      0.07078025001101196,
+      0.06858300021849573,
+      0.06943141692318022,
+      0.07116141705773771,
+      0.07208633283153176
+    ],
+    "status": {
+      "schema_version": 1,
+      "model_called": false,
+      "model_failed": false,
+      "selection_truncated": false,
+      "final_output_capped": false,
+      "full_source_returned": false,
+      "reason_codes": [],
+      "packet_query_anchor": "unknown",
+      "absent_required": [],
+      "lost_required": [],
+      "next_action": null,
+      "status": "auto_candidates",
+      "retrieval_mode": "python_symbol",
+      "semantic_sufficiency": "unknown",
+      "requested_symbols": [
+        "DataFrame.__getitem__",
+        "DataFrame.__setitem__",
+        "DataFrame._set_item_frame_value"
+      ],
+      "scan_complete": true,
+      "missing_symbols": [],
+      "ambiguous_symbols": [],
+      "symbol_ranges": {
+        "DataFrame.__getitem__": [
+          [
+            4062,
+            4128
+          ]
+        ],
+        "DataFrame.__setitem__": [
+          [
+            4271,
+            4311
+          ]
+        ],
+        "DataFrame._set_item_frame_value": [
+          [
+            4420,
+            4468
+          ]
+        ]
+      },
+      "symbol_occurrences": {
+        "DataFrame.__getitem__": 1,
+        "DataFrame.__setitem__": 1,
+        "DataFrame._set_item_frame_value": 1
+      },
+      "symbol_ranges_truncated": false,
+      "output_format": "numbered",
+      "source_consistency": "stat_unchanged",
+      "source_stamp": [
+        16777231,
+        73759131,
+        447104,
+        1791846879746659508,
+        1791846879746667341
+      ],
+      "output_lines": 157,
+      "output_chars": 7424,
+      "open_count": 1
+    },
+    "model_called": false
+  },
+  {
+    "task": "pandas_dispatch",
+    "variant": "new_compact_status",
+    "exit": 0,
+    "stdout_chars": 7424,
+    "stderr_chars": 363,
+    "sufficient_facts": 6,
+    "facts": 6,
+    "median_local_wall": 0.07299187500029802,
+    "local_wall": [
+      0.08154979208484292,
+      0.07299187500029802,
+      0.07497029099613428,
+      0.07260024989955127,
+      0.07103370898403227
+    ],
+    "status": {
+      "schema_version": 1,
+      "model_called": false,
+      "model_failed": false,
+      "selection_truncated": false,
+      "final_output_capped": false,
+      "full_source_returned": false,
+      "status": "auto_candidates",
+      "retrieval_mode": "python_symbol",
+      "semantic_sufficiency": "unknown",
+      "source_consistency": "stat_unchanged",
+      "output_lines": 157,
+      "output_chars": 7424
+    },
+    "model_called": false
+  },
+  {
+    "task": "rich_render",
+    "variant": "previous_literal",
+    "exit": 2,
+    "stdout_chars": 0,
+    "stderr_chars": 957,
+    "sufficient_facts": 0,
+    "facts": 6,
+    "median_local_wall": 0.04238587501458824,
+    "local_wall": [
+      0.04546220903284848,
+      0.04238587501458824,
+      0.042995375115424395,
+      0.04216379183344543,
+      0.04087629192508757
+    ],
+    "status": {
+      "schema_version": 1,
+      "model_called": false,
+      "model_failed": false,
+      "selection_truncated": false,
+      "final_output_capped": true,
+      "full_source_returned": false,
+      "reason_codes": [
+        "literal_scope_too_broad"
+      ],
+      "packet_query_anchor": "unknown",
+      "absent_required": [],
+      "lost_required": [],
+      "next_action": "narrow_search_terms",
+      "status": "needs_targeted_read",
+      "retrieval_mode": "literal_search",
+      "scan_complete": true,
+      "search_match_lines": {
+        "print": 33,
+        "log": 25
+      },
+      "missing_search_terms": [],
+      "semantic_sufficiency": "unknown",
+      "context_lines": 12,
+      "traceback_completed_blocks": 0,
+      "suggested_ranges": [
+        [
+          28,
+          52
+        ],
+        [
+          299,
+          323
+        ],
+        [
+          418,
+          442
+        ],
+        [
+          578,
+          624
+        ],
+        [
+          631,
+          657
+        ],
+        [
+          703,
+          730
+        ],
+        [
+          1085,
+          1156
+        ],
+        [
+          1269,
+          1311
+        ],
+        [
+          1410,
+          1434
+        ],
+        [
+          1503,
+          1539
+        ],
+        [
+          1596,
+          1687
+        ],
+        [
+          1746,
+          1784
+        ]
+      ],
+      "source_consistency": "stat_unchanged",
+      "source_stamp": [
+        16777231,
+        73759134,
+        101361,
+        1791846879747981644,
+        1791846879747987227
+      ],
+      "output_lines": 0,
+      "output_chars": 0,
+      "open_count": 1
+    },
+    "model_called": false
+  },
+  {
+    "task": "rich_render",
+    "variant": "new_full_status",
+    "exit": 0,
+    "stdout_chars": 9483,
+    "stderr_chars": 921,
+    "sufficient_facts": 6,
+    "facts": 6,
+    "median_local_wall": 0.04980341694317758,
+    "local_wall": [
+      0.04998933291062713,
+      0.04980341694317758,
+      0.04956891713663936,
+      0.04893375001847744,
+      0.05020229215733707
+    ],
+    "status": {
+      "schema_version": 1,
+      "model_called": false,
+      "model_failed": false,
+      "selection_truncated": false,
+      "final_output_capped": false,
+      "full_source_returned": false,
+      "reason_codes": [],
+      "packet_query_anchor": "unknown",
+      "absent_required": [],
+      "lost_required": [],
+      "next_action": null,
+      "status": "auto_candidates",
+      "retrieval_mode": "python_symbol",
+      "semantic_sufficiency": "unknown",
+      "requested_symbols": [
+        "Console.print",
+        "Console.log"
+      ],
+      "scan_complete": true,
+      "missing_symbols": [],
+      "ambiguous_symbols": [],
+      "symbol_ranges": {
+        "Console.print": [
+          [
+            1652,
+            1756
+          ]
+        ],
+        "Console.log": [
+          [
+            1947,
+            2028
+          ]
+        ]
+      },
+      "symbol_occurrences": {
+        "Console.print": 1,
+        "Console.log": 1
+      },
+      "symbol_ranges_truncated": false,
+      "output_format": "numbered",
+      "source_consistency": "stat_unchanged",
+      "source_stamp": [
+        16777231,
+        73759134,
+        101361,
+        1791846879747981644,
+        1791846879747987227
+      ],
+      "output_lines": 187,
+      "output_chars": 9483,
+      "open_count": 1
+    },
+    "model_called": false
+  },
+  {
+    "task": "rich_render",
+    "variant": "new_compact_status",
+    "exit": 0,
+    "stdout_chars": 9483,
+    "stderr_chars": 363,
+    "sufficient_facts": 6,
+    "facts": 6,
+    "median_local_wall": 0.0503825000487268,
+    "local_wall": [
+      0.04971845913678408,
+      0.049359832890331745,
+      0.0503825000487268,
+      0.051758249988779426,
+      0.051156583009287715
+    ],
+    "status": {
+      "schema_version": 1,
+      "model_called": false,
+      "model_failed": false,
+      "selection_truncated": false,
+      "final_output_capped": false,
+      "full_source_returned": false,
+      "status": "auto_candidates",
+      "retrieval_mode": "python_symbol",
+      "semantic_sufficiency": "unknown",
+      "source_consistency": "stat_unchanged",
+      "output_lines": 187,
+      "output_chars": 9483
+    },
+    "model_called": false
+  },
+  {
+    "task": "cpython_trace",
+    "variant": "previous_literal",
+    "exit": 0,
+    "stdout_chars": 8773,
+    "stderr_chars": 841,
+    "sufficient_facts": 6,
+    "facts": 6,
+    "median_local_wall": 0.04481383296661079,
+    "local_wall": [
+      0.045061750104650855,
+      0.04481383296661079,
+      0.04422725015319884,
+      0.04434020793996751,
+      0.04552504210732877
+    ],
+    "status": {
+      "schema_version": 1,
+      "model_called": false,
+      "model_failed": false,
+      "selection_truncated": false,
+      "final_output_capped": false,
+      "full_source_returned": false,
+      "reason_codes": [],
+      "packet_query_anchor": "unknown",
+      "absent_required": [],
+      "lost_required": [],
+      "next_action": null,
+      "status": "auto_candidates",
+      "retrieval_mode": "literal_search",
+      "scan_complete": true,
+      "search_match_lines": {
+        "Traceback (most recent call last):": 2,
+        "Total test files:": 1,
+        "runtime error:": 1,
+        "SEGV": 2
+      },
+      "missing_search_terms": [],
+      "semantic_sufficiency": "unknown",
+      "context_lines": 4,
+      "traceback_completed_blocks": 2,
+      "output_format": "numbered",
+      "source_consistency": "stat_unchanged",
+      "source_stamp": [
+        16777231,
+        73759132,
+        551037,
+        1791846879747050249,
+        1791846879747056915
+      ],
+      "output_lines": 77,
+      "output_chars": 8773,
+      "open_count": 2
+    },
+    "model_called": false
+  },
+  {
+    "task": "cpython_trace",
+    "variant": "new_full_status",
+    "exit": 0,
+    "stdout_chars": 8773,
+    "stderr_chars": 841,
+    "sufficient_facts": 6,
+    "facts": 6,
+    "median_local_wall": 0.04690662492066622,
+    "local_wall": [
+      0.045879125129431486,
+      0.047699083806946874,
+      0.050183207960799336,
+      0.04690662492066622,
+      0.04613537504337728
+    ],
+    "status": {
+      "schema_version": 1,
+      "model_called": false,
+      "model_failed": false,
+      "selection_truncated": false,
+      "final_output_capped": false,
+      "full_source_returned": false,
+      "reason_codes": [],
+      "packet_query_anchor": "unknown",
+      "absent_required": [],
+      "lost_required": [],
+      "next_action": null,
+      "status": "auto_candidates",
+      "retrieval_mode": "literal_search",
+      "scan_complete": true,
+      "search_match_lines": {
+        "Traceback (most recent call last):": 2,
+        "Total test files:": 1,
+        "runtime error:": 1,
+        "SEGV": 2
+      },
+      "missing_search_terms": [],
+      "semantic_sufficiency": "unknown",
+      "context_lines": 4,
+      "traceback_completed_blocks": 2,
+      "output_format": "numbered",
+      "source_consistency": "stat_unchanged",
+      "source_stamp": [
+        16777231,
+        73759132,
+        551037,
+        1791846879747050249,
+        1791846879747056915
+      ],
+      "output_lines": 77,
+      "output_chars": 8773,
+      "open_count": 2
+    },
+    "model_called": false
+  },
+  {
+    "task": "cpython_trace",
+    "variant": "new_compact_status",
+    "exit": 0,
+    "stdout_chars": 8773,
+    "stderr_chars": 363,
+    "sufficient_facts": 6,
+    "facts": 6,
+    "median_local_wall": 0.04579712497070432,
+    "local_wall": [
+      0.04587837494909763,
+      0.04607283300720155,
+      0.04579712497070432,
+      0.045618291944265366,
+      0.04562695906497538
+    ],
+    "status": {
+      "schema_version": 1,
+      "model_called": false,
+      "model_failed": false,
+      "selection_truncated": false,
+      "final_output_capped": false,
+      "full_source_returned": false,
+      "status": "auto_candidates",
+      "retrieval_mode": "literal_search",
+      "semantic_sufficiency": "unknown",
+      "source_consistency": "stat_unchanged",
+      "output_lines": 77,
+      "output_chars": 8773
+    },
+    "model_called": false
+  },
+  {
+    "task": "scipy_failure_blocks",
+    "variant": "previous_literal",
+    "exit": 0,
+    "stdout_chars": 2815,
+    "stderr_chars": 836,
+    "sufficient_facts": 1,
+    "facts": 6,
+    "median_local_wall": 0.04669520794413984,
+    "local_wall": [
+      0.04720920906402171,
+      0.04669520794413984,
+      0.046389207942411304,
+      0.04660791694186628,
+      0.051606500055640936
+    ],
+    "status": {
+      "schema_version": 1,
+      "model_called": false,
+      "model_failed": false,
+      "selection_truncated": false,
+      "final_output_capped": false,
+      "full_source_returned": false,
+      "reason_codes": [],
+      "packet_query_anchor": "unknown",
+      "absent_required": [],
+      "lost_required": [],
+      "next_action": null,
+      "status": "auto_candidates",
+      "retrieval_mode": "literal_search",
+      "scan_complete": true,
+      "search_match_lines": {
+        "TestMakeSplrep.test_fitpack_F[1]": 1,
+        "TestMakeSplrep.test_fitpack_F[6]": 1,
+        "failed,": 1
+      },
+      "missing_search_terms": [],
+      "semantic_sufficiency": "unknown",
+      "context_lines": 4,
+      "traceback_completed_blocks": 0,
+      "output_format": "numbered",
+      "source_consistency": "stat_unchanged",
+      "source_stamp": [
+        16777231,
+        73759133,
+        638795,
+        1791846879747579486,
+        1791846879747585820
+      ],
+      "output_lines": 27,
+      "output_chars": 2815,
+      "open_count": 2
+    },
+    "model_called": false
+  },
+  {
+    "task": "scipy_failure_blocks",
+    "variant": "new_full_status",
+    "exit": 0,
+    "stdout_chars": 7579,
+    "stderr_chars": 836,
+    "sufficient_facts": 6,
+    "facts": 6,
+    "median_local_wall": 0.04885075008496642,
+    "local_wall": [
+      0.048761624842882156,
+      0.049490208039060235,
+      0.049230749951675534,
+      0.048663708148524165,
+      0.04885075008496642
+    ],
+    "status": {
+      "schema_version": 1,
+      "model_called": false,
+      "model_failed": false,
+      "selection_truncated": false,
+      "final_output_capped": false,
+      "full_source_returned": false,
+      "reason_codes": [],
+      "packet_query_anchor": "unknown",
+      "absent_required": [],
+      "lost_required": [],
+      "next_action": null,
+      "status": "auto_candidates",
+      "retrieval_mode": "literal_search",
+      "scan_complete": true,
+      "search_match_lines": {
+        "TestMakeSplrep.test_fitpack_F[1]": 1,
+        "TestMakeSplrep.test_fitpack_F[6]": 1,
+        "failed,": 1
+      },
+      "missing_search_terms": [],
+      "semantic_sufficiency": "unknown",
+      "context_lines": 4,
+      "traceback_completed_blocks": 2,
+      "output_format": "numbered",
+      "source_consistency": "stat_unchanged",
+      "source_stamp": [
+        16777231,
+        73759133,
+        638795,
+        1791846879747579486,
+        1791846879747585820
+      ],
+      "output_lines": 84,
+      "output_chars": 7579,
+      "open_count": 2
+    },
+    "model_called": false
+  },
+  {
+    "task": "scipy_failure_blocks",
+    "variant": "new_compact_status",
+    "exit": 0,
+    "stdout_chars": 7579,
+    "stderr_chars": 363,
+    "sufficient_facts": 6,
+    "facts": 6,
+    "median_local_wall": 0.04988095792941749,
+    "local_wall": [
+      0.048638249980285764,
+      0.04907879210077226,
+      0.04988095792941749,
+      0.05617112503387034,
+      0.053535958053544164
+    ],
+    "status": {
+      "schema_version": 1,
+      "model_called": false,
+      "model_failed": false,
+      "selection_truncated": false,
+      "final_output_capped": false,
+      "full_source_returned": false,
+      "status": "auto_candidates",
+      "retrieval_mode": "literal_search",
+      "semantic_sufficiency": "unknown",
+      "source_consistency": "stat_unchanged",
+      "output_lines": 84,
+      "output_chars": 7579
+    },
+    "model_called": false
+  }
+]
