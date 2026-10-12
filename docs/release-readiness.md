@@ -1,6 +1,6 @@
-# Release readiness — 2.6.0 candidate
+# Release readiness — 2.6.0
 
-Decision: **B — basic local product is ready for review; optional cloud and automatic agent selection are not validated release guarantees.** Default is Python-only tokens, v2.4 policy, return-context off. Bounded return context and exact target filtering are explicit advanced local options. No main push, public tag/release or global installation was performed.
+Decision: **B — basic local product is ready for review; optional cloud and automatic agent selection are not validated release guarantees.** Default is Python-only tokens, v2.4 policy, return-context off. Bounded return context and exact target filtering are explicit advanced local options. Publication and a backed-up global skill update are now authorized; they follow PR review and passing CI.
 
 ## Contract and scope
 
@@ -27,8 +27,9 @@ Validated runtime scope: macOS arm64, Python3.10 and3.14. Linux/Windows matrix i
 | Agent automatic selection | NOT RUN | No middleware/always-on claim |
 | Fresh installed-skill paired model evaluation | PASS | Repaired harness completed 4 pairs/8 episodes; both arms4/4; tokens +10.65%, time +10.21%; no router calls |
 | Mixed local evaluation | PASS | 24 new tasks /8 projects, default output identical to release baseline; no broader answer-quality claim |
-| Global install/auth/AGENTS mutation | NOT APPLICABLE | Explicitly outside scope |
-| Public GitHub tag/release | NOT RUN | Requires separate approval |
+| Global skill update | NOT RUN | Authorized after release; backup and hash verification required |
+| Auth/AGENTS mutation | NOT APPLICABLE | Not needed for installation |
+| Public GitHub tag/release | NOT RUN | Authorized; follows passing CI and PR merge |
 
 ## Fresh evaluation limitations
 
@@ -42,6 +43,6 @@ The measured installed SKILL matches final SKILL; its runtime came from873de65. 
 
 ## Publication and rollback
 
-Keep the reviewed candidate archive/checksum/inventory together. After approval, validate the pending CI platforms, publish the reviewed branch/PR and exact approved tag/release. Do not attach historical savings to changed product hashes. No new release was published by this task.
+Keep the reviewed candidate archive/checksum/inventory together. Validate the pending CI platforms, publish the authorized branch/PR and exact tag/release. Do not attach historical savings to changed product hashes. Current publication state is also available on the GitHub release page.
 
 Rollback with a verified installation backup, or a clean checkout/archive of public **v2.5.0 at1737ae2c360c1b495f627cf61f51b20f27ea806b**. Do not revert only an experimental return-context commit. Unmanaged old skill folders should be preserved and replaced manually after validating a new destination.

@@ -1,4 +1,4 @@
-# Token Router 2.6.0 — release draft
+# Token Router 2.6.0
 
 A local, standard-library Python CLI and agent skill for selecting relevant raw source lines. Default use needs no model, account or network.
 
@@ -20,7 +20,7 @@ Migration: preserve unmanaged old skill folders. Install into a new destination,
 - Run prepared Linux/Windows jobs or keep published tested scope explicitly macOS.
 - Extract the reviewed archive in a fresh path and run the documented samples.
 - Confirm no research sources, raw private prompts or credentials in the allowlisted artifact.
-- Obtain the separately required approval before main push, public tag or GitHub Release.
+- Publication and global installation were authorized for this release; use the reviewed PR and passing CI.
 - Publish the exact reviewed archive/checksum/inventory together; checksum is integrity, not publisher authentication.
 
-Status: draft only. No public release or global installation was performed.
+Publication status and CI evidence are recorded in release-readiness.md and the GitHub release.

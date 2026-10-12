@@ -2,11 +2,11 @@
 
 Retrieve original, numbered line ranges from large code files, logs and optional references before a reasoning model reads them. **Python-only by default: no Codex, login, model or network request required.** It selects evidence; it does not summarize, execute code, prove completeness, or guarantee token/time savings.
 
-Release candidate **2.6.0**. Python **3.10–3.14**, standard library. Basic CLI targets Linux/macOS/Windows; actual validation and remaining platform checks are recorded in [release readiness](docs/release-readiness.md). Optional cloud selection has a narrower advanced support contract.
+**2.6.0**. Python **3.10–3.14**, standard library. Basic CLI targets Linux/macOS/Windows; actual validation and remaining platform checks are recorded in [release readiness](docs/release-readiness.md). Optional cloud selection has a narrower advanced support contract.
 
 ## Install and first use
 
-Use a reviewed checkout or verify the SHA-256 beside a downloaded release archive before extracting it. A checksum detects changes; it does not authenticate the publisher. Version2.6.0 is a prepared candidate, not a published tag yet. From its checkout/extracted directory:
+Use a reviewed checkout or verify the SHA-256 beside a downloaded release archive before extracting it. A checksum detects changes; it does not authenticate the publisher. Download the versioned archive and checksum from [Releases](https://github.com/sleeplesshan/token-router/releases). From its extracted directory:
 
 ```sh
 python3 scripts/install.py install --dest "$HOME/.agents/skills/token-router"
@@ -19,7 +19,7 @@ python3 "$HOME/.agents/skills/token-router/scripts/router.py" agent_context "$HO
 
 Windows: use `python` and an absolute destination such as `"$env:USERPROFILE/.agents/skills/token-router"` in PowerShell. The installer accepts any explicit isolated destination; no administrator permissions are needed. Download/checkout uses network; the installed default router does not. Only the allowlisted runtime, skill, samples and support documents are installed; no benchmark logs or raw prompts.
 
-For reproducible source installation after publication, check out the exact tag/commit shown in `release-manifest.json`. Do not run an unreviewed remote script through a shell. An old unmanaged `cp -R` installation is never overwritten: install in a new destination, then replace it manually after inspection.
+For reproducible source installation check out the exact tag/commit shown in `release-manifest.json`. Do not run an unreviewed remote script through a shell. An old unmanaged `cp -R` installation is never overwritten: install in a new destination, then replace it manually after inspection.
 
 ## CLI or agent skill
 
@@ -66,7 +66,7 @@ Uninstall only accepts an unmodified managed installation; it does not delete ba
 
 ## Cloud and performance
 
-Advanced `--force-model`/legacy latency routing may send candidates+query to OpenAI and consume Codex subscription usage. Default operation never discovers Codex or calls it. Live Luna access is **not validated for this candidate**; it is not a setup requirement. See the contract before intentionally enabling it. Your main agent may separately send retrieved text to its model.
+Advanced `--force-model`/legacy latency routing may send candidates+query to OpenAI and consume Codex subscription usage. Default operation never discovers Codex or calls it. Live Luna access is **not validated for this release**; it is not a setup requirement. See the contract before intentionally enabling it. Your main agent may separately send retrieved text to its model.
 
 Measure answer quality, total input+output including skill instructions/selector/recovery, and whole completion time. Existing conditional return experiments do not establish universal savings: the earlier recovery benefit came from selected omitted-return tasks; the target filter saved0.46% on two explicit-target tasks. Those are historical fixed-product observations, not this release's performance. [Release evaluation](docs/release-readiness.md) separates fresh results, offline character counts and unmeasured behavior.
 
@@ -79,6 +79,6 @@ python3 scripts/run_router_tests.py tests/router-tests.json
 
 Both are offline, free of model calls. [CONTRIBUTING.md](CONTRIBUTING.md), [SUPPORT.md](SUPPORT.md), [SECURITY.md](SECURITY.md). MIT [license](LICENSE). Public samples are synthetic; research source downloads are separately pinned and licensed, and excluded from the runtime archive.
 
-## Current candidate evidence
+## Evaluation and appropriate use
 
 Four fixed installed-skill/ordinary-search pairs both answered4/4 correctly. Skill-enabled total tokens were10.65% higher; every task used ordinary search and no router call. This sample demonstrates avoiding needless routing, not savings or automatic discovery. It does not measure the extractor’s benefit on broad large-log questions. A separate replay of the four historical files preserves the released extractor’s output exactly; historical token savings are not relabeled as new measurements. Separately,24 offline default packets match the public release baseline;20 contain all initial required evidence. Detailed conditions and hashes are in the repository [evaluation](docs/release-evaluation/README.md).
