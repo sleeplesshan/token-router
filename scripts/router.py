@@ -132,8 +132,12 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument('--return-context',choices=('off','bounded'),default=None,help='Optional bounded Python return completion (default: off).')
     parser.add_argument('--return-target',help='Exact single callable return lookup; implies bounded completion; ambiguity preserves bounded output.')
     parser.add_argument('--search-term', action='append', default=[], help='Explicit case-sensitive literal windows; local tokens only, no structural ranking.')
+    parser.add_argument('--search-context', type=int, choices=range(13), default=None,
+                        help='Neighbors per side for literal search (0-12); omitted: code12/log4. Selected traceback completion still applies.')
     parser.add_argument('--line-numbers', action='store_true', help='Render source line numbers without changing stored raw evidence.')
     args = parser.parse_args(argv[1:])
+    if args.search_context is not None and not args.search_term:
+        parser.error('search-context requires search-term')
     if args.search_term:
         if args.force_model or args.deterministic or args.optimize != 'tokens' or args.read_scope == 'whole' or args.require_term or args.return_target or args.return_context == 'bounded':
             parser.error('search-term requires focused local tokens without return completion or require-term')
@@ -996,7 +1000,7 @@ def literal_search_packet(args, guard):
     """One metadata scan and one selected read; no AST, ranking, tail or model."""
     terms=args.search_term
     counts={term:0 for term in terms};spans=[];source_chars=0;total=0;line_costs=[];tracebacks=[];trace_open=None;matched_lines=[]
-    context=4 if args.mode=='error_log' else 12
+    context=args.search_context if args.search_context is not None else (4 if args.mode=='error_log' else 12)
     for n,line in enumerate(guard.lines(),1):
         total=n;source_chars+=len(line)
         line_costs.append(len(line)+(len(str(n))+2 if args.line_numbers else 0))

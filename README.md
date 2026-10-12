@@ -91,3 +91,5 @@ Four fixed installed-skill/ordinary-search pairs both answered4/4 correctly. Ski
 ## Development candidate (not part of v2.6.0 release)
 
 This branch experiments with `--search-term TEXT --line-numbers` for bounded literal windows and citation-ready lines. It aims to avoid broad structural extraction for questions with known anchors. Adoption requires new same-task comparisons against ordinary search, including all model/skill/follow-up costs. See references/contract.md.
+
+The dev reader accepts `--search-context 0..12` to request a smaller explicit literal window. Defaults and traceback/source/output safety checks stay unchanged. This option does not establish total-token savings; the revised discovery scope targets dispersed evidence rather than single-location searches.
