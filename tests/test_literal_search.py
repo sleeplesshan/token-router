@@ -62,7 +62,7 @@ class LiteralSearchTests(unittest.TestCase):
 class SelectedTracebackTests(unittest.TestCase):
     def test_selected_timestamped_traceback_completes_without_unrelated_block(self):
         lines=['padding\n']*300
-        lines[100]='2026-10-12T01:00:00Z ERROR: worker\n'
+        lines[100]='2026-10-12T01:00:00Z \x1b[31mERROR\x1b[0m: worker\n'
         lines[103]='2026-10-12T01:00:00Z Traceback (most recent call last):\n'
         for i in range(104,130):lines[i]='2026-10-12T01:00:00Z   File x, line 2\n'
         lines[130]='2026-10-12T01:00:00Z \x1b[31mValueError\x1b[0m: failed\n'

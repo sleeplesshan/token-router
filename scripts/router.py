@@ -1000,15 +1000,16 @@ def literal_search_packet(args, guard):
     for n,line in enumerate(guard.lines(),1):
         total=n;source_chars+=len(line)
         line_costs.append(len(line)+(len(str(n))+2 if args.line_numbers else 0))
+        ansi_visible=re.sub(r'\x1b\[[0-9;]*m','',line) if args.mode=='error_log' else line
         if args.mode=='error_log':
-            clean=re.sub(r'\x1b\[[0-9;]*m','',line)
+            clean=ansi_visible
             clean=re.sub(r'^\d{4}-\d{2}-\d{2}T\S+\s+','',clean).strip()
             if clean=='Traceback (most recent call last):':trace_open=n
             elif trace_open is not None:
                 if n-trace_open>64:trace_open=None
                 elif re.match(r'^[A-Za-z_][\w.]*(?:Error|Exception|Interrupt|Exit|Iteration)(?::|$)',clean):
                     tracebacks.append([trace_open,n]);trace_open=None
-        hits=[term for term in terms if term in line]
+        hits=[term for term in terms if term in line or term in ansi_visible]
         for term in hits:counts[term]+=1
         if hits:
             start,end=max(1,n-context),n+context
