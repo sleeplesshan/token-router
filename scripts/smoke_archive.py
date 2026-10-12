@@ -39,6 +39,8 @@ def main(archive):
         bounded=run(router,'heavy_code',large,'--query','lookup','--return-context','bounded',cwd=root,env=env)
         target=run(router,'heavy_code',large,'--query','lookup','--return-target','lookup',cwd=root,env=env)
         assert 'return stored_value' not in base and 'return stored_value' in bounded and target==bounded
+        complete=run(router,'heavy_code',large,'--symbol','lookup','--line-numbers','--compact-status',cwd=root,env=env)
+        assert 'return stored_value' in complete and 'documentation' in complete and 'neutral padding' not in complete
         # The archive must ship the numbered literal reader and explicit scope.
         incident=root/'literal incident.log'
         incident.write_text('neutral padding\n'*100+'ERROR: worker\nTraceback (most recent call last):\n  File "worker.py", line 7\nValueError: failed\n'+'neutral padding\n'*100,encoding='utf-8')

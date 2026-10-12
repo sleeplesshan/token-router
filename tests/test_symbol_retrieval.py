@@ -33,6 +33,13 @@ class SymbolRetrievalTests(unittest.TestCase):
             code,out,status=self.call(text,opts)
             self.assertEqual((code,out),(2,''));self.assertFalse(status['model_called'])
 
+    def test_ambiguity_diagnostics_are_bounded(self):
+        code,out,status=self.call('def f(): pass\n'*10000,['--symbol','f','--compact-status'])
+        self.assertEqual((code,out),(2,''))
+        self.assertEqual(status['symbol_occurrences']['f'],10000)
+        self.assertEqual(len(status['symbol_ranges']['f']),12)
+        self.assertTrue(status['symbol_ranges_truncated'])
+
     def test_complete_aggregate_cap_never_truncates_definition(self):
         text='def f():\n'+'    value = 1\n'*40+'    return value\n'
         with patch.object(r,'MAX_OUTPUT_CHARS',100):

@@ -66,7 +66,7 @@ Managed updates under .agents/skills or .codex/skills put backups under the sibl
 
 `--search-context N` (0-12) overrides neighbors only for `--search-term`; other paths reject it. Omitted values preserve code12/log4. Width0 retains every matching line, not ordinary neighbors; selected bounded tracebacks can still add lines. An ERROR before an unselected traceback does not select it at width0. This is explicit scope control, not a claim of semantic completeness. Use wider context for branch conditions or multiline expressions and include recovery costs in comparisons.
 
-Automatic discovery is scoped to dispersed error-log context; code and one-location work should bypass loading. This metadata guideline is not a programmable host interception or a future total-token guarantee. Candidate evaluation failed promotion; stable2.6.0 is unchanged.
+Discovery is scoped to dispersed error-log context or branching/order audits requiring complete Python definitions whose exact qualified names are already known. Literal-only lookups, one already-known line range and sufficient visible evidence should bypass loading. This metadata guideline is not a programmable host interception or a future total-token guarantee. The prior log-only gate failed promotion; the complete-callable candidate needs a separate actual-path evaluation. Stable2.6.0 is unchanged.
 
 ## Explicit complete Python callables (2.7.0 candidate)
 

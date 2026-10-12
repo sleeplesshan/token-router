@@ -1037,7 +1037,9 @@ def symbol_packet(args, guard):
     missing=[name for name,spans in found.items() if not spans]
     ambiguous=[name for name,spans in found.items() if len(spans)>1]
     base.update(scan_complete=True,missing_symbols=missing,ambiguous_symbols=ambiguous,
-                symbol_ranges={name:[[s.start,s.end] for s in spans] for name,spans in found.items()})
+                symbol_ranges={name:[[s.start,s.end] for s in spans[:12]] for name,spans in found.items()},
+                symbol_occurrences={name:len(spans) for name,spans in found.items()},
+                symbol_ranges_truncated=any(len(spans)>12 for spans in found.values()))
     if missing or ambiguous:
         return finalize_packet(args,guard,None,{**base,'reason_codes':['symbol_missing_or_ambiguous']},2)
     merged=[]
@@ -1194,7 +1196,8 @@ def finalize_packet(args, guard, packet, status, code=0):
         keep={'schema_version','status','retrieval_mode','reason_codes','next_action','model_called','model_failed',
               'source_consistency','final_output_capped','selection_truncated','full_source_returned',
               'output_lines','output_chars','semantic_sufficiency','missing_search_terms',
-              'absent_required','lost_required','missing_symbols','ambiguous_symbols','detail'}
+              'absent_required','lost_required','missing_symbols','ambiguous_symbols','detail',
+              'suggested_ranges','symbol_ranges','symbol_occurrences','symbol_ranges_truncated'}
         compact={k:v for k,v in compact.items() if k in keep and v is not None and v != []}
     print('[token-router status] '+json.dumps(compact),file=sys.stderr)
     if packet is not None and code==0:
