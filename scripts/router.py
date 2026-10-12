@@ -207,7 +207,7 @@ def ranked_candidates(line_factory, mode: str, query_terms: list[str], max_chars
     """
     source_chars = 0
     required_patterns = [(t,required_pattern(t)) for t in required_terms]
-    source_required = {t:{'count':0,'witness_lines':[]} for t in required_terms}
+    source_required = {t:{'count':0,'witness_lines':[],'witnesses_truncated':False} for t in required_terms}
     patterns = [term_pattern(term) for term in query_terms]
     match_terms = compile_matcher(query_terms)
     counts = Counter()
@@ -225,6 +225,8 @@ def ranked_candidates(line_factory, mode: str, query_terms: list[str], max_chars
                 source_required[term]['count'] += count
                 if len(source_required[term]['witness_lines']) < 64:
                     source_required[term]['witness_lines'].append(n)
+                else:
+                    source_required[term]['witnesses_truncated']=True
         if mode == "error_log" and re.search(r"_{3,}\s+\S.*\s+_{3,}", line):
             traceback_headers.append(n-1)
         hits = match_terms(line)
@@ -946,7 +948,7 @@ def packet_from_guard(guard, targets, text=None):
     raw = tuple(''.join(c) for c in chunks)
     rendered=[]
     for target,content in zip(targets,raw):
-        rendered.extend([f"#### Target Location Reason: {target['reason']}",
+        rendered.extend([f"#### Target Location Reason: {target['reason'][:256]}",
             f"--- [RAW CONTENT FROM LINE {target['start_line']} TO {target['end_line']}] ---",
             content,'--- [END OF SLICE] ---',''])
     return Packet(spans,raw,'\n'.join(rendered).rstrip()+'\n' if rendered else '')
@@ -967,7 +969,10 @@ def finalize_packet(args, guard, packet, status, code=0):
     """All paths emit only after source, output and sidecar checks succeed."""
     status={'schema_version':1,'model_called':False,'model_failed':False,
             'selection_truncated':False,'final_output_capped':False,
-            'full_source_returned':False,'reason_codes':[],**status}
+            'full_source_returned':False,'reason_codes':[],
+            'packet_query_anchor':'unknown','absent_required':[],'lost_required':[],
+            'next_action':None,**status}
+    written_report=None
     try:
         guard.check()
         status['source_consistency']='stat_unchanged'
@@ -994,10 +999,19 @@ def finalize_packet(args, guard, packet, status, code=0):
             try:
                 guard.check()
                 os.replace(tmp,dest)
+                written_report=dest
             finally:
                 tmp.unlink(missing_ok=True)
         guard.check()
     except SourceChanged:
+        # A source change after atomic report replacement invalidates that report.
+        # Earlier write failures must not remove a pre-existing report.
+        if written_report is not None:
+            try:
+                written_report.unlink(missing_ok=True)
+                status['report_invalidated']=True
+            except OSError:
+                status['report_invalidation_failed']=True
         packet=None;code=1
         status.update(status='error',reason_codes=['source_changed'],source_consistency='changed',
                       output_lines=0,output_chars=0,full_source_returned=False,coverage_guaranteed=False)
@@ -1044,19 +1058,20 @@ def main(argv: list[str]) -> int:
             if len(probe)<=AUTO_SMALL_CHARS:
                 raw_lines=list(io.StringIO(probe,newline=''))
                 total=len(raw_lines)
-                source_required={t:{'count':sum(len(list(required_pattern(t).finditer(line))) for line in raw_lines),'witness_lines':[]} for t in args.require_term}
+                source_required={t:{'count':sum(len(list(required_pattern(t).finditer(line))) for line in raw_lines),'witness_lines':[],'witnesses_truncated':False} for t in args.require_term}
                 matched=tuple(t for t in terms if query_matches(probe,[t]))
                 evidence=assess_packet_evidence(terms,(),matched,(probe,),args.require_term,source_required)
                 packet=packet_from_guard(guard,[dict(start_line=1,end_line=total,reason=full_reason)],probe)
                 print('[token-router usage] '+json.dumps(dict(input_tokens=0,output_tokens=0,cached_input_tokens=0)),file=sys.stderr)
-                return finalize_packet(args,guard,packet,{**status,'status':'auto_full','checks':asdict(evidence),
+                return finalize_packet(args,guard,packet,{**status,'status':'auto_full','checks':{'query_anchor':'unknown','core_scan_skipped':True,**asdict(evidence)},
+                    'source_required':source_required,
                     'packet_query_anchor':evidence.packet_query_anchor,'absent_required':list(evidence.absent_required),
                     'lost_required':[],'reason_codes':['small_source'],'full_source_returned':True,
                     'coverage_guaranteed':True,'scan_complete':True})
         if new and args.read_scope=='whole':
             total=0; source_chars=0; chunks=[]; hits=set()
             matcher=compile_matcher(terms)
-            source_required={t:{'count':0,'witness_lines':[]} for t in args.require_term}
+            source_required={t:{'count':0,'witness_lines':[],'witnesses_truncated':False} for t in args.require_term}
             for total,line in enumerate(guard.lines(),1):
                 source_chars+=len(line);hits.update(matcher(line))
                 if source_chars<=MAX_OUTPUT_CHARS:
@@ -1066,13 +1081,18 @@ def main(argv: list[str]) -> int:
             matched=tuple(t for i,t in enumerate(terms) if i in hits)
             raw=''.join(chunks)
             if source_chars>MAX_OUTPUT_CHARS:
+                evidence=assess_packet_evidence(terms,(),matched,(),args.require_term,source_required)
                 return finalize_packet(args,guard,None,{**status,'status':'needs_targeted_read',
                     'reason_codes':['output_budget_exceeded'],'final_output_capped':True,
+                    'checks':asdict(evidence),'source_required':source_required,
+                    'packet_query_anchor':evidence.packet_query_anchor,
+                    'absent_required':list(evidence.absent_required),'lost_required':list(evidence.lost_required),
                     'next_action':'narrow_query','scan_complete':True},2)
             packet=packet_from_guard(guard,[dict(start_line=1,end_line=total,reason=full_reason)],raw)
             evidence=assess_packet_evidence(terms,(),matched,packet.raw_slices,args.require_term,source_required)
             print('[token-router usage] '+json.dumps(dict(input_tokens=0,output_tokens=0,cached_input_tokens=0)),file=sys.stderr)
-            return finalize_packet(args,guard,packet,{**status,'status':'auto_full','checks':asdict(evidence),
+            return finalize_packet(args,guard,packet,{**status,'status':'auto_full','checks':{'query_anchor':'unknown','core_scan_skipped':True,**asdict(evidence)},
+                    'source_required':source_required,
                 'packet_query_anchor':evidence.packet_query_anchor,'absent_required':list(evidence.absent_required),
                 'lost_required':[],'reason_codes':['whole_scope'],'full_source_returned':True,
                 'coverage_guaranteed':True,'scan_complete':True})
@@ -1126,7 +1146,8 @@ def main(argv: list[str]) -> int:
                     for n in checks['source_required'][term]['witness_lines']:
                         witnesses.append([max(1,n-OUTPUT_CONTEXT_LINES),min(total,n+OUTPUT_CONTEXT_LINES)])
                 status.update(status=action,source_required=checks['source_required'],suggested_ranges=witnesses,
-                    suggestions_truncated=len(witnesses)>12 or any(v['count']>len(v['witness_lines']) for v in checks['source_required'].values()),
+                    selection_truncated=truncated,final_output_capped=len(packet.rendered)>MAX_OUTPUT_CHARS,
+                    suggestions_truncated=len(witnesses)>12 or any(v['witnesses_truncated'] for v in checks['source_required'].values()),
                     search_terms=checks['unmatched_terms'][:12],scan_complete=True)
                 return finalize_packet(args,guard,None,status,2)
         failure=None
