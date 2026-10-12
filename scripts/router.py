@@ -995,7 +995,7 @@ def numbered_packet(packet):
 def literal_search_packet(args, guard):
     """One metadata scan and one selected read; no AST, ranking, tail or model."""
     terms=args.search_term
-    counts={term:0 for term in terms};spans=[];source_chars=0;total=0;line_costs=[];tracebacks=[];trace_open=None
+    counts={term:0 for term in terms};spans=[];source_chars=0;total=0;line_costs=[];tracebacks=[];trace_open=None;matched_lines=[]
     context=4 if args.mode=='error_log' else 12
     for n,line in enumerate(guard.lines(),1):
         total=n;source_chars+=len(line)
@@ -1012,10 +1012,11 @@ def literal_search_packet(args, guard):
         hits=[term for term in terms if term in line or term in ansi_visible]
         for term in hits:counts[term]+=1
         if hits:
+            matched_lines.append(n)
             start,end=max(1,n-context),n+context
             if spans and start<=spans[-1][1]+1:spans[-1][1]=max(spans[-1][1],end)
             else:spans.append([start,end])
-    completed=[tb for tb in tracebacks if any(a<=tb[1] and b>=tb[0] for a,b in spans)]
+    completed=[tb for tb in tracebacks if any(a<=tb[0]<=b for a,b in spans) or any(tb[0]<=n<=tb[1] for n in matched_lines)]
     merged=[]
     for a,b in sorted(spans+completed):
         b=min(b,total)
