@@ -22,7 +22,7 @@ from typing import Any
 # Allow both direct CLI execution and file-based test imports.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from query_matcher import compile_matcher
-from evidence_checks import assess_query_evidence, complete_python_statements, required_pattern, assess_packet_evidence
+from evidence_checks import assess_query_evidence, complete_python_statements, required_pattern, assess_packet_evidence, bounded_return_supplement, limit_return_target
 from routing_policy import Span, ScanFacts, Packet, RouteDecision, decide_packet
 from source_guard import SourceGuard, SourceChanged
 
@@ -129,10 +129,11 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument('--require-term', action='append', default=[])
     parser.add_argument('--read-scope', choices=('focused','whole'), default=None)
     parser.add_argument('--report-json')
+    parser.add_argument('--return-target',help='Experimental: explicit single callable return lookup; unresolved targets preserve M.')
     args = parser.parse_args(argv[1:])
-    explicit_policy = args.policy_version is not None or args.read_scope is not None or bool(args.require_term)
+    explicit_policy = args.policy_version is not None or args.read_scope is not None or bool(args.require_term) or args.return_target is not None
     if explicit_policy and (args.deterministic or args.force_model or args.optimize != 'tokens'):
-        parser.error('policy-version, require-term and read-scope require automatic tokens mode')
+        parser.error('policy-version, require-term, read-scope and return-target require automatic tokens mode')
     args.policy_version = args.policy_version or 'v2.4'
     args.read_scope = args.read_scope or 'focused'
     if args.policy_version == 'v2.4' and (args.require_term or args.read_scope != 'focused'):
@@ -1020,6 +1021,8 @@ def finalize_packet(args, guard, packet, status, code=0):
         status.update(status='error',reason_codes=['report_or_finalization_error'],reason=str(exc),
                       output_lines=0,output_chars=0,full_source_returned=False,coverage_guaranteed=False)
     compact=dict(status)
+    compact.pop('return_target',None)
+    compact.pop('return_supplement',None)  # Experimental detail stays in the sidecar.
     if 'suggested_ranges' in compact:
         compact['suggested_ranges']=compact['suggested_ranges'][:12]
     if 'source_required' in compact:
@@ -1113,9 +1116,12 @@ def main(argv: list[str]) -> int:
         elif auto:
             targets=expand_candidate_context(targets_from_numbered_content(candidate,total,
                       'deterministic candidate evidence',mode=args.mode,apply_cap=False),total)
+            return_spans=[]; syntax_text=None; return_definitions=[]
             checks['boundary']={'syntax':'unknown','reason':'not_python_or_size_limit'}
             if not (new and args.read_scope=='whole') and args.mode=='heavy_code' and path.suffix=='.py' and guard.stamp[2]<=1_000_000:
-                targets,checks['boundary']=complete_python_statements(guard.read_text(),targets)
+                syntax_text=guard.read_text()
+                targets,checks['boundary']=complete_python_statements(syntax_text,targets,return_spans=return_spans,
+                    **({'return_definitions':return_definitions} if args.return_target is not None else {}))
             packet=packet_from_guard(guard,targets)
             evidence=assess_packet_evidence(terms,checks['matched_terms'],scan.source_terms,
                         packet.raw_slices,args.require_term,checks['source_required'])
@@ -1131,6 +1137,38 @@ def main(argv: list[str]) -> int:
                 if action=='auto_candidates' and checks['query_anchor']=='missing':
                     action='auto_full' if scan.source_chars<=AUTO_FULL_CHARS else 'needs_targeted_read'
                 decision=RouteDecision(action,(), 'search_query_terms' if checks['query_anchor']=='missing' else 'narrow_query')
+            if action=='auto_candidates' and return_spans and len(packet.rendered)<=MAX_OUTPUT_CHARS:
+                def accepts_return_patch(trial):
+                    if len(trial.rendered)>MAX_OUTPUT_CHARS:
+                        return False
+                    if new:
+                        trial_evidence=assess_packet_evidence(terms,checks['matched_terms'],scan.source_terms,
+                            trial.raw_slices,args.require_term,checks['source_required'])
+                        trial_decision=decide_packet(checks=trial_evidence,required=args.require_term,
+                            source_chars=scan.source_chars,full_chars=full_chars,packet_chars=len(trial.rendered),
+                            has_candidates=bool(trial.ranges),small_limit=AUTO_SMALL_CHARS,full_limit=AUTO_FULL_CHARS,
+                            candidate_limit=MAX_PROMPT_CHARS,output_limit=MAX_OUTPUT_CHARS)
+                        return trial_decision.action==action
+                    return token_first_strategy(scan.source_chars,full_chars,len(trial.rendered),bool(trial.ranges))==action
+                guard.check()
+                base_targets,base_packet=targets,packet
+                approved_spans=[]
+                targets,packet,patch_report=bounded_return_supplement(syntax_text,targets,packet,return_spans,
+                    lambda spans:packet_from_guard(guard,spans,syntax_text),accepts_return_patch,
+                    **({'accepted_spans':approved_spans} if args.return_target is not None else {}))
+                if args.return_target is not None:
+                    targets,packet,target_report=limit_return_target(args.return_target,return_definitions,
+                        base_targets,base_packet,targets,packet,approved_spans,
+                        lambda spans:packet_from_guard(guard,spans,syntax_text),accepts_return_patch)
+                    status['return_target']=target_report
+                guard.check()  # Cancellation must never turn source mutation into success.
+                status['return_supplement']=patch_report
+                if patch_report['applied']:
+                    evidence=assess_packet_evidence(terms,checks['matched_terms'],scan.source_terms,
+                        packet.raw_slices,args.require_term,checks['source_required'])
+                    checks.update(asdict(evidence))
+            if args.return_target is not None and 'return_target' not in status:
+                status['return_target']=dict(applied=False,reason='path_not_eligible')
             checks.update(packet_within_budget=len(packet.rendered)<=MAX_PROMPT_CHARS,
                           reduction_satisfied=len(packet.rendered)<=full_chars*.85)
             print('[token-router decision] '+json.dumps(dict(action=action,checks={k:v for k,v in checks.items() if k != 'source_required'},objective='tokens',
