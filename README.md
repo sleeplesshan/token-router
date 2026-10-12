@@ -95,3 +95,5 @@ This branch experiments with `--search-term TEXT --line-numbers` for bounded lit
 The dev reader accepts `--search-context 0..12` to request a smaller explicit literal window. Defaults and traceback/source/output safety checks stay unchanged. This option does not establish total-token savings; the revised discovery scope targets dispersed evidence rather than single-location searches.
 
 The dual-brain review and new same-task measurements are in [docs/token-value-review/report.ko.md](docs/token-value-review/report.ko.md). Completed comparisons show conditional savings; one unknown-usage timeout and the attrs cost increase prevent a universal savings claim or stable promotion.
+
+The unreleased2.7.0 automatic log-only gate and streamed timeout accounting were rechecked in [activation-gate review](docs/activation-gate-review/report.ko.md). Excluded tasks had no observed skill/reader invocation, but the complete pilot used25.9% more tokens. Release/global promotion is blocked; stable2.6.0 remains recommended. No general token savings claim is made.

@@ -1,0 +1,529 @@
+{
+  "package_version": "2.7.0",
+  "commit": "75b74384145180cf2f0d7a70512e0980f10aba09",
+  "policy_version": "v2.4",
+  "model": "gpt-6.1-sol",
+  "reasoning": "medium",
+  "tasks": [
+    {
+      "id": "cpython_subprocess_timeout",
+      "group": "CPython",
+      "mode": "heavy_code",
+      "file": "subprocess.py",
+      "query": "Inspect subprocess.run timeout handling, Windows versus POSIX child cleanup, and return-code checks. Answer all six numbered questions with exact code identifiers and original source line evidence.",
+      "facts": [
+        {
+          "id": "kill",
+          "question": "Which process method is called immediately after run catches TimeoutExpired? Give its fully qualified expression without arguments. Answer only the requested code identifier or literal.",
+          "accepted_answers": [
+            "process.kill"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 557,
+              "end_line": 558
+            }
+          ]
+        },
+        {
+          "id": "windows",
+          "question": "On Windows after killing the child, which method supplies exc.stdout and exc.stderr? Give its fully qualified expression without arguments. Answer only the requested code identifier or literal.",
+          "accepted_answers": [
+            "process.communicate"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 559,
+              "end_line": 565
+            }
+          ]
+        },
+        {
+          "id": "posix",
+          "question": "In the POSIX timeout branch, which method explicitly reaps the killed child? Give its fully qualified expression without arguments. Answer only the requested code identifier or literal.",
+          "accepted_answers": [
+            "process.wait"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 566,
+              "end_line": 569
+            }
+          ]
+        },
+        {
+          "id": "timeout_raise",
+          "question": "Which existing exception type is re-raised after timeout cleanup? Answer only the requested code identifier or literal.",
+          "accepted_answers": [
+            "TimeoutExpired"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 557,
+              "end_line": 570
+            }
+          ]
+        },
+        {
+          "id": "other_exception",
+          "question": "For a non-timeout exception, which context-manager method does the comment say waits for the child? Answer only the requested code identifier or literal.",
+          "accepted_answers": [
+            "__exit__"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 571,
+              "end_line": 574
+            }
+          ]
+        },
+        {
+          "id": "check",
+          "question": "When check is true and the polled return code is nonzero, which exception type is raised? Answer only the requested code identifier or literal.",
+          "accepted_answers": [
+            "CalledProcessError"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 575,
+              "end_line": 578
+            }
+          ]
+        }
+      ],
+      "source_sha256": "e84782f0d4a19f6001624f21b7d5c20c610e8e27113e2fd9c0482eb1dcd760cd",
+      "source_bytes": 89096,
+      "seen_regression": true,
+      "split": "regression",
+      "gate_expected": "bypass"
+    },
+    {
+      "id": "cpython_ubsan_failure",
+      "group": "CPython",
+      "mode": "error_log",
+      "file": "cpython-ubsan.log",
+      "query": "Inspect the failed multiprocessing test, traceback, test-file summary, and separate UBSan reports. Answer all six questions using exact literals and original log line evidence; do not infer causation.",
+      "facts": [
+        {
+          "id": "test",
+          "question": "Give the fully qualified test identifier inside parentheses on the ERROR line. Answer only the requested identifier, string, or number.",
+          "accepted_answers": [
+            "test.test_multiprocessing_spawn.test_processes.WithProcessesTestProcess.test_interrupt"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 3179,
+              "end_line": 3179
+            }
+          ]
+        },
+        {
+          "id": "exception",
+          "question": "Which exception class terminates that test traceback? Answer only the requested identifier, string, or number.",
+          "accepted_answers": [
+            "RuntimeError"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 3204,
+              "end_line": 3204
+            }
+          ]
+        },
+        {
+          "id": "raise_line",
+          "question": "At what numeric line in Lib/test/_test_multiprocessing.py does handler raise that exception? Answer only the requested identifier, string, or number.",
+          "accepted_answers": [
+            "628"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 3202,
+              "end_line": 3203
+            }
+          ]
+        },
+        {
+          "id": "test_files",
+          "question": "What exact run ratio appears in the final Total test files line? Give only the value after run=. Answer only the requested identifier, string, or number.",
+          "accepted_answers": [
+            "548/559"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 3657,
+              "end_line": 3657
+            }
+          ]
+        },
+        {
+          "id": "alignment",
+          "question": "What exact file:line:column prefixes the misaligned int load runtime error? Answer only the requested identifier, string, or number.",
+          "accepted_answers": [
+            "conftest.c:179:9"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 3673,
+              "end_line": 3673
+            }
+          ]
+        },
+        {
+          "id": "segv_top",
+          "question": "What function name is in frame #0 of the separate SEGV sanitizer report? Answer only the requested identifier, string, or number.",
+          "accepted_answers": [
+            "pthread_kill"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 3680,
+              "end_line": 3682
+            }
+          ]
+        }
+      ],
+      "source_sha256": "d23199487e0009822f4d3a33284fb9a42da018155164c308e96cad456611d606",
+      "source_bytes": 551037,
+      "seen_regression": true,
+      "split": "regression",
+      "gate_expected": "eligible"
+    },
+    {
+      "id": "scipy_distributed_failures",
+      "group": "SciPy",
+      "mode": "error_log",
+      "file": "scipy-fast.log",
+      "query": "Inspect actual pytest runtime metadata, final failure totals, first fitpack_F traceback, and the distinct legacy STFT tuple failure. Answer all six questions using exact literals and original log line evidence; do not rely on the CI job label.",
+      "facts": [
+        {
+          "id": "python",
+          "question": "What Python version does the pytest platform line report? Answer only the requested identifier, string, or number.",
+          "accepted_answers": [
+            "3.14.2"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 2421,
+              "end_line": 2421
+            }
+          ]
+        },
+        {
+          "id": "failed",
+          "question": "How many tests failed in the final summary? Give only the integer. Answer only the requested identifier, string, or number.",
+          "accepted_answers": [
+            "48"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ]
+        },
+        {
+          "id": "passed",
+          "question": "How many tests passed in the final summary? Give only the integer without commas. Answer only the requested identifier, string, or number.",
+          "accepted_answers": [
+            "85328"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ]
+        },
+        {
+          "id": "helper",
+          "question": "What assertion helper is called at the failing line in the first TestMakeSplrep.test_fitpack_F case? Give its name without arguments. Answer only the requested identifier, string, or number.",
+          "accepted_answers": [
+            "xp_assert_close_no_0d"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 3854,
+              "end_line": 3855
+            }
+          ]
+        },
+        {
+          "id": "source_line",
+          "question": "At what numeric line of test_bsplines.py is that first fitpack_F AttributeError reported? Answer only the requested identifier, string, or number.",
+          "accepted_answers": [
+            "5134"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 3870,
+              "end_line": 3870
+            }
+          ]
+        },
+        {
+          "id": "tuple_test",
+          "question": "Which legacy STFT test has the tuple object has no attribute shape error in the final summary? Give only the function name. Answer only the requested identifier, string, or number.",
+          "accepted_answers": [
+            "test_tutorial_stft_legacy_stft"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 6237,
+              "end_line": 6237
+            }
+          ]
+        }
+      ],
+      "source_sha256": "23cc02f4ecff02141897d670bf831f5be62702b33c2a48e6e5c2b717fd783ca3",
+      "source_bytes": 638795,
+      "seen_regression": true,
+      "split": "regression",
+      "gate_expected": "eligible"
+    },
+    {
+      "id": "attrs_initialization_pipeline",
+      "group": "attrs",
+      "mode": "heavy_code",
+      "file": "attrs_make.py",
+      "query": "상속 필드 수집부터 생성된 초기화 코드까지 추적하세요: _collect_base_attrs의 MRO와 중복 처리, _transform_attrs의 auto_attribs 주석 및 기본값 순서 검사, _frozen_setattrs의 예외, 생성된 __init__의 검증기와 __attrs_post_init__ 실행 순서를 확인하세요.",
+      "facts": [
+        {
+          "id": "mro",
+          "question": "정상 상속 필드 수집기가 순회하는 MRO 표현식은? 요청한 코드 표현식/이름만 반환하세요.",
+          "accepted_answers": [
+            "reversed(cls.__mro__[1:-1])"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 330,
+              "end_line": 330
+            }
+          ]
+        },
+        {
+          "id": "skip",
+          "question": "정상 수집기가 상속 필드를 건너뛰는 if 조건식은? 요청한 코드 표현식/이름만 반환하세요.",
+          "accepted_answers": [
+            "a.inherited or a.name in taken_attr_names"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 332,
+              "end_line": 332
+            }
+          ]
+        },
+        {
+          "id": "unannotated",
+          "question": "auto_attribs에서 주석 없는 attr.ib를 발견하면 어떤 예외를 발생시키는가? 요청한 코드 표현식/이름만 반환하세요.",
+          "accepted_answers": [
+            "UnannotatedAttributeError"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 424,
+              "end_line": 424
+            }
+          ]
+        },
+        {
+          "id": "ordering",
+          "question": "기본값 필드 뒤에 필수 필드가 오면 발생시키는 예외 이름은? 요청한 코드 표현식/이름만 반환하세요.",
+          "accepted_answers": [
+            "ValueError"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 489,
+              "end_line": 489
+            }
+          ]
+        },
+        {
+          "id": "frozen",
+          "question": "예외 객체 특례 외에 frozen 속성 대입을 거부하는 예외 이름은? 요청한 코드 표현식/이름만 반환하세요.",
+          "accepted_answers": [
+            "FrozenInstanceError"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 575,
+              "end_line": 575
+            }
+          ]
+        },
+        {
+          "id": "validation",
+          "question": "생성된 __init__에서 검증기 실행을 허용하는 if 조건식은? 요청한 코드 표현식/이름만 반환하세요.",
+          "accepted_answers": [
+            "_config._run_validators is True"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 2388,
+              "end_line": 2388
+            }
+          ]
+        },
+        {
+          "id": "post_init",
+          "question": "생성된 __init__에서 검증기 다음으로 호출하는 post-init 표현식은? 요청한 코드 표현식/이름만 반환하세요.",
+          "accepted_answers": [
+            "self.__attrs_post_init__()"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 2397,
+              "end_line": 2397
+            }
+          ]
+        }
+      ],
+      "source_sha256": "db3b8d7a08c7ed547459e6828e906ae4044e234d0144c189595bdf56cff61a91",
+      "source_bytes": 108039,
+      "seen_regression": true,
+      "split": "regression",
+      "gate_expected": "bypass"
+    },
+    {
+      "id": "pandas_duplicate_branches",
+      "group": "pandas",
+      "mode": "heavy_code",
+      "file": "pandas_frame.py",
+      "split": "fresh_locked",
+      "gate_expected": "bypass",
+      "query": "DataFrame.drop_duplicates와 duplicated의 서로 다른 분기를 원문에서 확인하세요. 빈 입력·중복 제거·인덱스 재설정·inplace·없는 열의 처리를 식별하세요.",
+      "facts": [
+        {
+          "id": "empty",
+          "question": "drop_duplicates의 빈 프레임 분기에서 반환하는 호출 표현식은? 표현식만 답하세요.",
+          "accepted_answers": [
+            "self.copy(deep=None)"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 6813,
+              "end_line": 6813
+            }
+          ]
+        },
+        {
+          "id": "mask",
+          "question": "drop_duplicates에서 result를 만드는 전체 우변 표현식은?",
+          "accepted_answers": [
+            "self[-self.duplicated(subset, keep=keep)]"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 6818,
+              "end_line": 6818
+            }
+          ]
+        },
+        {
+          "id": "index",
+          "question": "ignore_index 분기에서 새 인덱스를 만드는 함수 이름은?",
+          "accepted_answers": [
+            "default_index"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 6820,
+              "end_line": 6820
+            }
+          ]
+        },
+        {
+          "id": "inplace",
+          "question": "drop_duplicates의 inplace 분기에서 호출하는 self의 메서드 이름은?",
+          "accepted_answers": [
+            "self._update_inplace",
+            "_update_inplace"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 6823,
+              "end_line": 6823
+            }
+          ]
+        },
+        {
+          "id": "missing",
+          "question": "duplicated에서 subset에 없는 열이 있으면 어떤 예외를 발생시키나요?",
+          "accepted_answers": [
+            "KeyError"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 6950,
+              "end_line": 6950
+            }
+          ]
+        }
+      ],
+      "provenance": "https://github.com/pandas-dev/pandas/blob/0691c5cf90477d3503834d983f69350f250a6ff7/pandas/core/frame.py",
+      "source_sha256": "9b813159606b62af03bfe76a7089da282d2d6091f308cf2f4d90dd0661a01105",
+      "source_bytes": 447104
+    },
+    {
+      "id": "pytest_single_failure",
+      "group": "pytest",
+      "mode": "error_log",
+      "file": "pytest-ci.log",
+      "split": "fresh_locked",
+      "gate_expected": "bypass",
+      "query": "Inspect the one INTERNALERROR block and final process status in this pytest CI log. Identify only the requested literal facts; do not infer causation.",
+      "facts": [
+        {
+          "id": "warning",
+          "question": "What fully qualified exception/warning class ends the INTERNALERROR traceback?",
+          "accepted_answers": [
+            "pytest.PytestRemovedIn10Warning"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 644,
+              "end_line": 644
+            }
+          ]
+        },
+        {
+          "id": "cache",
+          "question": "What exact right-hand-side path is recommended in the cache_dir directive to keep the current location?",
+          "accepted_answers": [
+            "$TOX_ENV_DIR/.pytest_cache"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 647,
+              "end_line": 647
+            }
+          ]
+        },
+        {
+          "id": "exit",
+          "question": "What integer exit code is in the final Process completed line?",
+          "accepted_answers": [
+            "3"
+          ],
+          "evidence_ranges": [
+            {
+              "start_line": 652,
+              "end_line": 652
+            }
+          ]
+        }
+      ],
+      "provenance": "https://github.com/pytest-dev/pytest/actions/runs/38121360864/job/114416976257",
+      "source_commit": "2a9b98202ecc24099fee3c6adad05ee4d2b571ea",
+      "source_sha256": "ec9809b8e71692411ceea2c92081e34d2e68f493ae38f8b1eb7ecedcda2018bd",
+      "source_bytes": 60432
+    }
+  ],
+  "source_repeats": {
+    "regression": 2,
+    "fresh_locked": 1
+  },
+  "scope": "implicit activation gate; identical prompts; no forced reader; fresh tasks locked before calls"
+}

@@ -1,4 +1,4 @@
-# Release readiness — 2.6.0
+# Release readiness — stable2.6.0 / unreleased2.7.0 candidate
 
 Decision: **B — basic local product is ready for publication; optional cloud and automatic agent selection are not validated release guarantees.** Default is Python-only tokens, v2.4 policy, return-context off. Bounded return context and exact target filtering are explicit advanced local options. The reviewed release is published through PR #1. Machine-specific backup/install receipts are kept locally rather than embedded in the portable artifact.
 
@@ -52,3 +52,7 @@ Rollback with a verified installation backup, or a clean checkout/archive of pub
 Initial Windows CI exposed POSIX transport tests running against the deliberately disabled Windows cloud path, open-file deletion assumptions, and Windows stat ctime being creation time. The release reads native ChangeTime for Windows path/descriptor checks; API failure is closed. Mutation tests remain enabled, with Windows open-handle locking tested explicitly. Optional cloud transport cases are POSIX-only and Windows refusal is tested. [Microsoft FILE_BASIC_INFO](https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-file_basic_info). The process-tree timeout fixture allows three seconds for process startup; runtime timeout defaults are unchanged.
 
 A later Windows CI repeat exposed same-tick timestamp resolution in the restored-mtime fixture. The fixture now waits50ms before a write to exercise an actual changed timestamp. The product does not sleep or claim atomic snapshot detection: same-tick/restored-metadata limitations are explicitly documented in the contract and security guide.
+
+## Unreleased2.7.0 candidate — promotion blocked
+
+Local172 tests, manifest10/10, validator and archive-only literal/context/traceback lifecycle checks passed. Automatic pilot8CLI/189,233tokens had no timeout or unknown usage; candidate105,459 vs plain83,774tokens, both25/25 facts/citations, router0. No savings confirmed. Planned12 additional episodes, remote candidate CI, publication and global update were stopped. See docs/activation-gate-review/report.ko.md. Above2.6.0 CI/evaluation rows remain historical published-release evidence, not new candidate evidence.

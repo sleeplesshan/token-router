@@ -1,0 +1,951 @@
+{
+  "package_version": "2.7.0 untagged candidate",
+  "measured_commit": "75b74384145180cf2f0d7a70512e0980f10aba09",
+  "harness_capture_commit": "75b7438 (loaded at run start); later hardened by723eeb8",
+  "policy_version": "v2.4",
+  "model": "gpt-6.1-sol",
+  "reasoning": "medium",
+  "terminal": {
+    "status": "RuntimeError:pilot_no_token_savings",
+    "wall": 110.66944999992847,
+    "budget": {
+      "cli_calls": 8,
+      "known_tokens": 189233,
+      "retries": 0
+    },
+    "completed_episodes": 8
+  },
+  "totals": {
+    "plain": {
+      "tokens": 83774,
+      "wall": 61.68467091699131,
+      "factual": 25,
+      "strict": 25,
+      "facts": 25,
+      "skill_reads": 0,
+      "router_calls": 0,
+      "attempts": 4,
+      "source_commands": 6,
+      "median_episode_tokens": 21346.5
+    },
+    "candidate": {
+      "tokens": 105459,
+      "wall": 63.09079158282839,
+      "factual": 25,
+      "strict": 25,
+      "facts": 25,
+      "skill_reads": 0,
+      "router_calls": 0,
+      "attempts": 4,
+      "source_commands": 7,
+      "median_episode_tokens": 26406.0
+    }
+  },
+  "rows": [
+    {
+      "name": "attrs_initialization_pipeline-1-candidate",
+      "task": "attrs_initialization_pipeline",
+      "arm": "candidate",
+      "repeat": 1,
+      "factual": 7,
+      "strict": 7,
+      "facts": 7,
+      "total_tokens": 37107,
+      "wall": 15.885756625095382,
+      "attempt_count": 1,
+      "usage_complete": true,
+      "source_commands": 2,
+      "separate_skill_reads": 0,
+      "router_calls": 0,
+      "prompt_sha256": "9498b6d6151bca8f5650d740463c6f11f4c1b8398e9d311841db211be10c93e3",
+      "instructions_sha256": "d0a76fc490583189b6cea7bdac9033b49b612db15d32f71bd445409a376b94b9",
+      "scores": [
+        {
+          "id": "mro",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 330,
+              "end_line": 330
+            }
+          ]
+        },
+        {
+          "id": "skip",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 332,
+              "end_line": 333
+            }
+          ]
+        },
+        {
+          "id": "unannotated",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 422,
+              "end_line": 424
+            }
+          ]
+        },
+        {
+          "id": "ordering",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 487,
+              "end_line": 489
+            }
+          ]
+        },
+        {
+          "id": "frozen",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 575,
+              "end_line": 575
+            }
+          ]
+        },
+        {
+          "id": "validation",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 2388,
+              "end_line": 2388
+            }
+          ]
+        },
+        {
+          "id": "post_init",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 2396,
+              "end_line": 2397
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "attrs_initialization_pipeline-1-plain",
+      "task": "attrs_initialization_pipeline",
+      "arm": "plain",
+      "repeat": 1,
+      "factual": 7,
+      "strict": 7,
+      "facts": 7,
+      "total_tokens": 21029,
+      "wall": 14.157027208944783,
+      "attempt_count": 1,
+      "usage_complete": true,
+      "source_commands": 1,
+      "separate_skill_reads": 0,
+      "router_calls": 0,
+      "prompt_sha256": "9498b6d6151bca8f5650d740463c6f11f4c1b8398e9d311841db211be10c93e3",
+      "instructions_sha256": "d0a76fc490583189b6cea7bdac9033b49b612db15d32f71bd445409a376b94b9",
+      "scores": [
+        {
+          "id": "mro",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 330,
+              "end_line": 330
+            }
+          ]
+        },
+        {
+          "id": "skip",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 332,
+              "end_line": 333
+            }
+          ]
+        },
+        {
+          "id": "unannotated",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 422,
+              "end_line": 424
+            }
+          ]
+        },
+        {
+          "id": "ordering",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 487,
+              "end_line": 489
+            }
+          ]
+        },
+        {
+          "id": "frozen",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 575,
+              "end_line": 575
+            }
+          ]
+        },
+        {
+          "id": "validation",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 2388,
+              "end_line": 2392
+            }
+          ]
+        },
+        {
+          "id": "post_init",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 2396,
+              "end_line": 2397
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cpython_subprocess_timeout-1-candidate",
+      "task": "cpython_subprocess_timeout",
+      "arm": "candidate",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "total_tokens": 15540,
+      "wall": 14.364238832844421,
+      "attempt_count": 1,
+      "usage_complete": true,
+      "source_commands": 1,
+      "separate_skill_reads": 0,
+      "router_calls": 0,
+      "prompt_sha256": "cd26443d10076ac92be0b683c7e82ef59661367743c66f14507ea0b0bbc4ecf4",
+      "instructions_sha256": "d0a76fc490583189b6cea7bdac9033b49b612db15d32f71bd445409a376b94b9",
+      "scores": [
+        {
+          "id": "kill",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 557,
+              "end_line": 558
+            }
+          ]
+        },
+        {
+          "id": "windows",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 559,
+              "end_line": 565
+            }
+          ]
+        },
+        {
+          "id": "posix",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 566,
+              "end_line": 569
+            }
+          ]
+        },
+        {
+          "id": "timeout_raise",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 557,
+              "end_line": 557
+            },
+            {
+              "file": "subprocess.py",
+              "start_line": 570,
+              "end_line": 570
+            }
+          ]
+        },
+        {
+          "id": "other_exception",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 571,
+              "end_line": 573
+            }
+          ]
+        },
+        {
+          "id": "check",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 575,
+              "end_line": 578
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cpython_subprocess_timeout-1-plain",
+      "task": "cpython_subprocess_timeout",
+      "arm": "plain",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "total_tokens": 15781,
+      "wall": 10.072480874834582,
+      "attempt_count": 1,
+      "usage_complete": true,
+      "source_commands": 1,
+      "separate_skill_reads": 0,
+      "router_calls": 0,
+      "prompt_sha256": "cd26443d10076ac92be0b683c7e82ef59661367743c66f14507ea0b0bbc4ecf4",
+      "instructions_sha256": "d0a76fc490583189b6cea7bdac9033b49b612db15d32f71bd445409a376b94b9",
+      "scores": [
+        {
+          "id": "kill",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 557,
+              "end_line": 558
+            }
+          ]
+        },
+        {
+          "id": "windows",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 559,
+              "end_line": 565
+            }
+          ]
+        },
+        {
+          "id": "posix",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 566,
+              "end_line": 569
+            }
+          ]
+        },
+        {
+          "id": "timeout_raise",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 557,
+              "end_line": 557
+            },
+            {
+              "file": "subprocess.py",
+              "start_line": 570,
+              "end_line": 570
+            }
+          ]
+        },
+        {
+          "id": "other_exception",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 571,
+              "end_line": 574
+            }
+          ]
+        },
+        {
+          "id": "check",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 575,
+              "end_line": 578
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cpython_ubsan_failure-1-candidate",
+      "task": "cpython_ubsan_failure",
+      "arm": "candidate",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "total_tokens": 30647,
+      "wall": 15.536345415981486,
+      "attempt_count": 1,
+      "usage_complete": true,
+      "source_commands": 2,
+      "separate_skill_reads": 0,
+      "router_calls": 0,
+      "prompt_sha256": "a22e02001836d1d2a7d164f7fe346ef10664be9970155f58026563eae5a1ab80",
+      "instructions_sha256": "d0a76fc490583189b6cea7bdac9033b49b612db15d32f71bd445409a376b94b9",
+      "scores": [
+        {
+          "id": "test",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3179,
+              "end_line": 3179
+            }
+          ]
+        },
+        {
+          "id": "exception",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3204,
+              "end_line": 3204
+            }
+          ]
+        },
+        {
+          "id": "raise_line",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3202,
+              "end_line": 3203
+            }
+          ]
+        },
+        {
+          "id": "test_files",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3657,
+              "end_line": 3657
+            }
+          ]
+        },
+        {
+          "id": "alignment",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3673,
+              "end_line": 3673
+            }
+          ]
+        },
+        {
+          "id": "segv_top",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3680,
+              "end_line": 3682
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "cpython_ubsan_failure-1-plain",
+      "task": "cpython_ubsan_failure",
+      "arm": "plain",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "total_tokens": 25300,
+      "wall": 15.96288050012663,
+      "attempt_count": 1,
+      "usage_complete": true,
+      "source_commands": 2,
+      "separate_skill_reads": 0,
+      "router_calls": 0,
+      "prompt_sha256": "a22e02001836d1d2a7d164f7fe346ef10664be9970155f58026563eae5a1ab80",
+      "instructions_sha256": "d0a76fc490583189b6cea7bdac9033b49b612db15d32f71bd445409a376b94b9",
+      "scores": [
+        {
+          "id": "test",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3179,
+              "end_line": 3179
+            }
+          ]
+        },
+        {
+          "id": "exception",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3204,
+              "end_line": 3204
+            }
+          ]
+        },
+        {
+          "id": "raise_line",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3202,
+              "end_line": 3203
+            }
+          ]
+        },
+        {
+          "id": "test_files",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3657,
+              "end_line": 3657
+            }
+          ]
+        },
+        {
+          "id": "alignment",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3673,
+              "end_line": 3673
+            }
+          ]
+        },
+        {
+          "id": "segv_top",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3680,
+              "end_line": 3682
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scipy_distributed_failures-1-candidate",
+      "task": "scipy_distributed_failures",
+      "arm": "candidate",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "total_tokens": 22165,
+      "wall": 17.304450708907098,
+      "attempt_count": 1,
+      "usage_complete": true,
+      "source_commands": 2,
+      "separate_skill_reads": 0,
+      "router_calls": 0,
+      "prompt_sha256": "9a6a5729931828fd280eb91d69cf4685e4cde793d48684642e2a7316669d6431",
+      "instructions_sha256": "d0a76fc490583189b6cea7bdac9033b49b612db15d32f71bd445409a376b94b9",
+      "scores": [
+        {
+          "id": "python",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 2421,
+              "end_line": 2421
+            }
+          ]
+        },
+        {
+          "id": "failed",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ]
+        },
+        {
+          "id": "passed",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ]
+        },
+        {
+          "id": "helper",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 3854,
+              "end_line": 3855
+            }
+          ]
+        },
+        {
+          "id": "source_line",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 3870,
+              "end_line": 3870
+            }
+          ]
+        },
+        {
+          "id": "tuple_test",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6237,
+              "end_line": 6237
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scipy_distributed_failures-1-plain",
+      "task": "scipy_distributed_failures",
+      "arm": "plain",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "total_tokens": 21664,
+      "wall": 21.492282333085313,
+      "attempt_count": 1,
+      "usage_complete": true,
+      "source_commands": 2,
+      "separate_skill_reads": 0,
+      "router_calls": 0,
+      "prompt_sha256": "9a6a5729931828fd280eb91d69cf4685e4cde793d48684642e2a7316669d6431",
+      "instructions_sha256": "d0a76fc490583189b6cea7bdac9033b49b612db15d32f71bd445409a376b94b9",
+      "scores": [
+        {
+          "id": "python",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 2421,
+              "end_line": 2421
+            }
+          ]
+        },
+        {
+          "id": "failed",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ]
+        },
+        {
+          "id": "passed",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ]
+        },
+        {
+          "id": "helper",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 3838,
+              "end_line": 3838
+            },
+            {
+              "file": "scipy-fast.log",
+              "start_line": 3854,
+              "end_line": 3855
+            }
+          ]
+        },
+        {
+          "id": "source_line",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 3838,
+              "end_line": 3838
+            },
+            {
+              "file": "scipy-fast.log",
+              "start_line": 3870,
+              "end_line": 3870
+            }
+          ]
+        },
+        {
+          "id": "tuple_test",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6237,
+              "end_line": 6237
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "comparison": {
+    "token_percent": 25.885119488146692,
+    "wall_percent": 2.2795301408502056
+  },
+  "all_attempts": {
+    "cli_calls": 8,
+    "known_tokens": 189233,
+    "unknown_usage": 0,
+    "retries": 0,
+    "main_timeouts": 0,
+    "harness_assembly_failure": 1,
+    "reused_result_instead_of_rerun": true
+  },
+  "past_timeout": {
+    "scope": "previous separate experiment",
+    "usage": null,
+    "known_other_tokens": 325108,
+    "not_zero": true
+  },
+  "capture_truncation_fix": {
+    "commit": "723eeb8",
+    "live_inputs_under_limit": true,
+    "no_live_affected": true
+  },
+  "scope": "implicit free selection pilot only; stopped on no savings;12 planned episodes not executed"
+}

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.7.0 — Unreleased candidate
+
+- Add explicit bounded literal search, numbered presentation and context0..12 while preserving raw default and shared safety.
+- Narrow automatic discovery to dispersed error logs; keep code lookup and one-location work on ordinary search. This is selection guidance, not a hard host interceptor.
+- Keep managed installation backups outside skill discovery.
+- Stream benchmark events and account for complete/partial failure usage; research helper is not installed.
+- Promotion blocked: the new8-episode automatic pilot maintained25/25 facts/citations but used25.9% more tokens, with no reader calls. See docs/activation-gate-review/report.ko.md.
+
 ## 2.6.0 — 2026-10-12
 
 - Keep v2.4 local admission and shared safety as the default; optional bounded Python return completion and exact return-target filtering. Explicit off+target is a usage error.
