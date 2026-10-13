@@ -79,4 +79,60 @@ for line in sys.stdin:
             self.assertIn('unrelated = "preserved"',path.read_text())
             self.assertFalse((Path(tmp)/'auth.json').exists())
 
+    def test_scoped_slot_absence_concurrency_and_null_delete(self):
+        from install import read_codex_slot, write_codex_slot
+        rpc=Mock(); empty=layer();empty['layers'][0]['config']['mcp_servers'].pop('token-router')
+        rpc.call.return_value=empty
+        self.assertEqual(read_codex_slot(rpc)['version'],'v1')
+        self.assertIsNone(read_codex_slot(rpc)['server'])
+        rpc.call.side_effect=[layer(), {'status':'ok'}]
+        write_codex_slot(SERVER,None,rpc)
+        self.assertEqual(rpc.call.call_args.args[1], {
+            'keyPath':'mcp_servers.token-router','value':None,'mergeStrategy':'replace',
+            'filePath':'/tmp/config.toml','expectedVersion':'v1'})
+        rpc.reset_mock();rpc.call.side_effect=None;rpc.call.return_value=layer()
+        with self.assertRaisesRegex(ConnectionError,'server_changed'):
+            write_codex_slot(None,SERVER,rpc)
+        self.assertEqual(rpc.call.call_count,1)
+
+    @unittest.skipUnless(shutil.which('codex'), 'Codex unavailable')
+    def test_real_scoped_create_delete_preserves_unrelated_bytes(self):
+        from install import read_codex_slot, write_codex_slot
+        original = ('# top comment\nmodel = "gpt-6.1-sol"\n\n'
+            '[mcp_servers.other] # table comment\ncommand = "python3"\n'
+            'args = [] # empty args\nstartup_timeout_sec = 17 # integer\n'
+            'tool_timeout_sec = 23\nenabled_tools = [] # means none\n'
+            'disabled_tools = []\n# trailing comment\n')
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'config.toml';path.write_text(original)
+            env=os.environ.copy();env['CODEX_HOME']=tmp
+            with ConfigRPC(env=env) as rpc:
+                self.assertIsNone(read_codex_slot(rpc)['server'])
+                value=dict(SERVER,omit_tools_from=['deferred'])
+                write_codex_slot(None,value,rpc)
+                self.assertTrue(path.read_text().startswith(original.rsplit('# trailing comment',1)[0]))
+                self.assertIn('# trailing comment\n',path.read_text())
+                self.assertEqual(read_codex_server(rpc)['server'],value)
+                # Versions track semantic configuration; comments are preserved, not CAS inputs.
+                comment_version=read_codex_slot(rpc)
+                path.write_text(path.read_text()+'\n# comment-only edit\n')
+                reply=rpc.call('config/value/write', {'keyPath':'mcp_servers.token-router.omit_tools_from',
+                    'value':['deferred'],'mergeStrategy':'replace','filePath':comment_version['filePath'],
+                    'expectedVersion':comment_version['version']})
+                self.assertEqual(reply['status'],'ok')
+                self.assertIn('# comment-only edit',path.read_text())
+                # Concurrent unrelated semantic edits must reject stale configuration versions.
+                stale=read_codex_slot(rpc)
+                path.write_text(path.read_text().replace('startup_timeout_sec = 17', 'startup_timeout_sec = 19')+'\n# concurrent edit\n')
+                with self.assertRaises(ConnectionError):
+                    rpc.call('config/value/write', {'keyPath':'mcp_servers.token-router',
+                        'value':None,'mergeStrategy':'replace','filePath':stale['filePath'],
+                        'expectedVersion':stale['version']})
+                self.assertEqual(read_codex_server(rpc)['server'],value)
+                write_codex_slot(value,None,rpc)
+                self.assertIsNone(read_codex_server(rpc))
+                self.assertTrue(path.read_text().startswith(original.replace('startup_timeout_sec = 17', 'startup_timeout_sec = 19').rsplit('# trailing comment',1)[0]))
+                self.assertIn('# trailing comment\n',path.read_text())
+                self.assertIn('# concurrent edit',path.read_text())
+
 if __name__=='__main__':unittest.main()
