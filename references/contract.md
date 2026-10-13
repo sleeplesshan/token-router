@@ -74,6 +74,12 @@ Discovery is scoped to dispersed error-log context or branching/order audits req
 
 ## Explicit complete Python callables — 2.7.0
 
+For an explicit request needing complete known callables, batch qualified names:
+
+```sh
+python3 "<skill>/scripts/router.py" heavy_code "<file>" --symbol "Class.method" --symbol "helper" --line-numbers --compact-status
+```
+
 Repeated `--symbol QUALNAME` selects1-8 exact qualified functions/async functions, including decorators. It requires focused local heavy_code tokens; it cannot combine with literal windows, required terms, return completion, deterministic, latency or cloud. The guarded probe is capped at1,000,000 decoded characters; line resource bounds still apply. Duplicate definitions (including overloads/property pairs), absent names and invalid Python withhold the whole batch. Overlapping definitions merge, preserving original lines without duplication. Full rendered batch must fit12,000 and the common output cap and retain the existing reduction margin. Complete definitions are not complete dependencies or enclosing conditional context.
 
 Selected bounded pytest failure blocks may extend from a recognized underscore header to their file:line:exception terminator within64 lines. Unselected blocks remain excluded. `--compact-status` changes only stderr presentation; current errors/actions/model flags remain and `--report-json` retains the full report. Raw/numbered stdout and the shared safety validation remain identical.

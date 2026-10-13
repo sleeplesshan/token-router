@@ -1,4 +1,6 @@
 interface:
   display_name: "Token Router"
-  short_description: "Gate dispersed failure logs; Python retrieval is explicit"
-  default_prompt: "Automatically use $token-router only for dispersed failure logs needing complete block context, with native guide delivery and --activation-profile log-context. Skip code, simple lookups, one range and visible evidence. Explicit callable retrieval remains available."
+  short_description: "Automatically retrieve dispersed CI failure context"
+  default_prompt: "Use $token-router to retrieve dispersed CI failure blocks and distant results with their original line numbers."
+policy:
+  allow_implicit_invocation: true
