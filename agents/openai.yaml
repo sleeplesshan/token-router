@@ -1,6 +1,6 @@
 interface:
   display_name: "Token Router"
-  short_description: "Automatically retrieve dispersed CI failure context"
-  default_prompt: "Use $token-router to retrieve dispersed CI failure blocks and distant results with their original line numbers."
+  short_description: "Automatically compare dispersed pytest failure blocks"
+  default_prompt: "Use $token-router to compare multiple pytest failure blocks and distant results with their original line numbers."
 policy:
   allow_implicit_invocation: true
