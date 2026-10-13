@@ -1,0 +1,2 @@
+# Benchmark source hashes refer to exact upstream bytes on every checkout host.
+docs/automatic-tool-review/sources/* -text
