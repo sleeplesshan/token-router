@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 from test_literal_search import r
-from routing_policy import plan_activation
+from routing_policy import plan_activation, admit_log_context, Span
 
 
 class HostActivationTests(unittest.TestCase):
@@ -18,6 +18,14 @@ class HostActivationTests(unittest.TestCase):
                         {'mode':'heavy_code'},{'selectors':('one',)},{'selectors':('one','one')},
                         {'selectors':('one','')},{'purpose':'unknown'}):
             self.assertEqual(plan_activation(**{**request,**changes}).action,'bypass')
+
+    def test_runtime_thresholds_are_inclusive_and_do_not_claim_sufficiency(self):
+        facts=dict(source_chars=50000,spans=[Span(1,10),Span(101,110)],
+                   selected_chars=500,bounding_chars=1000,completed_blocks=1,missing_terms=[])
+        self.assertEqual(admit_log_context(**facts).action,'activate')
+        for changes in ({'source_chars':49999},{'bounding_chars':999},{'completed_blocks':0},
+                        {'missing_terms':['absent']},{'spans':[Span(1,10)]}):
+            self.assertEqual(admit_log_context(**{**facts,**changes}).action,'bypass')
 
 
 class RuntimeActivationTests(unittest.TestCase):
@@ -78,4 +86,15 @@ class RuntimeActivationTests(unittest.TestCase):
         code,out,s=self.call('ERROR: first\nTotal test files: 9\n')
         self.assertEqual(code,0);self.assertNotIn('activation',s)
         for argv in (['heavy_code','x','--symbol','f'],['heavy_code','x','--search-term','x'],['error_log','x']):
-            self.assertEqual(r.main(['router.py',*argv,'--activation-profile','log-context']),2)
+            with contextlib.redirect_stderr(io.StringIO()):
+                self.assertEqual(r.main(['router.py',*argv,'--activation-profile','log-context']),2)
+
+    def test_rejected_sidecar_matches_activation_and_single_term_opens_zero(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p=Path(tmp)/'incident.log';p.write_text(self.fixture());report=Path(tmp)/'report.json'
+            out,err=io.StringIO(),io.StringIO()
+            with contextlib.redirect_stdout(out),contextlib.redirect_stderr(err):
+                code=r.main(['router.py','error_log',str(p),'--search-term','ERROR: first',
+                             '--activation-profile','log-context','--report-json',str(report)])
+            d=json.loads(report.read_text())
+            self.assertEqual((code,out.getvalue(),d['activation'],d['open_count']),(2,'','bypass',0))
