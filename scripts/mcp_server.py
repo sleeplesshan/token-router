@@ -101,6 +101,7 @@ def main():
     if not args.allow_root and not default_root_allowed(Path.cwd().resolve(),Path.home().resolve()):parser.error('explicit --allow-root required for home or filesystem root')
     try:server=Server(roots)
     except (OSError,ValueError):parser.error('allowed roots must be existing directories')
+    sys.stdout.reconfigure(encoding='utf-8',newline='\n')
     serve(server,sys.stdin.buffer,sys.stdout)
 
 if __name__=='__main__':main()
