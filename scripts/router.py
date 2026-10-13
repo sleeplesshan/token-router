@@ -1155,6 +1155,8 @@ def finalize_packet(args, guard, packet, status, code=0):
             'full_source_returned':False,'reason_codes':[],
             'packet_query_anchor':'unknown','absent_required':[],'lost_required':[],
             'next_action':None,**status}
+    if code != 0 and 'activation' in status:
+        status['activation']='bypass'
     written_report=None
     try:
         if packet is not None and getattr(args,'line_numbers',False):
