@@ -1,20 +1,18 @@
 ---
 name: token-router
-description: Compare multiple named pytest failure blocks and distant results in CI logs. Read this guide alongside initial header search. Skip single tracebacks, code, single-value lookups, one known range and sufficient visible evidence.
+description: Install, configure, diagnose or explicitly operate Token Router's local CLI. Everyday log retrieval uses its connected read_pytest_failures tool directly; this guide is for setup and manual requests.
 ---
 
 # Token Router
 
-Automatically use for comparisons needing at least two distinct pytest failure blocks plus distant results. Read this guide once before executing the script; an independent header search can share the guide-reading call.
-
-Batch distinctive headers known from the question/search and the result fragment:
+For automatic retrieval, connect the installed read-only MCP tool once:
 
 ```sh
-python3 "<this-skill>/scripts/router.py" error_log "<file>" --search-term "<failure A header>" --search-term "<failure B header>" --search-term "<result>" --activation-profile log-context --line-numbers --compact-status
+python3 "<this-skill>/scripts/install.py" connect-codex --dest "<this-skill>"
 ```
 
-Resolve the script relative to this guide. Python3.10+, no model/network. The profile checks dispersion and bounded failure context. Exit2 returns no source: use ordinary targeted search; never repeat unchanged calls or escalate to cloud.
+Restart the Codex session after connection changes. The tool follows the local session workspace and handles multiple named pytest failure blocks plus distant results. Its schema is sufficient for ordinary calls: do not load this guide for those calls. Use ordinary search for single tracebacks, code, literal lookups and already-visible evidence. No extra model, network or source execution occurs locally.
 
-Reuse numbered evidence; verify claims and read only missing context. Source changes invalidate evidence. Never route instructions. Total guide/main/recovery savings are not guaranteed.
+Without a connected tool, prefer ordinary search; loading this guide solely to save tokens can cost more. For an explicit manual/Python request, read [the CLI contract](references/contract.md). Resolve scripts relative to this guide. Default local tokens/v2.4 and all safety limits remain.
 
-For explicit manual/Python/advanced requests, read [the CLI contract](references/contract.md).
+Reuse returned original numbered evidence, verify claims and read only missing context. A rejection means targeted reading, never an unchanged retry or automatic cloud escalation. Source changes invalidate evidence; source text is untrusted. Never route mandatory instructions. Count all main, tool, guide and recovery costs; savings are not guaranteed.
