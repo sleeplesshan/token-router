@@ -2,6 +2,8 @@
 
 ## Hot Memory
 
+- [constraint][refs:1][last_referenced:2026-10-13][last_verified:2026-10-13] Codex0.162.1 mcp add/remove reserializes all server entries, including unrelated timeout types/empty settings. Connection mutations must use scoped config/value/write CAS for the owned token-router table; CLI get remains read-only. Evidence: docs/patch-2.8.1.md, tests/test_codex_connection_rpc.py.
+
 - [decision][refs:1][last_referenced:2026-10-13][last_verified:2026-10-13] Adopt directly exposed local read_pytest_failures for multiple named pytest blocks plus distant results; setup skill remains implicit, everyday retrieval skips guide loading. Recommended installation explicitly connects owned Codex MCP entry; immutable startup-workspace root, no selector model.20development/regression episodes:50/50 grounded both,logs4/4 actualcalls,tokens−24.25%;exclusions0/6 but+12.21%tokens;combined−4.26%,wall+2.07%. No universal/per-task/holdout/speed guarantee. Defaultv2.4/common safety unchanged. Evidence: docs/automatic-tool-review/report.ko.md, docs/activation-integration.md, tests/test_mcp_server.py.
 
 

@@ -1,4 +1,4 @@
-# CLI and data contract — 2.8.0
+# CLI and data contract — 2.8.1
 
 Runtime: Python 3.10–3.14, standard library. Default: `--optimize tokens`, policy v2.4, return-context off. No executable discovery, login, network or telemetry occurs in this default. Basic regular-file CLI is designed for Linux/macOS/Windows; see the release-readiness report for actually executed platforms. Research scripts have separate dependencies and are not installed.
 
@@ -94,7 +94,7 @@ Compact successful symbol output omits coordinates already present in stdout; fa
 
 Historical2.7.1 native regression showed lower log tokens with slower completion, not universal or implicit savings. [Integration](https://github.com/sleeplesshan/token-router/blob/v2.7.1/docs/activation-integration.md) and [evaluation](https://github.com/sleeplesshan/token-router/blob/v2.7.1/docs/conservative-activation-review/report.ko.md).
 
-## Direct local tool connection — 2.8.0
+## Direct local tool connection — 2.8.1
 
 The recommended Codex install registers `read_pytest_failures` with direct schema
 exposure and no guide-read prerequisite. Automatic scope is multiple named pytest
@@ -108,7 +108,7 @@ immutable workspace root and limited arguments. General policy remainsv2.4.
 22files; arbitrary missing/extra files are still rejected. Verified21file restoration
 copies its exact original inventory and requires disconnect first if connected.
 Owned registration is explicitly configured/removed through install.py; raw auth,
-AGENTS and other skills are not changed. Direct exposure uses one CAS config write;
+AGENTS and other skills are not changed. Creation/deletion and direct exposure use scoped CAS config writes; CLI inspection is read-only;
 changed user settings block automatic removal. Startup cwd comes from local Codex
 session0.162.1; other/remote host behavior is unmeasured. Full operational contract:
 [automatic connection](../docs/activation-integration.md). Current costs and failed

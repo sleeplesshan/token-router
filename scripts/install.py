@@ -164,11 +164,11 @@ class ConfigRPC:
         self.close()
 
 
-def read_codex_server(rpc=None):
-    """Return only token-router's user-layer record and CAS metadata, or None."""
+def read_codex_slot(rpc=None):
+    """Return token-router user slot (possibly None) and file/version CAS metadata."""
     if rpc is None:
         with ConfigRPC() as client:
-            return read_codex_server(client)
+            return read_codex_slot(client)
     result = rpc.call('config/read', {'includeLayers': True})
     try:
         layers = [x for x in result['layers'] if x['name']['type'] == 'user'
@@ -177,15 +177,36 @@ def read_codex_server(rpc=None):
             raise CodexConfigError('ambiguous_user_layer')
         layer = layers[0]
         server = layer['config'].get('mcp_servers', {}).get('token-router')
-        if server is None:
-            return None
-        if not isinstance(server, dict) or not isinstance(layer['version'], str) or not isinstance(layer['name']['file'], str):
+        if (server is not None and not isinstance(server, dict)) or not isinstance(layer['version'], str) or not isinstance(layer['name']['file'], str):
             raise CodexConfigError('invalid_user_layer')
         effective=result.get('config',{}).get('mcp_servers',{}).get('token-router',{})
         return {'server': server, 'filePath': layer['name']['file'], 'version': layer['version'],
                 'effective_omit_tools_from':effective.get('omit_tools_from')}
     except (KeyError, TypeError, AttributeError):
         raise CodexConfigError('invalid_user_layer') from None
+
+
+def read_codex_server(rpc=None):
+    """Compatibility view: absent server returns None."""
+    slot = read_codex_slot(rpc)
+    return slot if slot['server'] is not None else None
+
+
+def write_codex_slot(expected_server, value, rpc=None):
+    """Compare the exact user slot, then CAS-write only that server key."""
+    if rpc is None:
+        with ConfigRPC() as client:
+            return write_codex_slot(expected_server, value, client)
+    slot = read_codex_slot(rpc)
+    if slot['server'] != expected_server:
+        raise CodexConfigError('server_changed')
+    result = rpc.call('config/value/write', {
+        'keyPath': 'mcp_servers.token-router', 'value': value,
+        'mergeStrategy': 'replace', 'filePath': slot['filePath'],
+        'expectedVersion': slot['version']})
+    if result.get('status') != 'ok':
+        raise CodexConfigError('config_write_overridden')
+    return True
 
 
 def set_direct_exposure(expected_server, rpc=None):
@@ -216,6 +237,8 @@ def set_direct_exposure(expected_server, rpc=None):
 
 def codex_mcp(args):
     """Use the supported CLI; never rewrite unrelated TOML or print its contents."""
+    if args != ['get','token-router','--json']:
+        raise ValueError('Only read-only Codex MCP inspection is supported')
     executable=shutil.which('codex')
     if not executable:raise ValueError('Codex CLI is required for connection; local installation is still usable')
     result=subprocess.run([executable,'mcp',*args],capture_output=True,text=True,encoding='utf-8',timeout=20)
@@ -263,15 +286,19 @@ def connect_codex(dest,roots):
         raise ValueError('Existing token-router MCP configuration differs; preserve it and disconnect/reconfigure explicitly')
     if current:validate_codex_tool_policy(current)
     created=current is None
-    if created:codex_mcp(['add','token-router','--',record['command'],*args])
-    created_configuration=codex_mcp(['get','token-router','--json']) if created else None
     rollback_user=None
+    created_configuration=None
+    created_written=False
     try:
+        if created:
+            # Include exposure in the single creation; do not rewrite other servers.
+            rollback_user=dict(record, omit_tools_from=['deferred'])
+            write_codex_slot(None, rollback_user)
+            created_written=True
+            created_configuration=codex_mcp(['get','token-router','--json'])
         user_record=read_codex_server()
-        if created and user_record:
-            rollback_user=dict(user_record['server'])
         previous_user=data.get('codex_mcp',{}).get('user_configuration')
-        if previous_user is not None and (user_record is None or user_record['server']!=previous_user):
+        if not created and previous_user is not None and (user_record is None or user_record['server']!=previous_user):
             raise ValueError('Codex server exposure or user settings changed; preserve them and reconfigure explicitly')
         set_direct_exposure(record)
         if rollback_user is not None:rollback_user['omit_tools_from']=['deferred']
@@ -287,11 +314,15 @@ def connect_codex(dest,roots):
         data['codex_mcp']=record;save_marker(dest,data)
     except BaseException:
         # Do not remove a registration another process modified during setup.
-        if created and rollback_user is not None:
-            actual=codex_mcp(['get','token-router','--json'])
-            user_record=read_codex_server()
-            if actual==created_configuration and user_record and user_record['server']==rollback_user:
-                codex_mcp(['remove','token-router'])
+        if created_written and created_configuration is not None:
+            try:
+                actual=codex_mcp(['get','token-router','--json'])
+                user_record=read_codex_server()
+                if actual==created_configuration and user_record and user_record['server']==rollback_user:
+                    write_codex_slot(rollback_user, None)
+            except Exception:
+                # Unknown/concurrent state is preserved; retain the original failure.
+                pass
         raise
     return dict(status='connected',server='token-router',scope='startup_workspace' if not roots else 'explicit_roots',restart_required=True)
 
@@ -304,11 +335,13 @@ def disconnect_codex(dest):
         if record.get('configuration') is not None and current!=record['configuration']:
             raise ValueError('Codex server settings were changed; preserve them and disconnect manually')
         previous_user=record.get('user_configuration')
+        user_record=read_codex_server()
         if previous_user is not None:
-            user_record=read_codex_server()
             if user_record is None or user_record['server']!=previous_user:
                 raise ValueError('Codex exposure or user settings were changed; preserve them and disconnect manually')
-        codex_mcp(['remove','token-router'])
+        if user_record is None:
+            raise ValueError('Codex server is not in the owned user layer')
+        write_codex_slot(user_record['server'], None)
     data.pop('codex_mcp');save_marker(dest,data)
     return dict(status='disconnected',server='token-router',restart_required=True)
 

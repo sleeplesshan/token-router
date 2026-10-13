@@ -1,0 +1,46 @@
+{
+  "baseline_commit": "66388174125eb137ff1ceb63e7f7371e715d91fa",
+  "normalization": "Only router CLI VERSION 2.8.1 \u2192 2.8.0; no selection/schema/guide change",
+  "files": {
+    "scripts/router.py": {
+      "v2.8.0_sha256": "cca65305d335d96ad765f598c7779f6c80392c18d69fb5f3ac6b7b8087747a8b",
+      "v2.8.1_sha256": "5040490517297afe02eddf856fa78e390a206876901288a5a54817d6ecf26ec6",
+      "identical_except_version": true
+    },
+    "scripts/mcp_server.py": {
+      "v2.8.0_sha256": "578c8fad7eca2c88358b459d85d15af61ac8d8b78847442fb6e0256cca408ebc",
+      "v2.8.1_sha256": "578c8fad7eca2c88358b459d85d15af61ac8d8b78847442fb6e0256cca408ebc",
+      "identical_except_version": true
+    },
+    "scripts/routing_policy.py": {
+      "v2.8.0_sha256": "1700bcd91e104a801535e37fc3639ea1df689070da3e2ab363596d471fe5a0d9",
+      "v2.8.1_sha256": "1700bcd91e104a801535e37fc3639ea1df689070da3e2ab363596d471fe5a0d9",
+      "identical_except_version": true
+    },
+    "scripts/evidence_checks.py": {
+      "v2.8.0_sha256": "42c5e04344acb4d864715043e05021fff66b63dd7d1000a650c2dd41b723de6d",
+      "v2.8.1_sha256": "42c5e04344acb4d864715043e05021fff66b63dd7d1000a650c2dd41b723de6d",
+      "identical_except_version": true
+    },
+    "scripts/source_guard.py": {
+      "v2.8.0_sha256": "263b6803d18763f104a08d5a233fb44f525ddd0406cde9b225883897cea6bd35",
+      "v2.8.1_sha256": "263b6803d18763f104a08d5a233fb44f525ddd0406cde9b225883897cea6bd35",
+      "identical_except_version": true
+    },
+    "scripts/query_matcher.py": {
+      "v2.8.0_sha256": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+      "v2.8.1_sha256": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+      "identical_except_version": true
+    },
+    "SKILL.md": {
+      "v2.8.0_sha256": "2a3deebf0cacc47bc27beccef54c6ae25f4c2844584114d350820a22765765b0",
+      "v2.8.1_sha256": "2a3deebf0cacc47bc27beccef54c6ae25f4c2844584114d350820a22765765b0",
+      "identical_except_version": true
+    },
+    "agents/openai.yaml": {
+      "v2.8.0_sha256": "59d49899bc6be0a3fbdbcb34e05c5cdf6397e69d3b403f0592c4d6a9b23b90f1",
+      "v2.8.1_sha256": "59d49899bc6be0a3fbdbcb34e05c5cdf6397e69d3b403f0592c4d6a9b23b90f1",
+      "identical_except_version": true
+    }
+  }
+}

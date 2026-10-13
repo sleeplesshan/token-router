@@ -14,12 +14,16 @@ class ConnectionTests(unittest.TestCase):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.dest=Path(self.temp.name)/'skill';ins.install(ROOT,self.dest)
         self.current=None;self.changes=[]
+        writer=patch.object(ins,'write_codex_slot',side_effect=self.fake_write)
+        writer.start();self.addCleanup(writer.stop)
+    def fake_write(self, expected, value):
+        self.changes.append(('scoped', value))
+        if value is None:self.current=None
+        else:self.current={'transport':{'type':'stdio','command':value['command'],'args':value['args'],'cwd':None,'env':None,'env_vars':[]}}
+        return True
     def fake_codex(self,args):
-        if args[0]=='get':return self.current
-        self.changes.append(args)
-        if args[0]=='add':self.current={'transport':{'type':'stdio','command':args[3],'args':args[4:],'cwd':None,'env':None,'env_vars':[]}}
-        if args[0]=='remove':self.current=None
-        return None
+        self.assertEqual(args,['get','token-router','--json'])
+        return self.current
     def test_connect_is_idempotent_and_disconnect_only_managed_transport(self):
         with patch.object(ins,'read_codex_server',side_effect=lambda:{'effective_omit_tools_from':['deferred'],'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
             ins.connect_codex(self.dest,[]);record=d.read_install(self.dest)['codex_mcp'];self.assertNotIn('--allow-root',record['args'])
@@ -53,6 +57,19 @@ class ConnectionTests(unittest.TestCase):
             with self.assertRaises(OSError):ins.connect_codex(self.dest,[])
         self.assertIsNone(self.current)
         self.assertNotIn('codex_mcp',d.read_install(self.dest))
+    def test_failed_creation_does_not_enter_rollback(self):
+        with patch.object(ins,'codex_mcp',side_effect=self.fake_codex),patch.object(ins,'write_codex_slot',side_effect=ins.CodexConfigError('rpc_error')) as write:
+            with self.assertRaisesRegex(ins.CodexConfigError,'rpc_error'):
+                ins.connect_codex(self.dest,[])
+            self.assertEqual(write.call_count,1)
+
+    def test_unavailable_postwrite_snapshot_preserves_original_error(self):
+        with patch.object(ins,'codex_mcp',side_effect=[None, ValueError('inspection failed')]):
+            with self.assertRaisesRegex(ValueError,'inspection failed'):
+                ins.connect_codex(self.dest,[])
+        self.assertIsNotNone(self.current)
+        self.assertEqual(len(self.changes),1)
+
     def test_connected_install_cannot_restore_legacy_without_disconnect(self):
         with patch.object(ins,'read_codex_server',side_effect=lambda:{'effective_omit_tools_from':['deferred'],'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):ins.connect_codex(self.dest,[])
         with tempfile.TemporaryDirectory() as temp:

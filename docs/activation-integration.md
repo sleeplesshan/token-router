@@ -1,4 +1,4 @@
-# Automatic local retrieval — 2.8.0
+# Automatic local retrieval — 2.8.1
 
 Recommended Codex installation connects one local read-only tool:
 
@@ -16,10 +16,11 @@ Tool selection remains the model's decision, not interception of every read.
 
 ## Supported connection and ownership
 
-Codex CLI0.162.1 was tested. The installer uses `codex mcp add/get/remove` plus
-config-only app-server RPC to set just
-`mcp_servers.token-router.omit_tools_from=["deferred"]`. The scoped write uses the
-user config version for compare-and-swap. It does not start a model/thread, add
+Codex CLI0.162.1 was tested. The installer uses read-only `codex mcp get` plus config-only app-server RPC.
+Creation/deletion replace only `mcp_servers.token-router`; existing matching
+connections receive only `omit_tools_from=["deferred"]`. Each scoped write uses
+the user config version for compare-and-swap. Version2.8.0 used CLI add/remove,
+which can reserialize unrelated MCP entries;2.8.1 removes those mutation calls. It does not start a model/thread, add
 another inference provider or alter global models/auth/AGENTS. Direct exposure
 has a recurring context cost; deferred discovery did not activate in two pilots.
 That observed non-selection is not proof of a universal Codex limitation.
