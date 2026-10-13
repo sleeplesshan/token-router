@@ -47,6 +47,22 @@ def main(archive):
         literal=run(router,'error_log',incident,'--search-term','File "worker.py"','--search-context','0','--line-numbers',cwd=root,env=env)
         assert '102: Traceback' in literal and '104: ValueError: failed' in literal
         assert 'neutral padding' not in literal
+        # Exercise the shipped stdio adapter without Codex, login or a network.
+        mcp_log=root/'pytest 한글.log'
+        padding='neutral padding abcdefghijklmnopqrstuvwxyz\n'*800
+        mcp_log.write_text(padding+'____ test_alpha ____\n값 = "안녕"\ntests/test_x.py:42: ValueError\n'
+                           +padding+'____ test_beta ____\nvalue = failed\ntests/test_x.py:43: ValueError\n'
+                           +padding+'2 failed, 20 passed\n',encoding='utf-8')
+        requests=[dict(jsonrpc='2.0',id=1,method='initialize',params=dict(protocolVersion='2025-11-25')),
+                  dict(jsonrpc='2.0',id=2,method='tools/call',params=dict(name='read_pytest_failures',
+                       arguments=dict(path=str(mcp_log),failure_headers=['____ test_alpha ____','____ test_beta ____'])))]
+        protocol=subprocess.run([sys.executable,str(dest/'scripts/mcp_server.py'),'--allow-root',str(root)],
+              input='\n'.join(json.dumps(r,ensure_ascii=False)for r in requests)+'\n',
+              capture_output=True,text=True,encoding='utf-8',cwd=root,env=env,timeout=10)
+        assert protocol.returncode==0,protocol.stderr
+        replies=[json.loads(line)for line in protocol.stdout.splitlines()]
+        assert not replies[1]['result']['isError'],replies
+        assert '안녕' in replies[1]['result']['content'][0]['text']
         result=json.loads(run(installer,'update','--dest',dest,cwd=root,env=env));assert Path(result['backup']).is_dir()
         run(installer,'restore','--dest',dest,'--backup',result['backup'],cwd=root,env=env)
         run(installer,'uninstall','--dest',dest,cwd=root,env=env);assert not dest.exists();assert Path(result['backup']).exists()
