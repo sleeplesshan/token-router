@@ -181,7 +181,9 @@ def read_codex_server(rpc=None):
             return None
         if not isinstance(server, dict) or not isinstance(layer['version'], str) or not isinstance(layer['name']['file'], str):
             raise CodexConfigError('invalid_user_layer')
-        return {'server': server, 'filePath': layer['name']['file'], 'version': layer['version']}
+        effective=result.get('config',{}).get('mcp_servers',{}).get('token-router',{})
+        return {'server': server, 'filePath': layer['name']['file'], 'version': layer['version'],
+                'effective_omit_tools_from':effective.get('omit_tools_from')}
     except (KeyError, TypeError, AttributeError):
         raise CodexConfigError('invalid_user_layer') from None
 
@@ -205,9 +207,10 @@ def set_direct_exposure(expected_server, rpc=None):
         raise CodexConfigError('exposure_setting_changed')
     if server.get('omit_tools_from') == ['deferred']:
         return True
-    rpc.call('config/value/write', {'keyPath': 'mcp_servers.token-router.omit_tools_from',
+    written=rpc.call('config/value/write', {'keyPath': 'mcp_servers.token-router.omit_tools_from',
         'value': ['deferred'], 'mergeStrategy': 'replace', 'filePath': record['filePath'],
         'expectedVersion': record['version']})
+    if written.get('status')!='ok':raise CodexConfigError('config_write_overridden')
     return True
 
 
@@ -265,7 +268,8 @@ def connect_codex(dest,roots):
         set_direct_exposure(record)
         if rollback_user is not None:rollback_user['omit_tools_from']=['deferred']
         user_record=read_codex_server()
-        if not user_record or user_record['server'].get('omit_tools_from')!=['deferred']:
+        if (not user_record or user_record['server'].get('omit_tools_from')!=['deferred']
+                or user_record.get('effective_omit_tools_from')!=['deferred']):
             raise ValueError('Direct tool exposure was not enabled')
         actual=codex_mcp(['get','token-router','--json'])
         if not transport_matches(actual,record):raise ValueError('Codex registration verification failed')

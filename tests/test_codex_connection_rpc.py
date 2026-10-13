@@ -18,7 +18,7 @@ def layer():
 
 class ConfigTests(unittest.TestCase):
     def test_scoped_read_and_write(self):
-        rpc = Mock(); rpc.call.side_effect = [layer(), {}]
+        rpc = Mock(); rpc.call.side_effect = [layer(), {"status":"ok"}]
         self.assertTrue(set_direct_exposure(SERVER, rpc))
         self.assertEqual(rpc.call.call_args.args, ('config/value/write', {
             'keyPath': 'mcp_servers.token-router.omit_tools_from', 'value': ['deferred'],

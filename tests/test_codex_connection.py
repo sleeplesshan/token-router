@@ -21,34 +21,34 @@ class ConnectionTests(unittest.TestCase):
         if args[0]=='remove':self.current=None
         return None
     def test_connect_is_idempotent_and_disconnect_only_managed_transport(self):
-        with patch.object(ins,'read_codex_server',side_effect=lambda:{'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
+        with patch.object(ins,'read_codex_server',side_effect=lambda:{'effective_omit_tools_from':['deferred'],'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
             ins.connect_codex(self.dest,[]);record=d.read_install(self.dest)['codex_mcp'];self.assertNotIn('--allow-root',record['args'])
             ins.connect_codex(self.dest,[]);self.assertEqual(len(self.changes),1)
             ins.disconnect_codex(self.dest);self.assertIsNone(self.current);self.assertNotIn('codex_mcp',d.read_install(self.dest))
     def test_foreign_or_changed_server_is_not_overwritten(self):
         self.current={'transport':{'type':'stdio','command':'other','args':[]}}
-        with patch.object(ins,'read_codex_server',side_effect=lambda:{'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
+        with patch.object(ins,'read_codex_server',side_effect=lambda:{'effective_omit_tools_from':['deferred'],'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
             with self.assertRaises(ValueError):ins.connect_codex(self.dest,[])
         self.assertEqual(self.changes,[])
         self.current=None
-        with patch.object(ins,'read_codex_server',side_effect=lambda:{'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
+        with patch.object(ins,'read_codex_server',side_effect=lambda:{'effective_omit_tools_from':['deferred'],'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
             ins.connect_codex(self.dest,[]);self.current['transport']['env']={'CUSTOM':'preserve'}
             with self.assertRaises(ValueError):ins.disconnect_codex(self.dest)
         self.assertEqual(len(self.changes),1)
     def test_user_filters_and_disabled_setting_are_preserved(self):
-        with patch.object(ins,'read_codex_server',side_effect=lambda:{'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
+        with patch.object(ins,'read_codex_server',side_effect=lambda:{'effective_omit_tools_from':['deferred'],'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
             ins.connect_codex(self.dest,[])
             self.current['enabled_tools']=['read_pytest_failures']
             with self.assertRaises(ValueError):ins.disconnect_codex(self.dest)
             with self.assertRaises(ValueError):ins.connect_codex(self.dest,[])
         self.assertEqual(len(self.changes),1)
     def test_marker_failure_removes_only_new_registration(self):
-        with patch.object(ins,'read_codex_server',side_effect=lambda:{'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex),patch.object(ins,'save_marker',side_effect=OSError('disk full')):
+        with patch.object(ins,'read_codex_server',side_effect=lambda:{'effective_omit_tools_from':['deferred'],'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex),patch.object(ins,'save_marker',side_effect=OSError('disk full')):
             with self.assertRaises(OSError):ins.connect_codex(self.dest,[])
         self.assertIsNone(self.current)
         self.assertNotIn('codex_mcp',d.read_install(self.dest))
     def test_connected_install_cannot_restore_legacy_without_disconnect(self):
-        with patch.object(ins,'read_codex_server',side_effect=lambda:{'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):ins.connect_codex(self.dest,[])
+        with patch.object(ins,'read_codex_server',side_effect=lambda:{'effective_omit_tools_from':['deferred'],'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):ins.connect_codex(self.dest,[])
         with tempfile.TemporaryDirectory() as temp:
             old=Path(temp)/'old';old.mkdir()
             import shutil
@@ -59,7 +59,7 @@ class ConnectionTests(unittest.TestCase):
             with self.assertRaises(ValueError):ins.install(old,self.dest)
         self.assertIsNotNone(self.current)
     def test_update_preserves_registration_and_invalid_root_is_nonmutating(self):
-        with patch.object(ins,'read_codex_server',side_effect=lambda:{'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
+        with patch.object(ins,'read_codex_server',side_effect=lambda:{'effective_omit_tools_from':['deferred'],'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
             with self.assertRaises(ValueError):ins.connect_codex(self.dest,[str(self.dest/'missing')])
             self.assertEqual(self.changes,[])
             ins.connect_codex(self.dest,[str(self.dest.parent)])
