@@ -2,7 +2,8 @@
 
 ## Hot Memory
 
-- [decision][refs:1][last_referenced:2026-10-13][last_verified:2026-10-13] Automatic scope is native dispersed failure-context logs; code is explicit manual only. Pure host plan_activation before guide requires declared need,2+known selectors and unavailable evidence. Optional log-context profile reuses scan/guards; installation is not host middleware.16-turn regression logs24/24 with tokens112242→82143(-26.82%) but wall42.76→54.50s(+27.46%); excluded guide/reader0. Overall38/38,tokens-17.62%,wall+21.03%. Adopt optional token-focused host connection, no speed/universal claim or defaultv2.4 promotion. Evidence: docs/conservative-activation-review/report.ko.md, docs/activation-integration.md, tests/test_activation_profile.py.
+- [decision][refs:1][last_referenced:2026-10-13][last_verified:2026-10-13] Adopt directly exposed local read_pytest_failures for multiple named pytest blocks plus distant results; setup skill remains implicit, everyday retrieval skips guide loading. Recommended installation explicitly connects owned Codex MCP entry; immutable startup-workspace root, no selector model.20development/regression episodes:50/50 grounded both,logs4/4 actualcalls,tokens−24.25%;exclusions0/6 but+12.21%tokens;combined−4.26%,wall+2.07%. No universal/per-task/holdout/speed guarantee. Defaultv2.4/common safety unchanged. Evidence: docs/automatic-tool-review/report.ko.md, docs/activation-integration.md, tests/test_mcp_server.py.
+
 
 - [decision][refs:1][last_referenced:2026-10-13][last_verified:2026-10-13] Adopt explicit bounded complete Python callables and selected recognizable failure blocks; preserve default query v2.4 and common safety. Native Codex installed-skill trial16episodes actual router8/8 maintained fixed-rubric48/48,193678→158361tokens (-18.23%),116.29→111.80s; pandas effectively flat and CPython slower. Cold separate guide loading increased costs24.12%; no automatic/cold/universal savings claim. Guide must be read before application; pre-read batching rejected. Evidence: docs/actual-reader-review/report.ko.md, native-audit.json, tests/test_symbol_retrieval.py.
 
@@ -25,5 +26,7 @@
 ## Cold Memory
 
 ## Archived Decisions
+
+- [superseded][refs:1][archived:2026-10-13] Native-guide-only automatic scope replaced by directly exposed local MCP tool after cold guide and native non-selection pilots. Prior16 native-gated measurements remain historical evidence in docs/conservative-activation-review/report.ko.md; installation did not connect middleware.
 
 - [superseded][refs:1][archived:2026-10-13] Log-only discovery scope from activation-gate pilot superseded by explicit complete-callable/failure-block guidance after actual-path evidence. Its negative measurements remain preserved. Replacement: docs/actual-reader-review/report.ko.md.

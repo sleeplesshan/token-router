@@ -1,0 +1,96 @@
+{
+  "limits": {
+    "main_turns": 16,
+    "total_tokens": 550000,
+    "per_episode_token_cap": 60000,
+    "absolute_timeout": 240,
+    "idle_timeout": 90,
+    "grace_timeout": 10,
+    "additional_source_commands": 3,
+    "total_wall": 1800
+  },
+  "package_version": "2.7.1",
+  "candidate": "direct-local-MCP-tool",
+  "commit": "9e7c697c719e9f63065d33914ea4c2cc2fd2b5ae",
+  "policy_version": "v2.4",
+  "model": "gpt-6.1-sol",
+  "reasoning": "medium",
+  "manifest_hash": "9745dd4da3067fa9105d95832c227c6b42117293c546d8fc0bea09b6d5597c8d",
+  "prompt_hashes": {
+    "scipy_failure_blocks": "735cb4503d88cd314df8314081f008001daeacf1f8f755bc3c4d6290e5989513",
+    "cpython_trace": "1acceb123d32eacd67fbba6b8e70b50a33f1e5bfd2b09b8085ebac206a25c11b",
+    "visible_summary": "09fb38aa6ba137ae72b1984524fb6c12153514b01ac865eacb0e6f34de45f682",
+    "sympy_multiple_failures_ko": "87b3cd9d389df257a3db8cd44af9e5dceb557696fc254add05647d85de22899d"
+  },
+  "common_hash": "ef3d45c086f174d5e57e679a3cde9b90c304dd798c9c581d19a675e0f0cf9c58",
+  "grader_hash": "c7a0271fe297f1b037fd9450df40b6d5bbc75a0dd205b6dcb6d4154e7949fe49",
+  "seed_hashes": {
+    "sympy_multiple_failures_ko": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scipy_failure_blocks": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cpython_trace": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "visible_summary": "64822ccc38858570ef3724222f13c2bb6076646326c10c3c8f4be935b935828e"
+  },
+  "client_hash": "72ea9a97e571e730d426872a2bfef53009bbaa153bb7b7c3b5620cb5102eebec",
+  "harness_hash": "41ef8d44617633dfc366c7e47e72bbd89aaeebf0a45e57bb75afd7f1ca7adc50",
+  "payload_hashes": {
+    "LICENSE": "c0d5b8821cbbe219f05c53abb58fb61e42c80222aa8af76c9841862e9b4f4b9b",
+    "CHANGELOG.md": "27e00850ea4bf9ab7b51b27da785e0da18542c57799261262a1952e62fd24351",
+    "README.md": "c13306db3ca41e05224ba9c407e011df32e6a0e0de34b4e67ec77f7b4d5807d5",
+    "SUPPORT.md": "54e3860fc3b592455be329c9e491768fe40176e96461d3f65bfbf40c0360a451",
+    ".token-router-install.json": "8f896d48426a35e51a1c5d7d6f32eb25a876d5c17666f4b9d17bccebdc10e852",
+    "CONTRIBUTING.md": "443021703db9e67c5f02ebb72723f9e1544ddce7d6e5b18f77abc8c2604fd969",
+    "SKILL.md": "2a3deebf0cacc47bc27beccef54c6ae25f4c2844584114d350820a22765765b0",
+    "CLAUDE.md": "4584b100b0278cb6b198e5635143dec350e556bb3ec44ea90cd8a577fc42e775",
+    "SECURITY.md": "211f5cc0b96ab2e9af5fce2e49d049e31d9a4cfe0a287191886f4cb9c009088f",
+    "references/contract.md": "145a9fea8303398be01145d4d86f38aa22f92642a5cf131c946dd319a658460b",
+    "agents/openai.yaml": "59d49899bc6be0a3fbdbcb34e05c5cdf6397e69d3b403f0592c4d6a9b23b90f1",
+    "docs/release-readiness.md": "df07fb3095e2c15c1c17e4eaf6786e810a3dd255e1befd4c15f1b33487f1ada3",
+    "samples/service.py": "0e731a9a13875fe666672199002c14d66ae9925b1db51d4d77cc3a0c781b0a70",
+    "samples/reference.md": "b5b1766d373fa0e72662d0f1da91955124ce00200d9c213f53e7867131a86f8e",
+    "samples/incident.log": "169c6e141deff0782b30a48faee44d8ab4323ff18454cc540486516418aef409",
+    "scripts/source_guard.py": "263b6803d18763f104a08d5a233fb44f525ddd0406cde9b225883897cea6bd35",
+    "scripts/evidence_checks.py": "42c5e04344acb4d864715043e05021fff66b63dd7d1000a650c2dd41b723de6d",
+    "scripts/distribution.py": "efe47048e322db99d01259b3546ecbd3ef6eedd693d9b47875282b58079485a1",
+    "scripts/routing_policy.py": "1700bcd91e104a801535e37fc3639ea1df689070da3e2ab363596d471fe5a0d9",
+    "scripts/query_matcher.py": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+    "scripts/install.py": "4438041bc5747f1662dec6d2d3b0fd02e52ad4043983121affeceb6be4a519e0",
+    "scripts/router.py": "079e656e878d89e8202f5279a57532aca7619adb690386b5f4a063675879c0b0",
+    "scripts/mcp_server.py": "59ef933ea823dcd2fbf74b942e2923b796f21bdfba1b30edd80738473bea1d42"
+  },
+  "schedule": [
+    [
+      "sympy_multiple_failures_ko",
+      1
+    ],
+    [
+      "scipy_failure_blocks",
+      1
+    ],
+    [
+      "cpython_trace",
+      1
+    ],
+    [
+      "visible_summary",
+      1
+    ],
+    [
+      "sympy_multiple_failures_ko",
+      2
+    ],
+    [
+      "scipy_failure_blocks",
+      2
+    ],
+    [
+      "cpython_trace",
+      2
+    ],
+    [
+      "visible_summary",
+      2
+    ]
+  ],
+  "criteria": "No fixed-rubric loss/new insufficient approval. Positive implicit actual reader/profile 4/4, negative guide/reader0/4; all billed costs complete; Each positive-task aggregate AND positive-group/whole tokens reduced; per-repeat increases reported. No universal guarantee. Stop pilot after first repeat if no aggregate or log savings, missing activation or quality issue. No retuning or forced attachment.",
+  "measurement": "Direct local MCP reader plus installed setup skill enabled on ALL tasks. Identical text-only tasks, no force or skill attachment; schema/context and all main usage counted. Actual native MCP calls required on positives; guide loads forbidden. No header seed except negative visible. Known sources, not new holdout; all-attempt input+output; cached/reasoning subsets not added."
+}

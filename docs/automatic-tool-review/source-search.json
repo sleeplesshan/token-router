@@ -1,0 +1,121 @@
+{
+  "scope": "Public discovery stopped at first qualifying additional source;10downloadedlogs total;2additional of12allowed",
+  "logs": [
+    {
+      "file": "pytest.log",
+      "repository": "pytest-dev/pytest",
+      "run_id": 38121360864,
+      "job_id": 114416976269,
+      "url": "https://github.com/pytest-dev/pytest/actions/runs/38121360864/job/114416976269",
+      "sha256": "4183e912e77af76b3264a690ae274dad553adb5f1b94377b1587791f07fac6a0",
+      "bytes": 60483,
+      "lines": 672,
+      "eligible": false,
+      "reason": "no pytest failure blocks"
+    },
+    {
+      "file": "pytest-plugins.log",
+      "repository": "pytest-dev/pytest",
+      "run_id": 38121360864,
+      "job_id": 114416976275,
+      "url": "https://github.com/pytest-dev/pytest/actions/runs/38121360864/job/114416976275",
+      "sha256": "03e2fd709c9ac7da9015e015ff6873dab4279c589cffbf77c02c32aa0a5c9dfd",
+      "bytes": 61095,
+      "lines": 676,
+      "eligible": false,
+      "reason": "no pytest failure blocks"
+    },
+    {
+      "file": "pytest-macos.log",
+      "repository": "pytest-dev/pytest",
+      "run_id": 38121360864,
+      "job_id": 114416976288,
+      "url": "https://github.com/pytest-dev/pytest/actions/runs/38121360864/job/114416976288",
+      "sha256": "c70d6e462bf2de9c24194d161116d182b6050a7aceaf5afdd25927d7ab39bf80",
+      "bytes": 62549,
+      "lines": 685,
+      "eligible": false,
+      "reason": "no pytest failure blocks"
+    },
+    {
+      "file": "pandas.log",
+      "repository": "pandas-dev/pandas",
+      "run_id": 38316307925,
+      "job_id": 115033648456,
+      "url": "https://github.com/pandas-dev/pandas/actions/runs/38316307925/job/115033648456",
+      "sha256": "de9a0a5292a9c93d7e745b1d989b3b5a9b64cd543a3ea978ab51d599ab6a0ef3",
+      "bytes": 501895,
+      "lines": 2201,
+      "eligible": false,
+      "reason": "two blocks195lines each exceed64"
+    },
+    {
+      "file": "httpx.log",
+      "repository": "encode/httpx",
+      "run_id": 37009481166,
+      "job_id": 110845502631,
+      "url": "https://github.com/encode/httpx/actions/runs/37009481166/job/110845502631",
+      "sha256": "5ff1b235151be16bca158a1bfb10a7f2ad50a8ac74437f1ca3d9c85eed7b3696",
+      "bytes": 66624,
+      "lines": 730,
+      "eligible": false,
+      "reason": "one block only;124lines"
+    },
+    {
+      "file": "sklearn.log",
+      "repository": "scikit-learn/scikit-learn",
+      "run_id": 38278847765,
+      "job_id": 114911084690,
+      "url": "https://github.com/scikit-learn/scikit-learn/actions/runs/38278847765/job/114911084690",
+      "sha256": "39433106fcb47b5108474c38da11b44fdd01a6c181bbf323f6df9fbbe0fee9ae",
+      "bytes": 1137215,
+      "lines": 5201,
+      "eligible": false,
+      "reason": "one block only;162lines"
+    },
+    {
+      "file": "sklearn-min.log",
+      "repository": "scikit-learn/scikit-learn",
+      "run_id": 38278847765,
+      "job_id": 114911084429,
+      "url": "https://github.com/scikit-learn/scikit-learn/actions/runs/38278847765/job/114911084429",
+      "sha256": "536e093e1ecb3cc42dcf61f53747917346d11159ba5ffd6591e900868aa8cb02",
+      "bytes": 866269,
+      "lines": 3311,
+      "eligible": false,
+      "reason": "one block only"
+    },
+    {
+      "file": "numpy.log",
+      "repository": "numpy/numpy",
+      "run_id": 38285002118,
+      "job_id": 114934869692,
+      "url": "https://github.com/numpy/numpy/actions/runs/38285002118/job/114934869692",
+      "sha256": "bc0ef3a02954b45bbe08e5aa47ff8fa779b427162b24ac2b28d5e4295edafc2a",
+      "bytes": 16959,
+      "lines": 224,
+      "eligible": false,
+      "reason": "no pytest failure blocks"
+    },
+    {
+      "file": "matplotlib.log",
+      "repository": "matplotlib/matplotlib",
+      "run_id": 38294146374,
+      "job_id": 114961065801,
+      "sha256": "4140a2ffc951825302d59751f7b93bddf0a33b884f19e784336053a5b3a51817",
+      "bytes": 1826002,
+      "eligible": false,
+      "reason": "mostly long blocks; stopped when SymPy suitable"
+    },
+    {
+      "file": "sympy.log",
+      "repository": "sympy/sympy",
+      "run_id": 38330342967,
+      "job_id": 115078685188,
+      "sha256": "add4fe82b292e7188fbf58eb6589f801565886b729c3d36f7299dc40c63d1800",
+      "bytes": 84004,
+      "eligible": true,
+      "reason": "multiple short complete blocks and distant summary"
+    }
+  ]
+}

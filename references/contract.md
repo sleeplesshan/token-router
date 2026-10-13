@@ -1,4 +1,4 @@
-# CLI and data contract — 2.7.1
+# CLI and data contract — 2.8.0
 
 Runtime: Python 3.10–3.14, standard library. Default: `--optimize tokens`, policy v2.4, return-context off. No executable discovery, login, network or telemetry occurs in this default. Basic regular-file CLI is designed for Linux/macOS/Windows; see the release-readiness report for actually executed platforms. Research scripts have separate dependencies and are not installed.
 
@@ -70,7 +70,7 @@ Managed updates under .agents/skills or .codex/skills put backups under the sibl
 
 `--search-context N` (0-12) overrides neighbors only for `--search-term`; other paths reject it. Omitted values preserve code12/log4. Width0 retains every matching line, not ordinary neighbors; selected bounded tracebacks can still add lines. An ERROR before an unselected traceback does not select it at width0. This is explicit scope control, not a claim of semantic completeness. Use wider context for branch conditions or multiline expressions and include recovery costs in comparisons.
 
-Discovery is scoped to dispersed error-log context or branching/order audits requiring complete Python definitions whose exact qualified names are already known. Literal-only lookups, one already-known line range and sufficient visible evidence should bypass loading. This metadata guideline is not a programmable host interception or a future total-token guarantee. The prior log-only gate failed promotion. The explicit native complete-callable/failure-block evaluation is in docs/actual-reader-review/report.ko.md; cold implicit savings remain unproven.
+Historical2.7.0 discovery (superseded by the2.8 setup/manual metadata below) was scoped to dispersed error-log context or branching/order audits requiring complete Python definitions whose exact qualified names are already known. Literal-only lookups, one already-known line range and sufficient visible evidence should bypass loading. This metadata guideline is not a programmable host interception or a future total-token guarantee. The prior log-only gate failed promotion. The explicit native complete-callable/failure-block evaluation is in docs/actual-reader-review/report.ko.md; cold implicit savings remain unproven.
 
 ## Explicit complete Python callables — 2.7.0
 
@@ -92,4 +92,24 @@ Compact successful symbol output omits coordinates already present in stdout; fa
 
 `--activation-profile log-context` is additive and optional, only error_log with local literal search. Existing scan facts require source50,000 decoded chars, separate selected regions2+/span100lines+, a selected recognized complete failure block1+, all terms found and selected line cost at most half the bounding region. Existing rendered caps and general15% margin are unchanged. Rejects return no source; no whole/cloud fallback. Source/sidecar errors override activation. `activation`, `activation_profile`, sidecar-only `activation_facts` are observations; require exit0 and successful status before consuming evidence. Compact stderr omits scan details. Manual commands without the profile and query policy remain unchanged.
 
-Native regression showed lower log tokens with slower completion, not universal or implicit savings. [Integration](https://github.com/sleeplesshan/token-router/blob/v2.7.1/docs/activation-integration.md) and [evaluation](https://github.com/sleeplesshan/token-router/blob/v2.7.1/docs/conservative-activation-review/report.ko.md).
+Historical2.7.1 native regression showed lower log tokens with slower completion, not universal or implicit savings. [Integration](https://github.com/sleeplesshan/token-router/blob/v2.7.1/docs/activation-integration.md) and [evaluation](https://github.com/sleeplesshan/token-router/blob/v2.7.1/docs/conservative-activation-review/report.ko.md).
+
+## Direct local tool connection — 2.8.0
+
+The recommended Codex install registers `read_pytest_failures` with direct schema
+exposure and no guide-read prerequisite. Automatic scope is multiple named pytest
+failure blocks plus distant results; all other automatic tasks use ordinary search.
+Setup/manual skill metadata remains implicitly discoverable. CLI-only install and
+all existing flags preserve their contracts. The adapter invokes only guarded local
+literal/profile selection; five-second timeout,65KBrequests,12KBcharacter packet,
+immutable workspace root and limited arguments. General policy remainsv2.4.
+
+22-file payload migration accepts exactly the original21file inventory and current
+22files; arbitrary missing/extra files are still rejected. Verified21file restoration
+copies its exact original inventory and requires disconnect first if connected.
+Owned registration is explicitly configured/removed through install.py; raw auth,
+AGENTS and other skills are not changed. Direct exposure uses one CAS config write;
+changed user settings block automatic removal. Startup cwd comes from local Codex
+session0.162.1; other/remote host behavior is unmeasured. Full operational contract:
+[automatic connection](../docs/activation-integration.md). Current costs and failed
+pilots: [evaluation](../docs/automatic-tool-review/report.ko.md).

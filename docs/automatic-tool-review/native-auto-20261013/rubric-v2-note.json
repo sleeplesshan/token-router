@@ -1,0 +1,9 @@
+{
+  "reason": "Original rubric omitted directly sufficient line781/domain=QQ; line782 also explicitly displays domainQQ. Original strict5/6 remains preserved; all facts correct6/6. This correction does not erase +46.63% token failure.",
+  "changed_fact": "poly_explicit",
+  "added_sufficient_lines": [
+    781,
+    782
+  ],
+  "runtime_hints_changed": false
+}

@@ -1,70 +1,92 @@
-# Conservative activation integration
+# Automatic local retrieval — 2.8.0
 
-The automatic scope is dispersed failure logs. Complete Python callable retrieval
-remains a manual capability: similar code questions had both substantial and
-negligible savings. This is task eligibility, not a future-token predictor.
-
-Installing a skill does **not** insert middleware into every Codex read. Metadata
-narrows model discovery; a host that owns `turn/start` can enforce the gate before
-loading the guide. Without that host integration, pre-loading enforcement is not
-available. No global model, auth, hook or AGENTS configuration is changed.
-
-## Host gate before a main turn
-
-Import the installed `scripts/routing_policy.py`. Use facts already available from
-the user request or ordinary search; do not read the whole file for this gate.
-Do not infer selectors from an answer key. `purpose='failure_context'` means the
-task needs block context, not merely a named error or a number from a summary.
-
-```python
-from dataclasses import asdict
-from routing_policy import plan_activation
-
-decision = plan_activation(
-    mode="error_log",
-    purpose="failure_context",
-    selectors=("ERROR: worker (", "Total test files:"),
-    visible_sufficient=False,
-    native_guide=True,
-)
-input_items = [{"type": "text", "text": user_task}]
-if decision.action == "activate":
-    input_items.append({"type": "skill", "name": "token-router",
-                        "path": installed_skill_path})
-# Send these items to the existing main turn, using the host's ordinary settings.
-# Bypass means the ordinary path: no skill attachment, guide read or router call.
-```
-
-This function has no I/O, persistent history, classifier model or additional
-model turn. Unknown purpose, fewer than two distinct selectors, sufficient
-visible evidence, code tasks or lack of native guide support all bypass.
-The host must preserve the declared need and pass known selectors to the agent.
-It must never claim a guarantee based on this preliminary decision.
-
-## Extraction gate in the same local command
+Recommended Codex installation connects one local read-only tool:
 
 ```sh
-python3 scripts/router.py error_log path/to/ci.log \
-  --search-term 'ERROR: worker (' --search-term 'Total test files:' \
-  --activation-profile log-context --line-numbers --compact-status
+python3 scripts/install.py install --dest "$HOME/.agents/skills/token-router" --connect-codex
+# Existing verified installation:
+python3 scripts/install.py connect-codex --dest "$HOME/.agents/skills/token-router"
 ```
 
-The existing metadata scan is reused: source at least50,000 decoded characters,
-all selectors found, at least two separate selected regions spanning100 lines,
-at least one selected recognized complete Python/pytest failure block, and
-selected line cost no more than half the bounding region. The whole rendered
-packet still has the12,000-character explicit-reader cap and common final cap.
-The bounding-region test rejects poor scope; it is **not** a comparison against
-efficient batched search and does not change the general15% policy threshold.
+Start a new Codex session after installation, update or connection changes. The
+model sees a compact `read_pytest_failures` schema from the start; no skill guide
+load or repeated manual invocation is required for everyday retrieval. The setup
+skill remains discoverable for setup, diagnostics and explicit manual requests.
+Tool selection remains the model's decision, not interception of every read.
 
-Rejection returns exit2, empty raw stdout and a reason. `activation=bypass` with
-`next_action=ordinary_search` means use ordinary targeted search; never repeat
-the same call or automatically perform whole reading/cloud selection. Runtime
-rejection can occur after native guide delivery; that cost must count. An
-admitted packet preserves the manual reader's source ranges and raw text.
-Source consistency and finalization failures still override output. Detailed
-scan facts stay in `--report-json`; compact stderr stays short.
+## Supported connection and ownership
 
-Manual commands without the profile and default query/v2.4 remain unchanged.
-The installed21-file inventory is unchanged. The API lives in an existing
-runtime module; host integrations are opt-in, not automatically installed.
+Codex CLI0.162.1 was tested. The installer uses `codex mcp add/get/remove` plus
+config-only app-server RPC to set just
+`mcp_servers.token-router.omit_tools_from=["deferred"]`. The scoped write uses the
+user config version for compare-and-swap. It does not start a model/thread, add
+another inference provider or alter global models/auth/AGENTS. Direct exposure
+has a recurring context cost; deferred discovery did not activate in two pilots.
+That observed non-selection is not proof of a universal Codex limitation.
+
+Managed markers record transport and user configuration. Different, disabled,
+filtered or subsequently changed settings are preserved and rejected. Installation
+can succeed before connection fails: stderr says `installed_connection_failed`
+and supplies a reconnect action. CLI-only installation remains usable. A new
+registration is removed after failed setup only if its current settings still
+match the installer-created record. Concurrent changes are preserved.
+
+Global registration omits cwd. On local Codex0.162.1, the server inherits the
+session's local workspace cwd, verified against the official implementation.
+It captures that canonical directory as an immutable read root. Home/filesystem
+root startup is rejected unless deliberately authorized with explicit roots:
+
+```sh
+python3 scripts/install.py connect-codex --dest "$HOME/.agents/skills/token-router" \
+  --allow-root /reviewed/project --allow-root /reviewed/logs
+```
+
+Changing roots requires disconnect/reconnect. Multiroot/remote environments and
+other hosts were not automatically validated. The server does not use dynamic
+MCP roots or follow another task's later cwd. New sessions need new server
+lifecycles; active processes can retain an earlier release after update.
+
+## Tool and extraction contract
+
+Arguments: local `.log`/`.txt`/`.out` path,2–8 distinct literal failure headers,
+optional result fragment (default ` failed`). Known test names are acceptable;
+unknown names require ordinary search first. Automatic scope is comparisons of
+multiple named pytest blocks and distant results. Single tracebacks, code,
+literal answers, one known range and visible sufficient evidence use ordinary
+search. There is no project whitelist or future-token predictor.
+
+The stdio MCP server uses Python3.10+ standard library and a fixed, no-shell
+local reader subprocess with5second timeout. It rejects outside-root paths and
+symlink escapes, scrubs cloud/ROUTER overrides, exposes no cloud/extra CLI flags,
+and writes only JSON-RPC on protocol stdout. Requests are limited to65,536bytes;
+source/resource and12,000 rendered-character packet caps remain. Failures return
+short structured diagnostics without raw source. Calls are synchronous;
+cancellation is not processed during the bounded local call. No automatic retry,
+recovery engine, network endpoint, source execution or persistent index exists.
+
+The reader reuses `--activation-profile log-context`: source50,000+ decoded
+characters, every selector present, separate regions2+/span100lines+, a selected
+recognizable bounded failure block and selected lines at most half the bounding
+region. Default15% rendered reduction and all source/descriptor/coordinate/output
+checks remain. This profile does not prove semantic completeness or compare
+against optimal ordinary search. Exceeding any guard withholds all raw output.
+Use targeted reading after rejection; never repeat unchanged calls or escalate
+automatically to cloud. Success returns the exact existing numbered CLI packet.
+
+## Disconnect and rollback
+
+```sh
+python3 scripts/install.py disconnect-codex --dest "$HOME/.agents/skills/token-router"
+python3 scripts/install.py restore --dest "$HOME/.agents/skills/token-router" --backup /verified/backup
+python3 scripts/install.py uninstall --dest "$HOME/.agents/skills/token-router"
+```
+
+Uninstall removes an unchanged managed connection first; changed settings block
+removal so they can be preserved. Disconnect before restoring a21-file version;
+its adapter does not exist.22-file updates preserve the managed connection.
+Backups stay outside skill discovery, and exact inventories are restored.
+Restart/new session is required after rollback as well.
+
+The older I/O-free `routing_policy.plan_activation` native-guide host API remains
+available, unchanged and optional. It is not the default connection used above;
+its2.7.1 native-only contract and measurement are historical. [Current evaluation](automatic-tool-review/report.ko.md).

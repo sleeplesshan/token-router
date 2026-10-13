@@ -1,0 +1,10 @@
+{
+  "status": "RuntimeError:activation_contract:sympy_multiple_failures_ko-1-implicit",
+  "budget": {
+    "main_turns": 2,
+    "known_tokens": 46366,
+    "unknown_usage": 0
+  },
+  "wall": 22.522582750068977,
+  "episodes": 2
+}
