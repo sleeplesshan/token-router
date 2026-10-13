@@ -16,6 +16,12 @@ DESCRIPTION=('Read complete dispersed pytest failure blocks plus distant final r
              'Skip single tracebacks, code, literal-only questions and evidence already visible. '
              'Returns original numbered source, not semantic conclusions; a rejection requires ordinary targeted reading.')
 SCHEMA={'type':'object','properties':{'path':{'type':'string'},'failure_headers':{'type':'array','items':{'type':'string','maxLength':256},'minItems':2,'maxItems':8,'uniqueItems':True},'result_term':{'type':'string','default':' failed','maxLength':256}},'required':['path','failure_headers'],'additionalProperties':False}
+INSTRUCTIONS=('For comparisons of multiple named pytest failure blocks and distant results, '
+              'prefer read_pytest_failures directly when their names are already known; '
+              'its failure_headers accept those literal names. No preliminary search or skill guide is needed. '
+              'If names are unknown, discover them with ordinary search first. '
+              'Use ordinary search for single tracebacks, code, literal lookups or sufficient visible evidence. '
+              'On rejection, read targeted ranges; never retry unchanged or escalate to a model.')
 
 def failure(code):
     return {'isError':True,'content':[{'type':'text','text':json.dumps({'status':'not_returned','reason':code,'next_action':'ordinary_targeted_read'})}]}
@@ -64,7 +70,7 @@ class Server:
         if not isinstance(params,dict):return error(ident,-32602,'Invalid params')
         if method=='initialize':
             self.initialized=True
-            result={'protocolVersion':params.get('protocolVersion') if params.get('protocolVersion') in VERSIONS else VERSIONS[0],'capabilities':{'tools':{'listChanged':False}},'serverInfo':{'name':'token-router-local','version':'0.1.0'}}
+            result={'protocolVersion':params.get('protocolVersion') if params.get('protocolVersion') in VERSIONS else VERSIONS[0],'capabilities':{'tools':{'listChanged':False}},'serverInfo':{'name':'token-router-local','version':'0.1.0'},'instructions':INSTRUCTIONS}
         elif method=='ping':result={}
         elif not self.initialized:return error(ident,-32000,'Initialize first')
         elif method=='tools/list':result={'tools':[{'name':TOOL,'description':DESCRIPTION,'inputSchema':SCHEMA,'annotations':{'readOnlyHint':True,'destructiveHint':False,'openWorldHint':False}}]}
