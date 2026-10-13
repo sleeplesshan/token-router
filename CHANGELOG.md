@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.8.1 — 2026-10-13
+
+- Replace Codex CLI MCP add/remove with scoped, version-checked config-only RPC creation/deletion of `mcp_servers.token-router`. Preserve unrelated MCP timeout types, empty settings and comments; retain ownership checks and bounded, no-model configuration requests.
+- Fix2.8.0 installation scope: CLI add/remove can reserialize every MCP server. Existing manually changed connections are still preserved; failed setup removes only an unchanged owned registration.
+- Reader, native selection/schema, skill guidance, defaultv2.4/optionalv2.5 and common safety are unchanged. This is an installation patch with offline verification, not a new model benchmark. Original2.8.0 measurements and identities remain intact; see docs/patch-2.8.1.md.
+
 ## 2.8.0 — 2026-10-13
 
 - Add a local stdio `read_pytest_failures` MCP tool with direct Codex exposure, so named multi-pytest failure comparisons can run without guide-loading/model-discovery roundtrips. Setup skill remains implicitly discoverable; single traces, code and visible facts use ordinary search.

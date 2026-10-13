@@ -2,12 +2,12 @@
 
 Retrieve bounded original lines from large Python files and logs before a reasoning model reads them. **Python-only by default: no model, login, network or source execution.** It returns evidence, not summaries or semantic confidence.
 
-**v2.8.0 · Python3.10–3.14 · standard library · Linux/macOS/Windows.** [Support and validation](docs/release-readiness.md).
+**v2.8.1 · Python3.10–3.14 · standard library · Linux/macOS/Windows.** [Support and validation](docs/release-readiness.md).
 
 ## Install
 
 ```sh
-git clone --branch v2.8.0 --depth 1 https://github.com/sleeplesshan/token-router.git
+git clone --branch v2.8.1 --depth 1 https://github.com/sleeplesshan/token-router.git
 cd token-router
 python3 scripts/install.py install --dest "$HOME/.agents/skills/token-router" --connect-codex
 python3 "$HOME/.agents/skills/token-router/scripts/router.py" --version
@@ -73,7 +73,7 @@ A text-only comparison with the installed skill and connected tool made4/4 actua
 | Combined whole wall sum |121.63s|124.15s (+2.07%)|
 | Automatic calls: logs / exclusions |0 /0|4/4 /0/6|
 
-![Automatic local tool comparison](https://raw.githubusercontent.com/sleeplesshan/token-router/v2.8.0/docs/automatic-tool-review/comparison.png)
+![Automatic local tool comparison](https://raw.githubusercontent.com/sleeplesshan/token-router/v2.8.1/docs/automatic-tool-review/comparison.png)
 
 **Observed log savings do not guarantee a saving on every task or workload.** Direct schema exposure has context cost even when the tool is skipped; excluded tasks increased in this sample. SymPy logs saved9.77% tokens with slower completion; SciPy saved34.30%. General speed improvement is unproven. A short-answer-heavy workload may be better with this connection disabled. [Full paired data, failed candidates, ledger, hashes and reproduction](docs/automatic-tool-review/report.ko.md).
 
@@ -88,10 +88,10 @@ python3 scripts/install.py update --dest "$HOME/.agents/skills/token-router"
 python3 scripts/install.py verify --dest "$HOME/.agents/skills/token-router"
 python3 scripts/install.py disconnect-codex --dest "$HOME/.agents/skills/token-router"
 python3 scripts/install.py restore --dest "$HOME/.agents/skills/token-router" --backup /verified/backup
-python3 scripts/install.py uninstall --dest "$HOME/.agents/skills/token-router" --connect-codex
+python3 scripts/install.py uninstall --dest "$HOME/.agents/skills/token-router"
 ```
 
-The connection option changes only the owned `token-router` MCP entry; CLI-only installation leaves Codex configuration unchanged. Other skills, AGENTS, model and auth are untouched by the installer. Keep personal edits separately. Disconnect before restoring a21-file release (v2.7.1 or earlier). Backups preserve exact payload inventories; existing changed MCP settings are never silently removed.
+Version2.8.1 creates, exposes and removes the connection through scoped, version-checked config RPC; `codex mcp get` is read-only. Version2.8.0 used CLI add/remove, which can reserialize unrelated MCP entries; use the patch release. The connection option changes only the owned `token-router` MCP entry; CLI-only installation leaves Codex configuration unchanged. Other skills, AGENTS, model and auth are untouched by the installer. Keep personal edits separately. Disconnect before restoring a21-file release (v2.7.1 or earlier). Backups preserve exact payload inventories; existing changed MCP settings are never silently removed.
 
 ## Development / advanced use
 
@@ -99,7 +99,7 @@ The connection option changes only the owned `token-router` MCP entry; CLI-only 
 python3 -m unittest discover -s tests
 python3 scripts/run_router_tests.py tests/router-tests.json
 python3 scripts/build_release.py --output dist
-python3 scripts/smoke_archive.py dist/token-router-2.8.0.zip
+python3 scripts/smoke_archive.py dist/token-router-2.8.1.zip
 ```
 
 These checks are offline and make no model call. Optional cloud/legacy latency selection is an advanced POSIX compatibility path using fixed `gpt-6-luna`/low via Codex login. It is never automatic, not required, and live Luna access is unvalidated for this release. Your main agent can separately send the extracted evidence to its own model.

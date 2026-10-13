@@ -1,4 +1,4 @@
-# Release readiness — 2.8.0
+# Release readiness — 2.8.1
 
 Python3.10–3.14 standard-library local runtime. Linux/macOS/Windows basic CLI,
 installer and stdio adapter are covered by the six-job offline CI matrix. Actual
@@ -8,9 +8,9 @@ remain unmeasured. No live Luna call or new selector model is part of validation
 
 | Check | Evidence |
 |---|---|
-| Local Python3.10/3.14 |217 unit tests,10 manifest scenarios; source/coordinate/output safety retained |
+| Local Python3.10/3.14 |221 unit tests,10 manifest scenarios; source/coordinate/output safety retained |
 | MCP boundary |13 adapter tests: bounded transport, real reader, escape/type/source-change/timeout/error withholding |
-| Installation |Known21→22file migration, exact rollback;7 ownership/policy tests and6 config-only RPC tests |
+| Installation |Known21→22file migration, exact rollback;9 ownership/policy tests and8 config-only RPC tests |
 | Config integration |Temporary Codex homes: direct exposure CAS write, repeated connect/disconnect and unrelated configuration preserved; no main turns |
 | Automatic real use |16main comparison + separately locked4code exclusions; positive tool4/4, negative0/6, guide0;50/50 factual+visible sufficient evidence,10/10 completed each arm |
 | Costs |Eligible96953→73446tokens(−24.25%); exclusions117702→132074(+12.21%); combined214655→205520(−4.26%); whole wall121.63→124.15s(+2.07%) |
@@ -31,3 +31,8 @@ The installer changes only its destination and, with the connection option, the
 owned MCP entry. Deployment of the maintainer's global instructions is a separate
 recorded action, never implied by the repository release. Rollback disconnects
 before restoring a verified21file backup/archive. Existing user edits are not reset.
+
+Patch2.8.1 changes only connection writes, documentation and the CLI version marker.
+It creates/deletes the owned MCP table through scoped CAS RPC; no new real-model
+trial was run. Historical model scores, hashes and reports remain frozen.
+[Patch checks and rollout](patch-2.8.1.md).
