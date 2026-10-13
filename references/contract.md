@@ -1,4 +1,4 @@
-# CLI and data contract — 2.7.0
+# CLI and data contract — 2.7.1
 
 Runtime: Python 3.10–3.14, standard library. Default: `--optimize tokens`, policy v2.4, return-context off. No executable discovery, login, network or telemetry occurs in this default. Basic regular-file CLI is designed for Linux/macOS/Windows; see the release-readiness report for actually executed platforms. Research scripts have separate dependencies and are not installed.
 
@@ -8,6 +8,7 @@ Runtime: Python 3.10–3.14, standard library. Default: `--optimize tokens`, pol
 |---|---|---|
 | query, report-json, line-numbers, compact-status | Supported | Supported |
 | search-term / search-context | focused only; context requires literal terms | Usage error |
+| activation-profile log-context | error_log + search-term only; bypass exit2 | Usage error |
 | symbol QUALNAME | heavy_code + focused only; incompatible with search terms/required literals/return completion | Usage error |
 | policy-version v2.4/v2.5 | Supported | Usage error when explicitly supplied |
 | require-term, whole read-scope | v2.5 only | Usage error |
@@ -24,6 +25,7 @@ stdout contains original decoded source slices with headers only on successful e
 - 0: extraction success, including deterministic cloud fallback; never proof of answer accuracy or semantic completeness.
 - 1: input/read/report/source error; no raw stdout.
 - 2 + `status=needs_targeted_read`: retrieval/output/input-resource abstention; no raw stdout.
+- 2 + `status=bypass`: optional profile rejected; empty raw stdout, ordinary targeted search.
 - 2 + `status=usage_error`: invalid command, printed in structured stderr after argparse text. No sidecar is created for invalid arguments.
 - 130: interrupted cloud operation, no raw stdout.
 
@@ -77,3 +79,11 @@ Repeated `--symbol QUALNAME` selects1-8 exact qualified functions/async function
 Selected bounded pytest failure blocks may extend from a recognized underscore header to their file:line:exception terminator within64 lines. Unselected blocks remain excluded. `--compact-status` changes only stderr presentation; current errors/actions/model flags remain and `--report-json` retains the full report. Raw/numbered stdout and the shared safety validation remain identical.
 
 Compact successful symbol output omits coordinates already present in stdout; failure symbol ranges and suggested ranges remain bounded. `symbol_occurrences` and `symbol_ranges_truncated` describe repeated definition positions, not answer probability. Named/literal selection does not use general query ranking; the query policy version has no new semantic sufficiency role there. Model reason/output/source validation is unchanged.
+
+## Conservative host activation — 2.7.1
+
+`routing_policy.plan_activation` is an I/O-free host API for pre-guide eligibility: native guide delivery, failure-context log purpose,2–32 known selectors with at least two distinct literals, and insufficient visible evidence. Unknown purpose, code, simple lookup, visible evidence and cold delivery bypass. It does not classify prose, inspect source or predict billed savings. Installation alone cannot attach middleware; the host owning the main turn must connect it.
+
+`--activation-profile log-context` is additive and optional, only error_log with local literal search. Existing scan facts require source50,000 decoded chars, separate selected regions2+/span100lines+, a selected recognized complete failure block1+, all terms found and selected line cost at most half the bounding region. Existing rendered caps and general15% margin are unchanged. Rejects return no source; no whole/cloud fallback. Source/sidecar errors override activation. `activation`, `activation_profile`, sidecar-only `activation_facts` are observations; require exit0 and successful status before consuming evidence. Compact stderr omits scan details. Manual commands without the profile and query policy remain unchanged.
+
+Native regression showed lower log tokens with slower completion, not universal or implicit savings. [Integration](https://github.com/sleeplesshan/token-router/blob/v2.7.1/docs/activation-integration.md) and [evaluation](https://github.com/sleeplesshan/token-router/blob/v2.7.1/docs/conservative-activation-review/report.ko.md).

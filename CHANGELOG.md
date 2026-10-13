@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.7.1 — 2026-10-13
+
+- Narrow automatic discovery to native dispersed failure-log context. Complete Python definitions remain explicit manual retrieval.
+- Add I/O-free host `plan_activation` before native guide attachment and optional `--activation-profile log-context` using the existing literal scan; manual CLI/defaultv2.4/shared safety unchanged. No global hook or selector model.
+- Native16-episode regression: actual logs24/24 evidence conditions, tokens−26.82%, wall+27.46%; exclusions had no skill/guide/reader. All38/38, tokens−17.62%, wall+21.03%. Optional token-focused path, no speed/universal savings claim.
+-189 offline tests plus10 manifest scenarios; repair/reconcile research RPC/grace/shutdown event capture. Preserve old scores and publish new locks/packets/raw hashes.
+
+
 ## 2.7.0 — 2026-10-13
 
 - Add explicit complete bounded Python callable retrieval (`--symbol`), merged overlaps/decorators and whole-batch refusal for missing/duplicate/syntax/budget failures.

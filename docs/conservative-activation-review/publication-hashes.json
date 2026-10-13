@@ -1,0 +1,5 @@
+{
+  "episodes_local_sha256": "ff6e0abc43f65a9bc41d11da7430d1958ab48af886f900b0a03fd0c639b020ec",
+  "episodes_public_sha256": "ada2304590606b0fc6f6e44bf717fe1a433c0075e147a357e667850517e6c094",
+  "sanitization": "Absolute home/experiment paths replaced in public command/status strings; counters/answers/source line text unchanged."
+}

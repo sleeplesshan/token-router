@@ -2,12 +2,12 @@
 
 Retrieve bounded original lines from large Python files and logs before a reasoning model reads them. **Python-only by default: no model, login, network or source execution.** It returns evidence, not summaries or semantic confidence.
 
-**v2.7.0 · Python3.10–3.14 · standard library · Linux/macOS/Windows.** [Support and validation](docs/release-readiness.md).
+**v2.7.1 · Python3.10–3.14 · standard library · Linux/macOS/Windows.** [Support and validation](docs/release-readiness.md).
 
 ## Install
 
 ```sh
-git clone --branch v2.7.0 --depth 1 https://github.com/sleeplesshan/token-router.git
+git clone --branch v2.7.1 --depth 1 https://github.com/sleeplesshan/token-router.git
 cd token-router
 python3 scripts/install.py install --dest "$HOME/.agents/skills/token-router"
 python3 "$HOME/.agents/skills/token-router/scripts/router.py" --version
@@ -17,7 +17,7 @@ Or download the versioned archive and SHA-256 from [Releases](https://github.com
 
 ## Choose the smallest adequate read
 
-Use ordinary search for a literal answer or an already-known short range. Reuse visible evidence. Routing is useful when search leaves dispersed failure context or a branch/order question needs complete named Python definitions. File size alone does not make it worthwhile.
+Use ordinary search for a literal answer or an already-known short range. Reuse visible evidence. Automatic scope is limited to dispersed recognizable failure blocks plus distant result context, with native guide delivery and insufficient visible evidence. Complete Python callable retrieval remains an explicit manual capability. File size alone does not make it worthwhile.
 
 ```sh
 # Complete explicitly named callables, batched; no dependency traversal.
@@ -27,7 +27,7 @@ python3 scripts/router.py heavy_code path/to/module.py \
 # Exact failure-header fragments and a dispersed summary, batched.
 python3 scripts/router.py error_log path/to/ci.log \
   --search-term 'ERROR: worker (' --search-term 'Total test files:' \
-  --line-numbers --compact-status
+  --activation-profile log-context --line-numbers --compact-status
 
 # Existing general query path: default local tokens / v2.4 policy.
 python3 scripts/router.py heavy_code samples/service.py --query retry_delay
@@ -49,29 +49,37 @@ Both explicit readers cap their whole rendered packet at12,000 characters plus t
 | auto_full /0 | Whole decoded source |
 | auto_candidates /0 | Excerpt; verify evidence |
 | needs_targeted_read /2 | Empty source output; narrow or read specific ranges |
+| bypass /2 | Profile rejected; ordinary targeted search, empty source output |
 | usage_error /2 | Correct the command |
 | error /1 | Input, source change or report failure; empty source output |
 | fallback /0 | Optional selector failed; inspect model_failed |
 
 The general query policy remains **v2.4**, with **v2.5 opt-in**; return-context remains off. Optional `--return-context bounded`/`--return-target QUALNAME` are separate existing features. Shared stat/path+descriptor checks, strict model-visible coordinates and final rendered output cap remain in every path. Metadata checks are not atomic snapshots. UTF-8 replacement and LF normalization preserve decoded lines, not exact original bytes. [Complete CLI contract](references/contract.md).
 
-## Measured value and limits
+## Conservative activation and measured limits
 
-In4 contextual development tasks (large pandas/Rich code and CPython/SciPy logs), two repeats per arm with native Codex skill input:
+A connected host can call `routing_policy.plan_activation` **before native skill injection** using already-known context needs, selectors and visible-evidence state. Code, simple lookups, one selector, sufficient evidence and cold delivery bypass. The optional `--activation-profile log-context` then checks actual dispersion and bounded failure context during the existing reader scan, without another file pass or model turn. It never falls back to whole source on rejection. [Host integration contract](https://github.com/sleeplesshan/token-router/blob/v2.7.1/docs/activation-integration.md).
 
-| Measure | Ordinary search | Router |
+**Installation alone does not connect this host gate or intercept all reads.** Metadata narrows discovery; connected execution enforces attachment/bypass. Manual CLI without the profile and default query policy remain unchanged. Admission is a conservative heuristic, not a guarantee against efficient batched search.
+
+A16-episode native regression trial compared ordinary search with the connected gate on2 dispersed logs and2 excluded tasks, each repeated twice. The measured candidate was package2.7.0/e3b5217;2.7.1 retains its runtime logic and guide with version/docs/test updates. Model: gpt-6.1-sol medium, no selector call.
+
+| Measure | Ordinary search | Connected gate |
 |---|---:|---:|
-| Fixed-rubric correct answers + source evidence |48/48|48/48|
-| Successful episodes |8/8|8/8|
-| Total input + output, including guide/main/recovery |193,678|158,361 (-18.23%)|
-| Whole episode wall sum |116.29s|111.80s (-3.86%)|
-| Actual router calls |0|8|
+| Fixed-rubric answers + evidence, actual logs |24/24|24/24|
+| Actual logs input + output |112,242|82,143 (−26.82%)|
+| Actual logs whole wall sum |42.76s|54.50s (+27.46%)|
+| Router/profile calls on admitted logs |0|4/4|
+| Skill attachment/guide read/router on exclusions |0|0/4|
+| All answers + evidence |38/38|38/38|
+| All input + output |162,608|133,954 (−17.62%)|
+| All whole wall sum |85.96s|104.04s (+21.03%)|
 
-![Actual-use comparison](https://raw.githubusercontent.com/sleeplesshan/token-router/v2.7.0/docs/actual-reader-review/comparison.png)
+![Conservative activation comparison](https://raw.githubusercontent.com/sleeplesshan/token-router/v2.7.1/docs/conservative-activation-review/comparison.png)
 
-This is a measured **explicit native invocation** path, not proof of automatic selection or universal savings. Pandas was effectively flat (one repeat increased tokens); CPython used fewer tokens but took21.47% longer. A separate cold CLI delivery used24.12% more tokens because of an additional guide-reading roundtrip and an overly broad failed extraction. Those losses and all48 new main turns/1,050,651tokens are retained. The guide-inserted experiment is separate. [Full report, per-episode packets, hashes and raw events](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/report.ko.md).
+This is an **optional token-saving log path, with slower observed completion**. CPython saved19.51% tokens; SciPy33.13%, but SciPy time increased. Excluded paths had identical prompts/native inputs and ordinary retrieval; their2.87% token variation is not gate savings or gate execution cost. All16 turns cost296,562 known tokens; no failures/timeouts or unknown usage occurred. Rejected admissions and failures would count, with unknown usage stopping the trial. [Full results, hashes, packets and raw events](https://github.com/sleeplesshan/token-router/blob/v2.7.1/docs/conservative-activation-review/report.ko.md).
 
-Queries answerable by one small search should bypass the skill. The15% rendered-character margin is a heuristic against whole-source size, not a guarantee against efficient ordinary search. New project holdouts, cold implicit savings and other main models remain unmeasured. Use sufficient full context for broad audits and cross-file work. Never route mandatory instructions. Historical [v2.5 evaluation](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/benchmark-v2.5.md) and other reports retain their original versions and scores.
+Known-source regression evidence is not a new project holdout or universal per-task guarantee. Previous [v2.7 explicit-reader evaluation](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/report.ko.md) retained native savings and cold24.12% losses; code savings ranged from substantial to negligible. The15% general rendered-character margin remains unchanged. Defaultv2.4 and optionalv2.5 retain their original safety and evidence contracts. Use complete context for broad/cross-file work and never route mandatory instructions.
 
 ## Update, restore, remove
 
@@ -84,7 +92,7 @@ python3 scripts/install.py restore --dest "$HOME/.agents/skills/token-router" --
 python3 scripts/install.py uninstall --dest "$HOME/.agents/skills/token-router"
 ```
 
-It does not change AGENTS, other skills, model configuration or auth. Keep personal edits separately. Roll back with a verifiedv2.6.0 archive/tag or the installation backup.
+It does not change AGENTS, other skills, model configuration or auth. Keep personal edits separately. Roll back with a verifiedv2.7.0 archive/tag or the installation backup.
 
 ## Development / advanced use
 
@@ -92,7 +100,7 @@ It does not change AGENTS, other skills, model configuration or auth. Keep perso
 python3 -m unittest discover -s tests
 python3 scripts/run_router_tests.py tests/router-tests.json
 python3 scripts/build_release.py --output dist
-python3 scripts/smoke_archive.py dist/token-router-2.7.0.zip
+python3 scripts/smoke_archive.py dist/token-router-2.7.1.zip
 ```
 
 These checks are offline and make no model call. Optional cloud/legacy latency selection is an advanced POSIX compatibility path using fixed `gpt-6-luna`/low via Codex login. It is never automatic, not required, and live Luna access is unvalidated for this release. Your main agent can separately send the extracted evidence to its own model.
