@@ -98,14 +98,19 @@ class MCPTests(unittest.TestCase):
         import os,sys
         requests=[{'jsonrpc':'2.0','id':1,'method':'initialize','params':{'protocolVersion':'2025-11-25'}},
                   {'jsonrpc':'2.0','id':2,'method':'tools/call','params':{'name':'read_pytest_failures','arguments':self.args}}]
-        # An invalid non-ASCII path must remain a clean JSON protocol response.
-        requests[1]['params']['arguments']['path']=str(self.root/'없는파일.log')
+        lines=['padding '*12+'\n']*1200
+        for start,name in [(100,'test_a'),(600,'test_b')]:
+            lines[start]='____ '+name+' ____\n'
+            lines[start+1]='값 = "안녕"\n'
+            lines[start+2]='tests/test_x.py:42: ValueError\n'
+        lines[1100]='2 failed, 20 passed\n';self.path.write_text(''.join(lines),encoding='utf-8')
         result=subprocess.run([sys.executable,str(SPEC.origin),'--allow-root',str(self.root)],
             input=('\n'.join(json.dumps(r,ensure_ascii=False)for r in requests)+'\n').encode('utf-8'),
             env=dict(os.environ,PYTHONIOENCODING='ascii'),capture_output=True,timeout=3)
         self.assertEqual(result.returncode,0)
         responses=[json.loads(line)for line in result.stdout.decode('utf-8').splitlines()]
-        self.assertEqual(len(responses),2);self.assertTrue(responses[1]['result']['isError'])
+        self.assertEqual(len(responses),2);self.assertFalse(responses[1]['result']['isError'])
+        self.assertIn('안녕',responses[1]['result']['content'][0]['text'])
         self.assertNotIn(b'\r\n',result.stdout)
 
 if __name__=='__main__':unittest.main()
