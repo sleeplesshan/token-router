@@ -1,7 +1,7 @@
 import importlib.util
 import io
 import json
-from pathlib import Path
+from pathlib import Path, PureWindowsPath, PurePosixPath
 import subprocess
 import tempfile
 import unittest
@@ -19,9 +19,48 @@ class MCPTests(unittest.TestCase):
     def test_validation_and_escape(self):
         for delta in [{'failure_headers':['same','same']},{'failure_headers':[True,'x']},{'path':False},{'extra':1},{'result_term':'\nx'}]:
             result=self.server.call({**self.args,**delta});self.assertTrue(result['isError'])
-        other=self.root.parent/'outside-secret.log'
-        link=self.root/'escape.log';link.symlink_to(other)
-        self.assertTrue(self.server.call({**self.args,'path':str(link)})['isError'])
+
+    def test_default_root_guard_posix_and_windows(self):
+        for cls,root,home,project in [(PurePosixPath,'/','/home/u','/work/project'),(PureWindowsPath,'C:/','C:/Users/u','C:/work/project')]:
+            self.assertFalse(self.m.default_root_allowed(cls(root),cls(home)))
+            self.assertFalse(self.m.default_root_allowed(cls(home),cls(home)))
+            self.assertTrue(self.m.default_root_allowed(cls(project),cls(home)))
+    def test_existing_symlink_escape(self):
+        with tempfile.TemporaryDirectory() as outside:
+            other=Path(outside)/'private.log';other.write_text('SECRET')
+            link=self.root/'escape.log'
+            try:link.symlink_to(other)
+            except OSError as exc:self.skipTest('symlinks unavailable: '+str(exc))
+            with patch.object(self.m.subprocess,'run',side_effect=AssertionError('must reject before subprocess')):
+                self.assertTrue(self.server.call({**self.args,'path':str(link)})['isError'])
+    def test_invalid_types_never_start_reader(self):
+        with patch.object(self.m.subprocess,'run',side_effect=AssertionError('unexpected reader')):
+            for args in (None,False,[],{}, {**self.args,'failure_headers':'name'}, {**self.args,'result_term':True}, {**self.args,'failure_headers':['a',3]}):
+                self.assertTrue(self.server.call(args)['isError'])
+    def test_mutation_after_reader_withholds_success(self):
+        def changed(*a,**kw):
+            self.path.write_text('mutated')
+            return subprocess.CompletedProcess([],0,'SECRET','[token-router status] {"status":"auto_candidates","activation":"activate"}\n')
+        with patch.object(self.m.subprocess,'run',side_effect=changed):result=self.server.call(self.args)
+        self.assertTrue(result['isError']);self.assertNotIn('SECRET',json.dumps(result))
+    def test_rpc_params_and_identifiers(self):
+        self.server.initialized=True
+        for params in (None,False,[],42):
+            reply=self.server.dispatch({'jsonrpc':'2.0','id':1,'method':'tools/call','params':params})
+            self.assertEqual(reply['error']['code'],-32602)
+        for ident in (None,True,[],{}):
+            reply=self.server.dispatch({'jsonrpc':'2.0','id':ident,'method':'ping'})
+            self.assertEqual(reply['error']['code'],-32600)
+    def test_credentials_and_router_overrides_scrubbed(self):
+        done=subprocess.CompletedProcess([],2,'','')
+        extra={'ROUTER_MOCK_RESPONSE':'secret','ROUTER_CODEX_BIN':'bad','OPENAI_API_KEY':'secret','CODEX_API_KEY':'secret','OPENAI_BASE_URL':'secret'}
+        with patch.dict(self.m.os.environ,extra),patch.object(self.m.subprocess,'run',return_value=done) as run:
+            self.server.call(self.args)
+        env=run.call_args.kwargs['env']
+        for key in extra:self.assertNotIn(key,env)
+        cmd=run.call_args.args[0]
+        self.assertIn('--activation-profile',cmd);self.assertIn('log-context',cmd)
+        self.assertFalse(set(cmd)&{'--force-model','--deterministic','--optimize'})
     def test_exact_payload_and_safe_command(self):
         payload='--- source unchanged ---\n'
         done=subprocess.CompletedProcess([],0,payload,'[token-router status] {"status":"auto_candidates","activation":"activate"}\n')

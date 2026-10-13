@@ -86,10 +86,13 @@ def serve(server,source,sink):
             except (ValueError,UnicodeError):response=error(None,-32700,'Parse error')
         if response is not None:sink.write(json.dumps(response,ensure_ascii=False)+'\n');sink.flush()
 
+def default_root_allowed(cwd, home):
+    return cwd.parent != cwd and cwd != home
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--allow-root',action='append',default=[]);args=parser.parse_args()
     roots=args.allow_root or [str(Path.cwd())]
-    if not args.allow_root and Path.cwd().resolve() in (Path('/'),Path.home().resolve()):parser.error('explicit --allow-root required for home or filesystem root')
+    if not args.allow_root and not default_root_allowed(Path.cwd().resolve(),Path.home().resolve()):parser.error('explicit --allow-root required for home or filesystem root')
     try:server=Server(roots)
     except (OSError,ValueError):parser.error('allowed roots must be existing directories')
     serve(server,sys.stdin.buffer,sys.stdout)
