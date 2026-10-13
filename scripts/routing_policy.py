@@ -50,6 +50,55 @@ class RouteDecision:
     next_action: str | None = None
 
 
+def plan_activation(*, mode, purpose, selectors=(), visible_sufficient=False,
+                    native_guide=False):
+    """Host preflight using already-known request facts; no file/model access.
+
+    Call before supplying a skill guide. The caller declares the context need;
+    this does not classify natural language or estimate future billed tokens.
+    Complete-callable retrieval remains an explicit manual capability.
+    """
+    reason = None
+    if visible_sufficient is not False:
+        reason = 'evidence_already_available'
+    elif native_guide is not True:
+        reason = 'native_guide_unavailable'
+    elif mode != 'error_log' or purpose != 'failure_context':
+        reason = 'outside_auto_scope'
+    elif (not isinstance(selectors, (tuple, list)) or not 2 <= len(selectors) <= 32
+          or any(not isinstance(t, str) or not t.strip() or len(t) > 256
+                 or '\n' in t or '\r' in t for t in selectors)
+          or len(set(selectors)) < 2):
+        reason = 'insufficient_distinct_selectors'
+    if reason:
+        return RouteDecision('bypass', (reason,), 'ordinary_search')
+    return RouteDecision('activate', ('eligible_failure_context',))
+
+
+def admit_log_context(*, source_chars, spans, selected_chars, bounding_chars,
+                      completed_blocks, missing_terms):
+    """Reuse literal-reader scan facts, never run a benefit-prediction model.
+
+    Two disjoint windows, a selected recognizable failure block and a large
+    unused gap are necessary. The 50% bounding-window margin is a conservative
+    eligibility heuristic, not a token guarantee versus efficient batched rg.
+    Existing 15% general-policy admission is unchanged.
+    """
+    if missing_terms:
+        reason = 'activation_missing_literal'
+    elif source_chars < 50000:
+        reason = 'activation_small_source'
+    elif len(spans) < 2 or spans[-1].end - spans[0].start < 100:
+        reason = 'activation_single_region'
+    elif completed_blocks < 1:
+        reason = 'activation_no_complete_failure_block'
+    elif selected_chars * 2 > bounding_chars:
+        reason = 'activation_low_context_reduction'
+    else:
+        return RouteDecision('activate')
+    return RouteDecision('bypass', (reason,), 'ordinary_search')
+
+
 def decide_packet(*, checks, required, source_chars, full_chars, packet_chars,
                   has_candidates, small_limit, full_limit, candidate_limit,
                   output_limit, whole=False):

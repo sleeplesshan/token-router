@@ -24,7 +24,7 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from query_matcher import compile_matcher
 from evidence_checks import assess_query_evidence, complete_python_statements, required_pattern, assess_packet_evidence, bounded_return_supplement, limit_return_target
-from routing_policy import Span, ScanFacts, Packet, RouteDecision, decide_packet
+from routing_policy import Span, ScanFacts, Packet, RouteDecision, decide_packet, admit_log_context
 from source_guard import SourceLimitError, SourceGuard, SourceChanged
 
 
@@ -135,10 +135,14 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument('--search-term', action='append', default=[], help='Explicit case-sensitive literal windows; local tokens only, no structural ranking.')
     parser.add_argument('--symbol', action='append', default=[], help='Exact qualified Python callable; complete bounded definitions, local tokens only.')
     parser.add_argument('--compact-status', action='store_true', help='Concise actionable stderr; report-json still contains full diagnostics.')
+    parser.add_argument('--activation-profile', choices=('log-context',),
+                        help='Optional conservative log-context admission; bypass with exit2, no whole fallback. Manual readers otherwise unchanged.')
     parser.add_argument('--search-context', type=int, choices=range(13), default=None,
                         help='Neighbors per side for literal search (0-12); omitted: code12/log4. Selected traceback completion still applies.')
     parser.add_argument('--line-numbers', action='store_true', help='Render source line numbers without changing stored raw evidence.')
     args = parser.parse_args(argv[1:])
+    if args.activation_profile and (args.mode != 'error_log' or not args.search_term):
+        parser.error('activation-profile requires error_log with explicit search-term')
     if args.symbol:
         if args.mode!='heavy_code' or args.force_model or args.deterministic or args.optimize!='tokens' or args.search_term or args.search_context is not None or args.require_term or args.read_scope=='whole' or args.return_target or args.return_context=='bounded':
             parser.error('symbol requires focused heavy_code local tokens without other selection options')
@@ -1063,6 +1067,10 @@ def symbol_packet(args, guard):
 def literal_search_packet(args, guard):
     """One metadata scan and one selected read; no AST, ranking, tail or model."""
     terms=args.search_term
+    profile=getattr(args,'activation_profile',None)
+    if profile and len(terms)<2:
+        return finalize_packet(args,guard,None,dict(status='bypass',activation='bypass',
+            reason_codes=['insufficient_distinct_selectors'],next_action='ordinary_search',scan_complete=False),2)
     counts={term:0 for term in terms};spans=[];source_chars=0;total=0;line_costs=[];tracebacks=[];trace_open=None;matched_lines=[];pytest_open=None;pytest_blocks=[]
     context=args.search_context if args.search_context is not None else (4 if args.mode=='error_log' else 12)
     for n,line in enumerate(guard.lines(),1):
@@ -1102,13 +1110,27 @@ def literal_search_packet(args, guard):
           'context_lines':context,'traceback_completed_blocks':len(completed)}
     if not spans:
         return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
-            'reason_codes':['literal_not_found'],'next_action':'change_search_scope'},2)
+            'reason_codes':['literal_not_found'],'next_action':'change_search_scope',
+            **({'activation':'bypass'} if profile else {})},2)
     # Reject excessive source before collecting it in memory.
     selected_cost=sum(sum(line_costs[x.start-1:x.end]) for x in spans)
+    if profile:
+        bounding_cost=sum(line_costs[spans[0].start-1:spans[-1].end])
+        admission=admit_log_context(source_chars=source_chars,spans=spans,
+            selected_chars=selected_cost,bounding_chars=bounding_cost,
+            completed_blocks=len(completed),missing_terms=base['missing_search_terms'])
+        base.update(activation=admission.action,activation_profile=profile,
+                    activation_facts={'source_chars':source_chars,'selected_chars':selected_cost,
+                        'bounding_chars':bounding_cost,'regions':len(spans),'completed_blocks':len(completed)})
+        if admission.action=='bypass':
+            return finalize_packet(args,guard,None,{**base,'status':'bypass',
+                'reason_codes':list(admission.reason_codes),'next_action':admission.next_action,
+                'suggested_ranges':[[s.start,s.end] for s in spans[:12]]},2)
     if selected_cost>min(MAX_OUTPUT_CHARS,12000):
         return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
             'reason_codes':['literal_scope_too_broad'],'next_action':'narrow_search_terms',
-            'final_output_capped':True,'suggested_ranges':[[x.start,x.end] for x in spans[:12]]},2)
+            'final_output_capped':True,'suggested_ranges':[[x.start,x.end] for x in spans[:12]],
+            **({'activation':'bypass'} if profile else {})},2)
     # Entire windows are kept; broad searches abstain instead of arbitrary cuts.
     targets=[dict(start_line=x.start,end_line=x.end,reason='explicit literal window; bounded selected traceback completion') for x in spans]
     packet=packet_from_guard(guard,targets)
@@ -1117,7 +1139,8 @@ def literal_search_packet(args, guard):
     if len(trial.rendered)>limit:
         return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
             'reason_codes':['literal_scope_too_broad'],'next_action':'narrow_search_terms',
-            'final_output_capped':True,'suggested_ranges':[[x.start,x.end] for x in spans[:12]]},2)
+            'final_output_capped':True,'suggested_ranges':[[x.start,x.end] for x in spans[:12]],
+            **({'activation':'bypass'} if profile else {})},2)
     if source_chars>AUTO_SMALL_CHARS and len(trial.rendered)>source_chars*.85:
         return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
             'reason_codes':['insufficient_bounded_reduction'],'next_action':'read_targeted_ranges'},2)
@@ -1199,6 +1222,7 @@ def finalize_packet(args, guard, packet, status, code=0):
         keep={'schema_version','status','retrieval_mode','reason_codes','next_action','model_called','model_failed',
               'source_consistency','final_output_capped','selection_truncated','full_source_returned',
               'output_lines','output_chars','semantic_sufficiency','missing_search_terms',
+              'activation','activation_profile',
               'absent_required','lost_required','missing_symbols','ambiguous_symbols','detail',
               'suggested_ranges','symbol_ranges','symbol_occurrences','symbol_ranges_truncated'}
         compact={k:v for k,v in compact.items() if k in keep and v is not None and v != []}
