@@ -3,6 +3,9 @@
 import argparse
 import json
 import os
+import queue
+import threading
+import time
 from pathlib import Path
 import shutil
 import subprocess
@@ -59,6 +62,155 @@ def install(source,dest):
     finally:
         if stage.exists():shutil.rmtree(stage)
 
+class CodexConfigError(RuntimeError):
+    """Safe diagnostic without server/config contents."""
+
+
+class ConfigRPC:
+    def __init__(self, command=None, *, env=None, timeout=10, total_timeout=25):
+        self.deadline = time.monotonic() + total_timeout
+        self.timeout = timeout
+        self.seq = 0
+        self.q = queue.Queue()
+        self.process = subprocess.Popen(command or ['codex', 'app-server', '--stdio'],
+            env=env, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+        def reader():
+            size = 0
+            try:
+                while True:
+                    line = self.process.stdout.readline(4_000_001)
+                    if not line:
+                        self.q.put(None)
+                        return
+                    size += len(line)
+                    if size > 4_000_000:
+                        self.q.put(CodexConfigError('response_limit'))
+                        return
+                    self.q.put(line)
+            except OSError:
+                self.q.put(CodexConfigError('read_failed'))
+        self.reader = threading.Thread(target=reader, daemon=True)
+        self.reader.start()
+        try:
+            self.call('initialize', {'clientInfo': {'name': 'token-router-config', 'version': '1'}})
+            self._send({'method': 'initialized'})
+        except Exception:
+            self.close()
+            raise
+
+    def _send(self, value):
+        data = (json.dumps(value) + '\n').encode()
+        if len(data) > 65536:
+            raise CodexConfigError('request_limit')
+        # Config requests are small; a writer thread also bounds an unresponsive pipe.
+        outcome = queue.Queue()
+        def write():
+            try:
+                self.process.stdin.write(data)
+                self.process.stdin.flush()
+                outcome.put(None)
+            except (OSError, ValueError):
+                outcome.put(CodexConfigError('write_failed'))
+        threading.Thread(target=write, daemon=True).start()
+        try:
+            result = outcome.get(timeout=max(.001, min(self.timeout, self.deadline-time.monotonic())))
+        except queue.Empty:
+            raise CodexConfigError('timeout') from None
+        if result:
+            raise result
+
+    def call(self, method, params):
+        if method not in ('initialize', 'config/read', 'config/value/write'):
+            raise CodexConfigError('unsupported_method')
+        self.seq += 1
+        self._send({'id': self.seq, 'method': method, 'params': params})
+        deadline = min(self.deadline, time.monotonic() + self.timeout)
+        while True:
+            try:
+                raw = self.q.get(timeout=max(.001, deadline-time.monotonic()))
+            except queue.Empty:
+                raise CodexConfigError('timeout') from None
+            if raw is None:
+                raise CodexConfigError('unexpected_eof')
+            if isinstance(raw, Exception):
+                raise raw
+            try:
+                reply = json.loads(raw)
+            except (ValueError, UnicodeError):
+                raise CodexConfigError('malformed_response') from None
+            if not isinstance(reply, dict):
+                raise CodexConfigError('malformed_response')
+            if reply.get('id') == self.seq:
+                if 'error' in reply:
+                    raise CodexConfigError('rpc_error')
+                if 'result' not in reply:
+                    raise CodexConfigError('malformed_response')
+                return reply['result']
+            if time.monotonic() >= deadline:
+                raise CodexConfigError('timeout')
+
+    def close(self):
+        if self.process.poll() is None:
+            self.process.kill()
+        self.process.wait(timeout=2)
+        self.reader.join(timeout=1)
+        self.process.stdin.close()
+        self.process.stdout.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.close()
+
+
+def read_codex_server(rpc=None):
+    """Return only token-router's user-layer record and CAS metadata, or None."""
+    if rpc is None:
+        with ConfigRPC() as client:
+            return read_codex_server(client)
+    result = rpc.call('config/read', {'includeLayers': True})
+    try:
+        layers = [x for x in result['layers'] if x['name']['type'] == 'user'
+                  and not x['name'].get('profile') and not x.get('disabledReason')]
+        if len(layers) != 1:
+            raise CodexConfigError('ambiguous_user_layer')
+        layer = layers[0]
+        server = layer['config'].get('mcp_servers', {}).get('token-router')
+        if server is None:
+            return None
+        if not isinstance(server, dict) or not isinstance(layer['version'], str) or not isinstance(layer['name']['file'], str):
+            raise CodexConfigError('invalid_user_layer')
+        return {'server': server, 'filePath': layer['name']['file'], 'version': layer['version']}
+    except (KeyError, TypeError, AttributeError):
+        raise CodexConfigError('invalid_user_layer') from None
+
+
+def set_direct_exposure(expected_server, rpc=None):
+    """CAS-write the single exposure key after exact caller-owned stdio matching."""
+    if rpc is None:
+        with ConfigRPC() as client:
+            return set_direct_exposure(expected_server, client)
+    record = read_codex_server(rpc)
+    if not record or not isinstance(expected_server, dict):
+        raise CodexConfigError('server_not_owned')
+    server = record['server']
+    if (not isinstance(expected_server.get('command'), str)
+            or not isinstance(expected_server.get('args'), list)
+            or not all(isinstance(x, str) for x in expected_server['args'])
+            or any(server.get(k) != expected_server.get(k) for k in ('command', 'args'))
+            or server.get('url') is not None):
+        raise CodexConfigError('server_not_owned')
+    if server.get('omit_tools_from') not in (None, ['deferred']):
+        raise CodexConfigError('exposure_setting_changed')
+    if server.get('omit_tools_from') == ['deferred']:
+        return True
+    rpc.call('config/value/write', {'keyPath': 'mcp_servers.token-router.omit_tools_from',
+        'value': ['deferred'], 'mergeStrategy': 'replace', 'filePath': record['filePath'],
+        'expectedVersion': record['version']})
+    return True
+
+
 def codex_mcp(args):
     """Use the supported CLI; never rewrite unrelated TOML or print its contents."""
     executable=shutil.which('codex')
@@ -101,7 +253,20 @@ def connect_codex(dest,roots):
         raise ValueError('Existing token-router MCP configuration differs; preserve it and disconnect/reconfigure explicitly')
     created=current is None
     if created:codex_mcp(['add','token-router','--',record['command'],*args])
+    created_configuration=codex_mcp(['get','token-router','--json']) if created else None
+    rollback_user=None
     try:
+        user_record=read_codex_server()
+        if created and user_record:
+            rollback_user=dict(user_record['server'])
+        previous_user=data.get('codex_mcp',{}).get('user_configuration')
+        if previous_user is not None and (user_record is None or user_record['server']!=previous_user):
+            raise ValueError('Codex server exposure or user settings changed; preserve them and reconfigure explicitly')
+        set_direct_exposure(record)
+        if rollback_user is not None:rollback_user['omit_tools_from']=['deferred']
+        user_record=read_codex_server()
+        if not user_record or user_record['server'].get('omit_tools_from')!=['deferred']:
+            raise ValueError('Direct tool exposure was not enabled')
         actual=codex_mcp(['get','token-router','--json'])
         if not transport_matches(actual,record):raise ValueError('Codex registration verification failed')
         if actual.get('enabled',True) is not True or actual.get('disabled_reason'):
@@ -110,9 +275,15 @@ def connect_codex(dest,roots):
         if (allowed is not None and 'read_pytest_failures' not in allowed) or 'read_pytest_failures' in denied:
             raise ValueError('Codex tool filters exclude read_pytest_failures; preserve or update them explicitly')
         record['configuration']=actual
+        record['user_configuration']=user_record['server']
         data['codex_mcp']=record;save_marker(dest,data)
     except BaseException:
-        if created:codex_mcp(['remove','token-router'])
+        # Do not remove a registration another process modified during setup.
+        if created and rollback_user is not None:
+            actual=codex_mcp(['get','token-router','--json'])
+            user_record=read_codex_server()
+            if actual==created_configuration and user_record and user_record['server']==rollback_user:
+                codex_mcp(['remove','token-router'])
         raise
     return dict(status='connected',server='token-router',scope='startup_workspace' if not roots else 'explicit_roots',restart_required=True)
 
@@ -124,6 +295,11 @@ def disconnect_codex(dest):
         if not transport_matches(current,record):raise ValueError('Codex server was changed; preserve it and disconnect manually')
         if record.get('configuration') is not None and current!=record['configuration']:
             raise ValueError('Codex server settings were changed; preserve them and disconnect manually')
+        previous_user=record.get('user_configuration')
+        if previous_user is not None:
+            user_record=read_codex_server()
+            if user_record is None or user_record['server']!=previous_user:
+                raise ValueError('Codex exposure or user settings were changed; preserve them and disconnect manually')
         codex_mcp(['remove','token-router'])
     data.pop('codex_mcp');save_marker(dest,data)
     return dict(status='disconnected',server='token-router',restart_required=True)
@@ -144,7 +320,7 @@ def main():
             result=install(source,dest)
             if a.connect_codex:
                 try:result['codex']=connect_codex(dest,a.allow_root)
-                except (OSError,ValueError,subprocess.SubprocessError) as exc:
+                except (OSError,ValueError,CodexConfigError,subprocess.SubprocessError) as exc:
                     print(json.dumps(dict(status='installed_connection_failed',installation=result,
                                           next_action='connect-codex --dest '+str(dest),reason=str(exc))),file=sys.stderr)
                     return 1
@@ -161,7 +337,7 @@ def main():
                 shutil.rmtree(dest)
             result=dict(status=a.action+'ed',destination=str(dest))
         print(json.dumps(result));return 0
-    except (OSError,ValueError,subprocess.SubprocessError) as exc:
+    except (OSError,ValueError,CodexConfigError,subprocess.SubprocessError) as exc:
         print(json.dumps(dict(status='error',reason=str(exc))),file=sys.stderr);return 1
 
 if __name__=='__main__':raise SystemExit(main())
