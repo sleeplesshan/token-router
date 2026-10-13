@@ -239,6 +239,13 @@ def save_marker(dest,record):
     finally:
         if os.path.exists(name):os.unlink(name)
 
+def validate_codex_tool_policy(current):
+    if current.get('enabled',True) is not True or current.get('disabled_reason'):
+        raise ValueError('Codex server is disabled; enable it in Codex settings before connecting')
+    allowed=current.get('enabled_tools');denied=current.get('disabled_tools') or []
+    if (allowed is not None and 'read_pytest_failures' not in allowed) or 'read_pytest_failures' in denied:
+        raise ValueError('Codex tool filters exclude read_pytest_failures; preserve or update them explicitly')
+
 def connect_codex(dest,roots):
     data=read_install(dest)
     if 'scripts/mcp_server.py' not in data['files']:raise ValueError('Update the installation before connecting Codex')
@@ -254,6 +261,7 @@ def connect_codex(dest,roots):
         raise ValueError('Managed Codex server settings changed; preserve them and reconfigure explicitly')
     if current and not transport_matches(current,record):
         raise ValueError('Existing token-router MCP configuration differs; preserve it and disconnect/reconfigure explicitly')
+    if current:validate_codex_tool_policy(current)
     created=current is None
     if created:codex_mcp(['add','token-router','--',record['command'],*args])
     created_configuration=codex_mcp(['get','token-router','--json']) if created else None
@@ -273,11 +281,7 @@ def connect_codex(dest,roots):
             raise ValueError('Direct tool exposure was not enabled')
         actual=codex_mcp(['get','token-router','--json'])
         if not transport_matches(actual,record):raise ValueError('Codex registration verification failed')
-        if actual.get('enabled',True) is not True or actual.get('disabled_reason'):
-            raise ValueError('Codex server is disabled; enable it in Codex settings before connecting')
-        allowed=actual.get('enabled_tools');denied=actual.get('disabled_tools') or []
-        if (allowed is not None and 'read_pytest_failures' not in allowed) or 'read_pytest_failures' in denied:
-            raise ValueError('Codex tool filters exclude read_pytest_failures; preserve or update them explicitly')
+        validate_codex_tool_policy(actual)
         record['configuration']=actual
         record['user_configuration']=user_record['server']
         data['codex_mcp']=record;save_marker(dest,data)

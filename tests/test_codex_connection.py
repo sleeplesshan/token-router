@@ -42,6 +42,12 @@ class ConnectionTests(unittest.TestCase):
             with self.assertRaises(ValueError):ins.disconnect_codex(self.dest)
             with self.assertRaises(ValueError):ins.connect_codex(self.dest,[])
         self.assertEqual(len(self.changes),1)
+    def test_disabled_existing_matching_server_is_never_mutated(self):
+        self.current={'enabled':False,'transport':{'type':'stdio','command':str(Path(sys.executable).absolute()),'args':[str(self.dest/'scripts/mcp_server.py')],'cwd':None,'env':None,'env_vars':[]}}
+        with patch.object(ins,'codex_mcp',side_effect=self.fake_codex),patch.object(ins,'set_direct_exposure') as write:
+            with self.assertRaises(ValueError):ins.connect_codex(self.dest,[])
+            write.assert_not_called()
+        self.assertEqual(self.changes,[])
     def test_marker_failure_removes_only_new_registration(self):
         with patch.object(ins,'read_codex_server',side_effect=lambda:{'effective_omit_tools_from':['deferred'],'server':{'command':self.current['transport']['command'],'args':self.current['transport']['args'],'omit_tools_from':['deferred']}}),patch.object(ins,'set_direct_exposure',return_value=True),patch.object(ins,'codex_mcp',side_effect=self.fake_codex),patch.object(ins,'save_marker',side_effect=OSError('disk full')):
             with self.assertRaises(OSError):ins.connect_codex(self.dest,[])
