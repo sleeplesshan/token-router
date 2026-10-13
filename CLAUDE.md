@@ -7,3 +7,5 @@ Use ordinary search for precise symbols, routing when focused evidence remains o
 Manual CLI usage is supported. Automatic discovery depends on the host's skill configuration and is not promised for every agent. Optional cloud selection uses Codex subscription usage and is unrelated to the default local path; read references/contract.md before enabling it.
 
 For complete known Python callables, batch `--symbol QUALNAME` with `--line-numbers --compact-status`; it returns no dependencies. For dispersed logs use distinctive `--search-term` failure headers. Follow the guide before execution and never reload a guide already supplied by the host. The measured native Codex guide-injection result is not a Claude cold-start/automatic-discovery result.
+
+Automatic discovery is now limited to native dispersed failure-context logs; cold Claude guide loading is not an automatic path. Manual Python/literal CLI remains available. A host may opt into the pre-guide API; installation alone does not connect a gate. Defaultv2.4/shared safety are unchanged. See references/contract.md.

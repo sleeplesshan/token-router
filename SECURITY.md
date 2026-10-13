@@ -11,3 +11,5 @@ The installer manages only its explicit destination and hashed payload. It rejec
 Report vulnerabilities privately using GitHub private vulnerability reporting if enabled or the maintainer's private profile contact. Include version, OS, sanitized reproduction and impact; never include auth files, API keys, customer/private data. Availability of optional cloud models is not guaranteed. Security fixes target the latest public release and its maintained successor.
 
 The explicit symbol reader parses a bounded Python AST without importing it and returns only requested unique definitions. Syntax success is not semantic evidence. Literal block matching uses recognizable bounded markers, not an authorization boundary. Numbering/compact diagnostics do not remove source consistency checks; full reports can reveal occurrence coordinates and selected names.
+
+The optional activation profile and host API assess declared need and observable scope, not semantic sufficiency or guaranteed token savings. Host facts cannot grant source permissions. Gates never authorize automatic cloud fallback, recovery engines, credential access or source execution.

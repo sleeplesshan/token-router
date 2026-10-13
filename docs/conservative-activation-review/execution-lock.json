@@ -1,0 +1,100 @@
+{
+  "limits": {
+    "main_turns": 16,
+    "total_tokens": 500000,
+    "per_episode_token_cap": 60000,
+    "absolute_timeout": 240,
+    "idle_timeout": 90,
+    "grace_timeout": 10,
+    "additional_source_commands": 3,
+    "total_wall": 1800
+  },
+  "package_version": "2.7.0",
+  "candidate": "conservative-activation",
+  "commit": "e3b521742a3a21df99243397f562eb696b21f063",
+  "policy_version": "v2.4",
+  "model": "gpt-6.1-sol",
+  "reasoning": "medium",
+  "manifest_hash": "faf274235b57ebc7021f95d5f724f94bd6c0a0d073ae2b44e527a6cf58799462",
+  "prompt_hashes": {
+    "cpython_trace": {
+      "plain": "b14d8cc6955af7efafe1d18e10c2f52059605e34a5d8b0e038b871c66131b449",
+      "gated": "470fb06f6c753a10ad75f79c8d4cfbf41dc7491b57f33b07bffe2a1fdff41e29"
+    },
+    "scipy_failure_blocks": {
+      "plain": "056bc1d4c4a653534024a9b8e4d58536914dc82d6d830e6e0b180803926068cc",
+      "gated": "7a6b320aa8e798dc8ec7d19d64d7764ff99db1b8feb38753c058ea3b606c55f6"
+    },
+    "pandas_dispatch": {
+      "plain": "1f804cd46cf61d1b1f6686a1099dcbedde3950b449d1901c831e53cf8c3e3102",
+      "gated": "1f804cd46cf61d1b1f6686a1099dcbedde3950b449d1901c831e53cf8c3e3102"
+    },
+    "visible_summary": {
+      "plain": "4a37ad9d5b45255b08794dc1108f0e355b4bd007c62fb5d5c25ece254ffb0e44",
+      "gated": "4a37ad9d5b45255b08794dc1108f0e355b4bd007c62fb5d5c25ece254ffb0e44"
+    }
+  },
+  "common_hash": "44b1c907a1987a6c0e9a9bf1c5d5db1819d4ede9e3dd6a3869043dd7c71ec788",
+  "client_hash": "e06fa71aa4eae365cd288ad516c2f539735eff51c9d83d5108588c47ea72c6fa",
+  "harness_hash": "2aa1fc67c3491e5994598d1e5aebb407644a7b49f227b516d55d35163527a871",
+  "payload_hashes": {
+    "LICENSE": "c0d5b8821cbbe219f05c53abb58fb61e42c80222aa8af76c9841862e9b4f4b9b",
+    "CHANGELOG.md": "55cf934a4d3e1888df93358371966a19a3fb9997dd0a7dbbf783cbd5a9161c0d",
+    "README.md": "2cd5925453279c6e3d89758c392540f7fbd781c8e82a7d222baafe98fa69fa90",
+    "SUPPORT.md": "9bd9daebaeaee7270ca5034761d129930a1e7e352e40a00685aab509e00af7de",
+    ".token-router-install.json": "a6bbbde99c477f3314e3c6e4562bfac8e9f2907d0f2b694f15f54b3ffcbbb8de",
+    "CONTRIBUTING.md": "443021703db9e67c5f02ebb72723f9e1544ddce7d6e5b18f77abc8c2604fd969",
+    "SKILL.md": "c9afd116e40537ed47758e88eff3e07910a1aa87774b7e449c5d7346815bf920",
+    "CLAUDE.md": "287ca9d02eb8c2e169cb6addc99ea8fc1b6080b16cf60b503d7d09ec67f1a148",
+    "SECURITY.md": "44cbb66a872a2407ed6bee2625e9eda6daa1563040b0509c0c16d6445295d706",
+    "references/contract.md": "2629ddff17d3f6e3babd7e2b308ac5a337282bcb974ced2e6012d5f4d287705b",
+    "agents/openai.yaml": "363ad98b68cf2b17dbb811efe03583df69fa149087b48f3a5f6b88ae1abcc641",
+    "docs/release-readiness.md": "9f45b0449243b8ef30710405cf2d765a4cefac1dc31e0757f84a56ee2ec4c0d4",
+    "samples/service.py": "0e731a9a13875fe666672199002c14d66ae9925b1db51d4d77cc3a0c781b0a70",
+    "samples/reference.md": "b5b1766d373fa0e72662d0f1da91955124ce00200d9c213f53e7867131a86f8e",
+    "samples/incident.log": "169c6e141deff0782b30a48faee44d8ab4323ff18454cc540486516418aef409",
+    "scripts/source_guard.py": "263b6803d18763f104a08d5a233fb44f525ddd0406cde9b225883897cea6bd35",
+    "scripts/evidence_checks.py": "42c5e04344acb4d864715043e05021fff66b63dd7d1000a650c2dd41b723de6d",
+    "scripts/distribution.py": "285343d1b9ea408ce4be2a2a379528c13cf87918b70ff7c8c201192a495d6aa1",
+    "scripts/routing_policy.py": "1700bcd91e104a801535e37fc3639ea1df689070da3e2ab363596d471fe5a0d9",
+    "scripts/query_matcher.py": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+    "scripts/install.py": "d44088de0371fb3afea261674e384cab18f7f27f64f6fee687bc9f398d7fab03",
+    "scripts/router.py": "2f093556b928cb22ec5136e2b2614f4e41354b257d364e810ddb3279ea784ecf"
+  },
+  "schedule": [
+    [
+      "cpython_trace",
+      1
+    ],
+    [
+      "scipy_failure_blocks",
+      1
+    ],
+    [
+      "pandas_dispatch",
+      1
+    ],
+    [
+      "visible_summary",
+      1
+    ],
+    [
+      "cpython_trace",
+      2
+    ],
+    [
+      "scipy_failure_blocks",
+      2
+    ],
+    [
+      "pandas_dispatch",
+      2
+    ],
+    [
+      "visible_summary",
+      2
+    ]
+  ],
+  "criteria": "No fixed-rubric loss or new insufficient approval; selected actual reader; exclusions skill/guide/reader0; all billed costs and wall retained. Gates not retuned.",
+  "measurement": "Native host connects plan_activation before turn/start. Not implicit host discovery; known regression sources. Input+output only; subsets not added. CPU/remote_wait proxy separated."
+}

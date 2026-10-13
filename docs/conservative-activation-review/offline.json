@@ -1,0 +1,973 @@
+{
+  "commit": "e3b521742a3a21df99243397f562eb696b21f063",
+  "package_version": "2.7.0",
+  "policy_version": "v2.4",
+  "rows": [
+    {
+      "task": "cpython_trace",
+      "host_action": "activate",
+      "reason_codes": [
+        "eligible_failure_context"
+      ],
+      "source_sha256": "d23199487e0009822f4d3a33284fb9a42da018155164c308e96cad456611d606",
+      "stdout_sha256": "024c7ca256283849c4c3203f8cd54eccadd08443421aa114537e466db0d993aa",
+      "rendered_chars": 8773,
+      "manual": [
+        {
+          "wall": 0.05088541703298688,
+          "cpu": 0.046024,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "Traceback (most recent call last):": 2,
+              "Total test files:": 1,
+              "runtime error:": 1,
+              "SEGV": 2
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822600,
+              551037,
+              1791851077242439262,
+              1791851077242450512
+            ],
+            "output_lines": 77,
+            "output_chars": 8773,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.04599025007337332,
+          "cpu": 0.044025,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "Traceback (most recent call last):": 2,
+              "Total test files:": 1,
+              "runtime error:": 1,
+              "SEGV": 2
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822600,
+              551037,
+              1791851077242439262,
+              1791851077242450512
+            ],
+            "output_lines": 77,
+            "output_chars": 8773,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.04590337513945997,
+          "cpu": 0.04410399999999999,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "Traceback (most recent call last):": 2,
+              "Total test files:": 1,
+              "runtime error:": 1,
+              "SEGV": 2
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822600,
+              551037,
+              1791851077242439262,
+              1791851077242450512
+            ],
+            "output_lines": 77,
+            "output_chars": 8773,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.04573037498630583,
+          "cpu": 0.044018,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "Traceback (most recent call last):": 2,
+              "Total test files:": 1,
+              "runtime error:": 1,
+              "SEGV": 2
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822600,
+              551037,
+              1791851077242439262,
+              1791851077242450512
+            ],
+            "output_lines": 77,
+            "output_chars": 8773,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.045852167066186666,
+          "cpu": 0.04416299999999998,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "Traceback (most recent call last):": 2,
+              "Total test files:": 1,
+              "runtime error:": 1,
+              "SEGV": 2
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822600,
+              551037,
+              1791851077242439262,
+              1791851077242450512
+            ],
+            "output_lines": 77,
+            "output_chars": 8773,
+            "open_count": 2
+          }
+        }
+      ],
+      "gated": [
+        {
+          "wall": 0.04591966699808836,
+          "cpu": 0.044715000000000005,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "Traceback (most recent call last):": 2,
+              "Total test files:": 1,
+              "runtime error:": 1,
+              "SEGV": 2
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "activation": "activate",
+            "activation_profile": "log-context",
+            "activation_facts": {
+              "source_chars": 551034,
+              "selected_chars": 8399,
+              "bounding_chars": 66783,
+              "regions": 5,
+              "completed_blocks": 2
+            },
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822600,
+              551037,
+              1791851077242439262,
+              1791851077242450512
+            ],
+            "output_lines": 77,
+            "output_chars": 8773,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.04828691598959267,
+          "cpu": 0.04644699999999996,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "Traceback (most recent call last):": 2,
+              "Total test files:": 1,
+              "runtime error:": 1,
+              "SEGV": 2
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "activation": "activate",
+            "activation_profile": "log-context",
+            "activation_facts": {
+              "source_chars": 551034,
+              "selected_chars": 8399,
+              "bounding_chars": 66783,
+              "regions": 5,
+              "completed_blocks": 2
+            },
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822600,
+              551037,
+              1791851077242439262,
+              1791851077242450512
+            ],
+            "output_lines": 77,
+            "output_chars": 8773,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.04699304117821157,
+          "cpu": 0.04524100000000003,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "Traceback (most recent call last):": 2,
+              "Total test files:": 1,
+              "runtime error:": 1,
+              "SEGV": 2
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "activation": "activate",
+            "activation_profile": "log-context",
+            "activation_facts": {
+              "source_chars": 551034,
+              "selected_chars": 8399,
+              "bounding_chars": 66783,
+              "regions": 5,
+              "completed_blocks": 2
+            },
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822600,
+              551037,
+              1791851077242439262,
+              1791851077242450512
+            ],
+            "output_lines": 77,
+            "output_chars": 8773,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.04699087515473366,
+          "cpu": 0.045169000000000015,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "Traceback (most recent call last):": 2,
+              "Total test files:": 1,
+              "runtime error:": 1,
+              "SEGV": 2
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "activation": "activate",
+            "activation_profile": "log-context",
+            "activation_facts": {
+              "source_chars": 551034,
+              "selected_chars": 8399,
+              "bounding_chars": 66783,
+              "regions": 5,
+              "completed_blocks": 2
+            },
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822600,
+              551037,
+              1791851077242439262,
+              1791851077242450512
+            ],
+            "output_lines": 77,
+            "output_chars": 8773,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.04632904194295406,
+          "cpu": 0.044537999999999967,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "Traceback (most recent call last):": 2,
+              "Total test files:": 1,
+              "runtime error:": 1,
+              "SEGV": 2
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "activation": "activate",
+            "activation_profile": "log-context",
+            "activation_facts": {
+              "source_chars": 551034,
+              "selected_chars": 8399,
+              "bounding_chars": 66783,
+              "regions": 5,
+              "completed_blocks": 2
+            },
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822600,
+              551037,
+              1791851077242439262,
+              1791851077242450512
+            ],
+            "output_lines": 77,
+            "output_chars": 8773,
+            "open_count": 2
+          }
+        }
+      ],
+      "stdout_unchanged": true
+    },
+    {
+      "task": "scipy_failure_blocks",
+      "host_action": "activate",
+      "reason_codes": [
+        "eligible_failure_context"
+      ],
+      "source_sha256": "23cc02f4ecff02141897d670bf831f5be62702b33c2a48e6e5c2b717fd783ca3",
+      "stdout_sha256": "1afcf6564b91a89ac706044f9520b266d77022a12d3183e2b961f2a1414284c6",
+      "rendered_chars": 7579,
+      "manual": [
+        {
+          "wall": 0.04887870792299509,
+          "cpu": 0.04728399999999999,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "TestMakeSplrep.test_fitpack_F[1]": 1,
+              "TestMakeSplrep.test_fitpack_F[6]": 1,
+              "failed,": 1
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822602,
+              638795,
+              1791851077243176081,
+              1791851077243184373
+            ],
+            "output_lines": 84,
+            "output_chars": 7579,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.048398332903161645,
+          "cpu": 0.047217000000000064,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "TestMakeSplrep.test_fitpack_F[1]": 1,
+              "TestMakeSplrep.test_fitpack_F[6]": 1,
+              "failed,": 1
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822602,
+              638795,
+              1791851077243176081,
+              1791851077243184373
+            ],
+            "output_lines": 84,
+            "output_chars": 7579,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.04913620790466666,
+          "cpu": 0.04745599999999994,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "TestMakeSplrep.test_fitpack_F[1]": 1,
+              "TestMakeSplrep.test_fitpack_F[6]": 1,
+              "failed,": 1
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822602,
+              638795,
+              1791851077243176081,
+              1791851077243184373
+            ],
+            "output_lines": 84,
+            "output_chars": 7579,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.04877779190428555,
+          "cpu": 0.04719899999999999,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "TestMakeSplrep.test_fitpack_F[1]": 1,
+              "TestMakeSplrep.test_fitpack_F[6]": 1,
+              "failed,": 1
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822602,
+              638795,
+              1791851077243176081,
+              1791851077243184373
+            ],
+            "output_lines": 84,
+            "output_chars": 7579,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.048609582940116525,
+          "cpu": 0.04714000000000007,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "TestMakeSplrep.test_fitpack_F[1]": 1,
+              "TestMakeSplrep.test_fitpack_F[6]": 1,
+              "failed,": 1
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822602,
+              638795,
+              1791851077243176081,
+              1791851077243184373
+            ],
+            "output_lines": 84,
+            "output_chars": 7579,
+            "open_count": 2
+          }
+        }
+      ],
+      "gated": [
+        {
+          "wall": 0.04948179214261472,
+          "cpu": 0.04774400000000001,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "TestMakeSplrep.test_fitpack_F[1]": 1,
+              "TestMakeSplrep.test_fitpack_F[6]": 1,
+              "failed,": 1
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "activation": "activate",
+            "activation_profile": "log-context",
+            "activation_facts": {
+              "source_chars": 632478,
+              "selected_chars": 7355,
+              "bounding_chars": 208849,
+              "regions": 3,
+              "completed_blocks": 2
+            },
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822602,
+              638795,
+              1791851077243176081,
+              1791851077243184373
+            ],
+            "output_lines": 84,
+            "output_chars": 7579,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.049278459046036005,
+          "cpu": 0.047520999999999924,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "TestMakeSplrep.test_fitpack_F[1]": 1,
+              "TestMakeSplrep.test_fitpack_F[6]": 1,
+              "failed,": 1
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "activation": "activate",
+            "activation_profile": "log-context",
+            "activation_facts": {
+              "source_chars": 632478,
+              "selected_chars": 7355,
+              "bounding_chars": 208849,
+              "regions": 3,
+              "completed_blocks": 2
+            },
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822602,
+              638795,
+              1791851077243176081,
+              1791851077243184373
+            ],
+            "output_lines": 84,
+            "output_chars": 7579,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.04963108408264816,
+          "cpu": 0.047826000000000035,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "TestMakeSplrep.test_fitpack_F[1]": 1,
+              "TestMakeSplrep.test_fitpack_F[6]": 1,
+              "failed,": 1
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "activation": "activate",
+            "activation_profile": "log-context",
+            "activation_facts": {
+              "source_chars": 632478,
+              "selected_chars": 7355,
+              "bounding_chars": 208849,
+              "regions": 3,
+              "completed_blocks": 2
+            },
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822602,
+              638795,
+              1791851077243176081,
+              1791851077243184373
+            ],
+            "output_lines": 84,
+            "output_chars": 7579,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.05159733397886157,
+          "cpu": 0.049614999999999965,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "TestMakeSplrep.test_fitpack_F[1]": 1,
+              "TestMakeSplrep.test_fitpack_F[6]": 1,
+              "failed,": 1
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "activation": "activate",
+            "activation_profile": "log-context",
+            "activation_facts": {
+              "source_chars": 632478,
+              "selected_chars": 7355,
+              "bounding_chars": 208849,
+              "regions": 3,
+              "completed_blocks": 2
+            },
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822602,
+              638795,
+              1791851077243176081,
+              1791851077243184373
+            ],
+            "output_lines": 84,
+            "output_chars": 7579,
+            "open_count": 2
+          }
+        },
+        {
+          "wall": 0.05035529192537069,
+          "cpu": 0.04867600000000005,
+          "status": {
+            "schema_version": 1,
+            "model_called": false,
+            "model_failed": false,
+            "selection_truncated": false,
+            "final_output_capped": false,
+            "full_source_returned": false,
+            "reason_codes": [],
+            "packet_query_anchor": "unknown",
+            "absent_required": [],
+            "lost_required": [],
+            "next_action": null,
+            "status": "auto_candidates",
+            "retrieval_mode": "literal_search",
+            "scan_complete": true,
+            "search_match_lines": {
+              "TestMakeSplrep.test_fitpack_F[1]": 1,
+              "TestMakeSplrep.test_fitpack_F[6]": 1,
+              "failed,": 1
+            },
+            "missing_search_terms": [],
+            "semantic_sufficiency": "unknown",
+            "context_lines": 4,
+            "traceback_completed_blocks": 2,
+            "activation": "activate",
+            "activation_profile": "log-context",
+            "activation_facts": {
+              "source_chars": 632478,
+              "selected_chars": 7355,
+              "bounding_chars": 208849,
+              "regions": 3,
+              "completed_blocks": 2
+            },
+            "output_format": "numbered",
+            "source_consistency": "stat_unchanged",
+            "source_stamp": [
+              16777231,
+              73822602,
+              638795,
+              1791851077243176081,
+              1791851077243184373
+            ],
+            "output_lines": 84,
+            "output_chars": 7579,
+            "open_count": 2
+          }
+        }
+      ],
+      "stdout_unchanged": true
+    },
+    {
+      "task": "pandas_dispatch",
+      "host_action": "bypass",
+      "reason_codes": [
+        "outside_auto_scope"
+      ],
+      "source_sha256": "9b813159606b62af03bfe76a7089da282d2d6091f308cf2f4d90dd0661a01105"
+    },
+    {
+      "task": "visible_summary",
+      "host_action": "bypass",
+      "reason_codes": [
+        "evidence_already_available"
+      ],
+      "source_sha256": "23cc02f4ecff02141897d670bf831f5be62702b33c2a48e6e5c2b717fd783ca3"
+    }
+  ]
+}

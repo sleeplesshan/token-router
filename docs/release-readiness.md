@@ -1,36 +1,24 @@
-# Release readiness — v2.7.0
+# Release readiness — v2.7.1
 
-Local explicit extraction is ready. [PR #2 CI](https://github.com/sleeplesshan/token-router/actions/runs/38324764260) passed all six jobs ataf804c0; publication also checks the final document head. Default remains Python-only tokens, v2.4 admission and return-context off. v2.5 is opt-in. No auto cloud, local inference, embeddings or recovery engine. Optional Luna compatibility is not live-validated.
+Supports an optional host-connected, token-focused failure-log gate. Fixed regression log tokens decreased26.82% with longer completion27.46%; this is not a universal, implicit or speed guarantee. Installation supplies narrower discovery metadata and a local API, not a global read hook.
 
-## Checks and evidence
+Default Python-only tokens/v2.4, optionalv2.5, manual named/literal readers and shared source/coordinate/output safety remain unchanged. No selector-model call, Jev, local inference, embeddings or automatic recovery. Optional Luna remains unvalidated live compatibility.
 
-| Gate | Current evidence |
+| Check | Evidence |
 |---|---|
-| Offline suite |181 tests on macOS Python3.10.20/3.14.5; platform skips explicit |
-| Existing manifest |10/10 scenarios |
-| Shared safety |Source mutation/replacement, strict visible model coordinates, output/input caps, long lines, report failures, zero default model calls and CLI priority remain tested |
-| New readers |Complete decorators/async/nested targets, ambiguity/missing/syntax/whole-batch caps, one guarded probe, selected pytest block, compact stdout/sidecar identity, bounded ambiguity |
-| Default regression |24 mixed tasks /8 pinned projects match publicv2.6.0 atf68dc09 with defaultv2.4 query policy; optional new selectors are separate |
-| Archive lifecycle |Install/read-only source/update/restore/uninstall from isolated Unicode/space paths with empty PATH/no key; symbol/literal/numbering smoke |
-| Cross-platform execution |PASS: [Linux/macOS/Windows × Python3.10/3.14](https://github.com/sleeplesshan/token-router/actions/runs/38324764260), including181-test suites/manifest/archive smoke; final-head CI remains the publication gate |
-| Native installed-skill comparison |16 episodes, actual router8/8, fixed-rubric48/48 both arms, completion8/8 both; total tokens-18.23% and observed wall sum-3.86% |
-| Automatic selection / cold implicit |Not established. Earlier cold CLI delivery increased tokens24.12%; no middleware guarantee |
-| Main timeout/cost capture |All48 new main turns have complete usage; no timeout/retry. Final16 native counters/command counts reconciled against ordered raw events |
-| Cloud/other models/new project holdout |Not run; not a basic product requirement |
-| Global installation |Verified separately by local installer backup/hash receipt after publication; a GitHub release alone does not change a machine |
+| Offline |189 tests, macOS Python3.10.20/3.14.5, one platform skip;10/10 manifest scenarios |
+| Activation |Host scope/native/visible exclusions, exact threshold edges, manual packet identity, zero extra source open, missing/near/small/unrecognized bypass, mutation/cap/CLI/sidecar checks |
+| Safety |Existing source replacement, descriptor/stat, strict visible coordinates, long lines, caps, report errors, default model0, CLI priority checks rerun |
+| Manual compatibility |Four real named/literal code/log requests match public2.7.0 stdout/stderr/exit exactly; admission changes only profile paths |
+| Actual host |16 native main turns, fixed38/38 both arms,8/8 completions, logs router/profile4/4; excluded skill/guide/reader0 |
+| Accounting |296,562 known input+output, cache/reasoning subsets not re-added; all16 raw counters/commands independently reconciled |
+| Failure paths |RPC/grace/shutdown capture repaired in research client; two synthetic accounting tests; no actual new timeout/failure observed, not universal future assurance |
+| Cross-platform |Publication requires six offline/manifest/archive CI jobs on Linux/macOS/Windows × Python3.10/3.14 for reviewed PR head |
+| Archive/global |21-file payload unchanged; staged Unicode/space archive lifecycle; publication then downloaded archive hash and managed global backup verification |
+| Unmeasured |New independent source holdout, cold/implicit guide delivery, other main models, unsupported log formats, per-task no-increase guarantee |
 
-## Version and measurement separation
+Measurement snapshot is package2.7.0 candidate/e3b5217, policyv2.4, gpt-6.1-sol medium and locked input/prompt/payload hashes. Release2.7.1 changes its VERSION marker, docs and tests after measurement; measured routing logic/guide remain hash-identical after normalizing VERSION. Release manifest pins actual source commit. Historical2.7.0 explicit-reader data and all earlier gold/scores remain intact.
 
-Stable predecessor: v2.6.0 atf68dc09bab5c331034feff4137bf91f41a36e880. The final real-use measurement pins package2.7.0 candidate/commit3ad145c, unchanged defaultv2.4 policy, exact user prompt/source/guide/runtime hashes and gpt-6.1-sol medium. Released runtime and guide hashes must match those measured paths; later documentation/research provenance commits are identified separately by the release manifest. No past benchmark is relabeled as a new model run.
+[New report and events](https://github.com/sleeplesshan/token-router/blob/v2.7.1/docs/conservative-activation-review/report.ko.md) · [host integration](https://github.com/sleeplesshan/token-router/blob/v2.7.1/docs/activation-integration.md) · [historical2.7 evaluation](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/report.ko.md).
 
-[Actual-reader report](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/report.ko.md), [ledger](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/episodes.json), [native raw audit](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/native-audit.json), [execution lock](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/run-native-lock.json), [source notices](https://github.com/sleeplesshan/token-router/blob/v2.7.0/docs/actual-reader-review/SOURCES.md).
-
-The four development tasks use known public code/log families; repeats are not independent projects. Pandas savings are negligible and one repeat increases tokens. CPython token savings coexist with21.47% longer time. Overall timing is descriptive; remote wait cannot be isolated from wall-minus-child-CPU. Default query output preservation does not imply every new literal output matches old literal behavior: selected failure completion intentionally adds evidence.
-
-Original gold/scores and independent source-coordinate/format adjudication remain separate. Native criteria were fixed before native calls. The research client has latent failure-path notification risks; all16 completed native traces were independently reconciled, not a universal client validation. All48 new turns total1,050,651known tokens within1.1M/50-turn budget. Historical usage-unknown timeout remains unknown and separate.
-
-## Publication and rollback
-
-Create reviewed PR, wait for all six CI jobs, merge that head, tagv2.7.0, build/download/verify the deterministic archive and SHA inventory, then update the managed global installation with backup/hash verification. Research sources and events are not in the21-file installed payload. Never edit authentication or global AGENTS as a side effect.
-
-Rollback to a verifiedv2.6.0 archive/tag or the validated backup printed by the installer. Do not reset user work, bypass managed-edit checks, or remove shared safety when changing an admission policy. Unsupported metadata detection fails closed; stat equality is not an atomic snapshot.
+Rollback: remove the optional profile/host attachment hook for existing manual behavior, or restore a verified2.7.0 install backup/archive. No auth, other skill, model setting or global AGENTS change is part of publication. Shared safety must survive policy rollback. Existing user edits are never reset or silently overwritten.
