@@ -39,6 +39,14 @@ def main(archive):
         bounded=run(router,'heavy_code',large,'--query','lookup','--return-context','bounded',cwd=root,env=env)
         target=run(router,'heavy_code',large,'--query','lookup','--return-target','lookup',cwd=root,env=env)
         assert 'return stored_value' not in base and 'return stored_value' in bounded and target==bounded
+        complete=run(router,'heavy_code',large,'--symbol','lookup','--line-numbers','--compact-status',cwd=root,env=env)
+        assert 'return stored_value' in complete and 'documentation' in complete and 'neutral padding' not in complete
+        # The archive must ship the numbered literal reader and explicit scope.
+        incident=root/'literal incident.log'
+        incident.write_text('neutral padding\n'*100+'ERROR: worker\nTraceback (most recent call last):\n  File "worker.py", line 7\nValueError: failed\n'+'neutral padding\n'*100,encoding='utf-8')
+        literal=run(router,'error_log',incident,'--search-term','File "worker.py"','--search-context','0','--line-numbers',cwd=root,env=env)
+        assert '102: Traceback' in literal and '104: ValueError: failed' in literal
+        assert 'neutral padding' not in literal
         result=json.loads(run(installer,'update','--dest',dest,cwd=root,env=env));assert Path(result['backup']).is_dir()
         run(installer,'restore','--dest',dest,'--backup',result['backup'],cwd=root,env=env)
         run(installer,'uninstall','--dest',dest,cwd=root,env=env);assert not dest.exists();assert Path(result['backup']).exists()

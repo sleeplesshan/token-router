@@ -6,7 +6,7 @@ Default routing is Python-only and must not discover or call a model. Keep origi
 python3 -m unittest discover -s tests
 python3 scripts/run_router_tests.py tests/router-tests.json
 python3 scripts/build_release.py --output dist
-python3 scripts/smoke_archive.py dist/token-router-2.6.0.zip
+python3 scripts/smoke_archive.py dist/token-router-2.7.0.zip
 ```
 
 Build from a clean committed source. Offline CI needs no model/login/secret; checkout and Python setup still use infrastructure network. Live comparisons require a separate explicit budget and sanitized licensed sources. Keep raw research evidence immutable and out of runtime archives; publish sanitized summaries and pinned replay instructions. Record product commit/module hashes, policy, model and source/prompt hashes. Failed/unknown usage is not zero.

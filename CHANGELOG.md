@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.7.0 — 2026-10-13
+
+- Add explicit complete bounded Python callable retrieval (`--symbol`), merged overlaps/decorators and whole-batch refusal for missing/duplicate/syntax/budget failures.
+- Add repeated literal windows (`--search-term`), selected recognizable Python/pytest failure-block completion, context0..12, numbered raw presentation and compact diagnostics. Preserve full report sidecars and common source/coordinate/output guards.
+- Bound duplicate-symbol witnesses/counts and omit successful coordinate duplication from compact status. Keep default query ranking, v2.4 admission, v2.5 opt-in, return-context off and zero default selector calls.
+- Guide reuse and distinctive log headers reduce avoidable rereads. Managed backups stay outside skill discovery. No pre-read guide/execution batching is used.
+- Native Codex installed-skill development comparison: actual router8/8, fixed-rubric48/48 both arms, total193,678→158,361tokens (-18.23%), wall116.29→111.80s (-3.86%). Pandas effectively flat, CPython slower; cold CLI comparison increased costs. No universal/automatic savings claim. Full all48-turn ledger and original/adjudicated scores: [actual-reader review](docs/actual-reader-review/report.ko.md).
+- Stream bounded benchmark capture and preserve failure/unknown usage accounting; research tools are excluded from installed payload.
+
 ## 2.6.0 — 2026-10-12
 
 - Keep v2.4 local admission and shared safety as the default; optional bounded Python return completion and exact return-target filtering. Explicit off+target is a usage error.

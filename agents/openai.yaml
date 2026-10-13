@@ -1,4 +1,4 @@
 interface:
   display_name: "Token Router"
-  short_description: "Select bounded raw evidence with local token-aware routing"
-  default_prompt: "Use $token-router to assess whether focused raw evidence retrieval helps this task, using the default local tokens policy and checking missing context."
+  short_description: "Read bounded complete Python callables or failure blocks"
+  default_prompt: "Use $token-router when branch/order analysis needs complete named callables or dispersed log blocks need context. Reuse evidence and skip simple literal lookups."

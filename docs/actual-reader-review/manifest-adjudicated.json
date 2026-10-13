@@ -1,0 +1,522 @@
+{
+  "schema_version": 2,
+  "package_version": "2.7.0 unreleased",
+  "commit": "b17adc0dcaef487e724c0f4e16f63d45dbaf45da",
+  "policy_version": "v2.4 explicit symbol/literal selectors; shared validation",
+  "tasks": [
+    {
+      "id": "pandas_dispatch",
+      "family": "code",
+      "file": "pandas_frame.py",
+      "language": "ko",
+      "query": "DataFrame.__getitem__, DataFrame.__setitem__, DataFrame._set_item_frame_value의 여러 분기와 순서를 원문에서 검토하세요. 정의 앞부분만으로는 답할 수 없습니다.",
+      "symbols": [
+        "DataFrame.__getitem__",
+        "DataFrame.__setitem__",
+        "DataFrame._set_item_frame_value"
+      ],
+      "seed_pattern": "^    def (__getitem__|__setitem__|_set_item_frame_value)\\(",
+      "facts": [
+        {
+          "id": "p1",
+          "question": "__getitem__ 시작에서 호출하는 세 정규화 함수를 실행 순서대로, 함수 이름만 세미콜론으로 구분해 쓰세요.",
+          "accepted_answers": [
+            "check_dict_or_set_indexers;lib.item_from_zerodim;com.apply_if_callable"
+          ],
+          "evidence_groups": [
+            [
+              4063
+            ],
+            [
+              4064
+            ],
+            [
+              4065
+            ]
+          ],
+          "kind": "sequence"
+        },
+        {
+          "id": "p2",
+          "question": "boolean DataFrame와 boolean1D key는 각각 어느 self 메서드로 반환하나요? 두 함수 이름을 소스 분기 순서로 쓰세요.",
+          "accepted_answers": [
+            "self.where;self._getitem_bool_array",
+            "where;_getitem_bool_array"
+          ],
+          "evidence_groups": [
+            [
+              4088
+            ],
+            [
+              4089
+            ],
+            [
+              4092
+            ],
+            [
+              4093
+            ]
+          ],
+          "kind": "sequence"
+        },
+        {
+          "id": "p3",
+          "question": "is_single_key 후반에서 data._get_item_cache를 허용하는 내부 if 조건식 전체는?",
+          "accepted_answers": [
+            "data.shape[1] == 1 and not isinstance(self.columns, MultiIndex)"
+          ],
+          "evidence_groups": [
+            [
+              4124
+            ],
+            [
+              4126
+            ]
+          ],
+          "kind": "expr"
+        },
+        {
+          "id": "p4",
+          "question": "__setitem__에서 key가 list이며 value가 DataFrame일 때 우선 호출되는 메서드 이름은? 앞뒤 분기 근거도 인용하세요.",
+          "accepted_answers": [
+            "self._setitem_array",
+            "_setitem_array"
+          ],
+          "evidence_groups": [
+            [
+              4298
+            ],
+            [
+              4299
+            ],
+            [
+              4300
+            ],
+            [
+              4301
+            ]
+          ],
+          "kind": "literal"
+        },
+        {
+          "id": "p5",
+          "question": "_set_item_frame_value에서 기존 column의 len_cols를 정하는 조건 표현식 전체는?",
+          "accepted_answers": [
+            "1 if is_scalar(cols) or isinstance(cols, tuple) else len(cols)"
+          ],
+          "evidence_groups": [
+            [
+              4427
+            ]
+          ],
+          "kind": "expr"
+        },
+        {
+          "id": "p6",
+          "question": "새 column의 DataFrame value에 대해 오류를 발생시키는 두 column-count 조건식을 순서대로 쓰세요.",
+          "accepted_answers": [
+            "len(value.columns) > 1;len(value.columns) == 0"
+          ],
+          "evidence_groups": [
+            [
+              4458
+            ],
+            [
+              4463
+            ]
+          ],
+          "kind": "expressions"
+        }
+      ],
+      "source_sha256": "9b813159606b62af03bfe76a7089da282d2d6091f308cf2f4d90dd0661a01105",
+      "source_bytes": 447104,
+      "source_lines": 12697,
+      "split": "development_actual_path",
+      "seed_sha256": "c9d1fb84486761059a3d84842ffeec9af6f151c717576ec2a4632c6b9b5f1c54"
+    },
+    {
+      "id": "rich_render",
+      "family": "code",
+      "file": "rich_console.py",
+      "language": "en",
+      "query": "Audit branching and ordering across Console.print and Console.log, including their late segment handling. Definitions are required, not just signatures.",
+      "symbols": [
+        "Console.print",
+        "Console.log"
+      ],
+      "seed_pattern": "^    def (print|log)\\(",
+      "facts": [
+        {
+          "id": "r1",
+          "question": "What combined outer+inner guard changes no_wrap to True in print? Write an expression.",
+          "accepted_answers": [
+            "soft_wrap and no_wrap is None"
+          ],
+          "evidence_groups": [
+            [
+              1697
+            ],
+            [
+              1698
+            ],
+            [
+              1699
+            ]
+          ],
+          "kind": "expr"
+        },
+        {
+          "id": "r2",
+          "question": "List the three callable names for collection, render hooks, then options update in print, in order.",
+          "accepted_answers": [
+            "self._collect_renderables;hook.process_renderables;self.options.update"
+          ],
+          "evidence_groups": [
+            [
+              1705
+            ],
+            [
+              1715
+            ],
+            [
+              1716
+            ]
+          ],
+          "kind": "sequence"
+        },
+        {
+          "id": "r3",
+          "question": "Under new_line_start, write the complete inner condition for inserting a leading newline.",
+          "accepted_answers": [
+            "len(\"\".join(segment.text for segment in new_segments).splitlines()) > 1"
+          ],
+          "evidence_groups": [
+            [
+              1745
+            ],
+            [
+              1746
+            ],
+            [
+              1748
+            ]
+          ],
+          "kind": "expr"
+        },
+        {
+          "id": "r4",
+          "question": "In log list the formatter, hook processor, renderer attribute, then crop helper, in execution order.",
+          "accepted_answers": [
+            "self._log_render;hook.process_renderables;self.render;Segment.split_and_crop_lines"
+          ],
+          "evidence_groups": [
+            [
+              2007
+            ],
+            [
+              2017
+            ],
+            [
+              2021
+            ],
+            [
+              2025
+            ]
+          ],
+          "kind": "sequence"
+        },
+        {
+          "id": "r5",
+          "question": "What exact condition filters log locals?",
+          "accepted_answers": [
+            "not key.startswith(\"__\")"
+          ],
+          "evidence_groups": [
+            [
+              2002
+            ]
+          ],
+          "kind": "expr"
+        },
+        {
+          "id": "r6",
+          "question": "For print crop=False and log, respectively, name the final direct buffer callable and the always-used crop helper.",
+          "accepted_answers": [
+            "self._buffer.extend;Segment.split_and_crop_lines"
+          ],
+          "evidence_groups": [
+            [
+              1755
+            ],
+            [
+              1756
+            ],
+            [
+              2025
+            ]
+          ],
+          "kind": "sequence"
+        }
+      ],
+      "source_sha256": "4533fc66963623a2a21447b501d6f51f8cfee7e14775178093a5e6eb61dc135a",
+      "source_bytes": 101361,
+      "source_lines": 2698,
+      "split": "development_actual_path",
+      "seed_sha256": "91f04703708d4072bad2c8f4f025332eac6b5085062b2b4d86b7efc3f119e85d"
+    },
+    {
+      "id": "cpython_trace",
+      "family": "log",
+      "file": "cpython-ubsan.log",
+      "language": "ko",
+      "query": "큰 CPython CI 로그에서 test_interrupt의 전체 대기 경로와 후반 UBSan 기록, Total test files 결과를 함께 조사하세요.",
+      "terms": [
+        "Traceback (most recent call last):",
+        "Total test files:",
+        "runtime error:",
+        "SEGV"
+      ],
+      "seed_pattern": "ERROR.*test_interrupt|Total test files:|san_log\\.[0-9]+ <",
+      "facts": [
+        {
+          "id": "c1",
+          "question": "test_interrupt가 _kill_process에 전달하는 callback 표현식은?",
+          "accepted_answers": [
+            "multiprocessing.Process.interrupt"
+          ],
+          "evidence_groups": [
+            [
+              3184
+            ],
+            [
+              3185
+            ]
+          ],
+          "kind": "expr"
+        },
+        {
+          "id": "c2",
+          "question": "대기 경로의 multiprocessing join, popen wait, poll 순서 다음 실제 운영체제 호출 이름은? join/wait/poll과 마지막 호출의 근거를 함께 인용하세요.",
+          "accepted_answers": [
+            "os.waitpid"
+          ],
+          "evidence_groups": [
+            [
+              3194
+            ],
+            [
+              3195
+            ],
+            [
+              3196
+            ],
+            [
+              3197
+            ],
+            [
+              3199
+            ],
+            [
+              3200
+            ]
+          ],
+          "kind": "literal"
+        },
+        {
+          "id": "c3",
+          "question": "wait의 self.poll에 전달하는 timeout 분기 표현식은?",
+          "accepted_answers": [
+            "os.WNOHANG if timeout == 0.0 else 0"
+          ],
+          "evidence_groups": [
+            [
+              3196
+            ],
+            [
+              3197
+            ]
+          ],
+          "kind": "expr"
+        },
+        {
+          "id": "c4",
+          "question": "예외를 실제 raise한 test 파일의 함수명, 파일 내부 줄, 예외 클래스는? 세미콜론으로 쓰세요.",
+          "accepted_answers": [
+            "handler;628;RuntimeError"
+          ],
+          "evidence_groups": [
+            [
+              3202
+            ],
+            [
+              3203
+            ]
+          ],
+          "kind": "sequence"
+        },
+        {
+          "id": "c5",
+          "question": "Total test files run 분수와 failed 개수를 세미콜론으로 쓰세요.",
+          "accepted_answers": [
+            "548/559;1"
+          ],
+          "evidence_groups": [
+            [
+              3657
+            ]
+          ],
+          "kind": "sequence"
+        },
+        {
+          "id": "c6",
+          "question": "서로 다른 UBSan 기록의 misaligned load type/alignment와 SEGV access type을 세미콜론으로 쓰세요. 인과관계를 추론하지 마세요.",
+          "accepted_answers": [
+            "int;4;READ",
+            "int;4 byte alignment;READ",
+            "'int';4 byte alignment;READ",
+            "int;4 bytes;READ"
+          ],
+          "evidence_groups": [
+            [
+              3673
+            ],
+            [
+              3680
+            ],
+            [
+              3681
+            ]
+          ],
+          "kind": "sequence"
+        }
+      ],
+      "source_sha256": "d23199487e0009822f4d3a33284fb9a42da018155164c308e96cad456611d606",
+      "source_bytes": 551037,
+      "source_lines": 3768,
+      "split": "development_actual_path",
+      "seed_sha256": "ffa46a3b35629639e7c70a0f0b3bc3fdbd0e5a05d411eec4cf78519abeaf87e2"
+    },
+    {
+      "id": "scipy_failure_blocks",
+      "family": "log",
+      "file": "scipy-fast.log",
+      "language": "en",
+      "query": "Compare the complete failure blocks TestMakeSplrep.test_fitpack_F[1] and TestMakeSplrep.test_fitpack_F[6], then connect them to the final failed/passed summary. Do not infer unseen implementations.",
+      "terms": [
+        "TestMakeSplrep.test_fitpack_F[1]",
+        "TestMakeSplrep.test_fitpack_F[6]",
+        "failed,"
+      ],
+      "seed_pattern": "_{3,} TestMakeSplrep.test_fitpack_F\\[(1|6)\\]|= 48 failed,",
+      "facts": [
+        {
+          "id": "s1",
+          "question": "In both cases, write the y arguments passed to F and F_dense in that order. Cite both blocks.",
+          "accepted_answers": [
+            "y[:, None];y"
+          ],
+          "evidence_groups": [
+            [
+              3851
+            ],
+            [
+              3852
+            ],
+            [
+              4017
+            ],
+            [
+              4018
+            ]
+          ],
+          "kind": "expressions"
+        },
+        {
+          "id": "s2",
+          "question": "Name the shared assertion helper and its two compared call expressions, in order; cite both cases.",
+          "accepted_answers": [
+            "xp_assert_close_no_0d;f(p);f_d(p)"
+          ],
+          "evidence_groups": [
+            [
+              3854
+            ],
+            [
+              4020
+            ]
+          ],
+          "kind": "sequence"
+        },
+        {
+          "id": "s3",
+          "question": "What exception class and missing attribute are shared by both cases?",
+          "accepted_answers": [
+            "AttributeError;shape"
+          ],
+          "evidence_groups": [
+            [
+              3855
+            ],
+            [
+              4021
+            ]
+          ],
+          "kind": "sequence"
+        },
+        {
+          "id": "s4",
+          "question": "What p value is captured for case1 and case6? Cite both locals.",
+          "accepted_answers": [
+            "1;1"
+          ],
+          "evidence_groups": [
+            [
+              3861
+            ],
+            [
+              4027
+            ]
+          ],
+          "kind": "sequence"
+        },
+        {
+          "id": "s5",
+          "question": "Write the shared failing file path and line (use forward slashes), and cite both terminators.",
+          "accepted_answers": [
+            "scipy/interpolate/tests/test_bsplines.py;5134",
+            "scipy/interpolate/tests/test_bsplines.py:5134"
+          ],
+          "evidence_groups": [
+            [
+              3870
+            ],
+            [
+              4037
+            ]
+          ],
+          "kind": "sequence"
+        },
+        {
+          "id": "s6",
+          "question": "What are final failed and passed counts, in that order?",
+          "accepted_answers": [
+            "48;85328"
+          ],
+          "evidence_groups": [
+            [
+              6256
+            ]
+          ],
+          "kind": "sequence"
+        }
+      ],
+      "source_sha256": "23cc02f4ecff02141897d670bf831f5be62702b33c2a48e6e5c2b717fd783ca3",
+      "source_bytes": 638795,
+      "source_lines": 6315,
+      "split": "development_actual_path",
+      "seed_sha256": "64822ccc38858570ef3724222f13c2bb6076646326c10c3c8f4be935b935828e"
+    }
+  ],
+  "scope": "4 development contextual tasks on public sources; two repeats are not independent tasks; no new project holdout",
+  "adjudication": "Original preserved; source coordinate errors and equivalent notation verified independently by Left reviewer before inline-guide runs."
+}

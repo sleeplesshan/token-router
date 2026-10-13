@@ -1,4 +1,4 @@
-# CLI and data contract — 2.6.0
+# CLI and data contract — 2.7.0
 
 Runtime: Python 3.10–3.14, standard library. Default: `--optimize tokens`, policy v2.4, return-context off. No executable discovery, login, network or telemetry occurs in this default. Basic regular-file CLI is designed for Linux/macOS/Windows; see the release-readiness report for actually executed platforms. Research scripts have separate dependencies and are not installed.
 
@@ -6,7 +6,9 @@ Runtime: Python 3.10–3.14, standard library. Default: `--optimize tokens`, pol
 
 | Option | Local tokens | deterministic / force-model / latency |
 |---|---|---|
-| query, report-json | Supported | Supported |
+| query, report-json, line-numbers, compact-status | Supported | Supported |
+| search-term / search-context | focused only; context requires literal terms | Usage error |
+| symbol QUALNAME | heavy_code + focused only; incompatible with search terms/required literals/return completion | Usage error |
 | policy-version v2.4/v2.5 | Supported | Usage error when explicitly supplied |
 | require-term, whole read-scope | v2.5 only | Usage error |
 | return-context off | Supported | Usage error when explicitly supplied |
@@ -55,3 +57,23 @@ A candidate must fit the budget and have at least 15% rendered-character reducti
 `--force-model` and the legacy `--optimize latency` path can transmit query and candidate source to OpenAI through an existing Codex ChatGPT login. The router fixes `gpt-6-luna`/low and never switches to API keys or another model. No live Luna test is part of this release: availability and account access are unverified. It is not required or recommended for first use. Local basic CLI support does not imply cloud support on Windows (disabled there, with local fallback).
 
 Known command contract: Codex CLI0.162.1, ephemeral/read-only/structured output, ignored user config, disabled tools/apps/skills for selection. Model data cannot authorize tool calls. Strict integer ranges must be contained in the visible candidate union. Invalid response/timeout triggers existing bounded deterministic fallback; inspect model_failed even at exit0. POSIX process groups are killed and reaped on timeout/interruption. Windows cloud process-tree support is not claimed. Main-agent cloud processing of extracted lines is separate from local routing.
+
+## Explicit search and numbered presentation — 2.7.0
+
+Version2.7.0 adds repeated `--search-term TEXT`: case-sensitive substring search with12 neighboring lines for code/references and4 for logs around every match, merged across overlaps. It bypasses structural ranking/AST/tail. Selected log windows overlapping a recognizable Python traceback extend to its terminating exception only within64 lines; timestamp/ANSI parsing identifies bounds without changing raw text. Log literals match raw text or its ANSI-SGR-stripped view, so colored ERROR markers remain searchable. Case is preserved. Unselected blocks are excluded. Search terms are explicit selection hints, not required-literal evidence. It supports focused local tokens only; cloud/deterministic/whole/required literals/return completion combinations are usage errors. Missing terms are reported, not guessed. Complete windows exceeding12,000rendered characters or the common final cap are withheld; narrow the search. Non-small sources still require at least15% reduction. No terms are inferred from gold or natural-language prose.
+
+`--line-numbers` is presentation-only across paths: original decoded text and coordinates remain unchanged in Packet.raw_slices; stdout uses NUMBERED CONTENT headers and prefixes each original line. The final cap includes prefixes and headers. Default raw output remains compatible. Coordinates make citation-only re-reading unnecessary. Shared source/coordinate/input/output/sidecar checks still apply.
+
+Managed updates under .agents/skills or .codex/skills put backups under the sibling skill-backups directory, outside discovery. This prevents old instructions being exposed as another current skill. Existing backups are preserved; move historical sibling backup directories out of the discovery root explicitly.
+
+`--search-context N` (0-12) overrides neighbors only for `--search-term`; other paths reject it. Omitted values preserve code12/log4. Width0 retains every matching line, not ordinary neighbors; selected bounded tracebacks can still add lines. An ERROR before an unselected traceback does not select it at width0. This is explicit scope control, not a claim of semantic completeness. Use wider context for branch conditions or multiline expressions and include recovery costs in comparisons.
+
+Discovery is scoped to dispersed error-log context or branching/order audits requiring complete Python definitions whose exact qualified names are already known. Literal-only lookups, one already-known line range and sufficient visible evidence should bypass loading. This metadata guideline is not a programmable host interception or a future total-token guarantee. The prior log-only gate failed promotion. The explicit native complete-callable/failure-block evaluation is in docs/actual-reader-review/report.ko.md; cold implicit savings remain unproven.
+
+## Explicit complete Python callables — 2.7.0
+
+Repeated `--symbol QUALNAME` selects1-8 exact qualified functions/async functions, including decorators. It requires focused local heavy_code tokens; it cannot combine with literal windows, required terms, return completion, deterministic, latency or cloud. The guarded probe is capped at1,000,000 decoded characters; line resource bounds still apply. Duplicate definitions (including overloads/property pairs), absent names and invalid Python withhold the whole batch. Overlapping definitions merge, preserving original lines without duplication. Full rendered batch must fit12,000 and the common output cap and retain the existing reduction margin. Complete definitions are not complete dependencies or enclosing conditional context.
+
+Selected bounded pytest failure blocks may extend from a recognized underscore header to their file:line:exception terminator within64 lines. Unselected blocks remain excluded. `--compact-status` changes only stderr presentation; current errors/actions/model flags remain and `--report-json` retains the full report. Raw/numbered stdout and the shared safety validation remain identical.
+
+Compact successful symbol output omits coordinates already present in stdout; failure symbol ranges and suggested ranges remain bounded. `symbol_occurrences` and `symbol_ranges_truncated` describe repeated definition positions, not answer probability. Named/literal selection does not use general query ranking; the query policy version has no new semantic sufficiency role there. Model reason/output/source validation is unchanged.

@@ -1,0 +1,116 @@
+{
+  "decision": "Keep new reader opt-in; broad default promotion rejected: joint token/time criterion not met",
+  "free_choice_initial": {
+    "plain": {
+      "episodes": 4,
+      "tokens": 79788,
+      "wall": 82.60775641701184,
+      "factual": 25,
+      "strict": 24,
+      "facts": 25,
+      "source_reads": 7,
+      "router_calls": 0,
+      "tool_chars": 21267,
+      "cpu": 5.425549999999999,
+      "median_tokens": 21949.5,
+      "median_wall": 20.61157774995081
+    },
+    "released": {
+      "episodes": 4,
+      "tokens": 101096,
+      "wall": 81.92269433499314,
+      "factual": 25,
+      "strict": 24,
+      "facts": 25,
+      "source_reads": 7,
+      "router_calls": 0,
+      "tool_chars": 33033,
+      "cpu": 5.095182000000001,
+      "median_tokens": 25917.5,
+      "median_wall": 20.76671570900362
+    },
+    "candidate": {
+      "episodes": 4,
+      "tokens": 115154,
+      "wall": 91.85286837280728,
+      "factual": 25,
+      "strict": 25,
+      "facts": 25,
+      "source_reads": 6,
+      "router_calls": 0,
+      "tool_chars": 36848,
+      "cpu": 5.081130999999999,
+      "median_tokens": 29437.0,
+      "median_wall": 21.002429249463603
+    }
+  },
+  "clean_final_literal": {
+    "plain": {
+      "episodes": 1,
+      "tokens": 35814,
+      "wall": 18.83195258397609,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "source_reads": 2,
+      "router_calls": 0,
+      "tool_chars": 30202,
+      "cpu": 1.6484969999999999,
+      "median_tokens": 35814,
+      "median_wall": 18.83195258397609
+    },
+    "candidate": {
+      "episodes": 1,
+      "tokens": 25818,
+      "wall": 25.785450417082757,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "source_reads": 1,
+      "router_calls": 1,
+      "tool_chars": 10405,
+      "cpu": 1.406872,
+      "median_tokens": 25818,
+      "median_wall": 25.785450417082757
+    }
+  },
+  "confounded_duplicate_skill_trial": {
+    "plain": {
+      "episodes": 1,
+      "tokens": 22397,
+      "wall": 21.290478374809027,
+      "factual": 6,
+      "strict": 5,
+      "facts": 6,
+      "source_reads": 2,
+      "router_calls": 0,
+      "tool_chars": 5118,
+      "cpu": 1.2041690000000003,
+      "median_tokens": 22397,
+      "median_wall": 21.290478374809027
+    },
+    "candidate": {
+      "episodes": 1,
+      "tokens": 31614,
+      "wall": 24.29766133404337,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "source_reads": 1,
+      "router_calls": 1,
+      "tool_chars": 10405,
+      "cpu": 2.024475,
+      "median_tokens": 31614,
+      "median_wall": 24.29766133404337
+    }
+  },
+  "total_known_tokens": 497658,
+  "total_cli_calls": 18,
+  "unknown_usage": 0,
+  "clean_token_change_pct": -27.910872843022283,
+  "clean_wall_change_pct": 36.92393447837865,
+  "free_token_change_pct": 44.32496114703965,
+  "free_wall_change_pct": 11.191578559675719,
+  "clean_budget_overshoot": 1632,
+  "source_commit": "e6481eb86de12406f07270532af899ae933e5ed9"
+}

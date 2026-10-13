@@ -1,0 +1,226 @@
+[
+  {
+    "name": "cpython_trace-1-plain",
+    "original_events_sha256": "f4dbfc0a557b47c219f2c0f8e134ac1a6db4d503e488112db6f32139ffc81fb8",
+    "usage_index": 326,
+    "last_command_index": 18,
+    "last_answer_index": 325,
+    "completion_index": 329,
+    "native_skill_inputs": [],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "cpython_trace-1-router",
+    "original_events_sha256": "698ba41cd43cbb7cd2227bc72c9ce4e7f50f6146d883e4765e90e2d214dd8bcf",
+    "usage_index": 306,
+    "last_command_index": 19,
+    "last_answer_index": 305,
+    "completion_index": 309,
+    "native_skill_inputs": [
+      {
+        "type": "skill",
+        "name": "token-router",
+        "path": "<workspace>/.agents/skills/token-router/SKILL.md"
+      }
+    ],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "cpython_trace-2-plain",
+    "original_events_sha256": "32b0d2460a422881dcbf8b5027381617ea28b6333ec6598320dd05522bad42f3",
+    "usage_index": 305,
+    "last_command_index": 18,
+    "last_answer_index": 304,
+    "completion_index": 308,
+    "native_skill_inputs": [],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "cpython_trace-2-router",
+    "original_events_sha256": "7615d832e6dcef72e3b7133846ece2fbdf30c51b1eb201fbe0831cd1e15f565b",
+    "usage_index": 302,
+    "last_command_index": 18,
+    "last_answer_index": 301,
+    "completion_index": 305,
+    "native_skill_inputs": [
+      {
+        "type": "skill",
+        "name": "token-router",
+        "path": "<workspace>/.agents/skills/token-router/SKILL.md"
+      }
+    ],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "pandas_dispatch-1-plain",
+    "original_events_sha256": "8de224075725736b6fc720d4754c5847300ee2bda3f966fdd090f7f8efba29fe",
+    "usage_index": 326,
+    "last_command_index": 18,
+    "last_answer_index": 325,
+    "completion_index": 329,
+    "native_skill_inputs": [],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "pandas_dispatch-1-router",
+    "original_events_sha256": "98499093d5ad704ca65acd786ee5bed4e59e828801b7bd068d8c5d8e6f61e532",
+    "usage_index": 327,
+    "last_command_index": 19,
+    "last_answer_index": 326,
+    "completion_index": 330,
+    "native_skill_inputs": [
+      {
+        "type": "skill",
+        "name": "token-router",
+        "path": "<workspace>/.agents/skills/token-router/SKILL.md"
+      }
+    ],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "pandas_dispatch-2-plain",
+    "original_events_sha256": "8d5c40863a362eaa50739bbe5687ffd8b31241ab6182e3e4abad548fea55c715",
+    "usage_index": 327,
+    "last_command_index": 19,
+    "last_answer_index": 326,
+    "completion_index": 330,
+    "native_skill_inputs": [],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "pandas_dispatch-2-router",
+    "original_events_sha256": "6d621d16c79d107a290f48f4fc848be09c122ece0858e56e69aa67e02478093f",
+    "usage_index": 326,
+    "last_command_index": 18,
+    "last_answer_index": 325,
+    "completion_index": 329,
+    "native_skill_inputs": [
+      {
+        "type": "skill",
+        "name": "token-router",
+        "path": "<workspace>/.agents/skills/token-router/SKILL.md"
+      }
+    ],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "rich_render-1-plain",
+    "original_events_sha256": "f276c251ef04b011c7336c764a5ac2ffd02188951772c223de0442ed6886d929",
+    "usage_index": 315,
+    "last_command_index": 19,
+    "last_answer_index": 314,
+    "completion_index": 318,
+    "native_skill_inputs": [],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "rich_render-1-router",
+    "original_events_sha256": "3a0c0d8689f2df328d15a1bd161fa0591379c3a5ec5544bcd7e9ac1e4e5628a0",
+    "usage_index": 315,
+    "last_command_index": 19,
+    "last_answer_index": 314,
+    "completion_index": 318,
+    "native_skill_inputs": [
+      {
+        "type": "skill",
+        "name": "token-router",
+        "path": "<workspace>/.agents/skills/token-router/SKILL.md"
+      }
+    ],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "rich_render-2-plain",
+    "original_events_sha256": "e9cdb66daf30a1b11ba25640aab045578846635e834ddc8e5243b9aaca99eef8",
+    "usage_index": 314,
+    "last_command_index": 18,
+    "last_answer_index": 313,
+    "completion_index": 317,
+    "native_skill_inputs": [],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "rich_render-2-router",
+    "original_events_sha256": "aacdaa2db684a552bcc58cd3b19d58519cac6db025f66b9d0a659e73c715964b",
+    "usage_index": 333,
+    "last_command_index": 19,
+    "last_answer_index": 332,
+    "completion_index": 336,
+    "native_skill_inputs": [
+      {
+        "type": "skill",
+        "name": "token-router",
+        "path": "<workspace>/.agents/skills/token-router/SKILL.md"
+      }
+    ],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "scipy_failure_blocks-1-plain",
+    "original_events_sha256": "a04145f1a0ccc346fc8ada9b14dc40e0c6eb937bd34afacb399eb277744136b4",
+    "usage_index": 369,
+    "last_command_index": 18,
+    "last_answer_index": 368,
+    "completion_index": 372,
+    "native_skill_inputs": [],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "scipy_failure_blocks-1-router",
+    "original_events_sha256": "39bfcf8a4daf03b9dc8eef3a75352a32e33f181287048504521f94e11f588093",
+    "usage_index": 370,
+    "last_command_index": 19,
+    "last_answer_index": 369,
+    "completion_index": 373,
+    "native_skill_inputs": [
+      {
+        "type": "skill",
+        "name": "token-router",
+        "path": "<workspace>/.agents/skills/token-router/SKILL.md"
+      }
+    ],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "scipy_failure_blocks-2-plain",
+    "original_events_sha256": "9b7dfb14570f69c975b28b9799c620586f40054e87438483b7dff823370eb6d9",
+    "usage_index": 369,
+    "last_command_index": 18,
+    "last_answer_index": 368,
+    "completion_index": 372,
+    "native_skill_inputs": [],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  },
+  {
+    "name": "scipy_failure_blocks-2-router",
+    "original_events_sha256": "34ce8e792e14473740f3a33b75fef4774cc737d6136e97aa83a3ead0224decf6",
+    "usage_index": 369,
+    "last_command_index": 18,
+    "last_answer_index": 368,
+    "completion_index": 372,
+    "native_skill_inputs": [
+      {
+        "type": "skill",
+        "name": "token-router",
+        "path": "<workspace>/.agents/skills/token-router/SKILL.md"
+      }
+    ],
+    "commands_reconciled": true,
+    "usage_reconciled": true
+  }
+]

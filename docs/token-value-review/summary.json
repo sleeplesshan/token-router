@@ -1,0 +1,3467 @@
+{
+  "product": {
+    "date": "2026-10-13",
+    "package_version": "2.7.0-dev",
+    "current_commit": "80950e8f1ba6e42b9392d1783104c9c4a11cf3cd",
+    "candidate_commit": "14d742fefd73311ce20a204417c0b32e2e6cf83e",
+    "policy": "v2.4",
+    "model": "gpt-6.1-sol",
+    "reasoning": "medium",
+    "manifest_hash": "ceb217cb9be429453344ea6ef227bcc814b4234a2db02aa172edc83452a004fe",
+    "files": {
+      "plain": {
+        "scipy-fast.log": "23cc02f4ecff02141897d670bf831f5be62702b33c2a48e6e5c2b717fd783ca3",
+        "subprocess.py": "e84782f0d4a19f6001624f21b7d5c20c610e8e27113e2fd9c0482eb1dcd760cd",
+        "cpython-ubsan.log": "d23199487e0009822f4d3a33284fb9a42da018155164c308e96cad456611d606",
+        "attrs_make.py": "db3b8d7a08c7ed547459e6828e906ae4044e234d0144c189595bdf56cff61a91"
+      },
+      "current": {
+        "scipy-fast.log": "23cc02f4ecff02141897d670bf831f5be62702b33c2a48e6e5c2b717fd783ca3",
+        "subprocess.py": "e84782f0d4a19f6001624f21b7d5c20c610e8e27113e2fd9c0482eb1dcd760cd",
+        "cpython-ubsan.log": "d23199487e0009822f4d3a33284fb9a42da018155164c308e96cad456611d606",
+        "attrs_make.py": "db3b8d7a08c7ed547459e6828e906ae4044e234d0144c189595bdf56cff61a91",
+        ".agents/skills/token-router/LICENSE": "c0d5b8821cbbe219f05c53abb58fb61e42c80222aa8af76c9841862e9b4f4b9b",
+        ".agents/skills/token-router/CHANGELOG.md": "4ffc0b276246aa137257a603e70c8bea00f8b6f2e70bf65fa2bb858761dceb35",
+        ".agents/skills/token-router/README.md": "d40d3befe85d4f2e5f07c098f80708b55947ff4cf1f035a2e2576111105f76f2",
+        ".agents/skills/token-router/SUPPORT.md": "4031409ee2d06cc34fc40c35f81732cab0dbd529545434a6d02b6ff5bb6b6706",
+        ".agents/skills/token-router/.token-router-install.json": "dd37322aecfc397326632f528421534103fa497895d07d8f682865ec19debbdb",
+        ".agents/skills/token-router/CONTRIBUTING.md": "fd2478634fca5670bb67442a2fbfc1141c1a0c808ad55a3a83de952821b904c6",
+        ".agents/skills/token-router/SKILL.md": "4dfc86273b7fabecf3bf5a03f8dd7a4798383dd5057340c0db6ef6408c7fb3c9",
+        ".agents/skills/token-router/CLAUDE.md": "9cbe4ce89f0d74d6bd41c6ebbe98e57708c96608d30ba028cdc632efe7bb556c",
+        ".agents/skills/token-router/SECURITY.md": "ed389392a7b87e25e4645c2bad5f2f99a91bb551a25ac090c4a528d4b6b75658",
+        ".agents/skills/token-router/references/contract.md": "a14ceab0128291af2dfc6d5bfb68fef372cb885a246021e82216138d0e174f57",
+        ".agents/skills/token-router/agents/openai.yaml": "2a9082ac2c77bcccbcb6cbe4ac8a488ca0e40b9825439f51bf70bced811eb783",
+        ".agents/skills/token-router/docs/release-readiness.md": "1894beeb2e28c975c0486a079fce47c721c3fbd7cebdd79fc82defaa0cd147f3",
+        ".agents/skills/token-router/samples/service.py": "0e731a9a13875fe666672199002c14d66ae9925b1db51d4d77cc3a0c781b0a70",
+        ".agents/skills/token-router/samples/reference.md": "b5b1766d373fa0e72662d0f1da91955124ce00200d9c213f53e7867131a86f8e",
+        ".agents/skills/token-router/samples/incident.log": "169c6e141deff0782b30a48faee44d8ab4323ff18454cc540486516418aef409",
+        ".agents/skills/token-router/scripts/source_guard.py": "263b6803d18763f104a08d5a233fb44f525ddd0406cde9b225883897cea6bd35",
+        ".agents/skills/token-router/scripts/evidence_checks.py": "42c5e04344acb4d864715043e05021fff66b63dd7d1000a650c2dd41b723de6d",
+        ".agents/skills/token-router/scripts/distribution.py": "285343d1b9ea408ce4be2a2a379528c13cf87918b70ff7c8c201192a495d6aa1",
+        ".agents/skills/token-router/scripts/routing_policy.py": "a84a9934c9e5b0e9156a13bec6e6c5df8a0a5daa029c749438251fcc16d18cb8",
+        ".agents/skills/token-router/scripts/query_matcher.py": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+        ".agents/skills/token-router/scripts/install.py": "d44088de0371fb3afea261674e384cab18f7f27f64f6fee687bc9f398d7fab03",
+        ".agents/skills/token-router/scripts/router.py": "15d53215db77c44fd5ac94d070bd7bc7aac9493bc4ab4357d1d0db815d182f2e"
+      },
+      "candidate": {
+        "scipy-fast.log": "23cc02f4ecff02141897d670bf831f5be62702b33c2a48e6e5c2b717fd783ca3",
+        "subprocess.py": "e84782f0d4a19f6001624f21b7d5c20c610e8e27113e2fd9c0482eb1dcd760cd",
+        "cpython-ubsan.log": "d23199487e0009822f4d3a33284fb9a42da018155164c308e96cad456611d606",
+        "attrs_make.py": "db3b8d7a08c7ed547459e6828e906ae4044e234d0144c189595bdf56cff61a91",
+        ".agents/skills/token-router/LICENSE": "c0d5b8821cbbe219f05c53abb58fb61e42c80222aa8af76c9841862e9b4f4b9b",
+        ".agents/skills/token-router/CHANGELOG.md": "4ffc0b276246aa137257a603e70c8bea00f8b6f2e70bf65fa2bb858761dceb35",
+        ".agents/skills/token-router/README.md": "22a2a887eaee3bb2d6bdc62b5bb646fb090dd23940dbf0d11683e7ca396a5fac",
+        ".agents/skills/token-router/SUPPORT.md": "4031409ee2d06cc34fc40c35f81732cab0dbd529545434a6d02b6ff5bb6b6706",
+        ".agents/skills/token-router/.token-router-install.json": "f6fa787ceeb1a9fb4957e410e6671a44b7f5b045cc7c067c4ed5687b09076024",
+        ".agents/skills/token-router/CONTRIBUTING.md": "fd2478634fca5670bb67442a2fbfc1141c1a0c808ad55a3a83de952821b904c6",
+        ".agents/skills/token-router/SKILL.md": "79e59a1a50f0964e811add0007b1708724696e24aab62d9b7252a28f5c0dc147",
+        ".agents/skills/token-router/CLAUDE.md": "9cbe4ce89f0d74d6bd41c6ebbe98e57708c96608d30ba028cdc632efe7bb556c",
+        ".agents/skills/token-router/SECURITY.md": "ed389392a7b87e25e4645c2bad5f2f99a91bb551a25ac090c4a528d4b6b75658",
+        ".agents/skills/token-router/references/contract.md": "b9c3598cb6dee710b4756be72ec95ebf3d444b89dfffd3ab7978ed5b5c21d4d3",
+        ".agents/skills/token-router/agents/openai.yaml": "2a9082ac2c77bcccbcb6cbe4ac8a488ca0e40b9825439f51bf70bced811eb783",
+        ".agents/skills/token-router/docs/release-readiness.md": "1894beeb2e28c975c0486a079fce47c721c3fbd7cebdd79fc82defaa0cd147f3",
+        ".agents/skills/token-router/samples/service.py": "0e731a9a13875fe666672199002c14d66ae9925b1db51d4d77cc3a0c781b0a70",
+        ".agents/skills/token-router/samples/reference.md": "b5b1766d373fa0e72662d0f1da91955124ce00200d9c213f53e7867131a86f8e",
+        ".agents/skills/token-router/samples/incident.log": "169c6e141deff0782b30a48faee44d8ab4323ff18454cc540486516418aef409",
+        ".agents/skills/token-router/scripts/source_guard.py": "263b6803d18763f104a08d5a233fb44f525ddd0406cde9b225883897cea6bd35",
+        ".agents/skills/token-router/scripts/evidence_checks.py": "42c5e04344acb4d864715043e05021fff66b63dd7d1000a650c2dd41b723de6d",
+        ".agents/skills/token-router/scripts/distribution.py": "285343d1b9ea408ce4be2a2a379528c13cf87918b70ff7c8c201192a495d6aa1",
+        ".agents/skills/token-router/scripts/routing_policy.py": "a84a9934c9e5b0e9156a13bec6e6c5df8a0a5daa029c749438251fcc16d18cb8",
+        ".agents/skills/token-router/scripts/query_matcher.py": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+        ".agents/skills/token-router/scripts/install.py": "d44088de0371fb3afea261674e384cab18f7f27f64f6fee687bc9f398d7fab03",
+        ".agents/skills/token-router/scripts/router.py": "460ce1aa41511d8de558b6454178dbfdef0b951ae7b9a4e9603393a7ccd023f4"
+      }
+    },
+    "scope": "same-task regression; skill optional/free source selection; no held-out generalization"
+  },
+  "scope": "complete same-task comparisons only; failed attempt kept separately, all-attempt tokens unknown",
+  "rows": [
+    {
+      "task": "attrs_initialization_pipeline",
+      "arm": "candidate",
+      "phase": "run-01",
+      "repeat": 1,
+      "factual": 7,
+      "strict": 7,
+      "facts": 7,
+      "success": true,
+      "tokens": 23495,
+      "usage": {
+        "input_tokens": 23026,
+        "output_tokens": 469,
+        "cached_input_tokens": 13568,
+        "reasoning_output_tokens": 32
+      },
+      "wall": 24.51600558287464,
+      "cli_cpu": 1.3917890000000002,
+      "remote_wait_proxy": 23.12421658287464,
+      "tool_calls": 2,
+      "source_commands": 2,
+      "followup_source_commands": 1,
+      "router_calls": 0,
+      "separate_skill_reads": 0,
+      "router_contexts": [],
+      "tool_chars": 6401,
+      "scores": [
+        {
+          "id": "mro",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 330,
+              "end_line": 330
+            }
+          ]
+        },
+        {
+          "id": "skip",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 332,
+              "end_line": 333
+            }
+          ]
+        },
+        {
+          "id": "unannotated",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 422,
+              "end_line": 424
+            }
+          ]
+        },
+        {
+          "id": "ordering",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 485,
+              "end_line": 489
+            }
+          ]
+        },
+        {
+          "id": "frozen",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 565,
+              "end_line": 575
+            }
+          ]
+        },
+        {
+          "id": "validation",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 2386,
+              "end_line": 2392
+            }
+          ]
+        },
+        {
+          "id": "post_init",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 2388,
+              "end_line": 2397
+            }
+          ]
+        }
+      ],
+      "command_text": [
+        "/bin/zsh -lc \"rg -n -F -e 'def _collect_base_attrs' -e 'def _transform_attrs' -e 'def _frozen_setattrs' -e 'UnannotatedAttributeError' -e 'No mandatory attributes' -e '_config._run_validators' -e 'self.__attrs_post_init__()' attrs_make.py\"",
+        "/bin/zsh -lc \"nl -ba attrs_make.py | sed -n '320,351p;395,435p;473,493p;561,581p;2378,2400p'\""
+      ],
+      "prompt_sha256": "9f86d52ce768ba707f3e7c141087637da97abcbd05c1ee6ebfb59ea6b715ecea",
+      "instructions_sha256": "c41601c9c2c0fa130dcb4b43096eb1a808f25fe3a659d06ba0039d0033273c5c"
+    },
+    {
+      "task": "attrs_initialization_pipeline",
+      "arm": "current",
+      "phase": "run-01",
+      "repeat": 1,
+      "factual": 7,
+      "strict": 7,
+      "facts": 7,
+      "success": true,
+      "tokens": 24801,
+      "usage": {
+        "input_tokens": 24341,
+        "output_tokens": 460,
+        "cached_input_tokens": 14080,
+        "reasoning_output_tokens": 0
+      },
+      "wall": 21.628264792030677,
+      "cli_cpu": 1.2749889999999997,
+      "remote_wait_proxy": 20.35327579203068,
+      "tool_calls": 3,
+      "source_commands": 2,
+      "followup_source_commands": 1,
+      "router_calls": 0,
+      "separate_skill_reads": 1,
+      "router_contexts": [],
+      "tool_chars": 9472,
+      "scores": [
+        {
+          "id": "mro",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 330,
+              "end_line": 330
+            }
+          ]
+        },
+        {
+          "id": "skip",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 332,
+              "end_line": 333
+            }
+          ]
+        },
+        {
+          "id": "unannotated",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 422,
+              "end_line": 430
+            }
+          ]
+        },
+        {
+          "id": "ordering",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 485,
+              "end_line": 489
+            }
+          ]
+        },
+        {
+          "id": "frozen",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 565,
+              "end_line": 575
+            }
+          ]
+        },
+        {
+          "id": "validation",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 2386,
+              "end_line": 2392
+            }
+          ]
+        },
+        {
+          "id": "post_init",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 2388,
+              "end_line": 2397
+            }
+          ]
+        }
+      ],
+      "command_text": [
+        "/bin/zsh -lc 'cat .agents/skills/token-router/SKILL.md'",
+        "/bin/zsh -lc \"rg -n -F -e 'def _collect_base_attrs' -e 'def _transform_attrs' -e 'def _frozen_setattrs' -e 'UnannotatedAttributeError' -e 'No mandatory attributes' -e '_config._run_validators' -e '__attrs_post_init__()' attrs_make.py\"",
+        "/bin/zsh -lc \"nl -ba attrs_make.py | sed -n '320,351p;381,435p;468,493p;561,581p;2375,2401p'\""
+      ],
+      "prompt_sha256": "9f86d52ce768ba707f3e7c141087637da97abcbd05c1ee6ebfb59ea6b715ecea",
+      "instructions_sha256": "c41601c9c2c0fa130dcb4b43096eb1a808f25fe3a659d06ba0039d0033273c5c"
+    },
+    {
+      "task": "attrs_initialization_pipeline",
+      "arm": "plain",
+      "phase": "run-01",
+      "repeat": 1,
+      "factual": 7,
+      "strict": 7,
+      "facts": 7,
+      "success": true,
+      "tokens": 22075,
+      "usage": {
+        "input_tokens": 21649,
+        "output_tokens": 426,
+        "cached_input_tokens": 13824,
+        "reasoning_output_tokens": 0
+      },
+      "wall": 20.999781291000545,
+      "cli_cpu": 1.3365669999999996,
+      "remote_wait_proxy": 19.663214291000546,
+      "tool_calls": 2,
+      "source_commands": 2,
+      "followup_source_commands": 1,
+      "router_calls": 0,
+      "separate_skill_reads": 0,
+      "router_contexts": [],
+      "tool_chars": 7387,
+      "scores": [
+        {
+          "id": "mro",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 330,
+              "end_line": 330
+            }
+          ]
+        },
+        {
+          "id": "skip",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 332,
+              "end_line": 333
+            }
+          ]
+        },
+        {
+          "id": "unannotated",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 422,
+              "end_line": 424
+            }
+          ]
+        },
+        {
+          "id": "ordering",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 485,
+              "end_line": 489
+            }
+          ]
+        },
+        {
+          "id": "frozen",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 565,
+              "end_line": 575
+            }
+          ]
+        },
+        {
+          "id": "validation",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 2386,
+              "end_line": 2392
+            }
+          ]
+        },
+        {
+          "id": "post_init",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "attrs_make.py",
+              "start_line": 2388,
+              "end_line": 2397
+            }
+          ]
+        }
+      ],
+      "command_text": [
+        "/bin/zsh -lc \"rg -n -e 'def _collect_base_attrs' -e 'def _transform_attrs' -e 'def _frozen_setattrs' -e 'UnannotatedAttributeError' -e 'mandatory' -e '_run_validators' -e '__attrs_post_init__' attrs_make.py\"",
+        "/bin/zsh -lc \"nl -ba attrs_make.py | sed -n '320,351p;381,435p;478,494p;561,585p;2378,2400p'\""
+      ],
+      "prompt_sha256": "03e76687ec0a10b10127ee9ae8e1c8998bc3027462eb29acf4c278fe3f5765a1",
+      "instructions_sha256": "c41601c9c2c0fa130dcb4b43096eb1a808f25fe3a659d06ba0039d0033273c5c"
+    },
+    {
+      "task": "cpython_ubsan_failure",
+      "arm": "candidate",
+      "phase": "run-01",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "success": true,
+      "tokens": 17865,
+      "usage": {
+        "input_tokens": 17523,
+        "output_tokens": 342,
+        "cached_input_tokens": 11136,
+        "reasoning_output_tokens": 0
+      },
+      "wall": 15.072213375009596,
+      "cli_cpu": 1.095875,
+      "remote_wait_proxy": 13.976338375009597,
+      "tool_calls": 1,
+      "source_commands": 1,
+      "followup_source_commands": 0,
+      "router_calls": 1,
+      "separate_skill_reads": 0,
+      "router_contexts": [
+        4
+      ],
+      "tool_chars": 8274,
+      "scores": [
+        {
+          "id": "test",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3179,
+              "end_line": 3179
+            }
+          ]
+        },
+        {
+          "id": "exception",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3204,
+              "end_line": 3204
+            }
+          ]
+        },
+        {
+          "id": "raise_line",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3202,
+              "end_line": 3203
+            }
+          ]
+        },
+        {
+          "id": "test_files",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3657,
+              "end_line": 3657
+            }
+          ]
+        },
+        {
+          "id": "alignment",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3673,
+              "end_line": 3673
+            }
+          ]
+        },
+        {
+          "id": "segv_top",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3680,
+              "end_line": 3682
+            }
+          ]
+        }
+      ],
+      "command_text": [
+        "/bin/zsh -lc \"python3 .agents/skills/token-router/scripts/router.py error_log cpython-ubsan.log --search-term 'ERROR: test' --search-term 'Total test files' --search-term 'misaligned address' --search-term 'SEGV' --search-context 4 --line-numbers\""
+      ],
+      "prompt_sha256": "da1b41566ed2bbd968ea5d826b57bb56acb3a3aa1cd7728ee63c86a4230ee807",
+      "instructions_sha256": "c41601c9c2c0fa130dcb4b43096eb1a808f25fe3a659d06ba0039d0033273c5c"
+    },
+    {
+      "task": "cpython_ubsan_failure",
+      "arm": "current",
+      "phase": "run-01",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 5,
+      "facts": 6,
+      "success": false,
+      "tokens": 40319,
+      "usage": {
+        "input_tokens": 39821,
+        "output_tokens": 498,
+        "cached_input_tokens": 29824,
+        "reasoning_output_tokens": 15
+      },
+      "wall": 43.14924208307639,
+      "cli_cpu": 1.495454,
+      "remote_wait_proxy": 41.653788083076385,
+      "tool_calls": 4,
+      "source_commands": 3,
+      "followup_source_commands": 2,
+      "router_calls": 0,
+      "separate_skill_reads": 1,
+      "router_contexts": [],
+      "tool_chars": 5377,
+      "scores": [
+        {
+          "id": "test",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3179,
+              "end_line": 3179
+            }
+          ]
+        },
+        {
+          "id": "exception",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3204,
+              "end_line": 3204
+            }
+          ]
+        },
+        {
+          "id": "raise_line",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3202,
+              "end_line": 3203
+            }
+          ]
+        },
+        {
+          "id": "test_files",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3657,
+              "end_line": 3657
+            }
+          ]
+        },
+        {
+          "id": "alignment",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3673,
+              "end_line": 3673
+            }
+          ]
+        },
+        {
+          "id": "segv_top",
+          "factual": true,
+          "citation_visible": false,
+          "gold_overlap": true,
+          "grounded": false,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3680,
+              "end_line": 3682
+            }
+          ]
+        }
+      ],
+      "command_text": [
+        "/bin/zsh -lc 'cat .agents/skills/token-router/SKILL.md'",
+        "/bin/zsh -lc \"rg -n -F -e 'ERROR:' -e 'Total test files' -e 'misaligned address' -e 'SEGV' -e '#0 ' -e 'in handler' -e 'ProcessError' cpython-ubsan.log\"",
+        "/bin/zsh -lc \"rg -n -F -e 'ERROR' -e '_test_multiprocessing.py' -e 'Traceback' -e 'raise ' cpython-ubsan.log\"",
+        "/bin/zsh -lc \"nl -ba cpython-ubsan.log | sed -n '3202,3205p'\""
+      ],
+      "prompt_sha256": "da1b41566ed2bbd968ea5d826b57bb56acb3a3aa1cd7728ee63c86a4230ee807",
+      "instructions_sha256": "c41601c9c2c0fa130dcb4b43096eb1a808f25fe3a659d06ba0039d0033273c5c"
+    },
+    {
+      "task": "cpython_ubsan_failure",
+      "arm": "plain",
+      "phase": "run-01",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 5,
+      "facts": 6,
+      "success": false,
+      "tokens": 54048,
+      "usage": {
+        "input_tokens": 53628,
+        "output_tokens": 420,
+        "cached_input_tokens": 38016,
+        "reasoning_output_tokens": 0
+      },
+      "wall": 24.878373875049874,
+      "cli_cpu": 1.8184289999999999,
+      "remote_wait_proxy": 23.059944875049876,
+      "tool_calls": 3,
+      "source_commands": 3,
+      "followup_source_commands": 2,
+      "router_calls": 0,
+      "separate_skill_reads": 0,
+      "router_contexts": [],
+      "tool_chars": 28931,
+      "scores": [
+        {
+          "id": "test",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3179,
+              "end_line": 3179
+            }
+          ]
+        },
+        {
+          "id": "exception",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3204,
+              "end_line": 3204
+            }
+          ]
+        },
+        {
+          "id": "raise_line",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3202,
+              "end_line": 3203
+            }
+          ]
+        },
+        {
+          "id": "test_files",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3657,
+              "end_line": 3657
+            }
+          ]
+        },
+        {
+          "id": "alignment",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3673,
+              "end_line": 3673
+            }
+          ]
+        },
+        {
+          "id": "segv_top",
+          "factual": true,
+          "citation_visible": false,
+          "gold_overlap": true,
+          "grounded": false,
+          "citations": [
+            {
+              "file": "cpython-ubsan.log",
+              "start_line": 3680,
+              "end_line": 3682
+            }
+          ]
+        }
+      ],
+      "command_text": [
+        "/bin/zsh -lc \"rg -n -e 'ERROR:' -e 'Total test files' -e 'misaligned address' -e 'SEGV' -e 'handler' -e '#0' cpython-ubsan.log\"",
+        "/bin/zsh -lc \"nl -ba cpython-ubsan.log | sed -n '3180,3210p'\"",
+        "/bin/zsh -lc \"nl -ba cpython-ubsan.log | sed -n '3177,3180p'\""
+      ],
+      "prompt_sha256": "e39ded96a8f6a92ac1bffdc170419250636b1fb1b26bcb3c8975d72d91a3a47c",
+      "instructions_sha256": "c41601c9c2c0fa130dcb4b43096eb1a808f25fe3a659d06ba0039d0033273c5c"
+    },
+    {
+      "task": "cpython_subprocess_timeout",
+      "arm": "candidate",
+      "phase": "recovery-01",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "success": true,
+      "tokens": 15319,
+      "usage": {
+        "input_tokens": 15066,
+        "output_tokens": 253,
+        "cached_input_tokens": 4608,
+        "reasoning_output_tokens": 0
+      },
+      "wall": 13.33266175002791,
+      "cli_cpu": 1.2047879999999997,
+      "remote_wait_proxy": 12.12787375002791,
+      "tool_calls": 1,
+      "source_commands": 1,
+      "followup_source_commands": 0,
+      "router_calls": 0,
+      "separate_skill_reads": 0,
+      "router_contexts": [],
+      "tool_chars": 9221,
+      "scores": [
+        {
+          "id": "kill",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 557,
+              "end_line": 558
+            }
+          ]
+        },
+        {
+          "id": "windows",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 559,
+              "end_line": 565
+            }
+          ]
+        },
+        {
+          "id": "posix",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 566,
+              "end_line": 569
+            }
+          ]
+        },
+        {
+          "id": "timeout_raise",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 557,
+              "end_line": 570
+            }
+          ]
+        },
+        {
+          "id": "other_exception",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 571,
+              "end_line": 574
+            }
+          ]
+        },
+        {
+          "id": "check",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 575,
+              "end_line": 578
+            }
+          ]
+        }
+      ],
+      "command_text": [
+        "/bin/zsh -lc \"rg -n -A 42 -B 8 'except TimeoutExpired' subprocess.py\""
+      ],
+      "prompt_sha256": "a32d2b3b860dc8baf8513704a15d57aa5c0746684fb99e2ae9b8eebbe286dc1f",
+      "instructions_sha256": "c41601c9c2c0fa130dcb4b43096eb1a808f25fe3a659d06ba0039d0033273c5c"
+    },
+    {
+      "task": "cpython_subprocess_timeout",
+      "arm": "current",
+      "phase": "recovery-01",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "success": true,
+      "tokens": 20082,
+      "usage": {
+        "input_tokens": 19767,
+        "output_tokens": 315,
+        "cached_input_tokens": 12288,
+        "reasoning_output_tokens": 0
+      },
+      "wall": 16.34859933401458,
+      "cli_cpu": 1.1353879999999998,
+      "remote_wait_proxy": 15.21321133401458,
+      "tool_calls": 2,
+      "source_commands": 2,
+      "followup_source_commands": 1,
+      "router_calls": 0,
+      "separate_skill_reads": 0,
+      "router_contexts": [],
+      "tool_chars": 2087,
+      "scores": [
+        {
+          "id": "kill",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 557,
+              "end_line": 558
+            }
+          ]
+        },
+        {
+          "id": "windows",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 559,
+              "end_line": 565
+            }
+          ]
+        },
+        {
+          "id": "posix",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 566,
+              "end_line": 569
+            }
+          ]
+        },
+        {
+          "id": "timeout_raise",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 557,
+              "end_line": 570
+            }
+          ]
+        },
+        {
+          "id": "other_exception",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 571,
+              "end_line": 574
+            }
+          ]
+        },
+        {
+          "id": "check",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 575,
+              "end_line": 578
+            }
+          ]
+        }
+      ],
+      "command_text": [
+        "/bin/zsh -lc \"rg -n -F -e 'except TimeoutExpired' -e 'exc.stdout' -e 'reaps' -e '__exit__' -e 'if check and' subprocess.py\"",
+        "/bin/zsh -lc \"nl -ba subprocess.py | sed -n '550,581p'\""
+      ],
+      "prompt_sha256": "a32d2b3b860dc8baf8513704a15d57aa5c0746684fb99e2ae9b8eebbe286dc1f",
+      "instructions_sha256": "c41601c9c2c0fa130dcb4b43096eb1a808f25fe3a659d06ba0039d0033273c5c"
+    },
+    {
+      "task": "cpython_subprocess_timeout",
+      "arm": "plain",
+      "phase": "recovery-01",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "success": true,
+      "tokens": 26824,
+      "usage": {
+        "input_tokens": 26519,
+        "output_tokens": 305,
+        "cached_input_tokens": 16896,
+        "reasoning_output_tokens": 0
+      },
+      "wall": 16.900721416808665,
+      "cli_cpu": 1.3932820000000001,
+      "remote_wait_proxy": 15.507439416808666,
+      "tool_calls": 2,
+      "source_commands": 2,
+      "followup_source_commands": 1,
+      "router_calls": 0,
+      "separate_skill_reads": 0,
+      "router_contexts": [],
+      "tool_chars": 2012,
+      "scores": [
+        {
+          "id": "kill",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 557,
+              "end_line": 558
+            }
+          ]
+        },
+        {
+          "id": "windows",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 559,
+              "end_line": 565
+            }
+          ]
+        },
+        {
+          "id": "posix",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 566,
+              "end_line": 569
+            }
+          ]
+        },
+        {
+          "id": "timeout_raise",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 557,
+              "end_line": 570
+            }
+          ]
+        },
+        {
+          "id": "other_exception",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 571,
+              "end_line": 574
+            }
+          ]
+        },
+        {
+          "id": "check",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "subprocess.py",
+              "start_line": 575,
+              "end_line": 578
+            }
+          ]
+        }
+      ],
+      "command_text": [
+        "/bin/zsh -lc \"rg -n -F -e 'except TimeoutExpired' -e 'if check and retcode' -e '__exit__' subprocess.py\"",
+        "/bin/zsh -lc \"nl -ba subprocess.py | sed -n '550,580p'\""
+      ],
+      "prompt_sha256": "a32d2b3b860dc8baf8513704a15d57aa5c0746684fb99e2ae9b8eebbe286dc1f",
+      "instructions_sha256": "c41601c9c2c0fa130dcb4b43096eb1a808f25fe3a659d06ba0039d0033273c5c"
+    },
+    {
+      "task": "scipy_distributed_failures",
+      "arm": "candidate",
+      "phase": "recovery-01",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "success": true,
+      "tokens": 23664,
+      "usage": {
+        "input_tokens": 23310,
+        "output_tokens": 354,
+        "cached_input_tokens": 13824,
+        "reasoning_output_tokens": 0
+      },
+      "wall": 24.30881291604601,
+      "cli_cpu": 1.373662,
+      "remote_wait_proxy": 22.93515091604601,
+      "tool_calls": 2,
+      "source_commands": 2,
+      "followup_source_commands": 1,
+      "router_calls": 0,
+      "separate_skill_reads": 0,
+      "router_contexts": [],
+      "tool_chars": 4699,
+      "scores": [
+        {
+          "id": "python",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 2421,
+              "end_line": 2421
+            }
+          ]
+        },
+        {
+          "id": "failed",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ]
+        },
+        {
+          "id": "passed",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ]
+        },
+        {
+          "id": "helper",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 3854,
+              "end_line": 3855
+            }
+          ]
+        },
+        {
+          "id": "source_line",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 3870,
+              "end_line": 3870
+            }
+          ]
+        },
+        {
+          "id": "tuple_test",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6237,
+              "end_line": 6237
+            }
+          ]
+        }
+      ],
+      "command_text": [
+        "/bin/zsh -lc \"rg -n -F -e 'platform ' -e 'TestMakeSplrep.test_fitpack_F' -e \\\"tuple' object has no attribute 'shape\\\" -e ' failed,' scipy-fast.log\"",
+        "/bin/zsh -lc \"sed -n '3838,3870p' scipy-fast.log | nl -ba -v 3838\""
+      ],
+      "prompt_sha256": "74a7b46424aefdc12ae068d5c9a477d75117cc373e451b405dfac7354579fa1b",
+      "instructions_sha256": "c41601c9c2c0fa130dcb4b43096eb1a808f25fe3a659d06ba0039d0033273c5c"
+    },
+    {
+      "task": "scipy_distributed_failures",
+      "arm": "current",
+      "phase": "recovery-01",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "success": true,
+      "tokens": 32085,
+      "usage": {
+        "input_tokens": 31698,
+        "output_tokens": 387,
+        "cached_input_tokens": 21504,
+        "reasoning_output_tokens": 0
+      },
+      "wall": 32.263717874884605,
+      "cli_cpu": 1.381364,
+      "remote_wait_proxy": 30.882353874884604,
+      "tool_calls": 3,
+      "source_commands": 2,
+      "followup_source_commands": 1,
+      "router_calls": 0,
+      "separate_skill_reads": 1,
+      "router_contexts": [],
+      "tool_chars": 6843,
+      "scores": [
+        {
+          "id": "python",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 2421,
+              "end_line": 2421
+            }
+          ]
+        },
+        {
+          "id": "failed",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ]
+        },
+        {
+          "id": "passed",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ]
+        },
+        {
+          "id": "helper",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 3854,
+              "end_line": 3855
+            }
+          ]
+        },
+        {
+          "id": "source_line",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 3870,
+              "end_line": 3870
+            }
+          ]
+        },
+        {
+          "id": "tuple_test",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6237,
+              "end_line": 6237
+            }
+          ]
+        }
+      ],
+      "command_text": [
+        "/bin/zsh -lc 'cat .agents/skills/token-router/SKILL.md'",
+        "/bin/zsh -lc \"rg -n -F -e 'platform ' -e ' failed,' -e 'TestMakeSplrep.test_fitpack_F' -e \\\"tuple' object has no attribute 'shape'\\\" scipy-fast.log\"",
+        "/bin/zsh -lc \"nl -ba scipy-fast.log | sed -n '3838,3870p'\""
+      ],
+      "prompt_sha256": "74a7b46424aefdc12ae068d5c9a477d75117cc373e451b405dfac7354579fa1b",
+      "instructions_sha256": "c41601c9c2c0fa130dcb4b43096eb1a808f25fe3a659d06ba0039d0033273c5c"
+    },
+    {
+      "task": "scipy_distributed_failures",
+      "arm": "plain",
+      "phase": "recovery-01",
+      "repeat": 1,
+      "factual": 6,
+      "strict": 6,
+      "facts": 6,
+      "success": true,
+      "tokens": 24531,
+      "usage": {
+        "input_tokens": 24174,
+        "output_tokens": 357,
+        "cached_input_tokens": 13952,
+        "reasoning_output_tokens": 0
+      },
+      "wall": 24.48822125000879,
+      "cli_cpu": 1.314235,
+      "remote_wait_proxy": 23.17398625000879,
+      "tool_calls": 2,
+      "source_commands": 2,
+      "followup_source_commands": 1,
+      "router_calls": 0,
+      "separate_skill_reads": 0,
+      "router_contexts": [],
+      "tool_chars": 8269,
+      "scores": [
+        {
+          "id": "python",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 2421,
+              "end_line": 2421
+            }
+          ]
+        },
+        {
+          "id": "failed",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ]
+        },
+        {
+          "id": "passed",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6256,
+              "end_line": 6256
+            }
+          ]
+        },
+        {
+          "id": "helper",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 3854,
+              "end_line": 3855
+            }
+          ]
+        },
+        {
+          "id": "source_line",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 3870,
+              "end_line": 3870
+            }
+          ]
+        },
+        {
+          "id": "tuple_test",
+          "factual": true,
+          "citation_visible": true,
+          "gold_overlap": true,
+          "grounded": true,
+          "citations": [
+            {
+              "file": "scipy-fast.log",
+              "start_line": 6237,
+              "end_line": 6237
+            }
+          ]
+        }
+      ],
+      "command_text": [
+        "/bin/zsh -lc \"rg -n -e '\"'^platform '\"' -e '=+ .*failed.*passed' -e 'test_fitpack_F' -e \\\"tuple.*has no attribute.*shape\\\" scipy-fast.log\"",
+        "/bin/zsh -lc \"rg -n -F 'platform ' scipy-fast.log; nl -ba scipy-fast.log | sed -n '3838,3870p'\""
+      ],
+      "prompt_sha256": "d2f33e4f6d723d0fb156ea974392282c4841d2a54915f8c31a436c81b5b6e8d6",
+      "instructions_sha256": "c41601c9c2c0fa130dcb4b43096eb1a808f25fe3a659d06ba0039d0033273c5c"
+    }
+  ],
+  "totals": {
+    "plain": {
+      "tokens": 127478,
+      "wall": 87.26709783286788,
+      "cli_cpu": 5.862513,
+      "remote_wait_proxy": 81.40458483286788,
+      "factual": 25,
+      "strict": 24,
+      "facts": 25,
+      "tool_calls": 9,
+      "source_commands": 9,
+      "followup_source_commands": 5,
+      "router_calls": 0,
+      "separate_skill_reads": 0,
+      "completed_episodes": 4,
+      "strict_success": 3,
+      "median_episode_tokens": 25677.5,
+      "median_episode_wall": 22.74400127050467
+    },
+    "current": {
+      "tokens": 117287,
+      "wall": 113.38982408400625,
+      "cli_cpu": 5.287195,
+      "remote_wait_proxy": 108.10262908400625,
+      "factual": 25,
+      "strict": 24,
+      "facts": 25,
+      "tool_calls": 12,
+      "source_commands": 9,
+      "followup_source_commands": 5,
+      "router_calls": 0,
+      "separate_skill_reads": 3,
+      "completed_episodes": 4,
+      "strict_success": 3,
+      "median_episode_tokens": 28443.0,
+      "median_episode_wall": 26.94599133345764
+    },
+    "candidate": {
+      "tokens": 80343,
+      "wall": 77.22969362395816,
+      "cli_cpu": 5.066114,
+      "remote_wait_proxy": 72.16357962395816,
+      "factual": 25,
+      "strict": 25,
+      "facts": 25,
+      "tool_calls": 6,
+      "source_commands": 6,
+      "followup_source_commands": 2,
+      "router_calls": 1,
+      "separate_skill_reads": 0,
+      "completed_episodes": 4,
+      "strict_success": 4,
+      "median_episode_tokens": 20680.0,
+      "median_episode_wall": 19.690513145527802
+    }
+  },
+  "pairs": [
+    {
+      "task": "cpython_subprocess_timeout",
+      "token_difference": -11505,
+      "token_percent": -42.89069490008948,
+      "wall_difference": -3.568059666780755,
+      "wall_percent": -21.111877882515294
+    },
+    {
+      "task": "cpython_ubsan_failure",
+      "token_difference": -36183,
+      "token_percent": -66.94604795737122,
+      "wall_difference": -9.806160500040278,
+      "wall_percent": -39.41640458211266
+    },
+    {
+      "task": "scipy_distributed_failures",
+      "token_difference": -867,
+      "token_percent": -3.534303534303529,
+      "wall_difference": -0.17940833396278322,
+      "wall_percent": -0.7326311377667705
+    },
+    {
+      "task": "attrs_initialization_pipeline",
+      "token_difference": 1420,
+      "token_percent": 6.432616081540199,
+      "wall_difference": 3.516224291874096,
+      "wall_percent": 16.744099584413163
+    }
+  ],
+  "failures": [
+    {
+      "phase": "run-01",
+      "episode": "scipy_distributed_failures-1-candidate",
+      "usage": null,
+      "wall": 120.01634929212742,
+      "timeout": true,
+      "source_commands": 0
+    }
+  ],
+  "all_attempts": {
+    "cli_calls": 13,
+    "known_tokens": 325108,
+    "unknown_usage_calls": 1,
+    "tokens": null,
+    "wall": 397.9029648329597,
+    "candidate_wall_including_timeout": 197.24604291608557
+  },
+  "candidate_vs_plain_complete": {
+    "token_percent": -36.975007452266276,
+    "wall_percent": -11.501934243456969,
+    "paired_median_token_difference": -6186.0,
+    "paired_median_wall_difference": -1.873734000371769
+  },
+  "ablation": [
+    {
+      "task": "cpython_subprocess_timeout",
+      "path": "default-query",
+      "identical_stdout": true,
+      "stdout_sha256": "1ad7272081f1691daa94e9ea92471d6c4990b66413aa3bf11580f15cfd45f329"
+    },
+    {
+      "task": "cpython_subprocess_timeout",
+      "path": "literal",
+      "width": null,
+      "terms": [
+        "except TimeoutExpired as exc:"
+      ],
+      "exit": 0,
+      "output_chars": 1313,
+      "output_lines": 25,
+      "missing_terms": [],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 4,
+      "facts": 6,
+      "median_local_wall": 0.03808779106475413,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "except TimeoutExpired as exc:": 1
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 12,
+        "traceback_completed_blocks": 0,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661149,
+          89096,
+          1791817891374098567,
+          1791817891374107359
+        ],
+        "output_lines": 25,
+        "output_chars": 1313,
+        "open_count": 2
+      },
+      "stdout_sha256": "d5914e79dc8b68ba6becacff51384a0fe0a34c146541c5044ae4c53117fabcc8"
+    },
+    {
+      "task": "cpython_subprocess_timeout",
+      "path": "literal",
+      "width": 0,
+      "terms": [
+        "except TimeoutExpired as exc:"
+      ],
+      "exit": 0,
+      "output_chars": 115,
+      "output_lines": 1,
+      "missing_terms": [],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 2,
+      "facts": 6,
+      "median_local_wall": 0.03795416606590152,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "except TimeoutExpired as exc:": 1
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 0,
+        "traceback_completed_blocks": 0,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661149,
+          89096,
+          1791817891374098567,
+          1791817891374107359
+        ],
+        "output_lines": 1,
+        "output_chars": 115,
+        "open_count": 2
+      },
+      "stdout_sha256": "efbb3f86e23f2bbf841c86f55c4a81703acb78fa74131d467ea92097b442fa9e"
+    },
+    {
+      "task": "cpython_subprocess_timeout",
+      "path": "literal",
+      "width": 1,
+      "terms": [
+        "except TimeoutExpired as exc:"
+      ],
+      "exit": 0,
+      "output_chars": 225,
+      "output_lines": 3,
+      "missing_terms": [],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 2,
+      "facts": 6,
+      "median_local_wall": 0.03781491587869823,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "except TimeoutExpired as exc:": 1
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 1,
+        "traceback_completed_blocks": 0,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661149,
+          89096,
+          1791817891374098567,
+          1791817891374107359
+        ],
+        "output_lines": 3,
+        "output_chars": 225,
+        "open_count": 2
+      },
+      "stdout_sha256": "5c2cf4bf97dc76a39e4f94d55fd9e55ae251644e84c92a0109e958b5a677c59d"
+    },
+    {
+      "task": "cpython_subprocess_timeout",
+      "path": "literal",
+      "width": 2,
+      "terms": [
+        "except TimeoutExpired as exc:"
+      ],
+      "exit": 0,
+      "output_chars": 275,
+      "output_lines": 5,
+      "missing_terms": [],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 3,
+      "facts": 6,
+      "median_local_wall": 0.037813750095665455,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "except TimeoutExpired as exc:": 1
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 2,
+        "traceback_completed_blocks": 0,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661149,
+          89096,
+          1791817891374098567,
+          1791817891374107359
+        ],
+        "output_lines": 5,
+        "output_chars": 275,
+        "open_count": 2
+      },
+      "stdout_sha256": "0138707538b355d4e353a80c0a054c108985df75088f2c1fc389d055f1749feb"
+    },
+    {
+      "task": "cpython_subprocess_timeout",
+      "path": "literal",
+      "width": 4,
+      "terms": [
+        "except TimeoutExpired as exc:"
+      ],
+      "exit": 0,
+      "output_chars": 484,
+      "output_lines": 9,
+      "missing_terms": [],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 3,
+      "facts": 6,
+      "median_local_wall": 0.03794287517666817,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "except TimeoutExpired as exc:": 1
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 4,
+        "traceback_completed_blocks": 0,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661149,
+          89096,
+          1791817891374098567,
+          1791817891374107359
+        ],
+        "output_lines": 9,
+        "output_chars": 484,
+        "open_count": 2
+      },
+      "stdout_sha256": "92f3531dfdd402a98a4ded0caf099c81a9e3b3774c57e4ad3acb3705ff4f00e1"
+    },
+    {
+      "task": "cpython_subprocess_timeout",
+      "path": "literal",
+      "width": 12,
+      "terms": [
+        "except TimeoutExpired as exc:"
+      ],
+      "exit": 0,
+      "output_chars": 1313,
+      "output_lines": 25,
+      "missing_terms": [],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 4,
+      "facts": 6,
+      "median_local_wall": 0.03879491612315178,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "except TimeoutExpired as exc:": 1
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 12,
+        "traceback_completed_blocks": 0,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661149,
+          89096,
+          1791817891374098567,
+          1791817891374107359
+        ],
+        "output_lines": 25,
+        "output_chars": 1313,
+        "open_count": 2
+      },
+      "stdout_sha256": "d5914e79dc8b68ba6becacff51384a0fe0a34c146541c5044ae4c53117fabcc8"
+    },
+    {
+      "task": "cpython_ubsan_failure",
+      "path": "default-query",
+      "identical_stdout": true,
+      "stdout_sha256": "4bc9bc3fab63697c31ab0858c93a24a356cb1abe2e481e4120e1da0756347f7a"
+    },
+    {
+      "task": "cpython_ubsan_failure",
+      "path": "literal",
+      "width": null,
+      "terms": [
+        "ERROR:",
+        "Traceback (most recent call last):",
+        "Total test files",
+        "runtime error:",
+        "SEGV"
+      ],
+      "exit": 0,
+      "output_chars": 8787,
+      "output_lines": 78,
+      "missing_terms": [],
+      "tracebacks": 2,
+      "gold_anchor_overlap": 6,
+      "facts": 6,
+      "median_local_wall": 0.042871249839663506,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "ERROR:": 2,
+          "Traceback (most recent call last):": 2,
+          "Total test files": 1,
+          "runtime error:": 1,
+          "SEGV": 2
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 4,
+        "traceback_completed_blocks": 2,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661150,
+          551037,
+          1791817891374349858,
+          1791817891374355983
+        ],
+        "output_lines": 78,
+        "output_chars": 8787,
+        "open_count": 2
+      },
+      "stdout_sha256": "48822f919b71243b1b7861bfbca38337b69128d0c6056c6e9e6f0295941433be"
+    },
+    {
+      "task": "cpython_ubsan_failure",
+      "path": "literal",
+      "width": 0,
+      "terms": [
+        "ERROR:",
+        "Traceback (most recent call last):",
+        "Total test files",
+        "runtime error:",
+        "SEGV"
+      ],
+      "exit": 0,
+      "output_chars": 5060,
+      "output_lines": 40,
+      "missing_terms": [],
+      "tracebacks": 2,
+      "gold_anchor_overlap": 6,
+      "facts": 6,
+      "median_local_wall": 0.04318641615100205,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "ERROR:": 2,
+          "Traceback (most recent call last):": 2,
+          "Total test files": 1,
+          "runtime error:": 1,
+          "SEGV": 2
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 0,
+        "traceback_completed_blocks": 2,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661150,
+          551037,
+          1791817891374349858,
+          1791817891374355983
+        ],
+        "output_lines": 40,
+        "output_chars": 5060,
+        "open_count": 2
+      },
+      "stdout_sha256": "a36d5650e3a3aca4c0c24d925a128ed08d12753e840f0697fcc8354b8bef7a76"
+    },
+    {
+      "task": "cpython_ubsan_failure",
+      "path": "literal",
+      "width": 1,
+      "terms": [
+        "ERROR:",
+        "Traceback (most recent call last):",
+        "Total test files",
+        "runtime error:",
+        "SEGV"
+      ],
+      "exit": 0,
+      "output_chars": 5893,
+      "output_lines": 51,
+      "missing_terms": [],
+      "tracebacks": 2,
+      "gold_anchor_overlap": 6,
+      "facts": 6,
+      "median_local_wall": 0.04363275016658008,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "ERROR:": 2,
+          "Traceback (most recent call last):": 2,
+          "Total test files": 1,
+          "runtime error:": 1,
+          "SEGV": 2
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 1,
+        "traceback_completed_blocks": 2,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661150,
+          551037,
+          1791817891374349858,
+          1791817891374355983
+        ],
+        "output_lines": 51,
+        "output_chars": 5893,
+        "open_count": 2
+      },
+      "stdout_sha256": "efb421b9cb7de894541a8166d44a98b46a29869adac5f0a3746a89aa7fdc3d8d"
+    },
+    {
+      "task": "cpython_ubsan_failure",
+      "path": "literal",
+      "width": 2,
+      "terms": [
+        "ERROR:",
+        "Traceback (most recent call last):",
+        "Total test files",
+        "runtime error:",
+        "SEGV"
+      ],
+      "exit": 0,
+      "output_chars": 6853,
+      "output_lines": 61,
+      "missing_terms": [],
+      "tracebacks": 2,
+      "gold_anchor_overlap": 6,
+      "facts": 6,
+      "median_local_wall": 0.04320445819757879,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "ERROR:": 2,
+          "Traceback (most recent call last):": 2,
+          "Total test files": 1,
+          "runtime error:": 1,
+          "SEGV": 2
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 2,
+        "traceback_completed_blocks": 2,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661150,
+          551037,
+          1791817891374349858,
+          1791817891374355983
+        ],
+        "output_lines": 61,
+        "output_chars": 6853,
+        "open_count": 2
+      },
+      "stdout_sha256": "ce71723132fb610bb5d49c8bd670cc9ac57112f54377a6bb104f152dbbfb5a43"
+    },
+    {
+      "task": "cpython_ubsan_failure",
+      "path": "literal",
+      "width": 4,
+      "terms": [
+        "ERROR:",
+        "Traceback (most recent call last):",
+        "Total test files",
+        "runtime error:",
+        "SEGV"
+      ],
+      "exit": 0,
+      "output_chars": 8787,
+      "output_lines": 78,
+      "missing_terms": [],
+      "tracebacks": 2,
+      "gold_anchor_overlap": 6,
+      "facts": 6,
+      "median_local_wall": 0.04354187520220876,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "ERROR:": 2,
+          "Traceback (most recent call last):": 2,
+          "Total test files": 1,
+          "runtime error:": 1,
+          "SEGV": 2
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 4,
+        "traceback_completed_blocks": 2,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661150,
+          551037,
+          1791817891374349858,
+          1791817891374355983
+        ],
+        "output_lines": 78,
+        "output_chars": 8787,
+        "open_count": 2
+      },
+      "stdout_sha256": "48822f919b71243b1b7861bfbca38337b69128d0c6056c6e9e6f0295941433be"
+    },
+    {
+      "task": "cpython_ubsan_failure",
+      "path": "literal",
+      "width": 12,
+      "terms": [
+        "ERROR:",
+        "Traceback (most recent call last):",
+        "Total test files",
+        "runtime error:",
+        "SEGV"
+      ],
+      "exit": 2,
+      "output_chars": 0,
+      "output_lines": 0,
+      "missing_terms": [],
+      "tracebacks": 2,
+      "gold_anchor_overlap": 0,
+      "facts": 6,
+      "median_local_wall": 0.042725708801299334,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": true,
+        "full_source_returned": false,
+        "reason_codes": [
+          "literal_scope_too_broad"
+        ],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": "narrow_search_terms",
+        "status": "needs_targeted_read",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "ERROR:": 2,
+          "Traceback (most recent call last):": 2,
+          "Total test files": 1,
+          "runtime error:": 1,
+          "SEGV": 2
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 12,
+        "traceback_completed_blocks": 2,
+        "suggested_ranges": [
+          [
+            3153,
+            3204
+          ],
+          [
+            3645,
+            3692
+          ],
+          [
+            3709,
+            3733
+          ]
+        ],
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661150,
+          551037,
+          1791817891374349858,
+          1791817891374355983
+        ],
+        "output_lines": 0,
+        "output_chars": 0,
+        "open_count": 1
+      },
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "scipy_distributed_failures",
+      "path": "default-query",
+      "identical_stdout": true,
+      "stdout_sha256": "1a2b1e9c1bc999b5614be0ec079d16fd0b645a0d6cbb090262b0c4877bb74540"
+    },
+    {
+      "task": "scipy_distributed_failures",
+      "path": "literal",
+      "width": null,
+      "terms": [
+        "platform linux",
+        "test_fitpack_F",
+        "tuple' object has no attribute 'shape",
+        "failed,"
+      ],
+      "exit": 2,
+      "output_chars": 0,
+      "output_lines": 0,
+      "missing_terms": [
+        "platform linux"
+      ],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 0,
+      "facts": 6,
+      "median_local_wall": 0.0449673340190202,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": true,
+        "full_source_returned": false,
+        "reason_codes": [
+          "literal_scope_too_broad"
+        ],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": "narrow_search_terms",
+        "status": "needs_targeted_read",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "platform linux": 0,
+          "test_fitpack_F": 42,
+          "tuple' object has no attribute 'shape": 2,
+          "failed,": 1
+        },
+        "missing_search_terms": [
+          "platform linux"
+        ],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 4,
+        "traceback_completed_blocks": 0,
+        "suggested_ranges": [
+          [
+            3834,
+            3849
+          ],
+          [
+            3867,
+            3882
+          ],
+          [
+            3900,
+            3915
+          ],
+          [
+            3933,
+            3948
+          ],
+          [
+            3966,
+            3981
+          ],
+          [
+            4000,
+            4015
+          ],
+          [
+            4034,
+            4050
+          ],
+          [
+            4073,
+            4089
+          ],
+          [
+            4112,
+            4128
+          ],
+          [
+            4151,
+            4167
+          ],
+          [
+            4190,
+            4206
+          ],
+          [
+            4230,
+            4246
+          ]
+        ],
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661151,
+          638795,
+          1791817891374705940,
+          1791817891374719482
+        ],
+        "output_lines": 0,
+        "output_chars": 0,
+        "open_count": 1
+      },
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "scipy_distributed_failures",
+      "path": "literal",
+      "width": 0,
+      "terms": [
+        "platform linux",
+        "test_fitpack_F",
+        "tuple' object has no attribute 'shape",
+        "failed,"
+      ],
+      "exit": 0,
+      "output_chars": 7445,
+      "output_lines": 45,
+      "missing_terms": [
+        "platform linux"
+      ],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 3,
+      "facts": 6,
+      "median_local_wall": 0.04577625007368624,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "platform linux": 0,
+          "test_fitpack_F": 42,
+          "tuple' object has no attribute 'shape": 2,
+          "failed,": 1
+        },
+        "missing_search_terms": [
+          "platform linux"
+        ],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 0,
+        "traceback_completed_blocks": 0,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661151,
+          638795,
+          1791817891374705940,
+          1791817891374719482
+        ],
+        "output_lines": 45,
+        "output_chars": 7445,
+        "open_count": 2
+      },
+      "stdout_sha256": "cc40f2ee468236e9a8150caece0fbd09f49f5eef1e09abe8b34b8a5d03fc8f22"
+    },
+    {
+      "task": "scipy_distributed_failures",
+      "path": "literal",
+      "width": 1,
+      "terms": [
+        "platform linux",
+        "test_fitpack_F",
+        "tuple' object has no attribute 'shape",
+        "failed,"
+      ],
+      "exit": 2,
+      "output_chars": 0,
+      "output_lines": 0,
+      "missing_terms": [
+        "platform linux"
+      ],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 0,
+      "facts": 6,
+      "median_local_wall": 0.045477791922166944,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": true,
+        "full_source_returned": false,
+        "reason_codes": [
+          "literal_scope_too_broad"
+        ],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": "narrow_search_terms",
+        "status": "needs_targeted_read",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "platform linux": 0,
+          "test_fitpack_F": 42,
+          "tuple' object has no attribute 'shape": 2,
+          "failed,": 1
+        },
+        "missing_search_terms": [
+          "platform linux"
+        ],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 1,
+        "traceback_completed_blocks": 0,
+        "suggested_ranges": [
+          [
+            3837,
+            3839
+          ],
+          [
+            3844,
+            3846
+          ],
+          [
+            3870,
+            3872
+          ],
+          [
+            3877,
+            3879
+          ],
+          [
+            3903,
+            3905
+          ],
+          [
+            3910,
+            3912
+          ],
+          [
+            3936,
+            3938
+          ],
+          [
+            3943,
+            3945
+          ],
+          [
+            3969,
+            3971
+          ],
+          [
+            3976,
+            3978
+          ],
+          [
+            4003,
+            4005
+          ],
+          [
+            4010,
+            4012
+          ]
+        ],
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661151,
+          638795,
+          1791817891374705940,
+          1791817891374719482
+        ],
+        "output_lines": 0,
+        "output_chars": 0,
+        "open_count": 2
+      },
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "scipy_distributed_failures",
+      "path": "literal",
+      "width": 2,
+      "terms": [
+        "platform linux",
+        "test_fitpack_F",
+        "tuple' object has no attribute 'shape",
+        "failed,"
+      ],
+      "exit": 2,
+      "output_chars": 0,
+      "output_lines": 0,
+      "missing_terms": [
+        "platform linux"
+      ],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 0,
+      "facts": 6,
+      "median_local_wall": 0.04528008308261633,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": true,
+        "full_source_returned": false,
+        "reason_codes": [
+          "literal_scope_too_broad"
+        ],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": "narrow_search_terms",
+        "status": "needs_targeted_read",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "platform linux": 0,
+          "test_fitpack_F": 42,
+          "tuple' object has no attribute 'shape": 2,
+          "failed,": 1
+        },
+        "missing_search_terms": [
+          "platform linux"
+        ],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 2,
+        "traceback_completed_blocks": 0,
+        "suggested_ranges": [
+          [
+            3836,
+            3840
+          ],
+          [
+            3843,
+            3847
+          ],
+          [
+            3869,
+            3873
+          ],
+          [
+            3876,
+            3880
+          ],
+          [
+            3902,
+            3906
+          ],
+          [
+            3909,
+            3913
+          ],
+          [
+            3935,
+            3939
+          ],
+          [
+            3942,
+            3946
+          ],
+          [
+            3968,
+            3972
+          ],
+          [
+            3975,
+            3979
+          ],
+          [
+            4002,
+            4006
+          ],
+          [
+            4009,
+            4013
+          ]
+        ],
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661151,
+          638795,
+          1791817891374705940,
+          1791817891374719482
+        ],
+        "output_lines": 0,
+        "output_chars": 0,
+        "open_count": 1
+      },
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "scipy_distributed_failures",
+      "path": "literal",
+      "width": 4,
+      "terms": [
+        "platform linux",
+        "test_fitpack_F",
+        "tuple' object has no attribute 'shape",
+        "failed,"
+      ],
+      "exit": 2,
+      "output_chars": 0,
+      "output_lines": 0,
+      "missing_terms": [
+        "platform linux"
+      ],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 0,
+      "facts": 6,
+      "median_local_wall": 0.044977334095165133,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": true,
+        "full_source_returned": false,
+        "reason_codes": [
+          "literal_scope_too_broad"
+        ],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": "narrow_search_terms",
+        "status": "needs_targeted_read",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "platform linux": 0,
+          "test_fitpack_F": 42,
+          "tuple' object has no attribute 'shape": 2,
+          "failed,": 1
+        },
+        "missing_search_terms": [
+          "platform linux"
+        ],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 4,
+        "traceback_completed_blocks": 0,
+        "suggested_ranges": [
+          [
+            3834,
+            3849
+          ],
+          [
+            3867,
+            3882
+          ],
+          [
+            3900,
+            3915
+          ],
+          [
+            3933,
+            3948
+          ],
+          [
+            3966,
+            3981
+          ],
+          [
+            4000,
+            4015
+          ],
+          [
+            4034,
+            4050
+          ],
+          [
+            4073,
+            4089
+          ],
+          [
+            4112,
+            4128
+          ],
+          [
+            4151,
+            4167
+          ],
+          [
+            4190,
+            4206
+          ],
+          [
+            4230,
+            4246
+          ]
+        ],
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661151,
+          638795,
+          1791817891374705940,
+          1791817891374719482
+        ],
+        "output_lines": 0,
+        "output_chars": 0,
+        "open_count": 1
+      },
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "scipy_distributed_failures",
+      "path": "literal",
+      "width": 12,
+      "terms": [
+        "platform linux",
+        "test_fitpack_F",
+        "tuple' object has no attribute 'shape",
+        "failed,"
+      ],
+      "exit": 2,
+      "output_chars": 0,
+      "output_lines": 0,
+      "missing_terms": [
+        "platform linux"
+      ],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 0,
+      "facts": 6,
+      "median_local_wall": 0.04555074987001717,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": true,
+        "full_source_returned": false,
+        "reason_codes": [
+          "literal_scope_too_broad"
+        ],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": "narrow_search_terms",
+        "status": "needs_targeted_read",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "platform linux": 0,
+          "test_fitpack_F": 42,
+          "tuple' object has no attribute 'shape": 2,
+          "failed,": 1
+        },
+        "missing_search_terms": [
+          "platform linux"
+        ],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 12,
+        "traceback_completed_blocks": 0,
+        "suggested_ranges": [
+          [
+            3826,
+            3857
+          ],
+          [
+            3859,
+            3890
+          ],
+          [
+            3892,
+            3923
+          ],
+          [
+            3925,
+            3956
+          ],
+          [
+            3958,
+            3989
+          ],
+          [
+            3992,
+            4023
+          ],
+          [
+            4026,
+            4058
+          ],
+          [
+            4065,
+            4097
+          ],
+          [
+            4104,
+            4136
+          ],
+          [
+            4143,
+            4175
+          ],
+          [
+            4182,
+            4214
+          ],
+          [
+            4222,
+            4254
+          ]
+        ],
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661151,
+          638795,
+          1791817891374705940,
+          1791817891374719482
+        ],
+        "output_lines": 0,
+        "output_chars": 0,
+        "open_count": 1
+      },
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "attrs_initialization_pipeline",
+      "path": "default-query",
+      "identical_stdout": true,
+      "stdout_sha256": "3b1b011a32d8fd998ce8ee5681d8bbf4101ed049cd581cd96f186afd82754327"
+    },
+    {
+      "task": "attrs_initialization_pipeline",
+      "path": "literal",
+      "width": null,
+      "terms": [
+        "_collect_base_attrs",
+        "_transform_attrs",
+        "_frozen_setattrs",
+        "_run_validators",
+        "__attrs_post_init__"
+      ],
+      "exit": 2,
+      "output_chars": 0,
+      "output_lines": 0,
+      "missing_terms": [],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 0,
+      "facts": 7,
+      "median_local_wall": 0.03904674993827939,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": true,
+        "full_source_returned": false,
+        "reason_codes": [
+          "literal_scope_too_broad"
+        ],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": "narrow_search_terms",
+        "status": "needs_targeted_read",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "_collect_base_attrs": 4,
+          "_transform_attrs": 2,
+          "_frozen_setattrs": 3,
+          "_run_validators": 2,
+          "__attrs_post_init__": 6
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 12,
+        "traceback_completed_blocks": 0,
+        "suggested_ranges": [
+          [
+            308,
+            332
+          ],
+          [
+            341,
+            365
+          ],
+          [
+            369,
+            393
+          ],
+          [
+            442,
+            470
+          ],
+          [
+            549,
+            573
+          ],
+          [
+            672,
+            696
+          ],
+          [
+            703,
+            739
+          ],
+          [
+            1400,
+            1424
+          ],
+          [
+            1619,
+            1643
+          ],
+          [
+            2001,
+            2025
+          ],
+          [
+            2376,
+            2411
+          ],
+          [
+            3308,
+            3341
+          ]
+        ],
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661152,
+          108039,
+          1791817891376324852,
+          1791817891376332644
+        ],
+        "output_lines": 0,
+        "output_chars": 0,
+        "open_count": 1
+      },
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "task": "attrs_initialization_pipeline",
+      "path": "literal",
+      "width": 0,
+      "terms": [
+        "_collect_base_attrs",
+        "_transform_attrs",
+        "_frozen_setattrs",
+        "_run_validators",
+        "__attrs_post_init__"
+      ],
+      "exit": 0,
+      "output_chars": 2256,
+      "output_lines": 17,
+      "missing_terms": [],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 2,
+      "facts": 7,
+      "median_local_wall": 0.040148957865312696,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "_collect_base_attrs": 4,
+          "_transform_attrs": 2,
+          "_frozen_setattrs": 3,
+          "_run_validators": 2,
+          "__attrs_post_init__": 6
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 0,
+        "traceback_completed_blocks": 0,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661152,
+          108039,
+          1791817891376324852,
+          1791817891376332644
+        ],
+        "output_lines": 17,
+        "output_chars": 2256,
+        "open_count": 2
+      },
+      "stdout_sha256": "5f6b630adc783d08ff013c8ef0d556ced35f155f7a1f4348bab9f93e228c6c0f"
+    },
+    {
+      "task": "attrs_initialization_pipeline",
+      "path": "literal",
+      "width": 1,
+      "terms": [
+        "_collect_base_attrs",
+        "_transform_attrs",
+        "_frozen_setattrs",
+        "_run_validators",
+        "__attrs_post_init__"
+      ],
+      "exit": 0,
+      "output_chars": 3219,
+      "output_lines": 50,
+      "missing_terms": [],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 2,
+      "facts": 7,
+      "median_local_wall": 0.03954058303497732,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "_collect_base_attrs": 4,
+          "_transform_attrs": 2,
+          "_frozen_setattrs": 3,
+          "_run_validators": 2,
+          "__attrs_post_init__": 6
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 1,
+        "traceback_completed_blocks": 0,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661152,
+          108039,
+          1791817891376324852,
+          1791817891376332644
+        ],
+        "output_lines": 50,
+        "output_chars": 3219,
+        "open_count": 2
+      },
+      "stdout_sha256": "e6855a3e2e009015db26e315611f617b28b0be4c25712731e81f56424528ceae"
+    },
+    {
+      "task": "attrs_initialization_pipeline",
+      "path": "literal",
+      "width": 2,
+      "terms": [
+        "_collect_base_attrs",
+        "_transform_attrs",
+        "_frozen_setattrs",
+        "_run_validators",
+        "__attrs_post_init__"
+      ],
+      "exit": 0,
+      "output_chars": 4160,
+      "output_lines": 81,
+      "missing_terms": [],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 2,
+      "facts": 7,
+      "median_local_wall": 0.039301374927163124,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "_collect_base_attrs": 4,
+          "_transform_attrs": 2,
+          "_frozen_setattrs": 3,
+          "_run_validators": 2,
+          "__attrs_post_init__": 6
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 2,
+        "traceback_completed_blocks": 0,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661152,
+          108039,
+          1791817891376324852,
+          1791817891376332644
+        ],
+        "output_lines": 81,
+        "output_chars": 4160,
+        "open_count": 2
+      },
+      "stdout_sha256": "b25f837d3d47f812337912f3f5e8fd946a6ad4d167ac0be3e091e37bb7041efa"
+    },
+    {
+      "task": "attrs_initialization_pipeline",
+      "path": "literal",
+      "width": 4,
+      "terms": [
+        "_collect_base_attrs",
+        "_transform_attrs",
+        "_frozen_setattrs",
+        "_run_validators",
+        "__attrs_post_init__"
+      ],
+      "exit": 0,
+      "output_chars": 6256,
+      "output_lines": 141,
+      "missing_terms": [],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 2,
+      "facts": 7,
+      "median_local_wall": 0.03966754209250212,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": false,
+        "full_source_returned": false,
+        "reason_codes": [],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": null,
+        "status": "auto_candidates",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "_collect_base_attrs": 4,
+          "_transform_attrs": 2,
+          "_frozen_setattrs": 3,
+          "_run_validators": 2,
+          "__attrs_post_init__": 6
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 4,
+        "traceback_completed_blocks": 0,
+        "output_format": "numbered",
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661152,
+          108039,
+          1791817891376324852,
+          1791817891376332644
+        ],
+        "output_lines": 141,
+        "output_chars": 6256,
+        "open_count": 2
+      },
+      "stdout_sha256": "c4c68cbd84c28311b88cf9383b8db3302c0b478e8a3674fce2662ca3e39a1711"
+    },
+    {
+      "task": "attrs_initialization_pipeline",
+      "path": "literal",
+      "width": 12,
+      "terms": [
+        "_collect_base_attrs",
+        "_transform_attrs",
+        "_frozen_setattrs",
+        "_run_validators",
+        "__attrs_post_init__"
+      ],
+      "exit": 2,
+      "output_chars": 0,
+      "output_lines": 0,
+      "missing_terms": [],
+      "tracebacks": 0,
+      "gold_anchor_overlap": 0,
+      "facts": 7,
+      "median_local_wall": 0.03930804110132158,
+      "status": {
+        "schema_version": 1,
+        "model_called": false,
+        "model_failed": false,
+        "selection_truncated": false,
+        "final_output_capped": true,
+        "full_source_returned": false,
+        "reason_codes": [
+          "literal_scope_too_broad"
+        ],
+        "packet_query_anchor": "unknown",
+        "absent_required": [],
+        "lost_required": [],
+        "next_action": "narrow_search_terms",
+        "status": "needs_targeted_read",
+        "retrieval_mode": "literal_search",
+        "scan_complete": true,
+        "search_match_lines": {
+          "_collect_base_attrs": 4,
+          "_transform_attrs": 2,
+          "_frozen_setattrs": 3,
+          "_run_validators": 2,
+          "__attrs_post_init__": 6
+        },
+        "missing_search_terms": [],
+        "semantic_sufficiency": "unknown",
+        "context_lines": 12,
+        "traceback_completed_blocks": 0,
+        "suggested_ranges": [
+          [
+            308,
+            332
+          ],
+          [
+            341,
+            365
+          ],
+          [
+            369,
+            393
+          ],
+          [
+            442,
+            470
+          ],
+          [
+            549,
+            573
+          ],
+          [
+            672,
+            696
+          ],
+          [
+            703,
+            739
+          ],
+          [
+            1400,
+            1424
+          ],
+          [
+            1619,
+            1643
+          ],
+          [
+            2001,
+            2025
+          ],
+          [
+            2376,
+            2411
+          ],
+          [
+            3308,
+            3341
+          ]
+        ],
+        "source_consistency": "stat_unchanged",
+        "source_stamp": [
+          16777231,
+          73661152,
+          108039,
+          1791817891376324852,
+          1791817891376332644
+        ],
+        "output_lines": 0,
+        "output_chars": 0,
+        "open_count": 1
+      },
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

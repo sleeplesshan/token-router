@@ -1,0 +1,101 @@
+{
+  "limits": {
+    "series_episodes": 16,
+    "total_calls": 50,
+    "total_tokens": 1100000,
+    "series_wall": 1800,
+    "extra_source_commands": 3,
+    "timeout_idle": 240,
+    "timeout_absolute": 360,
+    "timeout_grace": 20
+  },
+  "model": "gpt-6.1-sol",
+  "reasoning": "medium",
+  "provider": "builtin openai ChatGPT subscription; native app-server0.162.1; transport retries not exposed",
+  "package_version": "2.7.0 unreleased",
+  "commit": "3ad145c4cc8d4712b812429a87b849443d017e05",
+  "policy_version": "v2.4 explicit symbol/literal selectors; shared validation",
+  "delivery": "native Codex app-server SkillUserInput; no experimenter guide text",
+  "prompt_hashes": {
+    "pandas_dispatch": {
+      "plain": "131c0e35043a8685cbbea3b8b1d3e82a4598f85462792f260032f58730df3cf5",
+      "router": "894f553fb0e17d40e176110297335bddc16f3c3bd61551b6e75ab9d87600d66d"
+    },
+    "rich_render": {
+      "plain": "c539158687ef0fca57a90c4e502a3c88d6aecb88f266ac49c4f6aec31187cbc6",
+      "router": "b652dba877d6aae8a031a279e588e5648e333b3fae3b72b36fd5041a121bc3bd"
+    },
+    "cpython_trace": {
+      "plain": "079bf739e4e9ab87e60f7eef1f5651bc8ae490130fdd3ce4efd70d4a3c86a5fe",
+      "router": "8a6592b5c8e54ec1f437f89ce8b564fde29eaa3915b0c0ff015f5f241c5fcfa3"
+    },
+    "scipy_failure_blocks": {
+      "plain": "a2b89048e51971c8b8e4a110877ebba3c154b1200fc419b041660b601b321f62",
+      "router": "f019214da038cc81f4c6b067efe65b1dcfcedbfdcf75163352a00f6391734bd1"
+    }
+  },
+  "common_hash": "41b432c8f5dd0f4b8bfae9e197a19b106f51658e9db719e5981188f3eb8e4ca8",
+  "manifest_hash": "c7eb3b0fe5a8cba485ccf9fe0e9ebb306ed2e65281ab546715d31b5b05892068",
+  "client_hash": "a0d1d58b754d8d3ad671292dcf8153c2dea24645973c9c3edee850edcdfb205a",
+  "harness_hash": "f6cd4341bb6735a2511f03af569e65cb71f2a74a321c2d48c031c6f3e987c0bb",
+  "payload_hashes": {
+    "LICENSE": "c0d5b8821cbbe219f05c53abb58fb61e42c80222aa8af76c9841862e9b4f4b9b",
+    "CHANGELOG.md": "fb0487816eb89e630f26d4d8115ca35d28f6e61f4d54625fa2667b20b4fd0886",
+    "README.md": "24b09f2c44846007a99202b4b4e7e099b2b15d291362d3d0c5118c4e89b9c470",
+    "SUPPORT.md": "4031409ee2d06cc34fc40c35f81732cab0dbd529545434a6d02b6ff5bb6b6706",
+    ".token-router-install.json": "8436019c6d975853214fc9d33d33d8f1c9df50fbdff70c763599995c1ef53ac3",
+    "CONTRIBUTING.md": "443021703db9e67c5f02ebb72723f9e1544ddce7d6e5b18f77abc8c2604fd969",
+    "SKILL.md": "e07ab941002defe8a18e5c568d9e405bd7080b85f71ef637e6a935025e09a92e",
+    "CLAUDE.md": "9cbe4ce89f0d74d6bd41c6ebbe98e57708c96608d30ba028cdc632efe7bb556c",
+    "SECURITY.md": "ed389392a7b87e25e4645c2bad5f2f99a91bb551a25ac090c4a528d4b6b75658",
+    "references/contract.md": "3af166baea0bb60d6c4130c172da1c5d65c17595eba70e14859ea81a4aa234d5",
+    "agents/openai.yaml": "d73f50bf9718df52cfe0692187b59749a9b9194b237884d0f63dbb91281d2a52",
+    "docs/release-readiness.md": "8d27ff00a5708292c6561e5ccf1266f287c87abb6b2031373187b772136ab57d",
+    "samples/service.py": "0e731a9a13875fe666672199002c14d66ae9925b1db51d4d77cc3a0c781b0a70",
+    "samples/reference.md": "b5b1766d373fa0e72662d0f1da91955124ce00200d9c213f53e7867131a86f8e",
+    "samples/incident.log": "169c6e141deff0782b30a48faee44d8ab4323ff18454cc540486516418aef409",
+    "scripts/source_guard.py": "263b6803d18763f104a08d5a233fb44f525ddd0406cde9b225883897cea6bd35",
+    "scripts/evidence_checks.py": "42c5e04344acb4d864715043e05021fff66b63dd7d1000a650c2dd41b723de6d",
+    "scripts/distribution.py": "285343d1b9ea408ce4be2a2a379528c13cf87918b70ff7c8c201192a495d6aa1",
+    "scripts/routing_policy.py": "a84a9934c9e5b0e9156a13bec6e6c5df8a0a5daa029c749438251fcc16d18cb8",
+    "scripts/query_matcher.py": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+    "scripts/install.py": "d44088de0371fb3afea261674e384cab18f7f27f64f6fee687bc9f398d7fab03",
+    "scripts/router.py": "55833c0af86f0f511cfae1a7c047056466878f99dbd88d4ba145f08fe19de9d3"
+  },
+  "schedule": [
+    [
+      "pandas_dispatch",
+      1
+    ],
+    [
+      "rich_render",
+      1
+    ],
+    [
+      "cpython_trace",
+      1
+    ],
+    [
+      "scipy_failure_blocks",
+      1
+    ],
+    [
+      "pandas_dispatch",
+      2
+    ],
+    [
+      "rich_render",
+      2
+    ],
+    [
+      "cpython_trace",
+      2
+    ],
+    [
+      "scipy_failure_blocks",
+      2
+    ]
+  ],
+  "rejected": "Cold pre-read guide batching was removed before execution; run-cold.py/manifest-v3 were not run",
+  "stopping": "unknown usage, protocol or resource limits; every scheduled repeat retained; quality loss blocks release"
+}

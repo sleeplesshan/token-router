@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import io
 from dataclasses import asdict
 import json
@@ -53,7 +54,7 @@ def env_float(name: str, default: float, minimum: float | None = None) -> float:
     return value
 
 
-VERSION = "2.6.0"
+VERSION = "2.7.0"
 MODEL_NAME = "gpt-6-luna"
 REASONING_EFFORT = "low"
 CODEX_BIN = os.environ.get("ROUTER_CODEX_BIN", "codex")
@@ -131,7 +132,27 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument('--report-json')
     parser.add_argument('--return-context',choices=('off','bounded'),default=None,help='Optional bounded Python return completion (default: off).')
     parser.add_argument('--return-target',help='Exact single callable return lookup; implies bounded completion; ambiguity preserves bounded output.')
+    parser.add_argument('--search-term', action='append', default=[], help='Explicit case-sensitive literal windows; local tokens only, no structural ranking.')
+    parser.add_argument('--symbol', action='append', default=[], help='Exact qualified Python callable; complete bounded definitions, local tokens only.')
+    parser.add_argument('--compact-status', action='store_true', help='Concise actionable stderr; report-json still contains full diagnostics.')
+    parser.add_argument('--search-context', type=int, choices=range(13), default=None,
+                        help='Neighbors per side for literal search (0-12); omitted: code12/log4. Selected traceback completion still applies.')
+    parser.add_argument('--line-numbers', action='store_true', help='Render source line numbers without changing stored raw evidence.')
     args = parser.parse_args(argv[1:])
+    if args.symbol:
+        if args.mode!='heavy_code' or args.force_model or args.deterministic or args.optimize!='tokens' or args.search_term or args.search_context is not None or args.require_term or args.read_scope=='whole' or args.return_target or args.return_context=='bounded':
+            parser.error('symbol requires focused heavy_code local tokens without other selection options')
+        if len(args.symbol)>8 or any(len(s)>256 or not all(p.isidentifier() for p in s.split('.')) for s in args.symbol):
+            parser.error('symbol requires 1-8 qualified Python names, each at most256 characters')
+        args.symbol=list(dict.fromkeys(args.symbol))
+    if args.search_context is not None and not args.search_term:
+        parser.error('search-context requires search-term')
+    if args.search_term:
+        if args.force_model or args.deterministic or args.optimize != 'tokens' or args.read_scope == 'whole' or args.require_term or args.return_target or args.return_context == 'bounded':
+            parser.error('search-term requires focused local tokens without return completion or require-term')
+        if any(not t or not t.strip() or '\n' in t or '\r' in t or len(t)>256 for t in args.search_term) or len(args.search_term)>32:
+            parser.error('search-term requires 1-32 nonblank single-line literals, each at most 256 characters')
+        args.search_term = list(dict.fromkeys(args.search_term))
     explicit_policy = args.policy_version is not None or args.read_scope is not None or bool(args.require_term) or args.return_target is not None or args.return_context is not None
     if explicit_policy and (args.deterministic or args.force_model or args.optimize != 'tokens'):
         parser.error('policy-version, require-term, read-scope and return-target require automatic tokens mode')
@@ -975,6 +996,135 @@ def _collect_packet_lines(handle, spans, chunks):
             chunks[current].append(line)
 
 
+def numbered_packet(packet):
+    """Presentation only: source text and coordinates remain in raw_slices."""
+    rendered=[]
+    for span,raw in zip(packet.ranges,packet.raw_slices):
+        body=''.join(f'{n}: {line}' for n,line in enumerate(io.StringIO(raw, newline=''),span.start))
+        rendered.append(f'--- [NUMBERED CONTENT FROM LINE {span.start} TO {span.end}] ---\n'+body+'\n--- [END OF SLICE] ---\n')
+    return Packet(packet.ranges,packet.raw_slices,'\n'.join(rendered))
+
+
+def symbol_packet(args, guard):
+    """Complete explicit callables only: no dependencies or model selection."""
+    raw=guard.probe(1_000_001)
+    base=dict(status='needs_targeted_read',retrieval_mode='python_symbol',
+              semantic_sufficiency='unknown',next_action='read_targeted_ranges',
+              requested_symbols=args.symbol)
+    if len(raw)>1_000_000:
+        return finalize_packet(args,guard,None,{**base,'reason_codes':['symbol_parse_budget'],'scan_complete':False},2)
+    lines=list(io.StringIO(raw,newline=''))
+    if len(lines)>250_000 or any(len(line)>1_000_000 for line in lines):
+        raise SourceLimitError('source exceeds line limits')
+    try:
+        tree=ast.parse(raw)
+    except (SyntaxError,ValueError,RecursionError,MemoryError) as exc:
+        return finalize_packet(args,guard,None,{**base,'reason_codes':['symbol_parse_error'],'detail':type(exc).__name__,'scan_complete':True},2)
+    found={name:[] for name in args.symbol}
+    def visit(node,prefix=''):
+        qualified=prefix
+        if isinstance(node,(ast.ClassDef,ast.FunctionDef,ast.AsyncFunctionDef)):
+            qualified=prefix+'.'+node.name if prefix else node.name
+            if isinstance(node,(ast.FunctionDef,ast.AsyncFunctionDef)) and qualified in found:
+                start=min([node.lineno]+[d.lineno for d in node.decorator_list])
+                found[qualified].append(Span(start,node.end_lineno))
+        for child in ast.iter_child_nodes(node):
+            visit(child,qualified)
+    try:
+        visit(tree)
+    except RecursionError:
+        return finalize_packet(args,guard,None,{**base,'reason_codes':['symbol_parse_error'],'detail':'RecursionError','scan_complete':True},2)
+    missing=[name for name,spans in found.items() if not spans]
+    ambiguous=[name for name,spans in found.items() if len(spans)>1]
+    base.update(scan_complete=True,missing_symbols=missing,ambiguous_symbols=ambiguous,
+                symbol_ranges={name:[[s.start,s.end] for s in spans[:12]] for name,spans in found.items()},
+                symbol_occurrences={name:len(spans) for name,spans in found.items()},
+                symbol_ranges_truncated=any(len(spans)>12 for spans in found.values()))
+    if missing or ambiguous:
+        return finalize_packet(args,guard,None,{**base,'reason_codes':['symbol_missing_or_ambiguous']},2)
+    merged=[]
+    for span in sorted({s for spans in found.values() for s in spans},key=lambda s:s.start):
+        if merged and span.start<=merged[-1].end+1:
+            merged[-1]=Span(merged[-1].start,max(merged[-1].end,span.end))
+        else:
+            merged.append(span)
+    targets=[dict(start_line=s.start,end_line=s.end,reason='complete explicitly selected Python callable') for s in merged]
+    packet=packet_from_guard(guard,targets,raw)
+    trial=numbered_packet(packet) if args.line_numbers else packet
+    if len(trial.rendered)>min(MAX_OUTPUT_CHARS,12000):
+        return finalize_packet(args,guard,None,{**base,'reason_codes':['symbol_output_budget'],
+                    'final_output_capped':True},2)
+    if len(raw)>AUTO_SMALL_CHARS and len(trial.rendered)>len(raw)*.85:
+        return finalize_packet(args,guard,None,{**base,'reason_codes':['insufficient_bounded_reduction']},2)
+    return finalize_packet(args,guard,packet,{**base,'status':'auto_candidates',
+               'reason_codes':[],'next_action':None,'full_source_returned':merged==[Span(1,len(lines))]})
+
+
+def literal_search_packet(args, guard):
+    """One metadata scan and one selected read; no AST, ranking, tail or model."""
+    terms=args.search_term
+    counts={term:0 for term in terms};spans=[];source_chars=0;total=0;line_costs=[];tracebacks=[];trace_open=None;matched_lines=[];pytest_open=None;pytest_blocks=[]
+    context=args.search_context if args.search_context is not None else (4 if args.mode=='error_log' else 12)
+    for n,line in enumerate(guard.lines(),1):
+        total=n;source_chars+=len(line)
+        line_costs.append(len(line)+(len(str(n))+2 if args.line_numbers else 0))
+        ansi_visible=re.sub(r'\x1b\[[0-9;]*m','',line) if args.mode=='error_log' else line
+        if args.mode=='error_log':
+            clean=ansi_visible
+            clean=re.sub(r'^\d{4}-\d{2}-\d{2}T\S+\s+','',clean).strip()
+            if clean=='Traceback (most recent call last):':trace_open=n
+            elif trace_open is not None:
+                if n-trace_open>64:trace_open=None
+                elif re.match(r'^[A-Za-z_][\w.]*(?:Error|Exception|Interrupt|Exit|Iteration)(?::|$)',clean):
+                    tracebacks.append([trace_open,n]);trace_open=None
+            if re.match(r'^_{3,}\s+\S.*\s+_{3,}$',clean):pytest_open=n
+            elif pytest_open is not None:
+                if n-pytest_open>64:pytest_open=None
+                elif re.match(r'^.+:\d+:\s+[A-Za-z_][\w.]*(?:Error|Exception|Warning)$',clean):
+                    pytest_blocks.append([pytest_open,n]);pytest_open=None
+        hits=[term for term in terms if term in line or term in ansi_visible]
+        for term in hits:counts[term]+=1
+        if hits:
+            matched_lines.append(n)
+            start,end=max(1,n-context),n+context
+            if spans and start<=spans[-1][1]+1:spans[-1][1]=max(spans[-1][1],end)
+            else:spans.append([start,end])
+    completed=[tb for tb in tracebacks+pytest_blocks if any(a<=tb[0]<=b for a,b in spans) or any(tb[0]<=n<=tb[1] for n in matched_lines)]
+    merged=[]
+    for a,b in sorted(spans+completed):
+        b=min(b,total)
+        if merged and a<=merged[-1][1]+1:merged[-1][1]=max(merged[-1][1],b)
+        else:merged.append([a,b])
+    spans=[Span(a,b) for a,b in merged]
+    base={'status':'auto_candidates','retrieval_mode':'literal_search','scan_complete':True,
+          'search_match_lines':counts,'missing_search_terms':[t for t,c in counts.items() if not c],
+          'semantic_sufficiency':'unknown','full_source_returned':False,
+          'context_lines':context,'traceback_completed_blocks':len(completed)}
+    if not spans:
+        return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
+            'reason_codes':['literal_not_found'],'next_action':'change_search_scope'},2)
+    # Reject excessive source before collecting it in memory.
+    selected_cost=sum(sum(line_costs[x.start-1:x.end]) for x in spans)
+    if selected_cost>min(MAX_OUTPUT_CHARS,12000):
+        return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
+            'reason_codes':['literal_scope_too_broad'],'next_action':'narrow_search_terms',
+            'final_output_capped':True,'suggested_ranges':[[x.start,x.end] for x in spans[:12]]},2)
+    # Entire windows are kept; broad searches abstain instead of arbitrary cuts.
+    targets=[dict(start_line=x.start,end_line=x.end,reason='explicit literal window; bounded selected traceback completion') for x in spans]
+    packet=packet_from_guard(guard,targets)
+    trial=numbered_packet(packet) if args.line_numbers else packet
+    limit=min(MAX_OUTPUT_CHARS,12000)
+    if len(trial.rendered)>limit:
+        return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
+            'reason_codes':['literal_scope_too_broad'],'next_action':'narrow_search_terms',
+            'final_output_capped':True,'suggested_ranges':[[x.start,x.end] for x in spans[:12]]},2)
+    if source_chars>AUTO_SMALL_CHARS and len(trial.rendered)>source_chars*.85:
+        return finalize_packet(args,guard,None,{**base,'status':'needs_targeted_read',
+            'reason_codes':['insufficient_bounded_reduction'],'next_action':'read_targeted_ranges'},2)
+    base['full_source_returned']=len(spans)==1 and spans[0]==Span(1,total)
+    return finalize_packet(args,guard,packet,base)
+
+
 def finalize_packet(args, guard, packet, status, code=0):
     """All paths emit only after source, output and sidecar checks succeed."""
     status={'schema_version':1,'model_called':False,'model_failed':False,
@@ -984,6 +1134,9 @@ def finalize_packet(args, guard, packet, status, code=0):
             'next_action':None,**status}
     written_report=None
     try:
+        if packet is not None and getattr(args,'line_numbers',False):
+            packet=numbered_packet(packet)
+            status['output_format']='numbered'
         guard.check()
         status['source_consistency']='stat_unchanged'
         status['source_stamp']=list(guard.stamp)
@@ -1039,6 +1192,16 @@ def finalize_packet(args, guard, packet, status, code=0):
         compact.pop('source_required')
     if 'checks' in compact:
         compact['checks'] = {k:v for k,v in compact['checks'].items() if k != 'source_required'}
+    if getattr(args,'compact_status',False):
+        if code == 0:
+            for field in ('symbol_ranges','symbol_occurrences','symbol_ranges_truncated'):
+                compact.pop(field,None)  # Numbered packet already provides these coordinates.
+        keep={'schema_version','status','retrieval_mode','reason_codes','next_action','model_called','model_failed',
+              'source_consistency','final_output_capped','selection_truncated','full_source_returned',
+              'output_lines','output_chars','semantic_sufficiency','missing_search_terms',
+              'absent_required','lost_required','missing_symbols','ambiguous_symbols','detail',
+              'suggested_ranges','symbol_ranges','symbol_occurrences','symbol_ranges_truncated'}
+        compact={k:v for k,v in compact.items() if k in keep and v is not None and v != []}
     print('[token-router status] '+json.dumps(compact),file=sys.stderr)
     if packet is not None and code==0:
         print(packet.rendered,end='')
@@ -1063,6 +1226,13 @@ def main(argv: list[str]) -> int:
         guard=SourceGuard(path)
         if not path.is_file() or guard.stamp[2]==0:
             raise ValueError('Source must be a nonempty regular file')
+        def make_packet(targets, text=None):
+            result=packet_from_guard(guard,targets,text)
+            return numbered_packet(result) if args.line_numbers else result
+        if args.search_term:
+            return literal_search_packet(args,guard)
+        if args.symbol:
+            return symbol_packet(args,guard)
         terms=normalize_query_terms(args.query.strip())
         auto=not args.force_model and not args.deterministic
         new=auto and args.optimize=='tokens' and args.policy_version=='v2.5'
@@ -1076,7 +1246,7 @@ def main(argv: list[str]) -> int:
                 source_required={t:{'count':sum(len(list(required_pattern(t).finditer(line))) for line in raw_lines),'witness_lines':[],'witnesses_truncated':False} for t in args.require_term}
                 matched=tuple(t for t in terms if query_matches(probe,[t]))
                 evidence=assess_packet_evidence(terms,(),matched,(probe,),args.require_term,source_required)
-                packet=packet_from_guard(guard,[dict(start_line=1,end_line=total,reason=full_reason)],probe)
+                packet=make_packet([dict(start_line=1,end_line=total,reason=full_reason)],probe)
                 print('[token-router usage] '+json.dumps(dict(input_tokens=0,output_tokens=0,cached_input_tokens=0)),file=sys.stderr)
                 return finalize_packet(args,guard,packet,{**status,'status':'auto_full','checks':{'query_anchor':'unknown','core_scan_skipped':True,**asdict(evidence)},
                     'source_required':source_required,
@@ -1103,7 +1273,7 @@ def main(argv: list[str]) -> int:
                     'packet_query_anchor':evidence.packet_query_anchor,
                     'absent_required':list(evidence.absent_required),'lost_required':list(evidence.lost_required),
                     'next_action':'narrow_query','scan_complete':True},2)
-            packet=packet_from_guard(guard,[dict(start_line=1,end_line=total,reason=full_reason)],raw)
+            packet=make_packet([dict(start_line=1,end_line=total,reason=full_reason)],raw)
             evidence=assess_packet_evidence(terms,(),matched,packet.raw_slices,args.require_term,source_required)
             print('[token-router usage] '+json.dumps(dict(input_tokens=0,output_tokens=0,cached_input_tokens=0)),file=sys.stderr)
             return finalize_packet(args,guard,packet,{**status,'status':'auto_full','checks':{'query_anchor':'unknown','core_scan_skipped':True,**asdict(evidence)},
@@ -1134,7 +1304,7 @@ def main(argv: list[str]) -> int:
                 syntax_text=guard.read_text()
                 targets,checks['boundary']=complete_python_statements(syntax_text,targets,return_spans=return_spans if args.return_context=='bounded' else None,
                     **({'return_definitions':return_definitions} if args.return_target is not None else {}))
-            packet=packet_from_guard(guard,targets)
+            packet=make_packet(targets)
             evidence=assess_packet_evidence(terms,checks['matched_terms'],scan.source_terms,
                         packet.raw_slices,args.require_term,checks['source_required'])
             checks.update(asdict(evidence))
@@ -1166,12 +1336,12 @@ def main(argv: list[str]) -> int:
                 base_targets,base_packet=targets,packet
                 approved_spans=[]
                 targets,packet,patch_report=bounded_return_supplement(syntax_text,targets,packet,return_spans,
-                    lambda spans:packet_from_guard(guard,spans,syntax_text),accepts_return_patch,
+                    lambda spans:make_packet(spans,syntax_text),accepts_return_patch,
                     **({'accepted_spans':approved_spans} if args.return_target is not None else {}))
                 if args.return_target is not None:
                     targets,packet,target_report=limit_return_target(args.return_target,return_definitions,
                         base_targets,base_packet,targets,packet,approved_spans,
-                        lambda spans:packet_from_guard(guard,spans,syntax_text),accepts_return_patch)
+                        lambda spans:make_packet(spans,syntax_text),accepts_return_patch)
                     status['return_target']=target_report
                 guard.check()  # Cancellation must never turn source mutation into success.
                 status['return_supplement']=patch_report
@@ -1202,7 +1372,7 @@ def main(argv: list[str]) -> int:
                 return finalize_packet(args,guard,None,status,2)
         failure=None
         if action=='auto_full':
-            targets=whole;packet=packet_from_guard(guard,targets)
+            targets=whole;packet=make_packet(targets)
         elif action=='auto_candidates' and packet is None:
             targets=targets_from_numbered_content(candidate,total,'automatic complete-candidate bypass; source may contain omitted evidence',mode=args.mode)
         if action.startswith('auto_'):
@@ -1226,7 +1396,7 @@ def main(argv: list[str]) -> int:
             if not targets:
                 raise ValueError('No complete source line fits the configured budget')
         if packet is None or action in ('model','fallback','deterministic'):
-            packet=packet_from_guard(guard,targets)
+            packet=make_packet(targets)
         if auto and args.optimize=='tokens':
             final=assess_packet_evidence(terms,checks.get('core_terms',()),scan.source_terms,packet.raw_slices,
                                        args.require_term,checks['source_required'])
