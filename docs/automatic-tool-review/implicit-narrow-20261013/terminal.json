@@ -1,0 +1,10 @@
+{
+  "status": "RuntimeError:quality_stop:sympy_multiple_failures_ko-1-implicit",
+  "budget": {
+    "main_turns": 2,
+    "known_tokens": 48283,
+    "unknown_usage": 0
+  },
+  "wall": 23.273963167099282,
+  "episodes": 2
+}

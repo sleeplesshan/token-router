@@ -10,4 +10,17 @@ Automatic skill selection is host-dependent. Try manual `$token-router` invocati
 
 For cost regressions report guide delivery/read count, actual router invocation, main input+output including cached subsets only once, followup reads and failures. A guide-reading model roundtrip can exceed the saving from a short packet. Do not switch to cloud automatically.
 
-For2.7.1 activation issues, report host/native guide delivery, declared task purpose, profile exit/status and whether the host actually attached the skill. Installation does not add a global hook. A profile bypass means ordinary targeted search; do not repeat an unchanged call. Manual retrieval can omit the profile. Log token savings coexisted with longer completion; include all guide/main/recovery/failed costs rather than source-size ratios.
+For historical2.7.1 activation issues, report host/native guide delivery, declared task purpose, profile exit/status and whether the host actually attached the skill. Installation does not add a global hook. A profile bypass means ordinary targeted search; do not repeat an unchanged call. Manual retrieval can omit the profile. Log token savings coexisted with longer completion; include all guide/main/recovery/failed costs rather than source-size ratios.
+
+For2.8 automatic retrieval, use the recommended `--connect-codex` install, then
+start a new local Codex session. In `/mcp` or Codex's MCP settings, verify the
+`token-router` server and `read_pytest_failures` tool are available. Automatic
+scope is multiple named pytest failure blocks plus distant results. No guide
+read is needed for tool calls. Single tracebacks/code/visible answers use ordinary
+search. Direct schema exposure has a context cost even without invocation.
+
+`installed_connection_failed` means local files are installed but the connection
+needs repair. Run the reported `connect-codex --dest ...` action. Preserve existing
+settings when ownership/filter/exposure checks fail. Home/root startup requires
+explicit reviewed roots; other-host/remote/multiroot defaults are unmeasured.
+Disconnect before restoringv2.7.1 or earlier; active servers need a new session.

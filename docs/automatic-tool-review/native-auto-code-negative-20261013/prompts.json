@@ -1,0 +1,3 @@
+{
+  "pandas_dispatch": "Task: DataFrame.__getitem__, DataFrame.__setitem__, DataFrame._set_item_frame_value의 여러 분기와 순서를 원문에서 검토하세요. 정의 앞부분만으로는 답할 수 없습니다.\nAllowed file: pandas_frame.py\nQuestions:\np1: __getitem__ 시작에서 호출하는 세 정규화 함수를 실행 순서대로, 함수 이름만 세미콜론으로 구분해 쓰세요.\np2: boolean DataFrame와 boolean1D key는 각각 어느 self 메서드로 반환하나요? 두 함수 이름을 소스 분기 순서로 쓰세요.\np3: is_single_key 후반에서 data._get_item_cache를 허용하는 내부 if 조건식 전체는?\np4: __setitem__에서 key가 list이며 value가 DataFrame일 때 우선 호출되는 메서드 이름은? 앞뒤 분기 근거도 인용하세요.\np5: _set_item_frame_value에서 기존 column의 len_cols를 정하는 조건 표현식 전체는?\np6: 새 column의 DataFrame value에 대해 오류를 발생시키는 두 column-count 조건식을 순서대로 쓰세요.\nKnown literal selectors: [\"DataFrame.__getitem__\", \"DataFrame.__setitem__\", \"DataFrame._set_item_frame_value\"]"
+}

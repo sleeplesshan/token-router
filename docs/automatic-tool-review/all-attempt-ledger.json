@@ -1,0 +1,68 @@
+{
+  "experiments": [
+    {
+      "experiment": "implicit-default-20261013",
+      "episodes": 16,
+      "known_input_output": 361561,
+      "usage_unknown": 0,
+      "termination": "completed",
+      "manifest_sha256": "2623488bb677d735f8769210ddf3f91bed6730c3a6ea86fde770b8a0dd5f2141",
+      "execution_lock_sha256": "5bab8342cd51d15ebb7e1b9af5acc9e63ca911a3c1edfa5d6d93eec01af37dc3",
+      "commit": "c5509f1befc3758ed4f02b43b175518fefc62ba0"
+    },
+    {
+      "experiment": "implicit-narrow-20261013",
+      "episodes": 2,
+      "known_input_output": 48283,
+      "usage_unknown": 0,
+      "termination": "RuntimeError:quality_stop:sympy_multiple_failures_ko-1-implicit",
+      "manifest_sha256": "a452904fc993c66f6bdcbfd6bb5c71db9a5a4e77d9a0f1a8b108eb464ffcfae1",
+      "execution_lock_sha256": "0908972d6b1f735fe8d1f1ae4cc566767d588af509097b364f6b9b6810c5d870",
+      "commit": "de813cf75e59e744cd0119321d4fd92145938fa5"
+    },
+    {
+      "experiment": "native-auto-20261013",
+      "episodes": 2,
+      "known_input_output": 46366,
+      "usage_unknown": 0,
+      "termination": "RuntimeError:activation_contract:sympy_multiple_failures_ko-1-implicit",
+      "manifest_sha256": "9745dd4da3067fa9105d95832c227c6b42117293c546d8fc0bea09b6d5597c8d",
+      "execution_lock_sha256": "d3aff2cbe11d4b0b41472cafb6fb5a38357230764bfa74948864b26d14305f3d",
+      "commit": "9e7c697c719e9f63065d33914ea4c2cc2fd2b5ae"
+    },
+    {
+      "experiment": "native-auto-guidance-20261013",
+      "episodes": 2,
+      "known_input_output": 41017,
+      "usage_unknown": 0,
+      "termination": "RuntimeError:activation_contract:sympy_multiple_failures_ko-1-implicit",
+      "manifest_sha256": "92d7ee35c978c72221476ea627e3783210cc70d99d43b52f63b89d8327750bca",
+      "execution_lock_sha256": "0144f5695991d585166bcfa7056c9c91790873d6faa76f2cd8c6a9176b5f212f",
+      "commit": "4257adf0ff9f74210e3ad1d6835ea8882e364740"
+    },
+    {
+      "experiment": "native-auto-direct-20261013",
+      "episodes": 16,
+      "known_input_output": 308302,
+      "usage_unknown": 0,
+      "termination": "completed",
+      "manifest_sha256": "4a05a62f5c4ef2b2494f1c3bbadedc4a06f4926c6ef0e412effa36080846106a",
+      "execution_lock_sha256": "2b542145017d23a3f2b7fbc4207ab208312371087d69cb38c6c8e36dcd3d8ae6",
+      "commit": "4257adf0ff9f74210e3ad1d6835ea8882e364740"
+    },
+    {
+      "experiment": "native-auto-code-negative-20261013",
+      "episodes": 4,
+      "known_input_output": 111873,
+      "usage_unknown": 0,
+      "termination": "completed",
+      "manifest_sha256": "8be72b00b4c3d810c5cd23d4da00a38d5de8f43bac82cf85216aaef85ffb2d8c",
+      "execution_lock_sha256": "363bcaf907f8df72ab577b18ff3764520d284a99a9b054dad3cb2f4b10dfa941",
+      "commit": "cb7c1cc6024d7f3247977c931d8438d1e8dd0317"
+    }
+  ],
+  "total_main_turns": 42,
+  "known_input_output": 917402,
+  "usage_unknown": 0,
+  "note": "Research iteration costs. Do not mix different candidates into the final paired causal comparison; all stopped/failed candidates retained. Historical pre-task unknown-usage experiments remain separate."
+}

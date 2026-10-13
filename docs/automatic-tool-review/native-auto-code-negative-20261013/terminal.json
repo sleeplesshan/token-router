@@ -1,0 +1,10 @@
+{
+  "status": "completed",
+  "budget": {
+    "main_turns": 4,
+    "known_tokens": 111873,
+    "unknown_usage": 0
+  },
+  "wall": 63.80893583293073,
+  "episodes": 4
+}

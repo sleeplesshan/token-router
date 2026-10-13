@@ -1,0 +1,49 @@
+{
+  "measured_commit": "4257adf",
+  "documented_normalization": [
+    "router CLI VERSION",
+    "MCP stdout UTF-8/LF configuration; same decoded result"
+  ],
+  "files": {
+    "scripts/router.py": {
+      "measured_sha256": "079e656e878d89e8202f5279a57532aca7619adb690386b5f4a063675879c0b0",
+      "release_sha256": "cca65305d335d96ad765f598c7779f6c80392c18d69fb5f3ac6b7b8087747a8b",
+      "selection_unchanged": true
+    },
+    "scripts/mcp_server.py": {
+      "measured_sha256": "c1b6477329ed2e5c49fd09412a5a739a240db7df5771c587dc7b525a18282dd7",
+      "release_sha256": "578c8fad7eca2c88358b459d85d15af61ac8d8b78847442fb6e0256cca408ebc",
+      "selection_unchanged": true
+    },
+    "scripts/routing_policy.py": {
+      "measured_sha256": "1700bcd91e104a801535e37fc3639ea1df689070da3e2ab363596d471fe5a0d9",
+      "release_sha256": "1700bcd91e104a801535e37fc3639ea1df689070da3e2ab363596d471fe5a0d9",
+      "selection_unchanged": true
+    },
+    "scripts/evidence_checks.py": {
+      "measured_sha256": "42c5e04344acb4d864715043e05021fff66b63dd7d1000a650c2dd41b723de6d",
+      "release_sha256": "42c5e04344acb4d864715043e05021fff66b63dd7d1000a650c2dd41b723de6d",
+      "selection_unchanged": true
+    },
+    "scripts/source_guard.py": {
+      "measured_sha256": "263b6803d18763f104a08d5a233fb44f525ddd0406cde9b225883897cea6bd35",
+      "release_sha256": "263b6803d18763f104a08d5a233fb44f525ddd0406cde9b225883897cea6bd35",
+      "selection_unchanged": true
+    },
+    "scripts/query_matcher.py": {
+      "measured_sha256": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+      "release_sha256": "75ce3d8fa9bbe0f6f599db65163313dd508070a38e1e86cda4d7e0969aaf4769",
+      "selection_unchanged": true
+    },
+    "SKILL.md": {
+      "measured_sha256": "2a3deebf0cacc47bc27beccef54c6ae25f4c2844584114d350820a22765765b0",
+      "release_sha256": "2a3deebf0cacc47bc27beccef54c6ae25f4c2844584114d350820a22765765b0",
+      "selection_unchanged": true
+    },
+    "agents/openai.yaml": {
+      "measured_sha256": "59d49899bc6be0a3fbdbcb34e05c5cdf6397e69d3b403f0592c4d6a9b23b90f1",
+      "release_sha256": "59d49899bc6be0a3fbdbcb34e05c5cdf6397e69d3b403f0592c4d6a9b23b90f1",
+      "selection_unchanged": true
+    }
+  }
+}

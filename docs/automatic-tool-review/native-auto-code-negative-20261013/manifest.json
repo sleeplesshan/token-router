@@ -1,0 +1,151 @@
+{
+  "package_version": "2.7.1",
+  "candidate": "direct-tool-code-negative-regression",
+  "commit": "cb7c1cc6024d7f3247977c931d8438d1e8dd0317",
+  "policy_version": "v2.4",
+  "model": "gpt-6.1-sol",
+  "reasoning": "medium",
+  "tasks": [
+    {
+      "id": "pandas_dispatch",
+      "family": "code",
+      "file": "pandas_frame.py",
+      "language": "ko",
+      "query": "DataFrame.__getitem__, DataFrame.__setitem__, DataFrame._set_item_frame_value의 여러 분기와 순서를 원문에서 검토하세요. 정의 앞부분만으로는 답할 수 없습니다.",
+      "symbols": [
+        "DataFrame.__getitem__",
+        "DataFrame.__setitem__",
+        "DataFrame._set_item_frame_value"
+      ],
+      "seed_pattern": "^    def (__getitem__|__setitem__|_set_item_frame_value)\\(",
+      "facts": [
+        {
+          "id": "p1",
+          "question": "__getitem__ 시작에서 호출하는 세 정규화 함수를 실행 순서대로, 함수 이름만 세미콜론으로 구분해 쓰세요.",
+          "accepted_answers": [
+            "check_dict_or_set_indexers;lib.item_from_zerodim;com.apply_if_callable"
+          ],
+          "evidence_groups": [
+            [
+              4063
+            ],
+            [
+              4064
+            ],
+            [
+              4065
+            ]
+          ],
+          "kind": "sequence"
+        },
+        {
+          "id": "p2",
+          "question": "boolean DataFrame와 boolean1D key는 각각 어느 self 메서드로 반환하나요? 두 함수 이름을 소스 분기 순서로 쓰세요.",
+          "accepted_answers": [
+            "self.where;self._getitem_bool_array",
+            "where;_getitem_bool_array"
+          ],
+          "evidence_groups": [
+            [
+              4088
+            ],
+            [
+              4089
+            ],
+            [
+              4092
+            ],
+            [
+              4093
+            ]
+          ],
+          "kind": "sequence"
+        },
+        {
+          "id": "p3",
+          "question": "is_single_key 후반에서 data._get_item_cache를 허용하는 내부 if 조건식 전체는?",
+          "accepted_answers": [
+            "data.shape[1] == 1 and not isinstance(self.columns, MultiIndex)"
+          ],
+          "evidence_groups": [
+            [
+              4124
+            ],
+            [
+              4126
+            ]
+          ],
+          "kind": "expr"
+        },
+        {
+          "id": "p4",
+          "question": "__setitem__에서 key가 list이며 value가 DataFrame일 때 우선 호출되는 메서드 이름은? 앞뒤 분기 근거도 인용하세요.",
+          "accepted_answers": [
+            "self._setitem_array",
+            "_setitem_array"
+          ],
+          "evidence_groups": [
+            [
+              4298
+            ],
+            [
+              4299
+            ],
+            [
+              4300
+            ],
+            [
+              4301
+            ]
+          ],
+          "kind": "literal"
+        },
+        {
+          "id": "p5",
+          "question": "_set_item_frame_value에서 기존 column의 len_cols를 정하는 조건 표현식 전체는?",
+          "accepted_answers": [
+            "1 if is_scalar(cols) or isinstance(cols, tuple) else len(cols)"
+          ],
+          "evidence_groups": [
+            [
+              4427
+            ]
+          ],
+          "kind": "expr"
+        },
+        {
+          "id": "p6",
+          "question": "새 column의 DataFrame value에 대해 오류를 발생시키는 두 column-count 조건식을 순서대로 쓰세요.",
+          "accepted_answers": [
+            "len(value.columns) > 1;len(value.columns) == 0"
+          ],
+          "evidence_groups": [
+            [
+              4458
+            ],
+            [
+              4463
+            ]
+          ],
+          "kind": "expressions"
+        }
+      ],
+      "source_sha256": "9b813159606b62af03bfe76a7089da282d2d6091f308cf2f4d90dd0661a01105",
+      "source_bytes": 447104,
+      "source_lines": 12697,
+      "split": "known-source regression; not new holdout",
+      "seed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected": "bypass"
+    }
+  ],
+  "source_manifest_sha256": "8e1872409a81907a381a686d82c344f293455dac0d92c0fbf096d9d846ad7826",
+  "scope": "Additional pre-locked code exclusion check; same existing rubric/known source. No admitted tasks.",
+  "holdout_manifest_hash": "3ca5ab65a79b01915ad6afb7c9fe60daf9b26771d2fc42eea29c7955ac2bc0aa",
+  "grading_version": 2,
+  "original_manifest_sha256": "a452904fc993c66f6bdcbfd6bb5c71db9a5a4e77d9a0f1a8b108eb464ffcfae1",
+  "exposure_config": {
+    "mcp_servers.token-router.omit_tools_from": [
+      "deferred"
+    ]
+  }
+}

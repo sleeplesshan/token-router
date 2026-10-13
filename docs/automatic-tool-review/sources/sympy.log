@@ -1,0 +1,917 @@
+﻿2026-10-13T01:05:14.7910977Z Current runner version: '2.337.0'
+2026-10-13T01:05:14.7936922Z ##[group]Runner Image Provisioner
+2026-10-13T01:05:14.7937975Z Hosted Compute Agent
+2026-10-13T01:05:14.7938623Z Version: 20261002.596
+2026-10-13T01:05:14.7939338Z Commit: c3d12f3313a95f25162a1503be624f3b0617f8c0
+2026-10-13T01:05:14.7940165Z Build Date: 2026-10-02T22:28:27Z
+2026-10-13T01:05:14.7940901Z Worker ID: {ebef7d14-55ae-414a-82f2-c415f8fb0e52}
+2026-10-13T01:05:14.7942230Z Region: centralus
+2026-10-13T01:05:14.7942855Z Cloud: Azure
+2026-10-13T01:05:14.7943505Z ##[endgroup]
+2026-10-13T01:05:14.7945133Z ##[group]Operating System
+2026-10-13T01:05:14.7945820Z Ubuntu
+2026-10-13T01:05:14.7946529Z 24.04.5
+2026-10-13T01:05:14.7947095Z LTS
+2026-10-13T01:05:14.7947645Z ##[endgroup]
+2026-10-13T01:05:14.7948340Z ##[group]Runner Image
+2026-10-13T01:05:14.7948997Z Image: ubuntu-24.04
+2026-10-13T01:05:14.7949689Z Version: 20261004.327.1
+2026-10-13T01:05:14.7950975Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261004.327/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-13T01:05:14.7953163Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261004.327
+2026-10-13T01:05:14.7954184Z ##[endgroup]
+2026-10-13T01:05:14.7955443Z ##[group]GITHUB_TOKEN Permissions
+2026-10-13T01:05:14.7957791Z Contents: read
+2026-10-13T01:05:14.7958607Z Metadata: read
+2026-10-13T01:05:14.7959222Z ##[endgroup]
+2026-10-13T01:05:14.7961629Z Secret source: None
+2026-10-13T01:05:14.7962778Z Cache mode: write
+2026-10-13T01:05:14.7963812Z Prepare workflow directory
+2026-10-13T01:05:14.8312769Z Prepare all required actions
+2026-10-13T01:05:14.8363555Z Getting action download info
+2026-10-13T01:05:15.1006421Z Download action repository 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-10-13T01:05:15.1882720Z Download action repository 'actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+2026-10-13T01:05:15.3715293Z Complete job name: Tests
+2026-10-13T01:05:15.4517008Z ##[group]Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+2026-10-13T01:05:15.4518140Z with:
+2026-10-13T01:05:15.4518643Z   persist-credentials: false
+2026-10-13T01:05:15.4519215Z   repository: sympy/sympy
+2026-10-13T01:05:15.4523204Z   token: ***
+2026-10-13T01:05:15.4523705Z   ssh-strict: true
+2026-10-13T01:05:15.4524183Z   ssh-user: git
+2026-10-13T01:05:15.4524649Z   clean: true
+2026-10-13T01:05:15.4525141Z   sparse-checkout-cone-mode: true
+2026-10-13T01:05:15.4525710Z   fetch-depth: 1
+2026-10-13T01:05:15.4526189Z   fetch-tags: false
+2026-10-13T01:05:15.4526690Z   show-progress: true
+2026-10-13T01:05:15.4527180Z   lfs: false
+2026-10-13T01:05:15.4527634Z   submodules: false
+2026-10-13T01:05:15.4528137Z   set-safe-directory: true
+2026-10-13T01:05:15.4528692Z   allow-unsafe-pr-checkout: false
+2026-10-13T01:05:15.4529510Z ##[endgroup]
+2026-10-13T01:05:15.5522785Z Syncing repository: sympy/sympy
+2026-10-13T01:05:15.5524685Z ##[group]Getting Git version info
+2026-10-13T01:05:15.5525550Z Working directory is '/home/runner/work/sympy/sympy'
+2026-10-13T01:05:15.5526639Z [command]/usr/bin/git version
+2026-10-13T01:05:15.5594554Z git version 2.55.0
+2026-10-13T01:05:15.5616219Z ##[endgroup]
+2026-10-13T01:05:15.5628684Z Temporarily overriding HOME='/home/runner/work/_temp/e37a1db8-2ab8-457a-99c4-9ab960fc27d8' before making global git config changes
+2026-10-13T01:05:15.5631609Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-13T01:05:15.5635684Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/sympy/sympy
+2026-10-13T01:05:15.5682866Z Deleting the contents of '/home/runner/work/sympy/sympy'
+2026-10-13T01:05:15.5686454Z ##[group]Determining repository object format
+2026-10-13T01:05:15.5688346Z ##[endgroup]
+2026-10-13T01:05:15.5689177Z ##[group]Initializing the repository
+2026-10-13T01:05:15.5692873Z [command]/usr/bin/git init /home/runner/work/sympy/sympy
+2026-10-13T01:05:15.5787899Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-13T01:05:15.5790419Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-13T01:05:15.5792488Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-13T01:05:15.5793883Z hint: call:
+2026-10-13T01:05:15.5794701Z hint:
+2026-10-13T01:05:15.5795619Z hint: 	git config --global init.defaultBranch <name>
+2026-10-13T01:05:15.5796573Z hint:
+2026-10-13T01:05:15.5797571Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-13T01:05:15.5798908Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-13T01:05:15.5799961Z hint:
+2026-10-13T01:05:15.5800731Z hint: 	git branch -m <name>
+2026-10-13T01:05:15.5801832Z hint:
+2026-10-13T01:05:15.5802924Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-13T01:05:15.5804449Z Initialized empty Git repository in /home/runner/work/sympy/sympy/.git/
+2026-10-13T01:05:15.5806240Z [command]/usr/bin/git remote add origin https://github.com/sympy/sympy
+2026-10-13T01:05:15.5853841Z ##[endgroup]
+2026-10-13T01:05:15.5855076Z ##[group]Disabling automatic garbage collection
+2026-10-13T01:05:15.5856886Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-13T01:05:15.5887849Z ##[endgroup]
+2026-10-13T01:05:15.5889371Z ##[group]Setting up auth
+2026-10-13T01:05:15.5890228Z Removing SSH command configuration
+2026-10-13T01:05:15.5894400Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-13T01:05:15.5924609Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-13T01:05:15.6246558Z Removing HTTP extra header
+2026-10-13T01:05:15.6253470Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-13T01:05:15.6284549Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-13T01:05:15.6502963Z Removing includeIf entries pointing to credentials config files
+2026-10-13T01:05:15.6507437Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-13T01:05:15.6538201Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-13T01:05:15.6759285Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-d1835e9f-ca3b-438d-87de-d8dcfc2b6182.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-13T01:05:15.6795156Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/sympy/sympy/.git.path /home/runner/work/_temp/git-credentials-d1835e9f-ca3b-438d-87de-d8dcfc2b6182.config
+2026-10-13T01:05:15.6826198Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/sympy/sympy/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-d1835e9f-ca3b-438d-87de-d8dcfc2b6182.config
+2026-10-13T01:05:15.6861010Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-d1835e9f-ca3b-438d-87de-d8dcfc2b6182.config
+2026-10-13T01:05:15.6892280Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-d1835e9f-ca3b-438d-87de-d8dcfc2b6182.config
+2026-10-13T01:05:15.6920197Z ##[endgroup]
+2026-10-13T01:05:15.6921036Z ##[group]Fetching the repository
+2026-10-13T01:05:15.6927517Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +bdc4de7c6d585fd6028a33d21b1260eca4e40f15:refs/remotes/pull/30741/merge
+2026-10-13T01:05:17.8432389Z From https://github.com/sympy/sympy
+2026-10-13T01:05:17.8434346Z  * [new ref]         bdc4de7c6d585fd6028a33d21b1260eca4e40f15 -> pull/30741/merge
+2026-10-13T01:05:17.8439861Z ##[endgroup]
+2026-10-13T01:05:17.8442118Z ##[group]Determining the checkout info
+2026-10-13T01:05:17.8444484Z ##[endgroup]
+2026-10-13T01:05:17.8446241Z [command]/usr/bin/git sparse-checkout disable
+2026-10-13T01:05:17.8495367Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-13T01:05:17.8523538Z ##[group]Checking out the ref
+2026-10-13T01:05:17.8528290Z [command]/usr/bin/git checkout --progress --force refs/remotes/pull/30741/merge
+2026-10-13T01:05:18.0450545Z Note: switching to 'refs/remotes/pull/30741/merge'.
+2026-10-13T01:05:18.0452679Z 
+2026-10-13T01:05:18.0455449Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-13T01:05:18.0458392Z changes and commit them, and you can discard any commits you make in this
+2026-10-13T01:05:18.0461050Z state without impacting any branches by switching back to a branch.
+2026-10-13T01:05:18.0463018Z 
+2026-10-13T01:05:18.0464322Z If you want to create a new branch to retain commits you create, you may
+2026-10-13T01:05:18.0466807Z do so (now or later) by using -c with the switch command. Example:
+2026-10-13T01:05:18.0468188Z 
+2026-10-13T01:05:18.0468765Z   git switch -c <new-branch-name>
+2026-10-13T01:05:18.0469751Z 
+2026-10-13T01:05:18.0470299Z Or undo this operation with:
+2026-10-13T01:05:18.0471888Z 
+2026-10-13T01:05:18.0472503Z   git switch -
+2026-10-13T01:05:18.0473451Z 
+2026-10-13T01:05:18.0474575Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-13T01:05:18.0475956Z 
+2026-10-13T01:05:18.0477490Z HEAD is now at bdc4de7 Merge 4120faf4bfe6aaa81675718fc5566833ff9f1999 into 01f79a5f52d4ec14da9d028f4fe9a7f9627679c5
+2026-10-13T01:05:18.0482567Z ##[endgroup]
+2026-10-13T01:05:18.0538443Z [command]/usr/bin/git log -1 --format=%H
+2026-10-13T01:05:18.0574023Z bdc4de7c6d585fd6028a33d21b1260eca4e40f15
+2026-10-13T01:05:18.0588228Z ##[group]Removing auth
+2026-10-13T01:05:18.0588809Z Removing SSH command configuration
+2026-10-13T01:05:18.0594905Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-13T01:05:18.0631774Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-13T01:05:18.0874688Z Removing HTTP extra header
+2026-10-13T01:05:18.0879088Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-13T01:05:18.0918010Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-13T01:05:18.1138721Z Removing includeIf entries pointing to credentials config files
+2026-10-13T01:05:18.1142971Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-13T01:05:18.1170152Z includeif.gitdir:/home/runner/work/sympy/sympy/.git.path
+2026-10-13T01:05:18.1170954Z includeif.gitdir:/home/runner/work/sympy/sympy/.git/worktrees/*.path
+2026-10-13T01:05:18.1171914Z includeif.gitdir:/github/workspace/.git.path
+2026-10-13T01:05:18.1172643Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-13T01:05:18.1179036Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/sympy/sympy/.git.path
+2026-10-13T01:05:18.1200631Z /home/runner/work/_temp/git-credentials-d1835e9f-ca3b-438d-87de-d8dcfc2b6182.config
+2026-10-13T01:05:18.1209971Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/sympy/sympy/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-d1835e9f\-ca3b\-438d\-87de\-d8dcfc2b6182\.config
+2026-10-13T01:05:18.1242514Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/sympy/sympy/.git/worktrees/*.path
+2026-10-13T01:05:18.1266028Z /home/runner/work/_temp/git-credentials-d1835e9f-ca3b-438d-87de-d8dcfc2b6182.config
+2026-10-13T01:05:18.1274049Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/sympy/sympy/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-d1835e9f\-ca3b\-438d\-87de\-d8dcfc2b6182\.config
+2026-10-13T01:05:18.1305850Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-13T01:05:18.1326944Z /github/runner_temp/git-credentials-d1835e9f-ca3b-438d-87de-d8dcfc2b6182.config
+2026-10-13T01:05:18.1335814Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-d1835e9f\-ca3b\-438d\-87de\-d8dcfc2b6182\.config
+2026-10-13T01:05:18.1368678Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-13T01:05:18.1390030Z /github/runner_temp/git-credentials-d1835e9f-ca3b-438d-87de-d8dcfc2b6182.config
+2026-10-13T01:05:18.1437197Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-d1835e9f\-ca3b\-438d\-87de\-d8dcfc2b6182\.config
+2026-10-13T01:05:18.1485846Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-13T01:05:18.1702616Z Removing credentials config '/home/runner/work/_temp/git-credentials-d1835e9f-ca3b-438d-87de-d8dcfc2b6182.config'
+2026-10-13T01:05:18.1711937Z ##[endgroup]
+2026-10-13T01:05:18.2044191Z ##[group]Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
+2026-10-13T01:05:18.2044687Z with:
+2026-10-13T01:05:18.2044930Z   python-version: 3.14
+2026-10-13T01:05:18.2045204Z   check-latest: false
+2026-10-13T01:05:18.2047773Z   token: ***
+2026-10-13T01:05:18.2048040Z   update-environment: true
+2026-10-13T01:05:18.2048333Z   allow-prereleases: false
+2026-10-13T01:05:18.2048612Z   freethreaded: false
+2026-10-13T01:05:18.2048870Z ##[endgroup]
+2026-10-13T01:05:18.3252550Z ##[group]Installed versions
+2026-10-13T01:05:18.3332941Z Successfully set up CPython (3.14.8)
+2026-10-13T01:05:18.3334037Z ##[endgroup]
+2026-10-13T01:05:18.3471528Z ##[group]Run python -m pip install --upgrade pip
+2026-10-13T01:05:18.3472092Z [36;1mpython -m pip install --upgrade pip[0m
+2026-10-13T01:05:18.3730770Z shell: /usr/bin/bash -e {0}
+2026-10-13T01:05:18.3731419Z env:
+2026-10-13T01:05:18.3731779Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.8/x64
+2026-10-13T01:05:18.3732310Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.8/x64/lib/pkgconfig
+2026-10-13T01:05:18.3732840Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+2026-10-13T01:05:18.3733303Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+2026-10-13T01:05:18.3733745Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+2026-10-13T01:05:18.3734193Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.8/x64/lib
+2026-10-13T01:05:18.3734578Z ##[endgroup]
+2026-10-13T01:05:18.9953697Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.14.8/x64/lib/python3.14/site-packages (26.2.1)
+2026-10-13T01:05:19.2097393Z ##[group]Run pip install -r requirements-dev.txt
+2026-10-13T01:05:19.2097810Z [36;1mpip install -r requirements-dev.txt[0m
+2026-10-13T01:05:19.2161943Z shell: /usr/bin/bash -e {0}
+2026-10-13T01:05:19.2162219Z env:
+2026-10-13T01:05:19.2162492Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.8/x64
+2026-10-13T01:05:19.2162937Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.8/x64/lib/pkgconfig
+2026-10-13T01:05:19.2163384Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+2026-10-13T01:05:19.2163768Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+2026-10-13T01:05:19.2164406Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+2026-10-13T01:05:19.2164800Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.8/x64/lib
+2026-10-13T01:05:19.2165118Z ##[endgroup]
+2026-10-13T01:05:19.6642661Z Collecting mpmath (from -r requirements-dev.txt (line 1))
+2026-10-13T01:05:19.7588158Z   Downloading mpmath-1.4.1-py3-none-any.whl.metadata (9.1 kB)
+2026-10-13T01:05:19.9249647Z Collecting mypy (from -r requirements-dev.txt (line 2))
+2026-10-13T01:05:19.9419913Z   Downloading mypy-2.4.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2026-10-13T01:05:19.9685865Z Collecting sphinx-lint (from -r requirements-dev.txt (line 3))
+2026-10-13T01:05:19.9862049Z   Downloading sphinx_lint-1.0.2-py3-none-any.whl.metadata (5.6 kB)
+2026-10-13T01:05:20.0287466Z Collecting pytest (from -r requirements-dev.txt (line 4))
+2026-10-13T01:05:20.0451524Z   Downloading pytest-9.1.1-py3-none-any.whl.metadata (7.6 kB)
+2026-10-13T01:05:20.0748789Z Collecting pytest-xdist (from -r requirements-dev.txt (line 5))
+2026-10-13T01:05:20.0908515Z   Downloading pytest_xdist-3.8.0-py3-none-any.whl.metadata (3.0 kB)
+2026-10-13T01:05:20.1178326Z Collecting pytest-timeout (from -r requirements-dev.txt (line 6))
+2026-10-13T01:05:20.1370443Z   Downloading pytest_timeout-2.4.0-py3-none-any.whl.metadata (20 kB)
+2026-10-13T01:05:20.1641389Z Collecting pytest-split (from -r requirements-dev.txt (line 7))
+2026-10-13T01:05:20.1799477Z   Downloading pytest_split-0.11.0-py3-none-any.whl.metadata (9.5 kB)
+2026-10-13T01:05:20.2120589Z Collecting pytest-doctestplus (from -r requirements-dev.txt (line 8))
+2026-10-13T01:05:20.2284642Z   Downloading pytest_doctestplus-1.7.1-py3-none-any.whl.metadata (17 kB)
+2026-10-13T01:05:20.2559071Z Collecting pytest-run-parallel (from -r requirements-dev.txt (line 9))
+2026-10-13T01:05:20.2750716Z   Downloading pytest_run_parallel-0.10.0-py3-none-any.whl.metadata (17 kB)
+2026-10-13T01:05:20.6984056Z Collecting hypothesis (from -r requirements-dev.txt (line 10))
+2026-10-13T01:05:20.7186208Z   Downloading hypothesis-6.169.0-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.6 kB)
+2026-10-13T01:05:21.1016172Z Collecting ruff (from -r requirements-dev.txt (line 11))
+2026-10-13T01:05:21.1194772Z   Downloading ruff-0.17.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
+2026-10-13T01:05:21.1682796Z Collecting slotscheck (from -r requirements-dev.txt (line 12))
+2026-10-13T01:05:21.1874264Z   Downloading slotscheck-0.21.0-py3-none-any.whl.metadata (5.9 kB)
+2026-10-13T01:05:21.2140336Z Collecting typing_extensions>=4.6.0 (from mypy->-r requirements-dev.txt (line 2))
+2026-10-13T01:05:21.2305935Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-10-13T01:05:21.2511473Z Collecting mypy_extensions>=1.0.0 (from mypy->-r requirements-dev.txt (line 2))
+2026-10-13T01:05:21.2680018Z   Downloading mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
+2026-10-13T01:05:21.2910876Z Collecting pathspec>=1.0.0 (from mypy->-r requirements-dev.txt (line 2))
+2026-10-13T01:05:21.3076128Z   Downloading pathspec-1.1.1-py3-none-any.whl.metadata (14 kB)
+2026-10-13T01:05:21.4586977Z Collecting librt>=0.16.0 (from mypy->-r requirements-dev.txt (line 2))
+2026-10-13T01:05:21.4756531Z   Downloading librt-0.16.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (1.3 kB)
+2026-10-13T01:05:21.5382453Z Collecting ast-serialize<1.0.0,>=0.11.2 (from mypy->-r requirements-dev.txt (line 2))
+2026-10-13T01:05:21.5558317Z   Downloading ast_serialize-0.13.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (1.4 kB)
+2026-10-13T01:05:21.5789169Z Collecting polib (from sphinx-lint->-r requirements-dev.txt (line 3))
+2026-10-13T01:05:21.6020280Z   Downloading polib-1.2.0-py2.py3-none-any.whl.metadata (15 kB)
+2026-10-13T01:05:22.0485471Z Collecting regex (from sphinx-lint->-r requirements-dev.txt (line 3))
+2026-10-13T01:05:22.0652967Z   Downloading regex-2026.9.29-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (40 kB)
+2026-10-13T01:05:22.0936666Z Collecting iniconfig>=1.0.1 (from pytest->-r requirements-dev.txt (line 4))
+2026-10-13T01:05:22.1101636Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+2026-10-13T01:05:22.1341192Z Collecting packaging>=22 (from pytest->-r requirements-dev.txt (line 4))
+2026-10-13T01:05:22.1505966Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+2026-10-13T01:05:22.1714284Z Collecting pluggy<2,>=1.5 (from pytest->-r requirements-dev.txt (line 4))
+2026-10-13T01:05:22.1872282Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+2026-10-13T01:05:22.2134845Z Collecting pygments>=2.7.2 (from pytest->-r requirements-dev.txt (line 4))
+2026-10-13T01:05:22.2292158Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+2026-10-13T01:05:22.2505839Z Collecting execnet>=2.1 (from pytest-xdist->-r requirements-dev.txt (line 5))
+2026-10-13T01:05:22.2731671Z   Downloading execnet-2.1.2-py3-none-any.whl.metadata (2.9 kB)
+2026-10-13T01:05:22.3060266Z Collecting sortedcontainers<3.0.0,>=2.1.0 (from hypothesis->-r requirements-dev.txt (line 10))
+2026-10-13T01:05:22.3219230Z   Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl.metadata (10 kB)
+2026-10-13T01:05:22.3491424Z Downloading mpmath-1.4.1-py3-none-any.whl (567 kB)
+2026-10-13T01:05:22.4095313Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 567.8/567.8 kB 10.8 MB/s  0:00:00
+2026-10-13T01:05:22.4266509Z Downloading mypy-2.4.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (15.4 MB)
+2026-10-13T01:05:22.5724865Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 15.4/15.4 MB 112.0 MB/s  0:00:00
+2026-10-13T01:05:22.5903810Z Downloading ast_serialize-0.13.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.3 MB)
+2026-10-13T01:05:22.6300264Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 28.1 MB/s  0:00:00
+2026-10-13T01:05:22.6546909Z Downloading sphinx_lint-1.0.2-py3-none-any.whl (20 kB)
+2026-10-13T01:05:22.6746011Z Downloading pytest-9.1.1-py3-none-any.whl (386 kB)
+2026-10-13T01:05:22.6973462Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+2026-10-13T01:05:22.7163632Z Downloading pytest_xdist-3.8.0-py3-none-any.whl (46 kB)
+2026-10-13T01:05:22.7340871Z Downloading pytest_timeout-2.4.0-py3-none-any.whl (14 kB)
+2026-10-13T01:05:22.7519389Z Downloading pytest_split-0.11.0-py3-none-any.whl (11 kB)
+2026-10-13T01:05:22.7772811Z Downloading pytest_doctestplus-1.7.1-py3-none-any.whl (25 kB)
+2026-10-13T01:05:22.8007901Z Downloading pytest_run_parallel-0.10.0-py3-none-any.whl (19 kB)
+2026-10-13T01:05:22.8260843Z Downloading hypothesis-6.169.0-cp314-cp314-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.2 MB)
+2026-10-13T01:05:22.8540233Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 38.5 MB/s  0:00:00
+2026-10-13T01:05:22.8770932Z Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+2026-10-13T01:05:22.8976763Z Downloading ruff-0.17.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.4 MB)
+2026-10-13T01:05:22.9989800Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.4/10.4 MB 103.3 MB/s  0:00:00
+2026-10-13T01:05:23.0178791Z Downloading slotscheck-0.21.0-py3-none-any.whl (18 kB)
+2026-10-13T01:05:23.0364136Z Downloading execnet-2.1.2-py3-none-any.whl (40 kB)
+2026-10-13T01:05:23.0552777Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+2026-10-13T01:05:23.0757889Z Downloading librt-0.16.0-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (523 kB)
+2026-10-13T01:05:23.1068470Z Downloading mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
+2026-10-13T01:05:23.1257038Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+2026-10-13T01:05:23.1441137Z Downloading pathspec-1.1.1-py3-none-any.whl (57 kB)
+2026-10-13T01:05:23.1619802Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+2026-10-13T01:05:23.1696454Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 189.9 MB/s  0:00:00
+2026-10-13T01:05:23.1854086Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-10-13T01:05:23.2078184Z Downloading polib-1.2.0-py2.py3-none-any.whl (20 kB)
+2026-10-13T01:05:23.2257521Z Downloading regex-2026.9.29-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+2026-10-13T01:05:23.2318351Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.2/807.2 kB 143.6 MB/s  0:00:00
+2026-10-13T01:05:23.3788725Z Installing collected packages: sortedcontainers, polib, typing_extensions, slotscheck, ruff, regex, pygments, pluggy, pathspec, packaging, mypy_extensions, mpmath, librt, iniconfig, hypothesis, execnet, ast-serialize, sphinx-lint, pytest, mypy, pytest-xdist, pytest-timeout, pytest-split, pytest-run-parallel, pytest-doctestplus
+2026-10-13T01:05:28.1114034Z 
+2026-10-13T01:05:28.1144530Z Successfully installed ast-serialize-0.13.0 execnet-2.1.2 hypothesis-6.169.0 iniconfig-2.3.1 librt-0.16.0 mpmath-1.4.1 mypy-2.4.0 mypy_extensions-1.1.0 packaging-26.3 pathspec-1.1.1 pluggy-1.6.0 polib-1.2.0 pygments-2.21.0 pytest-9.1.1 pytest-doctestplus-1.7.1 pytest-run-parallel-0.10.0 pytest-split-0.11.0 pytest-timeout-2.4.0 pytest-xdist-3.8.0 regex-2026.9.29 ruff-0.17.0 slotscheck-0.21.0 sortedcontainers-2.4.0 sphinx-lint-1.0.2 typing_extensions-4.16.0
+2026-10-13T01:05:28.2440588Z ##[group]Run pytest -n auto --timeout 10 --durations=50 --durations-min=5
+2026-10-13T01:05:28.2441490Z [36;1mpytest -n auto --timeout 10 --durations=50 --durations-min=5[0m
+2026-10-13T01:05:28.2503180Z shell: /usr/bin/bash -e {0}
+2026-10-13T01:05:28.2503425Z env:
+2026-10-13T01:05:28.2503681Z   pythonLocation: /opt/hostedtoolcache/Python/3.14.8/x64
+2026-10-13T01:05:28.2504114Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.14.8/x64/lib/pkgconfig
+2026-10-13T01:05:28.2504536Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+2026-10-13T01:05:28.2504915Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+2026-10-13T01:05:28.2505278Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.14.8/x64
+2026-10-13T01:05:28.2505644Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.14.8/x64/lib
+2026-10-13T01:05:28.2505960Z ##[endgroup]
+2026-10-13T01:08:55.6052515Z ============================= test session starts ==============================
+2026-10-13T01:08:55.6107542Z platform linux -- Python 3.14.8, pytest-9.1.1, pluggy-1.6.0
+2026-10-13T01:08:55.6123110Z architecture: 64-bit
+2026-10-13T01:08:55.6151739Z cache:        yes
+2026-10-13T01:08:55.6181773Z ground types: python 
+2026-10-13T01:08:55.6241559Z 
+2026-10-13T01:08:55.6271806Z rootdir: /home/runner/work/sympy/sympy
+2026-10-13T01:08:55.6301752Z configfile: pyproject.toml
+2026-10-13T01:08:55.6331940Z testpaths: sympy, doc/src
+2026-10-13T01:08:55.6362197Z plugins: timeout-2.4.0, split-0.11.0, hypothesis-6.169.0, doctestplus-1.7.1, run-parallel-0.10.0, xdist-3.8.0
+2026-10-13T01:08:55.6391759Z timeout: 10.0s
+2026-10-13T01:08:55.6392159Z timeout method: signal
+2026-10-13T01:08:55.6392573Z timeout func_only: False
+2026-10-13T01:08:55.6392981Z created: 4/4 workers
+2026-10-13T01:08:55.6393358Z 4 workers [14367 items]
+2026-10-13T01:08:55.6393607Z 
+2026-10-13T01:08:55.7292218Z ..s..........................................ss..................s.s.s.. [  0%]
+2026-10-13T01:08:55.8312432Z ....s.s.......................................ss........................ [  1%]
+2026-10-13T01:08:55.9352165Z ........................................................................ [  1%]
+2026-10-13T01:08:56.0612118Z .................................................s...................... [  2%]
+2026-10-13T01:08:56.2222154Z ........................s...xsss....................s.......s...sss..... [  2%]
+2026-10-13T01:08:56.3772353Z ..............ss.s..............................................s....... [  3%]
+2026-10-13T01:08:56.5372299Z ..s.............................ss........s..................s.......... [  3%]
+2026-10-13T01:08:56.6831910Z ....x...............s......s....s......s......................ss..s..... [  4%]
+2026-10-13T01:08:56.8437789Z .........ss........s......................s.....s................s....s. [  4%]
+2026-10-13T01:08:56.9872113Z ..x......ss.............s.........s..................................... [  5%]
+2026-10-13T01:08:57.1841941Z .......................................s................................ [  5%]
+2026-10-13T01:08:57.3162160Z ................................................s...s.....s............. [  6%]
+2026-10-13T01:08:58.1852244Z .......s....................x..........x......x...............s......... [  6%]
+2026-10-13T01:08:58.6182456Z ...s....s.s.......s.....................................s............... [  7%]
+2026-10-13T01:08:58.8299099Z ...s..................s.....s...................s...s...s.........s..... [  7%]
+2026-10-13T01:08:59.0352321Z ........x....s.......................................................... [  8%]
+2026-10-13T01:09:00.1525881Z ...................................................x..........x......x.x [  8%]
+2026-10-13T01:09:04.7642339Z ....x..............................................................ss..s [  9%]
+2026-10-13T01:09:05.2242608Z ..ss..s.s..ss..ss.s...ss.ss..s.sx.....x........................x........ [  9%]
+2026-10-13T01:09:06.0818949Z .x................................................................x..... [ 10%]
+2026-10-13T01:09:06.8552609Z ............x..................................x..........x..x.......... [ 10%]
+2026-10-13T01:09:08.5819280Z ..................................................sssssssssssss.ssssssss [ 11%]
+2026-10-13T01:09:10.7595217Z ss.s..........x.............x...............................x........... [ 11%]
+2026-10-13T01:09:14.3872257Z ........................................................................ [ 12%]
+2026-10-13T01:09:16.1532311Z ......................................................................x. [ 12%]
+2026-10-13T01:09:18.1942300Z ..................................................x.x.....x............. [ 13%]
+2026-10-13T01:09:20.2912339Z ..........................x.......................x..................... [ 13%]
+2026-10-13T01:09:21.8242364Z ..............x......................................................... [ 14%]
+2026-10-13T01:09:24.6912327Z ....x..............x..x................................................. [ 14%]
+2026-10-13T01:09:27.9202332Z .................................................................x...... [ 15%]
+2026-10-13T01:09:34.6232345Z .....x.................x..................x.x........................... [ 15%]
+2026-10-13T01:09:35.7612567Z ............................x......................x..............x..... [ 16%]
+2026-10-13T01:09:36.9332351Z .......x.x.............................................................. [ 16%]
+2026-10-13T01:09:38.4882547Z ....................................................ss.......s.......... [ 17%]
+2026-10-13T01:09:40.8172500Z .s....................................................................s. [ 17%]
+2026-10-13T01:09:41.7112449Z .................................x...................................... [ 18%]
+2026-10-13T01:09:44.1822268Z .............................................X...X......s...s........... [ 18%]
+2026-10-13T01:09:46.7252319Z .........................xs......x...................................... [ 19%]
+2026-10-13T01:09:51.4142256Z ........................................................................ [ 19%]
+2026-10-13T01:10:00.3092220Z ........................................................................ [ 20%]
+2026-10-13T01:10:03.7092100Z ........................................................................ [ 20%]
+2026-10-13T01:10:06.7144327Z ............................................................x........... [ 21%]
+2026-10-13T01:10:11.2036391Z .......x..................................s...............x.......ss.s.. [ 21%]
+2026-10-13T01:10:15.7274522Z ...........x..............x...xxx.......s............................... [ 22%]
+2026-10-13T01:10:17.5422363Z ....X....................................s.............................. [ 22%]
+2026-10-13T01:10:23.1362458Z .....x.x.......x...x....................x...............x...........x.x. [ 23%]
+2026-10-13T01:10:26.4082371Z .........s..............xx.sx........................................... [ 23%]
+2026-10-13T01:10:32.9592304Z ..........................x....x.x.....x................................ [ 24%]
+2026-10-13T01:10:37.5482281Z ...........x.........x.....................................x............ [ 24%]
+2026-10-13T01:10:38.3612285Z .................................s...................................... [ 25%]
+2026-10-13T01:10:43.9984103Z ....x.....................................................ss.s.......... [ 25%]
+2026-10-13T01:10:51.9772266Z ......x..............s.................................................. [ 26%]
+2026-10-13T01:10:53.1442383Z ........................................................................ [ 26%]
+2026-10-13T01:10:55.1742493Z ........................................................................ [ 27%]
+2026-10-13T01:11:03.6552517Z ........................................................................ [ 27%]
+2026-10-13T01:11:11.7016434Z ................................s.ssss..s.x............................. [ 28%]
+2026-10-13T01:11:18.9252330Z ...................................................................x.... [ 28%]
+2026-10-13T01:11:25.1368102Z ........................................................................ [ 29%]
+2026-10-13T01:11:34.4732912Z ........................................................................ [ 29%]
+2026-10-13T01:11:43.7182484Z ........................................................................ [ 30%]
+2026-10-13T01:11:44.0612386Z ...s..s..sss............................................................ [ 30%]
+2026-10-13T01:11:44.2522513Z ...........................sss..............s................s........s. [ 31%]
+2026-10-13T01:11:46.2672317Z ss....s................................................................. [ 31%]
+2026-10-13T01:11:57.9732196Z .......................................................sssss.ss.......ss [ 32%]
+2026-10-13T01:12:00.5065063Z ssss.ssssssssssssssssssssssssssss....................................... [ 32%]
+2026-10-13T01:12:02.3722544Z ........................................................................ [ 33%]
+2026-10-13T01:12:05.0182307Z .......................................................................s [ 33%]
+2026-10-13T01:12:05.4392795Z sssssssssssssssssssssssssssssssssssssss................................. [ 34%]
+2026-10-13T01:12:06.2332271Z ........................................................................ [ 34%]
+2026-10-13T01:12:06.5392561Z ....................ss...............................ss................. [ 35%]
+2026-10-13T01:12:06.8967830Z ...........ss............................ss............................. [ 35%]
+2026-10-13T01:12:07.3972355Z ........ss..............................ss.............................. [ 36%]
+2026-10-13T01:12:07.9842213Z ss.s.................................................................... [ 36%]
+2026-10-13T01:12:13.2802380Z ........................................................................ [ 37%]
+2026-10-13T01:12:14.3762377Z ........sss...s.ss...s.xx.......x....................................... [ 37%]
+2026-10-13T01:12:23.1166729Z ........................................................................ [ 38%]
+2026-10-13T01:12:27.6092583Z ........................................................................ [ 38%]
+2026-10-13T01:12:30.1487775Z ...x......................................x............................. [ 39%]
+2026-10-13T01:12:37.6212316Z .xs.....x.............................x................................. [ 39%]
+2026-10-13T01:12:39.4372264Z .................................x...................................... [ 40%]
+2026-10-13T01:12:40.4172460Z ................................................................x....... [ 40%]
+2026-10-13T01:12:42.2272290Z ........................................................................ [ 41%]
+2026-10-13T01:12:42.5082283Z ........................................................................ [ 41%]
+2026-10-13T01:12:44.4562463Z ........................................................................ [ 42%]
+2026-10-13T01:12:46.1579440Z ........................................................................ [ 42%]
+2026-10-13T01:12:46.3942383Z ........................................................................ [ 43%]
+2026-10-13T01:12:46.6222576Z ........................................................................ [ 43%]
+2026-10-13T01:12:46.8808902Z .......................ss.ssssssssssssssssss............................ [ 44%]
+2026-10-13T01:12:47.3272285Z .............F.........................................x................ [ 44%]
+2026-10-13T01:12:47.5482304Z ........................................................................ [ 45%]
+2026-10-13T01:12:48.1612564Z ........................................................................ [ 45%]
+2026-10-13T01:12:48.6112324Z ........................................................................ [ 46%]
+2026-10-13T01:12:48.9460719Z ........................................................................ [ 46%]
+2026-10-13T01:12:49.1522537Z ........s..s..s..s...s..s...s..s..s..s..s..s..s..s..s..s..s..s..s..s...s [ 47%]
+2026-10-13T01:12:49.6852415Z ..s..s....s.....s..s..s..s..s..s..s..s..s..s..s..s..s..s..s...s..s..s..s [ 47%]
+2026-10-13T01:12:50.5462835Z ..s..s..s..s..s..s..s..s..s..s...s..s..s..s..s..s..s..s..s..s..s........ [ 48%]
+2026-10-13T01:12:56.3472343Z ........................................................................ [ 48%]
+2026-10-13T01:13:03.1957391Z ........................................................................ [ 49%]
+2026-10-13T01:13:03.6533341Z ........................................................................ [ 49%]
+2026-10-13T01:13:03.9196165Z ........................................................................ [ 50%]
+2026-10-13T01:13:04.2212300Z ........................................................................ [ 50%]
+2026-10-13T01:13:04.5432453Z ........................................................................ [ 51%]
+2026-10-13T01:13:05.0171008Z ........................................................................ [ 51%]
+2026-10-13T01:13:05.2052253Z ........................................................................ [ 52%]
+2026-10-13T01:13:05.6102465Z ........................................................................ [ 52%]
+2026-10-13T01:13:07.5892289Z ..........................................x............................. [ 53%]
+2026-10-13T01:13:09.6592421Z ...........x............................................................ [ 53%]
+2026-10-13T01:13:13.1241791Z ........................................................................ [ 54%]
+2026-10-13T01:13:17.5132543Z ...............................................................sssssssss [ 54%]
+2026-10-13T01:13:17.7772514Z sssssssssssssss.................ssssssssssssssssssssssssssss.ssssssssss. [ 55%]
+2026-10-13T01:13:18.9896118Z ssssssssssss.ssssss.sssss.ssss.s.ssssssss.ss.ssssss..sss................ [ 55%]
+2026-10-13T01:13:25.0496523Z ........................................................................ [ 56%]
+2026-10-13T01:13:28.8242367Z ..F..................................................................... [ 56%]
+2026-10-13T01:13:29.0480447Z ........................................................ssssssssssssssss [ 57%]
+2026-10-13T01:13:29.3052504Z .ssssssssssssss......................................................... [ 57%]
+2026-10-13T01:13:29.8652295Z ...........................................x.................x..s....... [ 58%]
+2026-10-13T01:13:30.5422416Z .............................................................F.......... [ 58%]
+2026-10-13T01:13:30.9838637Z ...F.F...................................................FF............. [ 59%]
+2026-10-13T01:13:31.1902392Z ....F.......................x....sssssssssss.sss.s.ss..s................ [ 59%]
+2026-10-13T01:13:31.3372376Z ........................................................................ [ 60%]
+2026-10-13T01:13:31.4798282Z .....................................................x.................. [ 60%]
+2026-10-13T01:13:32.0167060Z .....................................................................x.. [ 61%]
+2026-10-13T01:13:32.5402345Z ........................................................................ [ 61%]
+2026-10-13T01:13:32.9482209Z ........................................................x............... [ 62%]
+2026-10-13T01:13:33.2542325Z ..................................................x..................... [ 62%]
+2026-10-13T01:13:35.2992669Z ........................................................................ [ 63%]
+2026-10-13T01:13:35.5912569Z ..................ssssssssssssssss...................................... [ 63%]
+2026-10-13T01:13:35.8760291Z ........................................................................ [ 64%]
+2026-10-13T01:13:36.2730669Z .................................................................x...... [ 64%]
+2026-10-13T01:13:36.5542567Z ...................sss.ssss.s.sss.ssss.sss..s........s.................. [ 65%]
+2026-10-13T01:13:36.9178946Z .............x.....................................................s.... [ 65%]
+2026-10-13T01:13:37.3102362Z .....................x.................................................. [ 66%]
+2026-10-13T01:13:37.7492354Z ........................................................................ [ 66%]
+2026-10-13T01:13:39.2142430Z ........................................................................ [ 67%]
+2026-10-13T01:13:39.5642330Z ....................................................s.ssss..s.ssssssssss [ 67%]
+2026-10-13T01:13:42.7552547Z ssssssssssssssssssssssssssssssss.ssss.ssssssssx......................... [ 68%]
+2026-10-13T01:13:47.1142436Z ............................................F........................... [ 68%]
+2026-10-13T01:13:50.0612607Z ........................................................................ [ 69%]
+2026-10-13T01:13:51.0159699Z ......x.........................x....................................... [ 69%]
+2026-10-13T01:13:52.7662400Z ....................................................x................... [ 70%]
+2026-10-13T01:13:54.9898745Z ..F..................................................................... [ 70%]
+2026-10-13T01:13:58.3752407Z ........................................................................ [ 71%]
+2026-10-13T01:14:01.1007467Z ..........................................................x............. [ 71%]
+2026-10-13T01:14:07.2632487Z .....x.................................................................. [ 72%]
+2026-10-13T01:14:09.2962365Z ................x....................................................... [ 72%]
+2026-10-13T01:14:09.9782460Z ...........................................................sss.......... [ 73%]
+2026-10-13T01:14:12.4995459Z ...................ssssssssss....x..................x................... [ 73%]
+2026-10-13T01:14:14.9512325Z .......x.........................x..xxx..............................x.. [ 74%]
+2026-10-13T01:14:16.4206808Z .................x.x.x.................................................. [ 74%]
+2026-10-13T01:14:24.2632329Z ......................................x.....................x........... [ 75%]
+2026-10-13T01:14:30.3562359Z x....................................................................xx. [ 75%]
+2026-10-13T01:14:45.7739857Z .........................................x.............................. [ 76%]
+2026-10-13T01:14:47.1657208Z ........x............................................................... [ 76%]
+2026-10-13T01:14:49.1678436Z ......x................................................x................ [ 77%]
+2026-10-13T01:14:53.1775642Z ..........x......x................................................xxx... [ 77%]
+2026-10-13T01:14:56.8012499Z ..............................x......................................... [ 78%]
+2026-10-13T01:15:04.7662497Z ........................................................................ [ 78%]
+2026-10-13T01:15:12.7302385Z ..............x....................................x.................... [ 79%]
+2026-10-13T01:15:19.4882266Z ...............................................xx....................... [ 79%]
+2026-10-13T01:15:41.6802354Z x...........x............................................x...x.......... [ 80%]
+2026-10-13T01:15:43.3782526Z ......sss.ssss.......................................................... [ 80%]
+2026-10-13T01:15:47.7872518Z ...............x........................................................ [ 81%]
+2026-10-13T01:15:54.0596964Z .......................................................x................ [ 81%]
+2026-10-13T01:15:59.9946109Z .....................................sss..............ss................ [ 82%]
+2026-10-13T01:16:07.2782280Z ............x...................................................s....... [ 82%]
+2026-10-13T01:16:07.9032353Z .........sss.ss....................................x.................... [ 83%]
+2026-10-13T01:16:10.2459155Z ...........................................ssss...s.......x............. [ 83%]
+2026-10-13T01:16:26.9382480Z ................s....................................................... [ 84%]
+2026-10-13T01:16:33.0182340Z .............x...................x...................................... [ 84%]
+2026-10-13T01:16:36.3346572Z ..............x...............ss.....................x...x.......x...... [ 85%]
+2026-10-13T01:16:42.5542868Z ..................................................................x...x. [ 85%]
+2026-10-13T01:16:52.5462493Z ..............x...x..........................................x.......... [ 86%]
+2026-10-13T01:16:55.4512382Z ...x...x....................x.........................................ss [ 86%]
+2026-10-13T01:17:07.5812516Z ssssss.ssss.x...........................s...................x.x......... [ 87%]
+2026-10-13T01:17:17.2442495Z .................x.............xx.x............................x........ [ 87%]
+2026-10-13T01:17:22.7612337Z .......................x...x........................x................... [ 88%]
+2026-10-13T01:17:31.4432311Z ...............x........................................................ [ 88%]
+2026-10-13T01:17:43.3696683Z ......s................s..............x................................. [ 89%]
+2026-10-13T01:17:48.7512268Z .........s...............................x.............................. [ 89%]
+2026-10-13T01:17:54.4329050Z .x..x...x.........................................x.sss..X...........ss. [ 90%]
+2026-10-13T01:17:57.3247713Z ...............................................s.......................s [ 90%]
+2026-10-13T01:17:57.7192355Z s....................................................................... [ 91%]
+2026-10-13T01:17:59.2238367Z ........................................................................ [ 91%]
+2026-10-13T01:17:59.6612332Z ........................s............................................... [ 92%]
+2026-10-13T01:18:00.0892314Z ..................................x........x...ss.s..................... [ 92%]
+2026-10-13T01:18:00.4712359Z ..........................x.............x...........................x... [ 93%]
+2026-10-13T01:18:01.0432339Z .......x.................................ssss...............ss.......... [ 93%]
+2026-10-13T01:18:01.8692383Z ....................s.sssssssss.ssssssssssssssss........................ [ 94%]
+2026-10-13T01:18:02.4215413Z ....ss...s...sss.......ssssss.ssssssss.ssssssssssss...s.......s.sss.s... [ 94%]
+2026-10-13T01:18:05.5682380Z ......................................x.................x.x.........x... [ 95%]
+2026-10-13T01:18:07.0322317Z .......xx.................................x......x........x......xx..... [ 95%]
+2026-10-13T01:18:08.0782352Z .x......x............x.x................................................ [ 96%]
+2026-10-13T01:18:09.8122197Z .......x.......................x.........x.xx............x......xx.xxxxx [ 96%]
+2026-10-13T01:18:10.5502408Z x.................x...x......x...............xxx.......x..............x. [ 97%]
+2026-10-13T01:18:13.2012256Z ..xx.xx.....xx....x.x.s.xx..x...x.............x.xx..x...x.xxx.Fxx....x.x [ 97%]
+2026-10-13T01:18:20.4942377Z ...xxx......xx.xxxx.....x..x...x.x.xx..xxxxxxxx..x.....x..xx...x.......x [ 98%]
+2026-10-13T01:18:29.8866460Z .....x.x..x.xx.......x..x...xx...xxxxx......xxx..xxxxxxxx.....xxxx...... [ 98%]
+2026-10-13T01:18:38.3722398Z xx..x.....x..xxxx..x.....xx..x......xs..xx.....xx..xxx.................x [ 99%]
+2026-10-13T01:18:43.3864857Z ....xx.......x....................................................x..... [ 99%]
+2026-10-13T01:18:49.2043752Z ....x..................................                                  [100%]
+2026-10-13T01:18:49.2046592Z =================================== FAILURES ===================================
+2026-10-13T01:18:49.2048100Z ________________________________ test_charpoly _________________________________
+2026-10-13T01:18:49.2048737Z [gw3] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python
+2026-10-13T01:18:49.2049116Z 
+2026-10-13T01:18:49.2049239Z     def test_charpoly():
+2026-10-13T01:18:49.2049531Z         x, y = Symbol('x'), Symbol('y')
+2026-10-13T01:18:49.2049843Z         z = Symbol('z')
+2026-10-13T01:18:49.2050085Z     
+2026-10-13T01:18:49.2050315Z         from sympy.abc import a,b,c
+2026-10-13T01:18:49.2050607Z     
+2026-10-13T01:18:49.2050864Z         m = Matrix(3, 3, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+2026-10-13T01:18:49.2051579Z     
+2026-10-13T01:18:49.2052159Z         assert eye_Determinant(3).charpoly(x).as_expr() == _0**3 - 3*_0**2 + 3*_0 - 1
+2026-10-13T01:18:49.2052953Z         assert eye_Determinant(3).charpoly(y).as_expr() == _0**3 - 3*_0**2 + 3*_0 - 1
+2026-10-13T01:18:49.2053403Z         assert m.charpoly().as_expr() == _0**3 - 15*_0**2 - 18*_0
+2026-10-13T01:18:49.2053832Z         raises(NonSquareMatrixError, lambda: Matrix([[1], [2]]).charpoly())
+2026-10-13T01:18:49.2054253Z         n = Matrix(4, 4, [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+2026-10-13T01:18:49.2054596Z         assert n.charpoly().as_expr() == _0**4
+2026-10-13T01:18:49.2054858Z     
+2026-10-13T01:18:49.2055096Z         n = Matrix(4, 4, [45, 0, 0, 0, 0, 23, 0, 0, 0, 0, 87, 0, 0, 0, 0, 12])
+2026-10-13T01:18:49.2055546Z         assert n.charpoly().as_expr() == _0**4 - 167*_0**3 + 8811*_0**2 - 173457*_0 + 1080540
+2026-10-13T01:18:49.2055929Z     
+2026-10-13T01:18:49.2056130Z         n = Matrix(3, 3, [x, 0, 0, a, y, 0, b, c, z])
+2026-10-13T01:18:49.2056545Z >       assert n.charpoly().as_expr() == _0**3 - (x+y+z)*_0**2 + _0*(x*y+y*z+x*z) - x*y*z
+2026-10-13T01:18:49.2057239Z E       AssertionError: assert _0**3 + _0**2*(-x - y - z) + _0*(x*y + x*z + y*z) - x*y*z == ((((_0 ** 3) - (((x + y) + z) * (_0 ** 2))) + (_0 * (((x * y) + (y * z)) + (x * z)))) - ((x * y) * z))
+2026-10-13T01:18:49.2057876Z E        +  where _0**3 + _0**2*(-x - y - z) + _0*(x*y + x*z + y*z) - x*y*z = as_expr()
+2026-10-13T01:18:49.2058425Z E        +    where as_expr = PurePoly(_0**3 + (-x - y - z)*_0**2 + (x*y + x*z + y*z)*_0 - x*y*z, _0, domain='ZZ[x,y,z,a,b,c]').as_expr
+2026-10-13T01:18:49.2059070Z E        +      where PurePoly(_0**3 + (-x - y - z)*_0**2 + (x*y + x*z + y*z)*_0 - x*y*z, _0, domain='ZZ[x,y,z,a,b,c]') = charpoly()
+2026-10-13T01:18:49.2059640Z E        +        where charpoly = Matrix([\n[x, 0, 0],\n[a, y, 0],\n[b, c, z]]).charpoly
+2026-10-13T01:18:49.2059930Z 
+2026-10-13T01:18:49.2060097Z sympy/matrices/tests/test_determinant.py:291: AssertionError
+2026-10-13T01:18:49.2060515Z _________________________ test_Domain_cyclotomic_field _________________________
+2026-10-13T01:18:49.2060982Z [gw2] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python
+2026-10-13T01:18:49.2061588Z 
+2026-10-13T01:18:49.2061693Z     def test_Domain_cyclotomic_field():
+2026-10-13T01:18:49.2061967Z         K = ZZ.cyclotomic_field(12)
+2026-10-13T01:18:49.2062261Z         assert K.is_Cyclotomic and K.is_CyclotomicField
+2026-10-13T01:18:49.2062765Z         assert K.ext.minpoly.as_poly(Poly(cyclotomic_poly(12)).gen) == Poly(cyclotomic_poly(12), domain=QQ)
+2026-10-13T01:18:49.2063229Z         assert K.dom == QQ
+2026-10-13T01:18:49.2063455Z         assert K.zeta_order == 12
+2026-10-13T01:18:49.2063684Z     
+2026-10-13T01:18:49.2063864Z         F = QQ.cyclotomic_field(3)
+2026-10-13T01:18:49.2064151Z >       assert F.ext.minpoly == Poly(cyclotomic_poly(3))
+2026-10-13T01:18:49.2064629Z E       AssertionError: assert PurePoly(_0**2 + _0 + 1, _0, domain='QQ') == Poly(_0**2 + _0 + 1, _0, domain='ZZ')
+2026-10-13T01:18:49.2065154Z E        +  where PurePoly(_0**2 + _0 + 1, _0, domain='QQ') = zeta3.minpoly
+2026-10-13T01:18:49.2065511Z E        +    where zeta3 = QQ<zeta3>.ext
+2026-10-13T01:18:49.2065842Z E        +  and   Poly(_0**2 + _0 + 1, _0, domain='ZZ') = Poly(_0**2 + _0 + 1)
+2026-10-13T01:18:49.2066197Z E        +    where _0**2 + _0 + 1 = cyclotomic_poly(3)
+2026-10-13T01:18:49.2066531Z 
+2026-10-13T01:18:49.2066694Z sympy/polys/domains/tests/test_domains.py:878: AssertionError
+2026-10-13T01:18:49.2067104Z _____________________________ test_bernoulli_poly ______________________________
+2026-10-13T01:18:49.2067550Z [gw0] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python
+2026-10-13T01:18:49.2067837Z 
+2026-10-13T01:18:49.2067928Z     def test_bernoulli_poly():
+2026-10-13T01:18:49.2068206Z         raises(ValueError, lambda: bernoulli_poly(-1, x))
+2026-10-13T01:18:49.2068576Z         assert bernoulli_poly(1, x, polys=True) == Poly(x - Q(1,2))
+2026-10-13T01:18:49.2068894Z     
+2026-10-13T01:18:49.2069080Z         assert bernoulli_poly(0, x) == 1
+2026-10-13T01:18:49.2069472Z         assert bernoulli_poly(1, x) == x - Q(1,2)
+2026-10-13T01:18:49.2069784Z         assert bernoulli_poly(2, x) == x**2 - x + Q(1,6)
+2026-10-13T01:18:49.2070136Z         assert bernoulli_poly(3, x) == x**3 - Q(3,2)*x**2 + Q(1,2)*x
+2026-10-13T01:18:49.2070534Z         assert bernoulli_poly(4, x) == x**4 - 2*x**3 + x**2 - Q(1,30)
+2026-10-13T01:18:49.2070955Z         assert bernoulli_poly(5, x) == x**5 - Q(5,2)*x**4 + Q(5,3)*x**3 - Q(1,6)*x
+2026-10-13T01:18:49.2071672Z         assert bernoulli_poly(6, x) == x**6 - 3*x**5 + Q(5,2)*x**4 - Q(1,2)*x**2 + Q(1,42)
+2026-10-13T01:18:49.2072045Z     
+2026-10-13T01:18:49.2072267Z >       assert bernoulli_poly(1).dummy_eq(x - Q(1,2))
+2026-10-13T01:18:49.2072559Z E       assert False
+2026-10-13T01:18:49.2072782Z E        +  where False = dummy_eq((x - 1/2))
+2026-10-13T01:18:49.2073067Z E        +    where dummy_eq = _0 - 1/2.dummy_eq
+2026-10-13T01:18:49.2073372Z E        +      where _0 - 1/2 = bernoulli_poly(1)
+2026-10-13T01:18:49.2073736Z E        +    and   1/2 = Q(1, 2)
+2026-10-13T01:18:49.2073894Z 
+2026-10-13T01:18:49.2074047Z sympy/polys/tests/test_appellseqs.py:22: AssertionError
+2026-10-13T01:18:49.2074436Z ______________________________ test_genocchi_poly ______________________________
+2026-10-13T01:18:49.2074897Z [gw0] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python
+2026-10-13T01:18:49.2075179Z 
+2026-10-13T01:18:49.2075274Z     def test_genocchi_poly():
+2026-10-13T01:18:49.2075550Z         raises(ValueError, lambda: genocchi_poly(-1, x))
+2026-10-13T01:18:49.2075909Z         assert genocchi_poly(2, x, polys=True) == Poly(-2*x + 1)
+2026-10-13T01:18:49.2076214Z     
+2026-10-13T01:18:49.2076399Z         assert genocchi_poly(0, x) == 0
+2026-10-13T01:18:49.2076669Z         assert genocchi_poly(1, x) == -1
+2026-10-13T01:18:49.2076966Z         assert genocchi_poly(2, x) == 1 - 2*x
+2026-10-13T01:18:49.2077256Z         assert genocchi_poly(3, x) == 3*x - 3*x**2
+2026-10-13T01:18:49.2077564Z         assert genocchi_poly(4, x) == -1 + 6*x**2 - 4*x**3
+2026-10-13T01:18:49.2077907Z         assert genocchi_poly(5, x) == -5*x + 10*x**3 - 5*x**4
+2026-10-13T01:18:49.2078286Z         assert genocchi_poly(6, x) == 3 - 15*x**2 + 15*x**4 - 6*x**5
+2026-10-13T01:18:49.2078599Z     
+2026-10-13T01:18:49.2078801Z >       assert genocchi_poly(2).dummy_eq(-2*x + 1)
+2026-10-13T01:18:49.2079068Z E       assert False
+2026-10-13T01:18:49.2079286Z E        +  where False = dummy_eq(((-2 * x) + 1))
+2026-10-13T01:18:49.2079575Z E        +    where dummy_eq = 1 - 2*_0.dummy_eq
+2026-10-13T01:18:49.2079859Z E        +      where 1 - 2*_0 = genocchi_poly(2)
+2026-10-13T01:18:49.2080048Z 
+2026-10-13T01:18:49.2080191Z sympy/polys/tests/test_appellseqs.py:55: AssertionError
+2026-10-13T01:18:49.2080572Z _______________________________ test_euler_poly ________________________________
+2026-10-13T01:18:49.2081021Z [gw0] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python
+2026-10-13T01:18:49.2081664Z 
+2026-10-13T01:18:49.2081758Z     def test_euler_poly():
+2026-10-13T01:18:49.2082031Z         raises(ValueError, lambda: euler_poly(-1, x))
+2026-10-13T01:18:49.2082383Z         assert euler_poly(1, x, polys=True) == Poly(x - Q(1,2))
+2026-10-13T01:18:49.2082688Z     
+2026-10-13T01:18:49.2082868Z         assert euler_poly(0, x) == 1
+2026-10-13T01:18:49.2083281Z         assert euler_poly(1, x) == x - Q(1,2)
+2026-10-13T01:18:49.2083557Z         assert euler_poly(2, x) == x**2 - x
+2026-10-13T01:18:49.2083866Z         assert euler_poly(3, x) == x**3 - Q(3,2)*x**2 + Q(1,4)
+2026-10-13T01:18:49.2084194Z         assert euler_poly(4, x) == x**4 - 2*x**3 + x
+2026-10-13T01:18:49.2084550Z         assert euler_poly(5, x) == x**5 - Q(5,2)*x**4 + Q(5,2)*x**2 - Q(1,2)
+2026-10-13T01:18:49.2084938Z         assert euler_poly(6, x) == x**6 - 3*x**5 + 5*x**3 - 3*x
+2026-10-13T01:18:49.2085227Z     
+2026-10-13T01:18:49.2085424Z >       assert euler_poly(1).dummy_eq(x - Q(1,2))
+2026-10-13T01:18:49.2085697Z E       assert False
+2026-10-13T01:18:49.2085914Z E        +  where False = dummy_eq((x - 1/2))
+2026-10-13T01:18:49.2086303Z E        +    where dummy_eq = _0 - 1/2.dummy_eq
+2026-10-13T01:18:49.2086584Z E        +      where _0 - 1/2 = euler_poly(1)
+2026-10-13T01:18:49.2086845Z E        +    and   1/2 = Q(1, 2)
+2026-10-13T01:18:49.2087004Z 
+2026-10-13T01:18:49.2087140Z sympy/polys/tests/test_appellseqs.py:73: AssertionError
+2026-10-13T01:18:49.2087527Z _____________________________ test_chebyshevu_poly _____________________________
+2026-10-13T01:18:49.2087982Z [gw3] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python
+2026-10-13T01:18:49.2088271Z 
+2026-10-13T01:18:49.2088365Z     def test_chebyshevu_poly():
+2026-10-13T01:18:49.2088647Z         raises(ValueError, lambda: chebyshevu_poly(-1, x))
+2026-10-13T01:18:49.2088938Z     
+2026-10-13T01:18:49.2089166Z         assert chebyshevu_poly(1, x, polys=True) == Poly(2*x)
+2026-10-13T01:18:49.2089496Z     
+2026-10-13T01:18:49.2089683Z         assert chebyshevu_poly(0, x) == 1
+2026-10-13T01:18:49.2089958Z         assert chebyshevu_poly(1, x) == 2*x
+2026-10-13T01:18:49.2090249Z         assert chebyshevu_poly(2, x) == 4*x**2 - 1
+2026-10-13T01:18:49.2090556Z         assert chebyshevu_poly(3, x) == 8*x**3 - 4*x
+2026-10-13T01:18:49.2090880Z         assert chebyshevu_poly(4, x) == 16*x**4 - 12*x**2 + 1
+2026-10-13T01:18:49.2091503Z         assert chebyshevu_poly(5, x) == 32*x**5 - 32*x**3 + 6*x
+2026-10-13T01:18:49.2091898Z         assert chebyshevu_poly(6, x) == 64*x**6 - 80*x**4 + 24*x**2 - 1
+2026-10-13T01:18:49.2092220Z     
+2026-10-13T01:18:49.2092416Z >       assert chebyshevu_poly(1).dummy_eq(2*x)
+2026-10-13T01:18:49.2092683Z E       assert False
+2026-10-13T01:18:49.2092896Z E        +  where False = dummy_eq((2 * x))
+2026-10-13T01:18:49.2093165Z E        +    where dummy_eq = 2*_0.dummy_eq
+2026-10-13T01:18:49.2093439Z E        +      where 2*_0 = chebyshevu_poly(1)
+2026-10-13T01:18:49.2093626Z 
+2026-10-13T01:18:49.2093764Z sympy/polys/tests/test_orthopolys.py:90: AssertionError
+2026-10-13T01:18:49.2094151Z ______________________________ test_hermite_poly _______________________________
+2026-10-13T01:18:49.2094603Z [gw3] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python
+2026-10-13T01:18:49.2094886Z 
+2026-10-13T01:18:49.2094982Z     def test_hermite_poly():
+2026-10-13T01:18:49.2095255Z         raises(ValueError, lambda: hermite_poly(-1, x))
+2026-10-13T01:18:49.2095529Z     
+2026-10-13T01:18:49.2095745Z         assert hermite_poly(1, x, polys=True) == Poly(2*x)
+2026-10-13T01:18:49.2096028Z     
+2026-10-13T01:18:49.2096210Z         assert hermite_poly(0, x) == 1
+2026-10-13T01:18:49.2096466Z         assert hermite_poly(1, x) == 2*x
+2026-10-13T01:18:49.2096741Z         assert hermite_poly(2, x) == 4*x**2 - 2
+2026-10-13T01:18:49.2097029Z         assert hermite_poly(3, x) == 8*x**3 - 12*x
+2026-10-13T01:18:49.2097346Z         assert hermite_poly(4, x) == 16*x**4 - 48*x**2 + 12
+2026-10-13T01:18:49.2097688Z         assert hermite_poly(5, x) == 32*x**5 - 160*x**3 + 120*x
+2026-10-13T01:18:49.2098066Z         assert hermite_poly(6, x) == 64*x**6 - 480*x**4 + 720*x**2 - 120
+2026-10-13T01:18:49.2098390Z     
+2026-10-13T01:18:49.2098576Z >       assert hermite_poly(1).dummy_eq(2*x)
+2026-10-13T01:18:49.2098833Z E       assert False
+2026-10-13T01:18:49.2099043Z E        +  where False = dummy_eq((2 * x))
+2026-10-13T01:18:49.2099449Z E        +    where dummy_eq = 2*_0.dummy_eq
+2026-10-13T01:18:49.2099720Z E        +      where 2*_0 = hermite_poly(1)
+2026-10-13T01:18:49.2099892Z 
+2026-10-13T01:18:49.2100039Z sympy/polys/tests/test_orthopolys.py:107: AssertionError
+2026-10-13T01:18:49.2100428Z ______________________________ test_laguerre_poly ______________________________
+2026-10-13T01:18:49.2100869Z [gw3] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python
+2026-10-13T01:18:49.2101153Z 
+2026-10-13T01:18:49.2101484Z     def test_laguerre_poly():
+2026-10-13T01:18:49.2101764Z         raises(ValueError, lambda: laguerre_poly(-1, x))
+2026-10-13T01:18:49.2102047Z     
+2026-10-13T01:18:49.2102312Z         assert laguerre_poly(1, x, polys=True) == Poly(-x + 1, domain='QQ')
+2026-10-13T01:18:49.2102782Z     
+2026-10-13T01:18:49.2102971Z         assert laguerre_poly(0, x) == 1
+2026-10-13T01:18:49.2103244Z         assert laguerre_poly(1, x) == -x + 1
+2026-10-13T01:18:49.2103568Z         assert laguerre_poly(2, x) == Q(1, 2)*x**2 - Q(4, 2)*x + 1
+2026-10-13T01:18:49.2103980Z         assert laguerre_poly(3, x) == -Q(1, 6)*x**3 + Q(9, 6)*x**2 - Q(18, 6)*x + 1
+2026-10-13T01:18:49.2104346Z         assert laguerre_poly(4, x) == Q(
+2026-10-13T01:18:49.2104657Z             1, 24)*x**4 - Q(16, 24)*x**3 + Q(72, 24)*x**2 - Q(96, 24)*x + 1
+2026-10-13T01:18:49.2105047Z         assert laguerre_poly(5, x) == -Q(1, 120)*x**5 + Q(25, 120)*x**4 - Q(
+2026-10-13T01:18:49.2105428Z             200, 120)*x**3 + Q(600, 120)*x**2 - Q(600, 120)*x + 1
+2026-10-13T01:18:49.2105962Z         assert laguerre_poly(6, x) == Q(1, 720)*x**6 - Q(36, 720)*x**5 + Q(450, 720)*x**4 - Q(2400, 720)*x**3 + Q(5400, 720)*x**2 - Q(4320, 720)*x + 1
+2026-10-13T01:18:49.2106440Z     
+2026-10-13T01:18:49.2106634Z         assert laguerre_poly(0, x, a) == 1
+2026-10-13T01:18:49.2106921Z         assert laguerre_poly(1, x, a) == -x + a + 1
+2026-10-13T01:18:49.2107299Z         assert laguerre_poly(2, x, a) == x**2/2 + (-a - 2)*x + a**2/2 + a*Q(3, 2) + 1
+2026-10-13T01:18:49.2107712Z         assert laguerre_poly(3, x, a) == -x**3/6 + (a/2 + Q(
+2026-10-13T01:18:49.2108077Z             3)/2)*x**2 + (-a**2/2 - a*Q(5, 2) - 3)*x + a**3/6 + a**2 + a*Q(11, 6) + 1
+2026-10-13T01:18:49.2108388Z     
+2026-10-13T01:18:49.2108588Z >       assert laguerre_poly(1).dummy_eq(-x + 1)
+2026-10-13T01:18:49.2108857Z E       assert False
+2026-10-13T01:18:49.2109072Z E        +  where False = dummy_eq((-x + 1))
+2026-10-13T01:18:49.2109347Z E        +    where dummy_eq = 1 - _0.dummy_eq
+2026-10-13T01:18:49.2109629Z E        +      where 1 - _0 = laguerre_poly(1)
+2026-10-13T01:18:49.2109820Z 
+2026-10-13T01:18:49.2109962Z sympy/polys/tests/test_orthopolys.py:167: AssertionError
+2026-10-13T01:18:49.2110380Z ____________ test_PurePoly_canonical_instantiation_and_coefficients ____________
+2026-10-13T01:18:49.2110869Z [gw0] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python
+2026-10-13T01:18:49.2111158Z 
+2026-10-13T01:18:49.2111494Z f = PurePoly(a*_0 + a + 1, _0, domain='ZZ[a]'), gen = _1
+2026-10-13T01:18:49.2111713Z 
+2026-10-13T01:18:49.2111807Z     def _gen_to_level(f, gen):
+2026-10-13T01:18:49.2112100Z         """Returns level associated with the given generator. """
+2026-10-13T01:18:49.2112424Z         if isinstance(gen, int):
+2026-10-13T01:18:49.2112661Z             length = len(f.gens)
+2026-10-13T01:18:49.2112874Z     
+2026-10-13T01:18:49.2113054Z             if -length <= gen < length:
+2026-10-13T01:18:49.2113304Z                 if gen < 0:
+2026-10-13T01:18:49.2113524Z                     return length + gen
+2026-10-13T01:18:49.2113762Z                 else:
+2026-10-13T01:18:49.2113967Z                     return gen
+2026-10-13T01:18:49.2114188Z             else:
+2026-10-13T01:18:49.2114466Z                 raise PolynomialError("-%s <= gen < %s expected, got %s" %
+2026-10-13T01:18:49.2114837Z                                       (length, length, gen))
+2026-10-13T01:18:49.2115108Z         else:
+2026-10-13T01:18:49.2115291Z             try:
+2026-10-13T01:18:49.2115639Z >               return f.gens.index(sympify(gen))
+2026-10-13T01:18:49.2115921Z                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-13T01:18:49.2116213Z E               ValueError: tuple.index(x): x not in tuple
+2026-10-13T01:18:49.2116424Z 
+2026-10-13T01:18:49.2116531Z sympy/polys/polytools.py:1888: ValueError
+2026-10-13T01:18:49.2116720Z 
+2026-10-13T01:18:49.2116894Z During handling of the above exception, another exception occurred:
+2026-10-13T01:18:49.2117170Z 
+2026-10-13T01:18:49.2117329Z     def test_PurePoly_canonical_instantiation_and_coefficients():
+2026-10-13T01:18:49.2117667Z         p = PurePoly(x*y + x + 1, x, y)
+2026-10-13T01:18:49.2117966Z         assert p.as_poly(a, b) == Poly(a*b + a + 1, a, b)
+2026-10-13T01:18:49.2118263Z >       assert p('a', 'b') == a*b + a + 1
+2026-10-13T01:18:49.2118625Z                ^^^^^^^^^^^
+2026-10-13T01:18:49.2118759Z 
+2026-10-13T01:18:49.2118868Z sympy/polys/tests/test_polytools.py:4365: 
+2026-10-13T01:18:49.2119191Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-10-13T01:18:49.2119532Z sympy/polys/polytools.py:4715: in __call__
+2026-10-13T01:18:49.2119803Z     return super().__call__(*values)
+2026-10-13T01:18:49.2120045Z            ^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-10-13T01:18:49.2120292Z sympy/polys/polytools.py:2544: in __call__
+2026-10-13T01:18:49.2120558Z     return f.eval(values)
+2026-10-13T01:18:49.2120767Z            ^^^^^^^^^^^^^^
+2026-10-13T01:18:49.2120985Z sympy/polys/polytools.py:2497: in eval
+2026-10-13T01:18:49.2121514Z     f = f.eval(gen, value)
+2026-10-13T01:18:49.2121731Z         ^^^^^^^^^^^^^^^^^^
+2026-10-13T01:18:49.2121953Z sympy/polys/polytools.py:2503: in eval
+2026-10-13T01:18:49.2122201Z     j = f._gen_to_level(x)
+2026-10-13T01:18:49.2122406Z         ^^^^^^^^^^^^^^^^^^
+2026-10-13T01:18:49.2122678Z _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+2026-10-13T01:18:49.2122913Z 
+2026-10-13T01:18:49.2123041Z f = PurePoly(a*_0 + a + 1, _0, domain='ZZ[a]'), gen = _1
+2026-10-13T01:18:49.2123256Z 
+2026-10-13T01:18:49.2123351Z     def _gen_to_level(f, gen):
+2026-10-13T01:18:49.2123640Z         """Returns level associated with the given generator. """
+2026-10-13T01:18:49.2123966Z         if isinstance(gen, int):
+2026-10-13T01:18:49.2124199Z             length = len(f.gens)
+2026-10-13T01:18:49.2124413Z     
+2026-10-13T01:18:49.2124597Z             if -length <= gen < length:
+2026-10-13T01:18:49.2124846Z                 if gen < 0:
+2026-10-13T01:18:49.2125066Z                     return length + gen
+2026-10-13T01:18:49.2125304Z                 else:
+2026-10-13T01:18:49.2125507Z                     return gen
+2026-10-13T01:18:49.2125717Z             else:
+2026-10-13T01:18:49.2125987Z                 raise PolynomialError("-%s <= gen < %s expected, got %s" %
+2026-10-13T01:18:49.2126359Z                                       (length, length, gen))
+2026-10-13T01:18:49.2126632Z         else:
+2026-10-13T01:18:49.2126807Z             try:
+2026-10-13T01:18:49.2127022Z                 return f.gens.index(sympify(gen))
+2026-10-13T01:18:49.2127620Z             except ValueError:
+2026-10-13T01:18:49.2128008Z >               raise PolynomialError(
+2026-10-13T01:18:49.2128383Z                     "a valid generator expected, got %s" % gen)
+2026-10-13T01:18:49.2128990Z E               sympy.polys.polyerrors.PolynomialError: a valid generator expected, got _1
+2026-10-13T01:18:49.2129395Z 
+2026-10-13T01:18:49.2129543Z sympy/polys/polytools.py:1890: PolynomialError
+2026-10-13T01:18:49.2130039Z _____________________________ test_PurePoly__eq__ ______________________________
+2026-10-13T01:18:49.2130676Z [gw3] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python
+2026-10-13T01:18:49.2130996Z 
+2026-10-13T01:18:49.2131139Z     def test_PurePoly__eq__():
+2026-10-13T01:18:49.2132040Z         assert (PurePoly(x, x) == PurePoly(x, x)) is True
+2026-10-13T01:18:49.2182258Z >       assert (PurePoly(x, x, domain=QQ) == PurePoly(x, x)) is True
+2026-10-13T01:18:49.2183144Z E       AssertionError: assert (PurePoly(_0, _0, domain='QQ') == PurePoly(_0, _0, domain='ZZ')) is True
+2026-10-13T01:18:49.2184249Z E        +  where PurePoly(_0, _0, domain='QQ') = PurePoly(x, x, domain=QQ)
+2026-10-13T01:18:49.2184865Z E        +  and   PurePoly(_0, _0, domain='ZZ') = PurePoly(x, x)
+2026-10-13T01:18:49.2185248Z 
+2026-10-13T01:18:49.2185482Z sympy/polys/tests/test_polytools.py:646: AssertionError
+2026-10-13T01:18:49.2186138Z ___________________________________ test_P21 ___________________________________
+2026-10-13T01:18:49.2186906Z [gw3] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python
+2026-10-13T01:18:49.2187401Z 
+2026-10-13T01:18:49.2187552Z     def test_P21():
+2026-10-13T01:18:49.2187939Z         M = Matrix([[5, -3, -7],
+2026-10-13T01:18:49.2188344Z                     [-2, 1,  2],
+2026-10-13T01:18:49.2188956Z                     [2, -3, -4]])
+2026-10-13T01:18:49.2189570Z >       assert M.charpoly(x).as_expr() == x**3 - 2*x**2 - 5*x + 6
+2026-10-13T01:18:49.2190415Z E       AssertionError: assert _0**3 - 2*_0**2 - 5*_0 + 6 == ((((x ** 3) - (2 * (x ** 2))) - (5 * x)) + 6)
+2026-10-13T01:18:49.2191431Z E        +  where _0**3 - 2*_0**2 - 5*_0 + 6 = as_expr()
+2026-10-13T01:18:49.2192081Z E        +    where as_expr = PurePoly(_0**3 - 2*_0**2 - 5*_0 + 6, _0, domain='ZZ').as_expr
+2026-10-13T01:18:49.2192708Z E        +      where PurePoly(_0**3 - 2*_0**2 - 5*_0 + 6, _0, domain='ZZ') = charpoly(x)
+2026-10-13T01:18:49.2193232Z E        +        where charpoly = Matrix([\n[ 5, -3, -7],\n[-2,  1,  2],\n[ 2, -3, -4]]).charpoly
+2026-10-13T01:18:49.2193551Z 
+2026-10-13T01:18:49.2193704Z sympy/utilities/tests/test_wester.py:1568: AssertionError
+2026-10-13T01:18:49.2194081Z                                 DO *NOT* COMMIT!                                
+2026-10-13T01:18:49.2194458Z ============================= slowest 50 durations =============================
+2026-10-13T01:18:49.2194926Z 10.00s call     sympy/utilities/tests/test_wester.py::test_W19
+2026-10-13T01:18:49.2195329Z 9.11s call     sympy/series/tests/test_limits.py::test_issue_17431
+2026-10-13T01:18:49.2195783Z 8.82s call     sympy/combinatorics/tests/test_coset_table.py::test_look_ahead
+2026-10-13T01:18:49.2196276Z 8.40s call     sympy/polys/series/tests/test_hypothesis.py::test_rs_series_zero
+2026-10-13T01:18:49.2196750Z 8.15s call     sympy/solvers/ode/tests/test_riccati.py::test_solve_riccati
+2026-10-13T01:18:49.2197191Z 8.14s call     sympy/sets/tests/test_fancysets.py::test_Range_symbolic
+2026-10-13T01:18:49.2197591Z 7.89s call     sympy/series/tests/test_limits.py::test_atan
+2026-10-13T01:18:49.2198025Z 7.77s call     sympy/polys/series/tests/test_hypothesis.py::test_global_series_one
+2026-10-13T01:18:49.2198530Z 7.71s call     sympy/physics/control/tests/test_lti.py::test_StateSpace_dsolve
+2026-10-13T01:18:49.2198994Z 7.69s call     sympy/matrices/tests/test_eigen.py::test_jordan_form
+2026-10-13T01:18:49.2199486Z 7.68s call     sympy/solvers/ode/tests/test_systems.py::test_sysode_linear_neq_order1_type3
+2026-10-13T01:18:49.2199978Z 7.67s call     sympy/series/tests/test_aseries.py::test_simple
+2026-10-13T01:18:49.2200383Z 7.65s call     sympy/holonomic/tests/test_holonomic.py::test_to_meijerg
+2026-10-13T01:18:49.2200839Z 7.40s call     sympy/integrals/tests/test_integrals.py::test_issue_23718
+2026-10-13T01:18:49.2201497Z 7.39s call     sympy/integrals/tests/test_meijerint.py::test_messy
+2026-10-13T01:18:49.2201942Z 7.22s call     sympy/solvers/ode/tests/test_ode.py::test_classify_ode
+2026-10-13T01:18:49.2202369Z 7.21s call     sympy/stats/tests/test_finite_rv.py::test_robust_soliton
+2026-10-13T01:18:49.2202812Z 7.15s call     sympy/combinatorics/tests/test_rewriting.py::test_rewriting
+2026-10-13T01:18:49.2203275Z 7.14s call     sympy/stats/tests/test_continuous_rv.py::test_multiple_normal
+2026-10-13T01:18:49.2203802Z 7.10s call     sympy/solvers/ode/tests/test_single.py::test_2nd_2F1_hypergeometric_integral
+2026-10-13T01:18:49.2204299Z 7.04s call     sympy/core/tests/test_function.py::test_issue_17382
+2026-10-13T01:18:49.2204935Z 7.03s call     sympy/physics/tests/test_secondquant.py::test_dummy_order_ambiguous
+2026-10-13T01:18:49.2205445Z 6.90s call     sympy/concrete/tests/test_sums_products.py::test_evalf_slow_series
+2026-10-13T01:18:49.2205932Z 6.89s call     sympy/integrals/tests/test_integrals.py::test_sqrt_quadratic
+2026-10-13T01:18:49.2206430Z 6.80s call     sympy/functions/elementary/tests/test_piecewise.py::test_issue_21481
+2026-10-13T01:18:49.2206970Z 6.72s call     sympy/physics/hep/tests/test_gamma_matrices.py::test_gamma_matrix_trace
+2026-10-13T01:18:49.2207476Z 6.68s call     sympy/physics/control/tests/test_lti.py::test_StateSpace_series
+2026-10-13T01:18:49.2207952Z 6.68s call     sympy/concrete/tests/test_sums_products.py::test_geometric_sums
+2026-10-13T01:18:49.2208508Z 6.66s call     sympy/solvers/tests/test_solvers.py::test_issue_20747
+2026-10-13T01:18:49.2208973Z 6.50s call     sympy/polys/tests/test_polyroots.py::test_roots_quartic
+2026-10-13T01:18:49.2209446Z 6.45s call     sympy/concrete/tests/test_sums_products.py::test_summation_by_residues
+2026-10-13T01:18:49.2209970Z 6.39s call     sympy/functions/special/tests/test_bessel.py::test_bessely_series
+2026-10-13T01:18:49.2210482Z 6.38s call     sympy/parsing/tests/test_mathematica.py::test_Mathematica_literal_regex
+2026-10-13T01:18:49.2211000Z 6.29s call     sympy/functions/special/tests/test_bessel.py::test_besselk_series
+2026-10-13T01:18:49.2211722Z 6.25s call     sympy/series/tests/test_limits.py::test_issue_14556
+2026-10-13T01:18:49.2212197Z 6.22s call     sympy/matrices/expressions/tests/test_matpow.py::test_as_explicit_symbol
+2026-10-13T01:18:49.2212684Z 6.22s call     sympy/series/tests/test_limits.py::test_issue_24276
+2026-10-13T01:18:49.2213079Z 6.16s call     sympy/series/tests/test_limits.py::test_issue_15202
+2026-10-13T01:18:49.2213524Z 6.15s call     sympy/integrals/tests/test_transforms.py::test_fourier_transform
+2026-10-13T01:18:49.2213968Z 6.14s call     sympy/stats/tests/test_rv.py::test_dependence
+2026-10-13T01:18:49.2214444Z 6.09s call     sympy/functions/special/tests/test_zeta_functions.py::test_lerchphi_expansion
+2026-10-13T01:18:49.2214979Z 6.06s call     sympy/concrete/tests/test_sums_products.py::test_issue_14640
+2026-10-13T01:18:49.2215471Z 6.00s call     sympy/simplify/tests/test_hyperexpand.py::test_meijerg_shift_operators
+2026-10-13T01:18:49.2215989Z 5.96s call     sympy/solvers/ode/tests/test_systems.py::test_nonlinear_2eq_order1
+2026-10-13T01:18:49.2216443Z 5.95s call     sympy/solvers/ode/tests/test_ode.py::test_issue_22523
+2026-10-13T01:18:49.2216863Z 5.84s call     sympy/integrals/tests/test_meijerint.py::test_recursive
+2026-10-13T01:18:49.2217291Z 5.76s call     sympy/simplify/tests/test_hyperexpand.py::test_lerchphi
+2026-10-13T01:18:49.2217721Z 5.70s call     sympy/ntheory/tests/test_residue.py::test_binomial_p_pow
+2026-10-13T01:18:49.2218207Z 5.66s call     sympy/physics/control/tests/test_lti.py::test_MIMOFeedback_construction
+2026-10-13T01:18:49.2218673Z 5.62s call     sympy/core/tests/test_arit.py::test_issue_21034
+2026-10-13T01:18:49.2219052Z =========================== short test summary info ============================
+2026-10-13T01:18:49.2219911Z FAILED sympy/matrices/tests/test_determinant.py::test_charpoly - AssertionError: assert _0**3 + _0**2*(-x - y - z) + _0*(x*y + x*z + y*z) - x*y*z == ((((_0 ** 3) - (((x + y) + z) * (_0 ** 2))) + (_0 * (((x * y) + (y * z)) + (x * z)))) - ((x * y) * z))
+2026-10-13T01:18:49.2220800Z  +  where _0**3 + _0**2*(-x - y - z) + _0*(x*y + x*z + y*z) - x*y*z = as_expr()
+2026-10-13T01:18:49.2221583Z  +    where as_expr = PurePoly(_0**3 + (-x - y - z)*_0**2 + (x*y + x*z + y*z)*_0 - x*y*z, _0, domain='ZZ[x,y,z,a,b,c]').as_expr
+2026-10-13T01:18:49.2222223Z  +      where PurePoly(_0**3 + (-x - y - z)*_0**2 + (x*y + x*z + y*z)*_0 - x*y*z, _0, domain='ZZ[x,y,z,a,b,c]') = charpoly()
+2026-10-13T01:18:49.2222766Z  +        where charpoly = Matrix([\n[x, 0, 0],\n[a, y, 0],\n[b, c, z]]).charpoly
+2026-10-13T01:18:49.2223592Z FAILED sympy/polys/domains/tests/test_domains.py::test_Domain_cyclotomic_field - AssertionError: assert PurePoly(_0**2 + _0 + 1, _0, domain='QQ') == Poly(_0**2 + _0 + 1, _0, domain='ZZ')
+2026-10-13T01:18:49.2224517Z  +  where PurePoly(_0**2 + _0 + 1, _0, domain='QQ') = zeta3.minpoly
+2026-10-13T01:18:49.2224855Z  +    where zeta3 = QQ<zeta3>.ext
+2026-10-13T01:18:49.2225161Z  +  and   Poly(_0**2 + _0 + 1, _0, domain='ZZ') = Poly(_0**2 + _0 + 1)
+2026-10-13T01:18:49.2225503Z  +    where _0**2 + _0 + 1 = cyclotomic_poly(3)
+2026-10-13T01:18:49.2225908Z FAILED sympy/polys/tests/test_appellseqs.py::test_bernoulli_poly - assert False
+2026-10-13T01:18:49.2226319Z  +  where False = dummy_eq((x - 1/2))
+2026-10-13T01:18:49.2226582Z  +    where dummy_eq = _0 - 1/2.dummy_eq
+2026-10-13T01:18:49.2226852Z  +      where _0 - 1/2 = bernoulli_poly(1)
+2026-10-13T01:18:49.2227113Z  +    and   1/2 = Q(1, 2)
+2026-10-13T01:18:49.2227568Z FAILED sympy/polys/tests/test_appellseqs.py::test_genocchi_poly - assert False
+2026-10-13T01:18:49.2227976Z  +  where False = dummy_eq(((-2 * x) + 1))
+2026-10-13T01:18:49.2228239Z  +    where dummy_eq = 1 - 2*_0.dummy_eq
+2026-10-13T01:18:49.2228503Z  +      where 1 - 2*_0 = genocchi_poly(2)
+2026-10-13T01:18:49.2228877Z FAILED sympy/polys/tests/test_appellseqs.py::test_euler_poly - assert False
+2026-10-13T01:18:49.2229267Z  +  where False = dummy_eq((x - 1/2))
+2026-10-13T01:18:49.2229519Z  +    where dummy_eq = _0 - 1/2.dummy_eq
+2026-10-13T01:18:49.2229773Z  +      where _0 - 1/2 = euler_poly(1)
+2026-10-13T01:18:49.2230013Z  +    and   1/2 = Q(1, 2)
+2026-10-13T01:18:49.2230365Z FAILED sympy/polys/tests/test_orthopolys.py::test_chebyshevu_poly - assert False
+2026-10-13T01:18:49.2230765Z  +  where False = dummy_eq((2 * x))
+2026-10-13T01:18:49.2231016Z  +    where dummy_eq = 2*_0.dummy_eq
+2026-10-13T01:18:49.2231491Z  +      where 2*_0 = chebyshevu_poly(1)
+2026-10-13T01:18:49.2231880Z FAILED sympy/polys/tests/test_orthopolys.py::test_hermite_poly - assert False
+2026-10-13T01:18:49.2232277Z  +  where False = dummy_eq((2 * x))
+2026-10-13T01:18:49.2232521Z  +    where dummy_eq = 2*_0.dummy_eq
+2026-10-13T01:18:49.2232767Z  +      where 2*_0 = hermite_poly(1)
+2026-10-13T01:18:49.2233130Z FAILED sympy/polys/tests/test_orthopolys.py::test_laguerre_poly - assert False
+2026-10-13T01:18:49.2233516Z  +  where False = dummy_eq((-x + 1))
+2026-10-13T01:18:49.2233762Z  +    where dummy_eq = 1 - _0.dummy_eq
+2026-10-13T01:18:49.2234011Z  +      where 1 - _0 = laguerre_poly(1)
+2026-10-13T01:18:49.2234754Z FAILED sympy/polys/tests/test_polytools.py::test_PurePoly_canonical_instantiation_and_coefficients - sympy.polys.polyerrors.PolynomialError: a valid generator expected, got _1
+2026-10-13T01:18:49.2235877Z FAILED sympy/polys/tests/test_polytools.py::test_PurePoly__eq__ - AssertionError: assert (PurePoly(_0, _0, domain='QQ') == PurePoly(_0, _0, domain='ZZ')) is True
+2026-10-13T01:18:49.2236593Z  +  where PurePoly(_0, _0, domain='QQ') = PurePoly(x, x, domain=QQ)
+2026-10-13T01:18:49.2236978Z  +  and   PurePoly(_0, _0, domain='ZZ') = PurePoly(x, x)
+2026-10-13T01:18:49.2237604Z FAILED sympy/utilities/tests/test_wester.py::test_P21 - AssertionError: assert _0**3 - 2*_0**2 - 5*_0 + 6 == ((((x ** 3) - (2 * (x ** 2))) - (5 * x)) + 6)
+2026-10-13T01:18:49.2238209Z  +  where _0**3 - 2*_0**2 - 5*_0 + 6 = as_expr()
+2026-10-13T01:18:49.2238585Z  +    where as_expr = PurePoly(_0**3 - 2*_0**2 - 5*_0 + 6, _0, domain='ZZ').as_expr
+2026-10-13T01:18:49.2239049Z  +      where PurePoly(_0**3 - 2*_0**2 - 5*_0 + 6, _0, domain='ZZ') = charpoly(x)
+2026-10-13T01:18:49.2239520Z  +        where charpoly = Matrix([\n[ 5, -3, -7],\n[-2,  1,  2],\n[ 2, -3, -4]]).charpoly
+2026-10-13T01:18:49.2240027Z = 11 failed, 13292 passed, 731 skipped, 329 xfailed, 4 xpassed in 796.88s (0:13:16) =
+2026-10-13T01:18:49.9819295Z ##[error]Process completed with exit code 1.
+2026-10-13T01:18:49.9964308Z Post job cleanup.
+2026-10-13T01:18:50.0784311Z [command]/usr/bin/git version
+2026-10-13T01:18:50.0829642Z git version 2.55.0
+2026-10-13T01:18:50.0868129Z Temporarily overriding HOME='/home/runner/work/_temp/72ff2b3b-4ab4-465c-83ef-26bf50b9be6a' before making global git config changes
+2026-10-13T01:18:50.0869791Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-13T01:18:50.0874819Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/sympy/sympy
+2026-10-13T01:18:50.0907651Z Removing SSH command configuration
+2026-10-13T01:18:50.0913997Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-13T01:18:50.0948394Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-13T01:18:50.1171726Z Removing HTTP extra header
+2026-10-13T01:18:50.1176987Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-13T01:18:50.1211710Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-13T01:18:50.1440398Z Removing includeIf entries pointing to credentials config files
+2026-10-13T01:18:50.1447435Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-13T01:18:50.1479163Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-13T01:18:50.1850007Z Cleaning up orphan processes

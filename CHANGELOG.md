@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.8.0 — 2026-10-13
+
+- Add a local stdio `read_pytest_failures` MCP tool with direct Codex exposure, so named multi-pytest failure comparisons can run without guide-loading/model-discovery roundtrips. Setup skill remains implicitly discoverable; single traces, code and visible facts use ordinary search.
+- Add explicit install/connect/disconnect ownership, scoped version-checked configuration and safe21→22file migration/rollback. Default reader/ranking/v2.4, optionalv2.5 and common source/coordinate/output guards remain. No selector model/network/source execution.
+- Actual automatic comparison:20episodes across5tasks,50/50 grounded facts each, tool4/4 positives and0/6 exclusions, guide0. Logs−24.25%tokens; exclusions+12.21%; combined−4.26%, whole wall+2.07%. Conditional log usefulness; no universal savings/speed claim.
+- Preserve42all-attempt main-turn costs(917402tokens), stopped cold-guide and non-selection pilots, original scoring and corrected rubric version.217unit+10manifest checks, config-only/no-model tests and exact CLI/MCP packet ablation. See docs/automatic-tool-review/report.ko.md.
+
 ## 2.7.1 — 2026-10-13
 
 - Narrow automatic discovery to native dispersed failure-log context. Complete Python definitions remain explicit manual retrieval.

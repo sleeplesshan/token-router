@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "frozen_at": "2026-10-13T01:53:28.295261+00:00",
+  "before_any_model_results": true,
+  "source": {
+    "repository": "sympy/sympy",
+    "commit": "4120faf4bfe6aaa81675718fc5566833ff9f1999",
+    "run_id": 38330342967,
+    "job_id": 115078685188,
+    "url": "https://github.com/sympy/sympy/actions/runs/38330342967/job/115078685188",
+    "file": "sympy.log",
+    "sha256": "add4fe82b292e7188fbf58eb6589f801565886b729c3d36f7299dc40c63d1800",
+    "bytes": 84004,
+    "lines": 917,
+    "unmodified": true
+  },
+  "tasks": [
+    {
+      "id": "sympy_multiple_failures_ko",
+      "group": "sympy_new_ci_log",
+      "language": "ko",
+      "split": "holdout",
+      "mode": "error_log",
+      "primary": "sympy.log",
+      "files": {
+        "sympy.log": "sympy.log"
+      },
+      "query": "test_euler_poly와 test_PurePoly__eq__의 실패 블록을 비교해 실제 실패 표현식과 객체 차이를 확인하고 최종 pytest 결과에 연결하세요.",
+      "search_terms": [
+        "test_euler_poly",
+        "test_PurePoly__eq__"
+      ],
+      "selectors_note": "Names explicitly in user task; distinctive underscore headers may be selected from ordinary search. No gold-derived literal injection.",
+      "facts": [
+        {
+          "id": "euler_call",
+          "question": "test_euler_poly에서 실패한 assert가 호출한 메서드 이름만 답하세요.",
+          "accepted_answers": [
+            "dummy_eq"
+          ],
+          "required_evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 617,
+              "end_line": 617
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "sympy.log",
+                "start_line": 617,
+                "end_line": 617
+              }
+            ]
+          ]
+        },
+        {
+          "id": "euler_symbol",
+          "question": "그 실패 출력에서 euler_poly(1)의 결과에 표시된 자동 변수 이름만 답하세요.",
+          "accepted_answers": [
+            "_0"
+          ],
+          "required_evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 620,
+              "end_line": 621
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "sympy.log",
+                "start_line": 620,
+                "end_line": 621
+              }
+            ],
+            [
+              {
+                "file": "sympy.log",
+                "start_line": 621,
+                "end_line": 621
+              }
+            ]
+          ]
+        },
+        {
+          "id": "poly_explicit",
+          "question": "test_PurePoly__eq__의 실패 비교에서 명시적으로 지정한 왼쪽 domain 코드만 답하세요.",
+          "accepted_answers": [
+            "QQ"
+          ],
+          "required_evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 781,
+              "end_line": 784
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "sympy.log",
+                "start_line": 781,
+                "end_line": 784
+              }
+            ],
+            [
+              {
+                "file": "sympy.log",
+                "start_line": 783,
+                "end_line": 783
+              }
+            ]
+          ]
+        },
+        {
+          "id": "poly_default",
+          "question": "같은 비교에서 domain 인수를 생략한 오른쪽 객체의 실제 domain 코드만 답하세요.",
+          "accepted_answers": [
+            "ZZ"
+          ],
+          "required_evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 782,
+              "end_line": 784
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "sympy.log",
+                "start_line": 782,
+                "end_line": 784
+              }
+            ],
+            [
+              {
+                "file": "sympy.log",
+                "start_line": 784,
+                "end_line": 784
+              }
+            ]
+          ]
+        },
+        {
+          "id": "poly_location",
+          "question": "test_PurePoly__eq__ 블록의 최종 원본 테스트 위치를 파일경로:줄번호 형식으로만 답하세요.",
+          "accepted_answers": [
+            "sympy/polys/tests/test_polytools.py:646"
+          ],
+          "required_evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 786,
+              "end_line": 786
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "sympy.log",
+                "start_line": 786,
+                "end_line": 786
+              }
+            ]
+          ]
+        },
+        {
+          "id": "failed_total",
+          "question": "최종 pytest 결과의 실패 테스트 수를 정수만으로 답하세요.",
+          "accepted_answers": [
+            "11"
+          ],
+          "required_evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 900,
+              "end_line": 900
+            }
+          ],
+          "sufficient_evidence_sets": [
+            [
+              {
+                "file": "sympy.log",
+                "start_line": 900,
+                "end_line": 900
+              }
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "New independent CI source family vs CPython/SciPy; SymPy project has appeared in older source-code experiments, so not a never-seen project.",
+    "One Korean task only, not a bilingual translation pair.",
+    "Offline structural eligibility selected; not representative prevalence."
+  ]
+}

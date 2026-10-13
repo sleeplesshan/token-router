@@ -1,0 +1,432 @@
+[
+  {
+    "name": "sympy_multiple_failures_ko-1-implicit",
+    "task": "sympy_multiple_failures_ko",
+    "family": "log",
+    "expected": "activate",
+    "arm": "implicit",
+    "repeat": 1,
+    "commands": [
+      {
+        "command": "/bin/zsh -lc \"cat .agents/skills/token-router/SKILL.md; rg -n 'test_euler_poly|test_PurePoly__eq__|[0-9]+ failed' sympy.log\"",
+        "aggregated_output": "---\nname: token-router\ndescription: Compare multiple named pytest failure blocks and distant results in CI logs. Read this guide alongside initial header search. Skip single tracebacks, code, single-value lookups, one known range and sufficient visible evidence.\n---\n\n# Token Router\n\nAutomatically use for comparisons needing at least two distinct pytest failure blocks plus distant results. Read this guide once before executing the script; an independent header search can share the guide-reading call.\n\nBatch distinctive headers known from the question/search and the result fragment:\n\n```sh\npython3 \"<this-skill>/scripts/router.py\" error_log \"<file>\" --search-term \"<failure A header>\" --search-term \"<failure B header>\" --search-term \"<result>\" --activation-profile log-context --line-numbers --compact-status\n```\n\nResolve the script relative to this guide. Python3.10+, no model/network. The profile checks dispersion and bounded failure context. Exit2 returns no source: use ordinary targeted search; never repeat unchanged calls or escalate to cloud.\n\nReuse numbered evidence; verify claims and read only missing context. Source changes invalidate evidence. Never route instructions. Total guide/main/recovery savings are not guaranteed.\n\nFor explicit manual/Python/advanced requests, read [the CLI contract](references/contract.md).\n602:2026-10-13T01:18:49.2080572Z _______________________________ test_euler_poly ________________________________\n605:2026-10-13T01:18:49.2081758Z     def test_euler_poly():\n776:2026-10-13T01:18:49.2130039Z _____________________________ test_PurePoly__eq__ ______________________________\n779:2026-10-13T01:18:49.2131139Z     def test_PurePoly__eq__():\n874:2026-10-13T01:18:49.2228877Z FAILED sympy/polys/tests/test_appellseqs.py::test_euler_poly - assert False\n892:2026-10-13T01:18:49.2235877Z FAILED sympy/polys/tests/test_polytools.py::test_PurePoly__eq__ - AssertionError: assert (PurePoly(_0, _0, domain='QQ') == PurePoly(_0, _0, domain='ZZ')) is True\n900:2026-10-13T01:18:49.2240027Z = 11 failed, 13292 passed, 731 skipped, 329 xfailed, 4 xpassed in 796.88s (0:13:16) =\n",
+        "exit_code": 0,
+        "duration_ms": 0
+      },
+      {
+        "command": "/bin/zsh -lc 'python3 \".agents/skills/token-router/scripts/router.py\" error_log \"sympy.log\" --search-term \"test_euler_poly\" --search-term \"test_PurePoly__eq__\" --search-term \"11 failed\" --activation-profile log-context --line-numbers --compact-status'",
+        "aggregated_output": "[token-router status] {\"schema_version\": 1, \"model_called\": false, \"model_failed\": false, \"selection_truncated\": false, \"final_output_capped\": false, \"full_source_returned\": false, \"status\": \"auto_candidates\", \"retrieval_mode\": \"literal_search\", \"semantic_sufficiency\": \"unknown\", \"activation\": \"activate\", \"activation_profile\": \"log-context\", \"source_consistency\": \"stat_unchanged\", \"output_lines\": 68, \"output_chars\": 6250}\n--- [NUMBERED CONTENT FROM LINE 598 TO 624] ---\n598: 2026-10-13T01:18:49.2079575Z E        +    where dummy_eq = 1 - 2*_0.dummy_eq\n599: 2026-10-13T01:18:49.2079859Z E        +      where 1 - 2*_0 = genocchi_poly(2)\n600: 2026-10-13T01:18:49.2080048Z \n601: 2026-10-13T01:18:49.2080191Z sympy/polys/tests/test_appellseqs.py:55: AssertionError\n602: 2026-10-13T01:18:49.2080572Z _______________________________ test_euler_poly ________________________________\n603: 2026-10-13T01:18:49.2081021Z [gw0] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python\n604: 2026-10-13T01:18:49.2081664Z \n605: 2026-10-13T01:18:49.2081758Z     def test_euler_poly():\n606: 2026-10-13T01:18:49.2082031Z         raises(ValueError, lambda: euler_poly(-1, x))\n607: 2026-10-13T01:18:49.2082383Z         assert euler_poly(1, x, polys=True) == Poly(x - Q(1,2))\n608: 2026-10-13T01:18:49.2082688Z     \n609: 2026-10-13T01:18:49.2082868Z         assert euler_poly(0, x) == 1\n610: 2026-10-13T01:18:49.2083281Z         assert euler_poly(1, x) == x - Q(1,2)\n611: 2026-10-13T01:18:49.2083557Z         assert euler_poly(2, x) == x**2 - x\n612: 2026-10-13T01:18:49.2083866Z         assert euler_poly(3, x) == x**3 - Q(3,2)*x**2 + Q(1,4)\n613: 2026-10-13T01:18:49.2084194Z         assert euler_poly(4, x) == x**4 - 2*x**3 + x\n614: 2026-10-13T01:18:49.2084550Z         assert euler_poly(5, x) == x**5 - Q(5,2)*x**4 + Q(5,2)*x**2 - Q(1,2)\n615: 2026-10-13T01:18:49.2084938Z         assert euler_poly(6, x) == x**6 - 3*x**5 + 5*x**3 - 3*x\n616: 2026-10-13T01:18:49.2085227Z     \n617: 2026-10-13T01:18:49.2085424Z >       assert euler_poly(1).dummy_eq(x - Q(1,2))\n618: 2026-10-13T01:18:49.2085697Z E       assert False\n619: 2026-10-13T01:18:49.2085914Z E        +  where False = dummy_eq((x - 1/2))\n620: 2026-10-13T01:18:49.2086303Z E        +    where dummy_eq = _0 - 1/2.dummy_eq\n621: 2026-10-13T01:18:49.2086584Z E        +      where _0 - 1/2 = euler_poly(1)\n622: 2026-10-13T01:18:49.2086845Z E        +    and   1/2 = Q(1, 2)\n623: 2026-10-13T01:18:49.2087004Z \n624: 2026-10-13T01:18:49.2087140Z sympy/polys/tests/test_appellseqs.py:73: AssertionError\n\n--- [END OF SLICE] ---\n\n--- [NUMBERED CONTENT FROM LINE 772 TO 786] ---\n772: 2026-10-13T01:18:49.2128383Z                     \"a valid generator expected, got %s\" % gen)\n773: 2026-10-13T01:18:49.2128990Z E               sympy.polys.polyerrors.PolynomialError: a valid generator expected, got _1\n774: 2026-10-13T01:18:49.2129395Z \n775: 2026-10-13T01:18:49.2129543Z sympy/polys/polytools.py:1890: PolynomialError\n776: 2026-10-13T01:18:49.2130039Z _____________________________ test_PurePoly__eq__ ______________________________\n777: 2026-10-13T01:18:49.2130676Z [gw3] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python\n778: 2026-10-13T01:18:49.2130996Z \n779: 2026-10-13T01:18:49.2131139Z     def test_PurePoly__eq__():\n780: 2026-10-13T01:18:49.2132040Z         assert (PurePoly(x, x) == PurePoly(x, x)) is True\n781: 2026-10-13T01:18:49.2182258Z >       assert (PurePoly(x, x, domain=QQ) == PurePoly(x, x)) is True\n782: 2026-10-13T01:18:49.2183144Z E       AssertionError: assert (PurePoly(_0, _0, domain='QQ') == PurePoly(_0, _0, domain='ZZ')) is True\n783: 2026-10-13T01:18:49.2184249Z E        +  where PurePoly(_0, _0, domain='QQ') = PurePoly(x, x, domain=QQ)\n784: 2026-10-13T01:18:49.2184865Z E        +  and   PurePoly(_0, _0, domain='ZZ') = PurePoly(x, x)\n785: 2026-10-13T01:18:49.2185248Z \n786: 2026-10-13T01:18:49.2185482Z sympy/polys/tests/test_polytools.py:646: AssertionError\n\n--- [END OF SLICE] ---\n\n--- [NUMBERED CONTENT FROM LINE 870 TO 878] ---\n870: 2026-10-13T01:18:49.2227568Z FAILED sympy/polys/tests/test_appellseqs.py::test_genocchi_poly - assert False\n871: 2026-10-13T01:18:49.2227976Z  +  where False = dummy_eq(((-2 * x) + 1))\n872: 2026-10-13T01:18:49.2228239Z  +    where dummy_eq = 1 - 2*_0.dummy_eq\n873: 2026-10-13T01:18:49.2228503Z  +      where 1 - 2*_0 = genocchi_poly(2)\n874: 2026-10-13T01:18:49.2228877Z FAILED sympy/polys/tests/test_appellseqs.py::test_euler_poly - assert False\n875: 2026-10-13T01:18:49.2229267Z  +  where False = dummy_eq((x - 1/2))\n876: 2026-10-13T01:18:49.2229519Z  +    where dummy_eq = _0 - 1/2.dummy_eq\n877: 2026-10-13T01:18:49.2229773Z  +      where _0 - 1/2 = euler_poly(1)\n878: 2026-10-13T01:18:49.2230013Z  +    and   1/2 = Q(1, 2)\n\n--- [END OF SLICE] ---\n\n--- [NUMBERED CONTENT FROM LINE 888 TO 904] ---\n888: 2026-10-13T01:18:49.2233516Z  +  where False = dummy_eq((-x + 1))\n889: 2026-10-13T01:18:49.2233762Z  +    where dummy_eq = 1 - _0.dummy_eq\n890: 2026-10-13T01:18:49.2234011Z  +      where 1 - _0 = laguerre_poly(1)\n891: 2026-10-13T01:18:49.2234754Z FAILED sympy/polys/tests/test_polytools.py::test_PurePoly_canonical_instantiation_and_coefficients - sympy.polys.polyerrors.PolynomialError: a valid generator expected, got _1\n892: 2026-10-13T01:18:49.2235877Z FAILED sympy/polys/tests/test_polytools.py::test_PurePoly__eq__ - AssertionError: assert (PurePoly(_0, _0, domain='QQ') == PurePoly(_0, _0, domain='ZZ')) is True\n893: 2026-10-13T01:18:49.2236593Z  +  where PurePoly(_0, _0, domain='QQ') = PurePoly(x, x, domain=QQ)\n894: 2026-10-13T01:18:49.2236978Z  +  and   PurePoly(_0, _0, domain='ZZ') = PurePoly(x, x)\n895: 2026-10-13T01:18:49.2237604Z FAILED sympy/utilities/tests/test_wester.py::test_P21 - AssertionError: assert _0**3 - 2*_0**2 - 5*_0 + 6 == ((((x ** 3) - (2 * (x ** 2))) - (5 * x)) + 6)\n896: 2026-10-13T01:18:49.2238209Z  +  where _0**3 - 2*_0**2 - 5*_0 + 6 = as_expr()\n897: 2026-10-13T01:18:49.2238585Z  +    where as_expr = PurePoly(_0**3 - 2*_0**2 - 5*_0 + 6, _0, domain='ZZ').as_expr\n898: 2026-10-13T01:18:49.2239049Z  +      where PurePoly(_0**3 - 2*_0**2 - 5*_0 + 6, _0, domain='ZZ') = charpoly(x)\n899: 2026-10-13T01:18:49.2239520Z  +        where charpoly = Matrix([\\n[ 5, -3, -7],\\n[-2,  1,  2],\\n[ 2, -3, -4]]).charpoly\n900: 2026-10-13T01:18:49.2240027Z = 11 failed, 13292 passed, 731 skipped, 329 xfailed, 4 xpassed in 796.88s (0:13:16) =\n901: 2026-10-13T01:18:49.9819295Z ##[error]Process completed with exit code 1.\n902: 2026-10-13T01:18:49.9964308Z Post job cleanup.\n903: 2026-10-13T01:18:50.0784311Z [command]/usr/bin/git version\n904: 2026-10-13T01:18:50.0829642Z git version 2.55.0\n\n--- [END OF SLICE] ---\n",
+        "exit_code": 0,
+        "duration_ms": 0
+      }
+    ],
+    "answer": {
+      "answers": [
+        {
+          "id": "euler_call",
+          "answer": "dummy_eq",
+          "evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 617,
+              "end_line": 617
+            }
+          ]
+        },
+        {
+          "id": "euler_symbol",
+          "answer": "_0",
+          "evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 621,
+              "end_line": 621
+            }
+          ]
+        },
+        {
+          "id": "poly_explicit",
+          "answer": "QQ",
+          "evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 781,
+              "end_line": 781
+            }
+          ]
+        },
+        {
+          "id": "poly_default",
+          "answer": "ZZ",
+          "evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 784,
+              "end_line": 784
+            }
+          ]
+        },
+        {
+          "id": "poly_location",
+          "answer": "sympy/polys/tests/test_polytools.py:646",
+          "evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 786,
+              "end_line": 786
+            }
+          ]
+        },
+        {
+          "id": "failed_total",
+          "answer": "11",
+          "evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 900,
+              "end_line": 900
+            }
+          ]
+        }
+      ],
+      "read_requests": [],
+      "search_requests": []
+    },
+    "usage": {
+      "input_tokens": 28321,
+      "output_tokens": 385,
+      "cached_input_tokens": 13312,
+      "reasoning_output_tokens": 14
+    },
+    "errors": [],
+    "usage_event_index": 234,
+    "last_item_event_index": 233,
+    "usage_complete": true,
+    "wall": 12.828644832829013,
+    "cpu": 1.1918419999999998,
+    "remote_wait_proxy": 11.636802832829014,
+    "termination_reason": null,
+    "capture_truncated": false,
+    "drain_complete": true,
+    "returncode": 0,
+    "skill_attached": false,
+    "skill_enabled": true,
+    "whole_wall": 12.828644832829013,
+    "total_tokens": 28706,
+    "known_usage_lower_bound": 28706,
+    "router_calls": 1,
+    "profile_calls": 1,
+    "guide_reads": 1,
+    "source_commands": 2,
+    "runtime_bypasses": 0,
+    "package_version": "2.7.1",
+    "commit": "de813cf75e59e744cd0119321d4fd92145938fa5",
+    "policy_version": "v2.4",
+    "model": "gpt-6.1-sol",
+    "reasoning": "medium",
+    "source_sha256": "add4fe82b292e7188fbf58eb6589f801565886b729c3d36f7299dc40c63d1800",
+    "prompt_sha256": "87b3cd9d389df257a3db8cd44af9e5dceb557696fc254add05647d85de22899d",
+    "instructions_sha256": "cdfcfa585b9a75d884481ca2ad4dc6c6e98532c39c55c4aa01ba3308bce6acd9",
+    "scores": [
+      {
+        "id": "euler_call",
+        "factual": true,
+        "citation_visible": true,
+        "sufficient_groups": true,
+        "grounded": true,
+        "citations": [
+          {
+            "file": "sympy.log",
+            "start_line": 617,
+            "end_line": 617
+          }
+        ]
+      },
+      {
+        "id": "euler_symbol",
+        "factual": true,
+        "citation_visible": true,
+        "sufficient_groups": true,
+        "grounded": true,
+        "citations": [
+          {
+            "file": "sympy.log",
+            "start_line": 621,
+            "end_line": 621
+          }
+        ]
+      },
+      {
+        "id": "poly_explicit",
+        "factual": true,
+        "citation_visible": true,
+        "sufficient_groups": false,
+        "grounded": false,
+        "citations": [
+          {
+            "file": "sympy.log",
+            "start_line": 781,
+            "end_line": 781
+          }
+        ]
+      },
+      {
+        "id": "poly_default",
+        "factual": true,
+        "citation_visible": true,
+        "sufficient_groups": true,
+        "grounded": true,
+        "citations": [
+          {
+            "file": "sympy.log",
+            "start_line": 784,
+            "end_line": 784
+          }
+        ]
+      },
+      {
+        "id": "poly_location",
+        "factual": true,
+        "citation_visible": true,
+        "sufficient_groups": true,
+        "grounded": true,
+        "citations": [
+          {
+            "file": "sympy.log",
+            "start_line": 786,
+            "end_line": 786
+          }
+        ]
+      },
+      {
+        "id": "failed_total",
+        "factual": true,
+        "citation_visible": true,
+        "sufficient_groups": true,
+        "grounded": true,
+        "citations": [
+          {
+            "file": "sympy.log",
+            "start_line": 900,
+            "end_line": 900
+          }
+        ]
+      }
+    ],
+    "strict": 5,
+    "facts": 6,
+    "success": false
+  },
+  {
+    "name": "sympy_multiple_failures_ko-1-plain",
+    "task": "sympy_multiple_failures_ko",
+    "family": "log",
+    "expected": "activate",
+    "arm": "plain",
+    "repeat": 1,
+    "commands": [
+      {
+        "command": "/bin/zsh -lc \"rg -n -A 32 -B 5 'test_euler_poly|test_PurePoly__eq__|[0-9]+ failed' sympy.log\"",
+        "aggregated_output": "597-2026-10-13T01:18:49.2079286Z E        +  where False = dummy_eq(((-2 * x) + 1))\n598-2026-10-13T01:18:49.2079575Z E        +    where dummy_eq = 1 - 2*_0.dummy_eq\n599-2026-10-13T01:18:49.2079859Z E        +      where 1 - 2*_0 = genocchi_poly(2)\n600-2026-10-13T01:18:49.2080048Z \n601-2026-10-13T01:18:49.2080191Z sympy/polys/tests/test_appellseqs.py:55: AssertionError\n602:2026-10-13T01:18:49.2080572Z _______________________________ test_euler_poly ________________________________\n603-2026-10-13T01:18:49.2081021Z [gw0] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python\n604-2026-10-13T01:18:49.2081664Z \n605:2026-10-13T01:18:49.2081758Z     def test_euler_poly():\n606-2026-10-13T01:18:49.2082031Z         raises(ValueError, lambda: euler_poly(-1, x))\n607-2026-10-13T01:18:49.2082383Z         assert euler_poly(1, x, polys=True) == Poly(x - Q(1,2))\n608-2026-10-13T01:18:49.2082688Z     \n609-2026-10-13T01:18:49.2082868Z         assert euler_poly(0, x) == 1\n610-2026-10-13T01:18:49.2083281Z         assert euler_poly(1, x) == x - Q(1,2)\n611-2026-10-13T01:18:49.2083557Z         assert euler_poly(2, x) == x**2 - x\n612-2026-10-13T01:18:49.2083866Z         assert euler_poly(3, x) == x**3 - Q(3,2)*x**2 + Q(1,4)\n613-2026-10-13T01:18:49.2084194Z         assert euler_poly(4, x) == x**4 - 2*x**3 + x\n614-2026-10-13T01:18:49.2084550Z         assert euler_poly(5, x) == x**5 - Q(5,2)*x**4 + Q(5,2)*x**2 - Q(1,2)\n615-2026-10-13T01:18:49.2084938Z         assert euler_poly(6, x) == x**6 - 3*x**5 + 5*x**3 - 3*x\n616-2026-10-13T01:18:49.2085227Z     \n617-2026-10-13T01:18:49.2085424Z >       assert euler_poly(1).dummy_eq(x - Q(1,2))\n618-2026-10-13T01:18:49.2085697Z E       assert False\n619-2026-10-13T01:18:49.2085914Z E        +  where False = dummy_eq((x - 1/2))\n620-2026-10-13T01:18:49.2086303Z E        +    where dummy_eq = _0 - 1/2.dummy_eq\n621-2026-10-13T01:18:49.2086584Z E        +      where _0 - 1/2 = euler_poly(1)\n622-2026-10-13T01:18:49.2086845Z E        +    and   1/2 = Q(1, 2)\n623-2026-10-13T01:18:49.2087004Z \n624-2026-10-13T01:18:49.2087140Z sympy/polys/tests/test_appellseqs.py:73: AssertionError\n625-2026-10-13T01:18:49.2087527Z _____________________________ test_chebyshevu_poly _____________________________\n626-2026-10-13T01:18:49.2087982Z [gw3] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python\n627-2026-10-13T01:18:49.2088271Z \n628-2026-10-13T01:18:49.2088365Z     def test_chebyshevu_poly():\n629-2026-10-13T01:18:49.2088647Z         raises(ValueError, lambda: chebyshevu_poly(-1, x))\n630-2026-10-13T01:18:49.2088938Z     \n631-2026-10-13T01:18:49.2089166Z         assert chebyshevu_poly(1, x, polys=True) == Poly(2*x)\n632-2026-10-13T01:18:49.2089496Z     \n633-2026-10-13T01:18:49.2089683Z         assert chebyshevu_poly(0, x) == 1\n634-2026-10-13T01:18:49.2089958Z         assert chebyshevu_poly(1, x) == 2*x\n635-2026-10-13T01:18:49.2090249Z         assert chebyshevu_poly(2, x) == 4*x**2 - 1\n636-2026-10-13T01:18:49.2090556Z         assert chebyshevu_poly(3, x) == 8*x**3 - 4*x\n637-2026-10-13T01:18:49.2090880Z         assert chebyshevu_poly(4, x) == 16*x**4 - 12*x**2 + 1\n--\n771-2026-10-13T01:18:49.2128008Z >               raise PolynomialError(\n772-2026-10-13T01:18:49.2128383Z                     \"a valid generator expected, got %s\" % gen)\n773-2026-10-13T01:18:49.2128990Z E               sympy.polys.polyerrors.PolynomialError: a valid generator expected, got _1\n774-2026-10-13T01:18:49.2129395Z \n775-2026-10-13T01:18:49.2129543Z sympy/polys/polytools.py:1890: PolynomialError\n776:2026-10-13T01:18:49.2130039Z _____________________________ test_PurePoly__eq__ ______________________________\n777-2026-10-13T01:18:49.2130676Z [gw3] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python\n778-2026-10-13T01:18:49.2130996Z \n779:2026-10-13T01:18:49.2131139Z     def test_PurePoly__eq__():\n780-2026-10-13T01:18:49.2132040Z         assert (PurePoly(x, x) == PurePoly(x, x)) is True\n781-2026-10-13T01:18:49.2182258Z >       assert (PurePoly(x, x, domain=QQ) == PurePoly(x, x)) is True\n782-2026-10-13T01:18:49.2183144Z E       AssertionError: assert (PurePoly(_0, _0, domain='QQ') == PurePoly(_0, _0, domain='ZZ')) is True\n783-2026-10-13T01:18:49.2184249Z E        +  where PurePoly(_0, _0, domain='QQ') = PurePoly(x, x, domain=QQ)\n784-2026-10-13T01:18:49.2184865Z E        +  and   PurePoly(_0, _0, domain='ZZ') = PurePoly(x, x)\n785-2026-10-13T01:18:49.2185248Z \n786-2026-10-13T01:18:49.2185482Z sympy/polys/tests/test_polytools.py:646: AssertionError\n787-2026-10-13T01:18:49.2186138Z ___________________________________ test_P21 ___________________________________\n788-2026-10-13T01:18:49.2186906Z [gw3] linux -- Python 3.14.8 /opt/hostedtoolcache/Python/3.14.8/x64/bin/python\n789-2026-10-13T01:18:49.2187401Z \n790-2026-10-13T01:18:49.2187552Z     def test_P21():\n791-2026-10-13T01:18:49.2187939Z         M = Matrix([[5, -3, -7],\n792-2026-10-13T01:18:49.2188344Z                     [-2, 1,  2],\n793-2026-10-13T01:18:49.2188956Z                     [2, -3, -4]])\n794-2026-10-13T01:18:49.2189570Z >       assert M.charpoly(x).as_expr() == x**3 - 2*x**2 - 5*x + 6\n795-2026-10-13T01:18:49.2190415Z E       AssertionError: assert _0**3 - 2*_0**2 - 5*_0 + 6 == ((((x ** 3) - (2 * (x ** 2))) - (5 * x)) + 6)\n796-2026-10-13T01:18:49.2191431Z E        +  where _0**3 - 2*_0**2 - 5*_0 + 6 = as_expr()\n797-2026-10-13T01:18:49.2192081Z E        +    where as_expr = PurePoly(_0**3 - 2*_0**2 - 5*_0 + 6, _0, domain='ZZ').as_expr\n798-2026-10-13T01:18:49.2192708Z E        +      where PurePoly(_0**3 - 2*_0**2 - 5*_0 + 6, _0, domain='ZZ') = charpoly(x)\n799-2026-10-13T01:18:49.2193232Z E        +        where charpoly = Matrix([\\n[ 5, -3, -7],\\n[-2,  1,  2],\\n[ 2, -3, -4]]).charpoly\n800-2026-10-13T01:18:49.2193551Z \n801-2026-10-13T01:18:49.2193704Z sympy/utilities/tests/test_wester.py:1568: AssertionError\n802-2026-10-13T01:18:49.2194081Z                                 DO *NOT* COMMIT!                                \n803-2026-10-13T01:18:49.2194458Z ============================= slowest 50 durations =============================\n804-2026-10-13T01:18:49.2194926Z 10.00s call     sympy/utilities/tests/test_wester.py::test_W19\n805-2026-10-13T01:18:49.2195329Z 9.11s call     sympy/series/tests/test_limits.py::test_issue_17431\n806-2026-10-13T01:18:49.2195783Z 8.82s call     sympy/combinatorics/tests/test_coset_table.py::test_look_ahead\n807-2026-10-13T01:18:49.2196276Z 8.40s call     sympy/polys/series/tests/test_hypothesis.py::test_rs_series_zero\n808-2026-10-13T01:18:49.2196750Z 8.15s call     sympy/solvers/ode/tests/test_riccati.py::test_solve_riccati\n809-2026-10-13T01:18:49.2197191Z 8.14s call     sympy/sets/tests/test_fancysets.py::test_Range_symbolic\n810-2026-10-13T01:18:49.2197591Z 7.89s call     sympy/series/tests/test_limits.py::test_atan\n811-2026-10-13T01:18:49.2198025Z 7.77s call     sympy/polys/series/tests/test_hypothesis.py::test_global_series_one\n--\n869-2026-10-13T01:18:49.2227113Z  +    and   1/2 = Q(1, 2)\n870-2026-10-13T01:18:49.2227568Z FAILED sympy/polys/tests/test_appellseqs.py::test_genocchi_poly - assert False\n871-2026-10-13T01:18:49.2227976Z  +  where False = dummy_eq(((-2 * x) + 1))\n872-2026-10-13T01:18:49.2228239Z  +    where dummy_eq = 1 - 2*_0.dummy_eq\n873-2026-10-13T01:18:49.2228503Z  +      where 1 - 2*_0 = genocchi_poly(2)\n874:2026-10-13T01:18:49.2228877Z FAILED sympy/polys/tests/test_appellseqs.py::test_euler_poly - assert False\n875-2026-10-13T01:18:49.2229267Z  +  where False = dummy_eq((x - 1/2))\n876-2026-10-13T01:18:49.2229519Z  +    where dummy_eq = _0 - 1/2.dummy_eq\n877-2026-10-13T01:18:49.2229773Z  +      where _0 - 1/2 = euler_poly(1)\n878-2026-10-13T01:18:49.2230013Z  +    and   1/2 = Q(1, 2)\n879-2026-10-13T01:18:49.2230365Z FAILED sympy/polys/tests/test_orthopolys.py::test_chebyshevu_poly - assert False\n880-2026-10-13T01:18:49.2230765Z  +  where False = dummy_eq((2 * x))\n881-2026-10-13T01:18:49.2231016Z  +    where dummy_eq = 2*_0.dummy_eq\n882-2026-10-13T01:18:49.2231491Z  +      where 2*_0 = chebyshevu_poly(1)\n883-2026-10-13T01:18:49.2231880Z FAILED sympy/polys/tests/test_orthopolys.py::test_hermite_poly - assert False\n884-2026-10-13T01:18:49.2232277Z  +  where False = dummy_eq((2 * x))\n885-2026-10-13T01:18:49.2232521Z  +    where dummy_eq = 2*_0.dummy_eq\n886-2026-10-13T01:18:49.2232767Z  +      where 2*_0 = hermite_poly(1)\n887-2026-10-13T01:18:49.2233130Z FAILED sympy/polys/tests/test_orthopolys.py::test_laguerre_poly - assert False\n888-2026-10-13T01:18:49.2233516Z  +  where False = dummy_eq((-x + 1))\n889-2026-10-13T01:18:49.2233762Z  +    where dummy_eq = 1 - _0.dummy_eq\n890-2026-10-13T01:18:49.2234011Z  +      where 1 - _0 = laguerre_poly(1)\n891-2026-10-13T01:18:49.2234754Z FAILED sympy/polys/tests/test_polytools.py::test_PurePoly_canonical_instantiation_and_coefficients - sympy.polys.polyerrors.PolynomialError: a valid generator expected, got _1\n892:2026-10-13T01:18:49.2235877Z FAILED sympy/polys/tests/test_polytools.py::test_PurePoly__eq__ - AssertionError: assert (PurePoly(_0, _0, domain='QQ') == PurePoly(_0, _0, domain='ZZ')) is True\n893-2026-10-13T01:18:49.2236593Z  +  where PurePoly(_0, _0, domain='QQ') = PurePoly(x, x, domain=QQ)\n894-2026-10-13T01:18:49.2236978Z  +  and   PurePoly(_0, _0, domain='ZZ') = PurePoly(x, x)\n895-2026-10-13T01:18:49.2237604Z FAILED sympy/utilities/tests/test_wester.py::test_P21 - AssertionError: assert _0**3 - 2*_0**2 - 5*_0 + 6 == ((((x ** 3) - (2 * (x ** 2))) - (5 * x)) + 6)\n896-2026-10-13T01:18:49.2238209Z  +  where _0**3 - 2*_0**2 - 5*_0 + 6 = as_expr()\n897-2026-10-13T01:18:49.2238585Z  +    where as_expr = PurePoly(_0**3 - 2*_0**2 - 5*_0 + 6, _0, domain='ZZ').as_expr\n898-2026-10-13T01:18:49.2239049Z  +      where PurePoly(_0**3 - 2*_0**2 - 5*_0 + 6, _0, domain='ZZ') = charpoly(x)\n899-2026-10-13T01:18:49.2239520Z  +        where charpoly = Matrix([\\n[ 5, -3, -7],\\n[-2,  1,  2],\\n[ 2, -3, -4]]).charpoly\n900:2026-10-13T01:18:49.2240027Z = 11 failed, 13292 passed, 731 skipped, 329 xfailed, 4 xpassed in 796.88s (0:13:16) =\n901-2026-10-13T01:18:49.9819295Z ##[error]Process completed with exit code 1.\n902-2026-10-13T01:18:49.9964308Z Post job cleanup.\n903-2026-10-13T01:18:50.0784311Z [command]/usr/bin/git version\n904-2026-10-13T01:18:50.0829642Z git version 2.55.0\n905-2026-10-13T01:18:50.0868129Z Temporarily overriding HOME='/home/runner/work/_temp/72ff2b3b-4ab4-465c-83ef-26bf50b9be6a' before making global git config changes\n906-2026-10-13T01:18:50.0869791Z Adding repository directory to the temporary git global config as a safe directory\n907-2026-10-13T01:18:50.0874819Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/sympy/sympy\n908-2026-10-13T01:18:50.0907651Z Removing SSH command configuration\n909-2026-10-13T01:18:50.0913997Z [command]/usr/bin/git config --local --name-only --get-regexp core\\.sshCommand\n910-2026-10-13T01:18:50.0948394Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'core\\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\"\n911-2026-10-13T01:18:50.1171726Z Removing HTTP extra header\n912-2026-10-13T01:18:50.1176987Z [command]/usr/bin/git config --local --name-only --get-regexp http\\.https\\:\\/\\/github\\.com\\/\\.extraheader\n913-2026-10-13T01:18:50.1211710Z [command]/usr/bin/git submodule foreach --recursive sh -c \"git config --local --name-only --get-regexp 'http\\.https\\:\\/\\/github\\.com\\/\\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\"\n914-2026-10-13T01:18:50.1440398Z Removing includeIf entries pointing to credentials config files\n915-2026-10-13T01:18:50.1447435Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\\.gitdir:\n916-2026-10-13T01:18:50.1479163Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url\n917-2026-10-13T01:18:50.1850007Z Cleaning up orphan processes\n",
+        "exit_code": 0,
+        "duration_ms": 0
+      }
+    ],
+    "answer": {
+      "answers": [
+        {
+          "id": "euler_call",
+          "answer": "dummy_eq",
+          "evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 617,
+              "end_line": 617
+            }
+          ]
+        },
+        {
+          "id": "euler_symbol",
+          "answer": "_0",
+          "evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 621,
+              "end_line": 621
+            }
+          ]
+        },
+        {
+          "id": "poly_explicit",
+          "answer": "QQ",
+          "evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 781,
+              "end_line": 783
+            }
+          ]
+        },
+        {
+          "id": "poly_default",
+          "answer": "ZZ",
+          "evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 784,
+              "end_line": 784
+            }
+          ]
+        },
+        {
+          "id": "poly_location",
+          "answer": "sympy/polys/tests/test_polytools.py:646",
+          "evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 786,
+              "end_line": 786
+            }
+          ]
+        },
+        {
+          "id": "failed_total",
+          "answer": "11",
+          "evidence": [
+            {
+              "file": "sympy.log",
+              "start_line": 900,
+              "end_line": 900
+            }
+          ]
+        }
+      ],
+      "read_requests": [],
+      "search_requests": []
+    },
+    "usage": {
+      "input_tokens": 19297,
+      "output_tokens": 280,
+      "cached_input_tokens": 12288,
+      "reasoning_output_tokens": 0
+    },
+    "errors": [],
+    "usage_event_index": 229,
+    "last_item_event_index": 228,
+    "usage_complete": true,
+    "wall": 10.4352444158867,
+    "cpu": 1.042243,
+    "remote_wait_proxy": 9.393001415886701,
+    "termination_reason": null,
+    "capture_truncated": false,
+    "drain_complete": true,
+    "returncode": 0,
+    "skill_attached": false,
+    "skill_enabled": false,
+    "whole_wall": 10.4352444158867,
+    "total_tokens": 19577,
+    "known_usage_lower_bound": 19577,
+    "router_calls": 0,
+    "profile_calls": 0,
+    "guide_reads": 0,
+    "source_commands": 1,
+    "runtime_bypasses": 0,
+    "package_version": "2.7.1",
+    "commit": "de813cf75e59e744cd0119321d4fd92145938fa5",
+    "policy_version": "v2.4",
+    "model": "gpt-6.1-sol",
+    "reasoning": "medium",
+    "source_sha256": "add4fe82b292e7188fbf58eb6589f801565886b729c3d36f7299dc40c63d1800",
+    "prompt_sha256": "87b3cd9d389df257a3db8cd44af9e5dceb557696fc254add05647d85de22899d",
+    "instructions_sha256": "cdfcfa585b9a75d884481ca2ad4dc6c6e98532c39c55c4aa01ba3308bce6acd9",
+    "scores": [
+      {
+        "id": "euler_call",
+        "factual": true,
+        "citation_visible": true,
+        "sufficient_groups": true,
+        "grounded": true,
+        "citations": [
+          {
+            "file": "sympy.log",
+            "start_line": 617,
+            "end_line": 617
+          }
+        ]
+      },
+      {
+        "id": "euler_symbol",
+        "factual": true,
+        "citation_visible": true,
+        "sufficient_groups": true,
+        "grounded": true,
+        "citations": [
+          {
+            "file": "sympy.log",
+            "start_line": 621,
+            "end_line": 621
+          }
+        ]
+      },
+      {
+        "id": "poly_explicit",
+        "factual": true,
+        "citation_visible": true,
+        "sufficient_groups": true,
+        "grounded": true,
+        "citations": [
+          {
+            "file": "sympy.log",
+            "start_line": 781,
+            "end_line": 783
+          }
+        ]
+      },
+      {
+        "id": "poly_default",
+        "factual": true,
+        "citation_visible": true,
+        "sufficient_groups": true,
+        "grounded": true,
+        "citations": [
+          {
+            "file": "sympy.log",
+            "start_line": 784,
+            "end_line": 784
+          }
+        ]
+      },
+      {
+        "id": "poly_location",
+        "factual": true,
+        "citation_visible": true,
+        "sufficient_groups": true,
+        "grounded": true,
+        "citations": [
+          {
+            "file": "sympy.log",
+            "start_line": 786,
+            "end_line": 786
+          }
+        ]
+      },
+      {
+        "id": "failed_total",
+        "factual": true,
+        "citation_visible": true,
+        "sufficient_groups": true,
+        "grounded": true,
+        "citations": [
+          {
+            "file": "sympy.log",
+            "start_line": 900,
+            "end_line": 900
+          }
+        ]
+      }
+    ],
+    "strict": 6,
+    "facts": 6,
+    "success": true
+  }
+]
