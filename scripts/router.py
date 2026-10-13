@@ -1206,6 +1206,8 @@ def finalize_packet(args, guard, packet, status, code=0):
         packet=None;code=1
         status.update(status='error',reason_codes=['report_or_finalization_error'],reason=str(exc),
                       output_lines=0,output_chars=0,full_source_returned=False,coverage_guaranteed=False)
+    if code != 0 and 'activation' in status:
+        status['activation']='bypass'
     compact=dict(status)
     compact.pop('return_target',None)
     compact.pop('return_supplement',None)  # Experimental detail stays in the sidecar.
