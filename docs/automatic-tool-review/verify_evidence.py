@@ -1,10 +1,12 @@
 """Reconcile public counters/inputs/packets/frozen scores without a model call."""
 from pathlib import Path
-import importlib.util,json,shutil,tempfile,zipfile
+import hashlib,importlib.util,json,shutil,tempfile,zipfile
 D=Path(__file__).resolve().parent
 ledger=json.loads((D/'all-attempt-ledger.json').read_text());total=0;turns=0
 for entry in ledger['experiments']:
  root=D/entry['experiment'];rows=json.loads((root/'episodes.json').read_text());m=json.loads((root/'manifest.json').read_text());tasks={t['id']:t for t in m['tasks']};bill=0
+ for task in tasks.values():
+  assert hashlib.sha256((D/'sources'/task['file']).read_bytes()).hexdigest()==task['source_sha256']
  spec=importlib.util.spec_from_file_location('frozen_grader',root/'grade.py');grader=importlib.util.module_from_spec(spec);spec.loader.exec_module(grader)
  with tempfile.TemporaryDirectory() as temp,zipfile.ZipFile(root/'events.zip')as z:
   tmp=Path(temp);shutil.copytree(D/'sources',tmp/'sources');grader.R=tmp

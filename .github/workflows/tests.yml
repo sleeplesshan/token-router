@@ -24,5 +24,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: python -m unittest discover -s tests
       - run: python scripts/run_router_tests.py tests/router-tests.json
+      - run: python docs/automatic-tool-review/verify_evidence.py
       - run: python scripts/build_release.py --output dist
       - run: python -c "from pathlib import Path; import subprocess,sys; files=list(Path('dist').glob('token-router-*.zip')); assert len(files)==1; subprocess.run([sys.executable,'scripts/smoke_archive.py',str(files[0])],check=True)"
