@@ -35,6 +35,29 @@ class ConnectionTests(unittest.TestCase):
             ins.connect_codex(self.dest,[]);self.current['transport']['env']={'CUSTOM':'preserve'}
             with self.assertRaises(ValueError):ins.disconnect_codex(self.dest)
         self.assertEqual(len(self.changes),1)
+    def test_user_filters_and_disabled_setting_are_preserved(self):
+        with patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
+            ins.connect_codex(self.dest,[])
+            self.current['enabled_tools']=['read_pytest_failures']
+            with self.assertRaises(ValueError):ins.disconnect_codex(self.dest)
+            with self.assertRaises(ValueError):ins.connect_codex(self.dest,[])
+        self.assertEqual(len(self.changes),1)
+    def test_marker_failure_removes_only_new_registration(self):
+        with patch.object(ins,'codex_mcp',side_effect=self.fake_codex),patch.object(ins,'save_marker',side_effect=OSError('disk full')):
+            with self.assertRaises(OSError):ins.connect_codex(self.dest,[])
+        self.assertIsNone(self.current)
+        self.assertNotIn('codex_mcp',d.read_install(self.dest))
+    def test_connected_install_cannot_restore_legacy_without_disconnect(self):
+        with patch.object(ins,'codex_mcp',side_effect=self.fake_codex):ins.connect_codex(self.dest,[])
+        with tempfile.TemporaryDirectory() as temp:
+            old=Path(temp)/'old';old.mkdir()
+            import shutil
+            for n in d.LEGACY_FILES:
+                target=old/n;target.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(ROOT/n,target)
+            hashes={n:d.digest(old/n)for n in d.LEGACY_FILES}
+            (old/d.MARKER).write_text(json.dumps(dict(product='token-router',schema_version=1,files=hashes)))
+            with self.assertRaises(ValueError):ins.install(old,self.dest)
+        self.assertIsNotNone(self.current)
     def test_update_preserves_registration_and_invalid_root_is_nonmutating(self):
         with patch.object(ins,'codex_mcp',side_effect=self.fake_codex):
             with self.assertRaises(ValueError):ins.connect_codex(self.dest,[str(self.dest/'missing')])
