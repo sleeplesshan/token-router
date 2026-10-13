@@ -94,6 +94,9 @@ def connect_codex(dest,roots):
         args+=['--allow-root',str(path)]
     record=dict(command=str(Path(sys.executable).absolute()),args=args)
     current=codex_mcp(['get','token-router','--json'])
+    previous=data.get('codex_mcp',{}).get('configuration')
+    if previous is not None and current is not None and current!=previous:
+        raise ValueError('Managed Codex server settings changed; preserve them and reconfigure explicitly')
     if current and not transport_matches(current,record):
         raise ValueError('Existing token-router MCP configuration differs; preserve it and disconnect/reconfigure explicitly')
     created=current is None
@@ -106,6 +109,7 @@ def connect_codex(dest,roots):
         allowed=actual.get('enabled_tools');denied=actual.get('disabled_tools') or []
         if (allowed is not None and 'read_pytest_failures' not in allowed) or 'read_pytest_failures' in denied:
             raise ValueError('Codex tool filters exclude read_pytest_failures; preserve or update them explicitly')
+        record['configuration']=actual
         data['codex_mcp']=record;save_marker(dest,data)
     except BaseException:
         if created:codex_mcp(['remove','token-router'])
@@ -118,6 +122,8 @@ def disconnect_codex(dest):
     current=codex_mcp(['get','token-router','--json'])
     if current:
         if not transport_matches(current,record):raise ValueError('Codex server was changed; preserve it and disconnect manually')
+        if record.get('configuration') is not None and current!=record['configuration']:
+            raise ValueError('Codex server settings were changed; preserve them and disconnect manually')
         codex_mcp(['remove','token-router'])
     data.pop('codex_mcp');save_marker(dest,data)
     return dict(status='disconnected',server='token-router',restart_required=True)
@@ -136,7 +142,12 @@ def main():
             if dest.resolve()==source or source in dest.resolve().parents:raise ValueError('Choose a destination outside the source checkout')
             if a.action=='update' and not dest.exists():raise ValueError('Update requires an existing managed installation')
             result=install(source,dest)
-            if a.connect_codex:result['codex']=connect_codex(dest,a.allow_root)
+            if a.connect_codex:
+                try:result['codex']=connect_codex(dest,a.allow_root)
+                except (OSError,ValueError,subprocess.SubprocessError) as exc:
+                    print(json.dumps(dict(status='installed_connection_failed',installation=result,
+                                          next_action='connect-codex --dest '+str(dest),reason=str(exc))),file=sys.stderr)
+                    return 1
         elif a.action=='restore':
             if a.backup is None:raise ValueError('restore requires --backup')
             backup=a.backup.expanduser().absolute();read_install(backup)
